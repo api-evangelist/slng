@@ -1,0 +1,401 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Agents Account Deepgram Aura 2 API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Deepgram Aura 2
+  description: Deepgram Aura 2 for conversational voice agents.
+paths:
+  /v1/tts/slng/deepgram/aura:2-en:
+    post:
+      operationId: slng/deepgram/aura:2-en
+      summary: Aura 2 (English)
+      description: Synthesize English speech using SLNG-hosted Deepgram Aura 2.
+      tags:
+      - Deepgram Aura 2
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngAuraEn'
+      - $ref: '#/components/parameters/XWorldPartSlngAuraEn'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramAura2EnRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  model: aura-2-thalia-en
+                  text: Hello, this is a test of text to speech synthesis.
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/SlngDeepgramAuraBadRequest'
+        '401':
+          $ref: '#/components/responses/SlngDeepgramAuraUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+  /v1/tts/slng/deepgram/aura:2-es:
+    post:
+      operationId: slng/deepgram/aura:2-es
+      summary: Aura 2 (Spanish)
+      description: Synthesize Spanish speech using SLNG-hosted Deepgram Aura 2.
+      tags:
+      - Deepgram Aura 2
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngAuraEs'
+      - $ref: '#/components/parameters/XWorldPartSlngAuraEs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramAura2EsRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  model: aura-2-celeste-es
+                  text: Hola, esto es una prueba de síntesis de texto a voz.
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/SlngDeepgramAuraBadRequest'
+        '401':
+          $ref: '#/components/responses/SlngDeepgramAuraUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+components:
+  parameters:
+    XWorldPartSlngAuraEs:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu
+    XRegionSlngAuraEn:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu-north-1
+        - us-east-1
+    XRegionSlngAuraEs:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu-north-1
+    XWorldPartSlngAuraEn:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu
+        - na
+  schemas:
+    DeepgramAuraTtsRequestBase:
+      type: object
+      properties:
+        text:
+          $ref: '#/components/schemas/TextToSynthesize'
+        encoding:
+          $ref: '#/components/schemas/DeepgramTtsEncoding'
+        sample_rate:
+          $ref: '#/components/schemas/DeepgramTtsSampleRate'
+        container:
+          $ref: '#/components/schemas/DeepgramTtsContainer'
+        bit_rate:
+          type: integer
+          description: Output bit rate for lossy encodings.
+          enum:
+          - 8000
+          - 16000
+          - 24000
+          - 32000
+          - 48000
+          - 64000
+          - 96000
+          - 128000
+          - 192000
+          - 256000
+      required:
+      - text
+    SlngDeepgramAura2EnModelName:
+      type: string
+      description: English voice model. Check the full list with audio samples in the [voice list](https://docs.slng.ai/voices/deepgram-aura#english-voices).
+      enum:
+      - aura-2-amalthea-en
+      - aura-2-andromeda-en
+      - aura-2-apollo-en
+      - aura-2-arcas-en
+      - aura-2-aries-en
+      - aura-2-asteria-en
+      - aura-2-athena-en
+      - aura-2-atlas-en
+      - aura-2-aurora-en
+      - aura-2-callista-en
+      - aura-2-cordelia-en
+      - aura-2-cora-en
+      - aura-2-delia-en
+      - aura-2-draco-en
+      - aura-2-electra-en
+      - aura-2-harmonia-en
+      - aura-2-helena-en
+      - aura-2-hera-en
+      - aura-2-hermes-en
+      - aura-2-hyperion-en
+      - aura-2-iris-en
+      - aura-2-janus-en
+      - aura-2-juno-en
+      - aura-2-jupiter-en
+      - aura-2-luna-en
+      - aura-2-mars-en
+      - aura-2-minerva-en
+      - aura-2-neptune-en
+      - aura-2-odysseus-en
+      - aura-2-ophelia-en
+      - aura-2-orion-en
+      - aura-2-orpheus-en
+      - aura-2-pandora-en
+      - aura-2-phoebe-en
+      - aura-2-pluto-en
+      - aura-2-saturn-en
+      - aura-2-selene-en
+      - aura-2-thalia-en
+      - aura-2-theia-en
+      - aura-2-vesta-en
+      - aura-2-zeus-en
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    SlngDeepgramAura2EnRequest:
+      allOf:
+      - $ref: '#/components/schemas/DeepgramAuraTtsRequestBase'
+      - type: object
+        properties:
+          model:
+            $ref: '#/components/schemas/SlngDeepgramAura2EnModelName'
+        required:
+        - model
+    SlngDeepgramAura2EsModelName:
+      type: string
+      description: Spanish voice model. Check the full list with audio samples in the [voice list](https://docs.slng.ai/voices/deepgram-aura#spanish-voices).
+      enum:
+      - aura-2-sirio-es
+      - aura-2-nestor-es
+      - aura-2-carina-es
+      - aura-2-celeste-es
+      - aura-2-alvaro-es
+      - aura-2-diana-es
+      - aura-2-aquila-es
+      - aura-2-selena-es
+      - aura-2-estrella-es
+      - aura-2-javier-es
+    DeepgramTtsEncoding:
+      type: string
+      description: Output audio encoding.
+      enum:
+      - linear16
+      - mp3
+      - opus
+      - flac
+      - aac
+      - mulaw
+      - alaw
+      default: mp3
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
+    SlngDeepgramAura2EsRequest:
+      allOf:
+      - $ref: '#/components/schemas/DeepgramAuraTtsRequestBase'
+      - type: object
+        properties:
+          model:
+            $ref: '#/components/schemas/SlngDeepgramAura2EsModelName'
+        required:
+        - model
+    SlngDeepgramAuraBadRequestResponse:
+      type: object
+      description: 'Bad request error for SLNG-hosted Deepgram Aura TTS. Validation errors include `fieldErrors`; provider errors include `details`.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error message or category.
+          example: Text is required
+        fieldErrors:
+          type: object
+          description: Field-level validation errors keyed by field name. Present for request validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            text:
+            - Required
+        details:
+          type: string
+          description: Detailed error message from the provider. Present for provider-side errors.
+          example: '{"err_code":"INVALID_QUERY_PARAMETER","err_msg":"Failed to deserialize query parameters"}'
+      required:
+      - error
+    SlngDeepgramAuraUnauthorizedResponse:
+      type: object
+      description: Unauthorized error response for SLNG-hosted Deepgram Aura TTS requests.
+      properties:
+        title:
+          type: string
+          description: Error title.
+          example: Unauthorized
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 401
+        detail:
+          type: string
+          description: Detailed error message.
+          example: No Authorization Header
+      required:
+      - title
+      - status
+      - detail
+    DeepgramTtsContainer:
+      type: string
+      description: Output file format container.
+      enum:
+      - none
+      - wav
+      - ogg
+      default: wav
+    DeepgramTtsSampleRate:
+      type: integer
+      description: Output sample rate in Hz.
+      enum:
+      - 8000
+      - 16000
+      - 24000
+      - 32000
+      - 48000
+      default: 24000
+    TextToSynthesize:
+      type: string
+      minLength: 1
+      description: Text to synthesize.
+  responses:
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    SlngDeepgramAuraBadRequest:
+      description: 'Bad request for SLNG-hosted Deepgram Aura TTS. Can be a validation error (missing/invalid fields) or a provider error (invalid query parameters).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngDeepgramAuraBadRequestResponse'
+          examples:
+            Missing required field:
+              summary: Validation error — missing required field
+              value:
+                error: Text is required
+                fieldErrors:
+                  text:
+                  - Required
+            Invalid encoding value:
+              summary: Invalid encoding value
+              value:
+                error: TTS service error
+                details: '{"err_code":"INVALID_QUERY_PARAMETER","err_msg":"Failed to deserialize query parameters: unknown variant `sss`, expected one of `linear16`, `mulaw`, `alaw`, `mp3`, `opus`, `flac`, `aac`","request_id":"9740fb95-d205-49f4-91c5-ab2f97bb09fa"}'
+            Model not found:
+              summary: Model or version not found
+              value:
+                error: TTS service error
+                details: '{"err_code":"Bad Request","err_msg":"No such model/version combination found.","request_id":"8ccc6b44-5f96-4d21-9b4d-3011fa36b2e9"}'
+    SlngDeepgramAuraUnauthorized:
+      description: 'Unauthorized error for SLNG-hosted Deepgram Aura TTS. Returned when the Authorization header is missing or invalid.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngDeepgramAuraUnauthorizedResponse'
+          example:
+            title: Unauthorized
+            status: 401
+            detail: No Authorization Header
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key

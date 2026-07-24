@@ -1,0 +1,551 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Agents Account Deepgram Nova 3 API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Deepgram Nova 3
+  description: Deepgram Nova 3 with VAD and speaker diarization.
+paths:
+  /v1/stt/slng/deepgram/nova:3-en:
+    post:
+      operationId: slng/deepgram/nova:3-en
+      summary: Nova 3 (English)
+      description: Transcribe English audio using SLNG-hosted Deepgram Nova 3.
+      tags:
+      - Deepgram Nova 3
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngNovaEn'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3EnRequest'
+            examples:
+              binary:
+                summary: Binary audio upload
+                value:
+                  audio: <binary>
+                  language: en
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3EnRequest'
+            examples:
+              url:
+                summary: URL-based transcription
+                value:
+                  url: https://docs.slng.ai/audio/hello.wav
+                  language: en
+      responses:
+        '200':
+          $ref: '#/components/responses/SlngDeepgramSttSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '413':
+          $ref: '#/components/responses/ProviderPayloadTooLarge'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/stt/slng/deepgram/nova:3-es:
+    post:
+      operationId: slng/deepgram/nova:3-es
+      summary: Nova 3 (Spanish)
+      description: Transcribe Spanish audio using SLNG-hosted Deepgram Nova 3.
+      tags:
+      - Deepgram Nova 3
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngNovaEs'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3EsRequest'
+            examples:
+              binary:
+                summary: Binary audio upload
+                value:
+                  audio: <binary>
+                  language: es
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3EsRequest'
+            examples:
+              url:
+                summary: URL-based transcription
+                value:
+                  url: https://docs.slng.ai/audio/hello-es.wav
+                  language: es
+      responses:
+        '200':
+          $ref: '#/components/responses/SlngDeepgramSttSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '413':
+          $ref: '#/components/responses/ProviderPayloadTooLarge'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/stt/slng/deepgram/nova:3-hi:
+    post:
+      operationId: slng/deepgram/nova:3-hi
+      summary: Nova 3 (Hindi)
+      description: Transcribe Hindi audio using SLNG-hosted Deepgram Nova 3.
+      tags:
+      - Deepgram Nova 3
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngNovaHi'
+      - $ref: '#/components/parameters/XWorldPartSlngNovaHi'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3HiRequest'
+            examples:
+              binary:
+                summary: Binary audio upload
+                value:
+                  audio: <binary>
+                  language: hi
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3HiRequest'
+            examples:
+              url:
+                summary: URL-based transcription
+                value:
+                  url: https://docs.slng.ai/audio/hello-hi.wav
+                  language: hi
+      responses:
+        '200':
+          $ref: '#/components/responses/SlngDeepgramSttSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '413':
+          $ref: '#/components/responses/ProviderPayloadTooLarge'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/stt/slng/deepgram/nova:3-multi:
+    post:
+      operationId: slng/deepgram/nova:3-multi
+      summary: Nova 3 (Multi-Language)
+      description: Transcribe multi-language audio using SLNG-hosted Deepgram Nova 3.
+      tags:
+      - Deepgram Nova 3
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngNovaMulti'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3MultiRequest'
+            examples:
+              binary:
+                summary: Binary audio upload
+                value:
+                  audio: <binary>
+                  language: multi
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramNova3MultiRequest'
+            examples:
+              url:
+                summary: URL-based transcription
+                value:
+                  url: https://docs.slng.ai/audio/hello.wav
+                  language: multi
+      responses:
+        '200':
+          $ref: '#/components/responses/SlngDeepgramSttSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '413':
+          $ref: '#/components/responses/ProviderPayloadTooLarge'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+components:
+  parameters:
+    XRegionSlngNovaEn:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - asia-south1
+        - australia-southeast1
+        - us-east-1
+    XRegionSlngNovaMulti:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu-north-1
+    XRegionSlngNovaHi:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - asia-south1
+    XWorldPartSlngNovaHi:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - ap
+    XRegionSlngNovaEs:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - us-east-1
+  schemas:
+    SlngDeepgramNova3EsLanguage:
+      type: string
+      description: Supported Spanish language code.
+      example: es
+      enum:
+      - es
+      - es-us
+      - es-419
+      - es-ar
+      - es-mx
+      - es-es
+    SlngDeepgramNova3HiRequest:
+      allOf:
+      - $ref: '#/components/schemas/SttAudioRequestBase'
+      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
+      - type: object
+        properties:
+          language:
+            $ref: '#/components/schemas/SlngDeepgramNova3HiLanguage'
+    SlngDeepgramNova3MultiRequest:
+      allOf:
+      - $ref: '#/components/schemas/SttAudioRequestBase'
+      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
+      - type: object
+        properties:
+          language:
+            $ref: '#/components/schemas/SlngDeepgramNova3MultiLanguage'
+    SlngDeepgramSttOptionsBase:
+      type: object
+      description: SLNG-hosted Deepgram STT processing options.
+      properties:
+        model:
+          type: string
+          description: Model name override.
+          default: nova-3
+        enable_partials:
+          type: boolean
+          description: Enable partial/interim transcription results for streaming.
+          default: true
+        punctuate:
+          type: boolean
+          description: Add punctuation and capitalization.
+          default: false
+        smart_format:
+          type: boolean
+          description: Apply formatting to improve readability (dates, times, numbers, etc.).
+          default: false
+        utterances:
+          type: boolean
+          description: Segment transcript into utterances.
+          default: false
+        paragraphs:
+          type: boolean
+          description: Add paragraph formatting.
+          default: false
+        numerals:
+          type: boolean
+          description: Convert spoken numbers to digits.
+          default: false
+        profanity_filter:
+          type: boolean
+          description: Filter profanity from transcript.
+          default: false
+        redact:
+          type: array
+          description: Redact sensitive information (pci, ssn, numbers).
+          items:
+            type: string
+            enum:
+            - pci
+            - ssn
+            - numbers
+        detect_language:
+          type: boolean
+          description: Auto-detect spoken language.
+          default: false
+        filler_words:
+          type: boolean
+          description: Include filler words (uh, um) in transcript.
+          default: false
+        multichannel:
+          type: boolean
+          description: Enable multi-channel audio processing.
+          default: false
+        keywords:
+          type: array
+          description: Keywords to boost recognition accuracy.
+          items:
+            type: string
+        encoding:
+          type: string
+          description: Input audio encoding.
+          default: linear16
+          enum:
+          - linear16
+          - flac
+          - mulaw
+          - amr-nb
+          - amr-wb
+          - opus
+          - speex
+          - mp3
+          - mp4
+          - webm
+          - aac
+          - ogg
+        sample_rate:
+          type: integer
+          description: Input audio sample rate in Hz.
+          default: 16000
+        channels:
+          type: integer
+          description: Number of audio channels.
+          minimum: 1
+        endpointing:
+          oneOf:
+          - type: integer
+            minimum: 0
+          - type: boolean
+          default: 10
+          description: Time in milliseconds of silence before finalizing speech. Enabled by default at 10ms on Deepgram's side. Set to false to disable endpointing entirely.
+        utterance_end_ms:
+          type: integer
+          minimum: 200
+          maximum: 5000
+          default: 1000
+          description: Time in milliseconds of silence between words before sending an UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum 5000ms. Requires interim_results (enable_partials) to be true.
+        tag:
+          type: string
+          description: Tag for request tracking.
+    SlngDeepgramNova3HiLanguage:
+      type: string
+      description: Supported language codes for the Hindi variant.
+      example: hi
+      enum:
+      - hi
+      - en
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    SlngDeepgramNova3EsRequest:
+      allOf:
+      - $ref: '#/components/schemas/SttAudioRequestBase'
+      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
+      - type: object
+        properties:
+          language:
+            $ref: '#/components/schemas/SlngDeepgramNova3EsLanguage'
+    SttAudioRequestBase:
+      type: object
+      properties:
+        audio:
+          type: string
+          format: binary
+          description: Audio file (multipart) or base64-encoded audio (JSON).
+        url:
+          type: string
+          description: Publicly accessible audio URL.
+          example: https://docs.slng.ai/audio/hello.wav
+    SlngDeepgramNova3EnRequest:
+      allOf:
+      - $ref: '#/components/schemas/SttAudioRequestBase'
+      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
+      - type: object
+        properties:
+          language:
+            $ref: '#/components/schemas/SlngDeepgramNova3EnLanguage'
+    DeepgramSttResponse:
+      type: object
+      description: 3rd Party Deepgram API response format.
+      required:
+      - results
+      properties:
+        results:
+          type: object
+          properties:
+            channels:
+              type: array
+              items:
+                type: object
+                properties:
+                  alternatives:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        transcript:
+                          type: string
+                        confidence:
+                          type: number
+                  detected_language:
+                    type: string
+        metadata:
+          type: object
+          properties:
+            request_id:
+              type: string
+            model:
+              type: string
+    SlngDeepgramNova3MultiLanguage:
+      type: string
+      description: Supported language code. Nova 3 Multi auto-detects language; only `multi` is accepted.
+      example: multi
+      default: multi
+      enum:
+      - multi
+    SlngDeepgramNova3EnLanguage:
+      type: string
+      description: Supported English language code.
+      example: en
+      enum:
+      - en
+      - en-au
+      - en-us
+      - en-nz
+      - en-gb
+      - en-in
+  responses:
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    SlngDeepgramSttSuccess:
+      description: Transcription successful.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeepgramSttResponse'
+          examples:
+            basic:
+              summary: Basic transcription
+              value:
+                results:
+                  channels:
+                  - alternatives:
+                    - transcript: hello from sunny barcelona
+                      confidence: 0.98
+                metadata:
+                  request_id: req-123
+                  model: nova-3
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderPayloadTooLarge:
+      description: Audio file exceeds size limit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key

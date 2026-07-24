@@ -1,0 +1,1788 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Account Agents API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Agents
+  description: Voice agent CRUD.
+paths:
+  /v1/agents:
+    get:
+      operationId: listAgents
+      summary: List agents
+      description: List all voice agents for your organisation.
+      tags:
+      - Agents
+      responses:
+        '200':
+          description: List of agents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoiceAgentOut'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createAgent
+      summary: Create agent
+      description: Create a new voice agent.
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceAgentCreate'
+            examples:
+              appointment-reminder:
+                summary: Basic outbound reminder agent
+                value:
+                  name: Appointment Reminder
+                  system_prompt: You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.
+                  greeting: Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.
+                  language: en
+                  region: eu-central
+                  models:
+                    stt: slng/deepgram/nova:3-en
+                    llm: groq/openai/gpt-oss-120b
+                    tts: slng/deepgram/aura:2-en
+                    tts_voice: aura-2-thalia-en
+                  template_defaults:
+                    clinic_name: Downtown Health Clinic
+                    patient_name: there
+              scheduling-agent-with-datetime:
+                summary: Scheduling agent with current date/time and idle nudges
+                value:
+                  name: Scheduling Assistant
+                  system_prompt: You help callers schedule appointments for {{practice_name}}. Use the current date and time tool before offering slots, and always read dates and times in natural speech.
+                  greeting: Hi {{patient_name}}, this is Ava from {{practice_name}}. I'm calling to help you find a convenient appointment time.
+                  language: en
+                  region: eu-central
+                  models:
+                    stt: slng/deepgram/nova:3-en
+                    llm: groq/openai/gpt-oss-120b
+                    tts: slng/deepgram/aura:2-en
+                    tts_voice: aura-2-thalia-en
+                  idle_nudges:
+                    enabled: true
+                    first_nudge_delay_seconds: 15
+                    second_nudge_delay_seconds: 30
+                    hangup_delay_seconds: 15
+                    first_nudge_text: Are you still there?
+                    second_nudge_text: I can stay on the line if you need a moment.
+                    final_hangup_text: I'm going to disconnect for now. Feel free to call us back anytime.
+                  tools:
+                  - type: built_in
+                    id: f0d84ac5-7988-460c-995d-2ad9621c09bb
+                    built_in: current_datetime
+                    timezone: Europe/Madrid
+                    prompt: Use this whenever you need the current local date, time, day, or UTC offset for the caller.
+                  - type: template
+                    id: dc4d6391-dc51-44e3-a816-bf65948290a2
+                    template: hangup
+                  template_defaults:
+                    practice_name: Greenfield Family Medicine
+                    patient_name: Maria
+              support-router-with-tools:
+                summary: Support agent with webhook lookup and human transfer
+                value:
+                  name: Support Router
+                  system_prompt: You help callers with order questions for {{brand_name}}. Use tools to look up order status and transfer urgent billing or cancellation cases to a human.
+                  greeting: Hi, thanks for calling {{brand_name}} support. How can I help you today?
+                  language: en
+                  region: eu-central
+                  models:
+                    stt: slng/deepgram/nova:3-en
+                    llm: groq/openai/gpt-oss-120b
+                    tts: slng/deepgram/aura:2-en
+                    tts_voice: aura-2-thalia-en
+                  tools:
+                  - type: webhook
+                    id: d8f8c1d7-3cf0-4c95-bb06-f28a2a1d2b50
+                    name: check_order
+                    description: Look up the status of a customer order
+                    url: https://api.example.com/orders/lookup
+                    parameters:
+                      type: object
+                      properties:
+                        order_id:
+                          type: string
+                      required:
+                      - order_id
+                    wait_for_response: true
+                    show_results_to_llm: true
+                    llm_result_instructions: Summarize the order status briefly and confirm the next action with the caller.
+                  - type: human_transfer
+                    id: b2c3d4e5-6789-abcd-ef01-234567890abc
+                    name: transfer_to_support
+                    description: Transfer the caller to a live support specialist
+                    phone_number: '+14155559999'
+                    execution_policy:
+                      pre_action_message:
+                        enabled: true
+                        text: Let me connect you to a live support specialist.
+                  template_defaults:
+                    brand_name: Northwind
+                  sip_outbound_trunk_id: 550e8400-e29b-41d4-a716-446655440100
+              collections-agent-with-system-webhook:
+                summary: Collections agent with voicemail handling and post-call webhook
+                value:
+                  name: Collections Follow-up
+                  system_prompt: You are a calm and professional payment follow-up assistant for {{company_name}}. Verify identity, explain the outstanding balance, and offer next steps without sounding aggressive.
+                  greeting: Hi, this is Mia calling from {{company_name}} about your account. Is now an okay time to talk for a moment?
+                  language: en
+                  region: eu-central
+                  models:
+                    stt: slng/deepgram/nova:3-en
+                    llm: groq/openai/gpt-oss-120b
+                    tts: slng/deepgram/aura:2-en
+                    tts_voice: aura-2-thalia-en
+                  tools:
+                  - type: template
+                    id: 95f6f6b2-0a1c-4ff2-8c91-451e36df3c73
+                    template: voicemail_detection
+                  - type: template
+                    id: dc4d6391-dc51-44e3-a816-bf65948290a2
+                    template: hangup
+                  - type: webhook
+                    id: 7bb0a71a-9153-4b4d-93b7-5d4d74efef24
+                    name: send_call_summary
+                    description: Send call outcome data to the collections platform when the call ends
+                    url: https://api.example.com/collections/call-summary
+                    parameters:
+                      type: object
+                      properties:
+                        account_id:
+                          type: string
+                        call_id:
+                          type: string
+                        transcript:
+                          type: array
+                      required:
+                      - account_id
+                      - call_id
+                    source: system
+                    wait_for_response: false
+                    show_results_to_llm: false
+                    system:
+                      triggers:
+                      - event: call_end
+                      arguments:
+                      - name: account_id
+                        type: string
+                        required: true
+                        source:
+                          type: constant
+                          value: acct_12345
+                      - name: call_id
+                        type: string
+                        required: true
+                        source:
+                          type: call_id
+                      - name: transcript
+                        type: transcript_messages
+                        source:
+                          type: transcript_messages
+                          max_messages: 100
+                  template_defaults:
+                    company_name: Northwind Finance
+              restaurant-host-with-datetime-and-lookup:
+                summary: Reservation host using date/time and availability webhook
+                value:
+                  name: Restaurant Host
+                  system_prompt: You are the phone host for {{restaurant_name}}. Use the current date and time before offering same-day options, collect party size and preferred time, and use the reservation tool to check availability.
+                  greeting: Thanks for calling {{restaurant_name}}. This is Elena speaking. How can I help with your reservation today?
+                  language: en
+                  region: eu-central
+                  models:
+                    stt: slng/deepgram/nova:3-en
+                    llm: groq/openai/gpt-oss-120b
+                    tts: slng/deepgram/aura:2-en
+                    tts_voice: aura-2-thalia-en
+                  tools:
+                  - type: built_in
+                    id: f0d84ac5-7988-460c-995d-2ad9621c09bb
+                    built_in: current_datetime
+                    timezone: America/New_York
+                    prompt: Use this before offering same-day or next-day reservation times.
+                  - type: webhook
+                    id: 58d7c9aa-4211-4df8-b7dc-234145f4c7d0
+                    name: check_reservation_availability
+                    description: Look up available reservation slots for a requested date, time, and party size
+                    url: https://api.example.com/reservations/availability
+                    parameters:
+                      type: object
+                      properties:
+                        requested_date:
+                          type: string
+                        requested_time:
+                          type: string
+                        party_size:
+                          type: integer
+                      required:
+                      - requested_date
+                      - requested_time
+                      - party_size
+                    wait_for_response: true
+                    show_results_to_llm: true
+                    llm_result_instructions: Offer the closest matching time slots in natural spoken language and confirm the caller's choice.
+                  template_defaults:
+                    restaurant_name: Cedar House
+              after-hours-router-with-system-datetime:
+                summary: After-hours router using system-injected date/time and transfer
+                value:
+                  name: After-hours Router
+                  system_prompt: You answer after-hours calls for {{clinic_name}}. Use the injected current local time to determine whether the clinic is open, route urgent medical concerns to the on-call line, and politely end non-urgent administrative calls after explaining office hours.
+                  greeting: Hi, you've reached {{clinic_name}}. How can I help you tonight?
+                  language: en
+                  models:
+                    stt: slng/deepgram/nova:3-en
+                    llm: groq/openai/gpt-oss-120b
+                    tts: slng/deepgram/aura:2-en
+                    tts_voice: aura-2-thalia-en
+                  tools:
+                  - type: built_in
+                    id: 1c6c4b06-9ca8-4d27-bd8e-72ec8d4d32d0
+                    built_in: current_datetime
+                    source: system
+                    timezone: America/Chicago
+                    prompt: Inject the clinic's current local date and time before the conversation begins.
+                    system:
+                      triggers:
+                      - event: call_start
+                  - type: human_transfer
+                    id: 7f9f35dd-6914-4a67-a970-f17c55f15394
+                    name: transfer_to_on_call_nurse
+                    description: Transfer the caller to the on-call nurse line for urgent issues
+                    phone_number: '+14155550199'
+                    execution_policy:
+                      pre_action_message:
+                        enabled: true
+                        text: I’m going to connect you to the on-call nurse now.
+                  - type: template
+                    id: dc4d6391-dc51-44e3-a816-bf65948290a2
+                    template: hangup
+                  template_defaults:
+                    clinic_name: Greenfield Family Medicine
+                  region: eu-central
+                  sip_outbound_trunk_id: 550e8400-e29b-41d4-a716-446655440101
+      responses:
+        '201':
+          description: Agent created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentOut'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                duplicate-tool-id:
+                  summary: Tool IDs must be unique within an agent
+                  value:
+                    detail: Duplicate tool id detected
+                invalid-template:
+                  summary: Prompt template syntax is invalid
+                  value:
+                    detail: 'Invalid template: Unmatched handlebars braces in template'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                user-not-found:
+                  summary: Authenticated user could not be resolved
+                  value:
+                    detail: User not found
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                no-organisation-membership:
+                  summary: Caller has no accessible organisation
+                  value:
+                    detail: User is not a member of any organisation
+        '404':
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                deployment-not-found:
+                  summary: No runtime is configured for this region
+                  value:
+                    detail: No runtime is configured for region 'us-east'
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                duplicate-agent-name:
+                  summary: Agent name already exists in the organisation
+                  value:
+                    detail: Agent with name 'Appointment Reminder' already exists
+        '422':
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                missing-human-transfer-trunk:
+                  summary: Human transfer requires outbound telephony
+                  value:
+                    detail: sip_outbound_trunk_id is required when human transfer tools are configured
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internal-error:
+                  summary: Unexpected application error
+                  value:
+                    detail: An unexpected internal error occurred while creating the agent.
+        '502':
+          description: Bad gateway.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                inbound-dispatch-rule-failed:
+                  summary: Inbound call routing setup failed
+                  value:
+                    detail: Failed to create inbound dispatch rule
+  /v1/agents/{agent_id}:
+    parameters:
+    - $ref: '#/components/parameters/AgentIdPath'
+    get:
+      operationId: getAgent
+      summary: Get agent
+      description: Get a single voice agent by ID.
+      tags:
+      - Agents
+      responses:
+        '200':
+          description: Agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentOut'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: updateAgent
+      summary: Update agent (partial)
+      description: Partially update a voice agent.
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceAgentUpdate'
+      responses:
+        '200':
+          description: Updated agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentOut'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          $ref: '#/components/responses/BadGatewayError'
+    put:
+      operationId: replaceAgent
+      summary: Replace agent
+      description: Replace a voice agent (full update).
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceAgentCreate'
+      responses:
+        '200':
+          description: Replaced agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentOut'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          $ref: '#/components/responses/BadGatewayError'
+    delete:
+      operationId: deleteAgent
+      summary: Delete agent
+      description: Soft-delete a voice agent.
+      tags:
+      - Agents
+      responses:
+        '204':
+          description: Deleted.
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v1/agents/{agent_id}/duplicate:
+    parameters:
+    - $ref: '#/components/parameters/AgentIdPath'
+    post:
+      operationId: duplicateAgent
+      summary: Duplicate agent
+      description: 'Create a server-side copy of an existing voice agent.
+
+
+        The duplicate copies the stored agent configuration, including prompts, models, tools,
+
+        template defaults, selected region, and outbound telephony settings.
+
+
+        The duplicate does not copy call history or the inbound connection. SLNG creates
+
+        and manages a runtime API key for the duplicated agent automatically.
+
+        '
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceAgentDuplicateCreate'
+            examples:
+              duplicate-agent:
+                summary: Duplicate an existing agent with a new name
+                value:
+                  name: Appointment Reminder Copy
+      responses:
+        '201':
+          description: Duplicated agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceAgentOut'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    HumanTransferTool:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - name
+      - phone_number
+      properties:
+        type:
+          type: string
+          enum:
+          - human_transfer
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+          maxLength: 64
+          description: 'Tool name. System webhook names may contain spaces; contextual webhook names must remain provider-safe.
+
+            '
+        description:
+          type: string
+          maxLength: 500
+          nullable: true
+        phone_number:
+          type: string
+          description: Destination phone number. Can be a literal E.164 number or a templated value that resolves to E.164 at runtime.
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+      description: 'Transfers the caller to a human (requires an outbound connection on the agent).
+
+        '
+    WebhookToolUpdate:
+      type: object
+      required:
+      - type
+      - id
+      - name
+      - description
+      - url
+      - parameters
+      properties:
+        type:
+          type: string
+          enum:
+          - webhook
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+          maxLength: 64
+          description: 'Tool name. For `source=contextual`, use only letters, numbers, underscores, or dashes.
+
+            '
+        description:
+          type: string
+          maxLength: 500
+        llm_result_instructions:
+          type: string
+          maxLength: 2000
+          nullable: true
+          description: Static instructions for how the model should use successful webhook results. Does not support runtime personalization.
+        url:
+          type: string
+          description: Webhook URL. Runtime personalization is allowed only in path segments and query parameter values. Scheme, host, port, credentials, fragments, and query parameter names must remain literal.
+        parameters:
+          type: object
+          additionalProperties: true
+        auth:
+          $ref: '#/components/schemas/WebhookToolAuthUpdate'
+        http_method:
+          type: string
+          enum:
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+          default: POST
+          description: HTTP method used when invoking the webhook.
+        webhook_format:
+          type: string
+          enum:
+          - envelope
+          - raw
+          default: envelope
+          description: '- `envelope`: send SLNG metadata plus arguments in the request body
+
+            - `raw`: send only the tool arguments object as the request body
+
+            '
+        timeout_seconds:
+          type: number
+          minimum: 1
+          maximum: 60
+          default: 10
+        wait_for_response:
+          type: boolean
+          default: true
+        show_results_to_llm:
+          type: boolean
+          nullable: true
+        source:
+          type: string
+          enum:
+          - contextual
+          - system
+          default: contextual
+        system:
+          $ref: '#/components/schemas/SystemToolConfig'
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+      description: Same schema as create, but bearer/hmac secrets can be omitted to keep the existing secret.
+    SystemArgumentType:
+      type: string
+      enum:
+      - string
+      - integer
+      - number
+      - boolean
+      - string[]
+      - integer[]
+      - number[]
+      - boolean[]
+      - transcript_messages
+    ModelsConfig:
+      type: object
+      additionalProperties: false
+      description: Model configuration for the agent runtime (STT + LLM + TTS).
+      required:
+      - stt
+      - llm
+      - tts
+      - tts_voice
+      properties:
+        stt:
+          type: string
+          description: STT model (provider/model:variant).
+          example: slng/deepgram/nova:3-en
+        llm:
+          type: string
+          description: 'LLM model (provider/model). Must be one of the supported models.
+
+            '
+          enum:
+          - bedrock-mantle/nvidia.nemotron-super-3-120b
+          - bedrock-mantle/nvidia.nemotron-nano-3-30b
+          - groq/openai/gpt-oss-120b
+          example: groq/openai/gpt-oss-120b
+        tts:
+          type: string
+          description: TTS model (provider/model:variant).
+          example: slng/deepgram/aura:2-en
+        tts_voice:
+          type: string
+          description: Voice identifier for TTS.
+          example: aura-2-thalia-en
+        stt_kwargs:
+          type: object
+          additionalProperties: true
+          default: {}
+        llm_kwargs:
+          type: object
+          additionalProperties: true
+          default: {}
+        tts_kwargs:
+          type: object
+          additionalProperties: true
+          default: {}
+        fallbacks:
+          $ref: '#/components/schemas/ModelsFallbacks'
+        stt_final_timeout_s:
+          type: number
+          nullable: true
+          minimum: 0
+          description: Optional STT soft-fallback timeout in seconds, measured from end-of-turn.
+        llm_first_token_timeout_s:
+          type: number
+          nullable: true
+          minimum: 0
+          description: Optional LLM soft-fallback timeout in seconds, measured to first token.
+        tts_first_audio_timeout_s:
+          type: number
+          nullable: true
+          minimum: 0
+          description: Optional TTS soft-fallback timeout in seconds, measured to first audio frame.
+        failure_audio_enabled:
+          type: boolean
+          default: true
+          description: When true, play technical-difficulties audio before hangup on terminal failures.
+    WebhookToolAuthHmacUpdate:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - hmac
+        secret:
+          type: string
+          nullable: true
+          description: Omit to keep the existing secret.
+    WebhookToolCreate:
+      type: object
+      required:
+      - type
+      - id
+      - name
+      - description
+      - url
+      - parameters
+      properties:
+        type:
+          type: string
+          enum:
+          - webhook
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+          maxLength: 64
+          description: 'Tool name. For `source=contextual`, use only letters, numbers, underscores, or dashes.
+
+            Reserved names are not allowed (e.g. `end_call`, `detected_answering_machine`).
+
+            '
+        description:
+          type: string
+          maxLength: 500
+        llm_result_instructions:
+          type: string
+          maxLength: 2000
+          nullable: true
+          description: Static instructions for how the model should use successful webhook results. Does not support runtime personalization.
+        url:
+          type: string
+          description: Webhook URL. Runtime personalization is allowed only in path segments and query parameter values. Scheme, host, port, credentials, fragments, and query parameter names must remain literal.
+        parameters:
+          type: object
+          additionalProperties: true
+          description: JSON Schema (object) for the tool parameters.
+        auth:
+          $ref: '#/components/schemas/WebhookToolAuthCreate'
+        http_method:
+          type: string
+          enum:
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+          default: POST
+          description: HTTP method used when invoking the webhook.
+        webhook_format:
+          type: string
+          enum:
+          - envelope
+          - raw
+          default: envelope
+          description: '- `envelope`: send SLNG metadata plus arguments in the request body
+
+            - `raw`: send only the tool arguments object as the request body
+
+            '
+        timeout_seconds:
+          type: number
+          minimum: 1
+          maximum: 60
+          default: 10
+        wait_for_response:
+          type: boolean
+          default: true
+        show_results_to_llm:
+          type: boolean
+          nullable: true
+          description: 'Defaults to `true` for contextual tools and `false` for system tools when omitted.
+
+            '
+        source:
+          type: string
+          enum:
+          - contextual
+          - system
+          default: contextual
+          description: '- `contextual`: LLM-invoked tool (user-driven)
+
+            - `system`: automatically triggered tool
+
+            '
+        system:
+          $ref: '#/components/schemas/SystemToolConfig'
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+      description: 'A webhook tool can be invoked in two ways:
+
+        - `source=contextual` (LLM tool-calling). In this mode, `system` must be omitted.
+
+        - `source=system` (automatic triggers). In this mode, `system` is required.
+
+
+        Webhook secrets are write-only. When using bearer/hmac auth:
+
+        - On create: `auth.token` / `auth.secret` is required.
+
+        - On update: you can omit `auth.token` / `auth.secret` to keep the existing secret.
+
+        '
+    SystemArgumentSourceConstant:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          enum:
+          - constant
+        value: {}
+    DateTime:
+      type: string
+      format: date-time
+      example: '2026-01-15T10:30:00Z'
+    ErrorResponse:
+      type: object
+      additionalProperties: true
+      description: 'Error payloads can vary depending on where the error is raised (edge gateway vs backend).
+
+
+        Common shapes include:
+
+        - `{ "error": "message" }`
+
+        - `{ "detail": "message" }`
+
+        - `{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }` (validation)
+
+        '
+      properties:
+        error:
+          type: string
+        detail:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
+    VoiceAgentUpdate:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          nullable: true
+        system_prompt:
+          type: string
+          nullable: true
+        greeting:
+          type: string
+          nullable: true
+        inbound_greeting:
+          type: string
+          nullable: true
+        outbound_greeting:
+          type: string
+          nullable: true
+        language:
+          type: string
+          maxLength: 10
+          nullable: true
+        region:
+          type: string
+          nullable: true
+          enum:
+          - us-east
+          - eu-central
+          - ap-south
+          description: Change the region where the agent runs.
+        models:
+          $ref: '#/components/schemas/ModelsConfig'
+        idle_nudges:
+          $ref: '#/components/schemas/IdleNudgesConfig'
+          nullable: true
+        enable_interruptions:
+          type: boolean
+          nullable: true
+        tools:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ToolUpdate'
+        sip_inbound_trunk_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+        sip_outbound_trunk_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+        template_defaults:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: string
+        runtime_variables:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RuntimeVariableDefinition'
+    WebhookToolAuthBearerCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - token
+      properties:
+        type:
+          type: string
+          enum:
+          - bearer
+        token:
+          type: string
+    VoiceAgentOut:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - organisation_id
+      - name
+      - system_prompt
+      - greeting
+      - language
+      - region
+      - models
+      - idle_nudges
+      - enable_interruptions
+      - tools
+      - template_variables
+      - created_at
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        organisation_id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+        system_prompt:
+          type: string
+        greeting:
+          type: string
+        inbound_greeting:
+          type: string
+          nullable: true
+        outbound_greeting:
+          type: string
+          nullable: true
+        language:
+          type: string
+        region:
+          type: string
+        models:
+          $ref: '#/components/schemas/ModelsConfig'
+        idle_nudges:
+          $ref: '#/components/schemas/IdleNudgesConfig'
+        enable_interruptions:
+          type: boolean
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolOut'
+        sip_inbound_trunk_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+        sip_outbound_trunk_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+        template_variables:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TemplateVariableMeta'
+        runtime_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuntimeVariableDefinition'
+        created_at:
+          $ref: '#/components/schemas/DateTime'
+        updated_at:
+          $ref: '#/components/schemas/DateTime'
+        deleted_at:
+          $ref: '#/components/schemas/DateTime'
+          nullable: true
+    SystemArgumentSourceTranscriptMessages:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - transcript_messages
+        max_messages:
+          type: integer
+          minimum: 1
+          maximum: 2000
+          default: 200
+    BuiltInTool:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - built_in
+      properties:
+        type:
+          type: string
+          enum:
+          - built_in
+        id:
+          $ref: '#/components/schemas/UUID'
+        built_in:
+          type: string
+          enum:
+          - current_datetime
+        source:
+          type: string
+          enum:
+          - contextual
+          - system
+          default: contextual
+          description: '- `contextual`: LLM-invoked tool
+
+            - `system`: automatically triggered tool
+
+            '
+        timezone:
+          type: string
+          default: UTC
+          description: IANA timezone name or templated value that resolves to one at runtime.
+        prompt:
+          type: string
+          maxLength: 500
+          nullable: true
+          description: Optional instructions override for the model or injected system context.
+        system:
+          $ref: '#/components/schemas/SystemToolConfig'
+      description: 'Configurable first-party utility tool.
+
+        When `source=contextual`, `system` must be omitted.
+
+        When `source=system`, `system` is required.
+
+        '
+    SystemArgumentRow:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - type
+      - source
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+        type:
+          $ref: '#/components/schemas/SystemArgumentType'
+        required:
+          type: boolean
+          default: false
+        description:
+          type: string
+          maxLength: 500
+          nullable: true
+        source:
+          $ref: '#/components/schemas/SystemArgumentSource'
+    TtsFallbackModel:
+      type: object
+      additionalProperties: false
+      required:
+      - model
+      - voice
+      properties:
+        model:
+          type: string
+          minLength: 1
+          maxLength: 200
+        voice:
+          type: string
+          minLength: 1
+          maxLength: 200
+    ToolUpdate:
+      oneOf:
+      - title: Template tool
+        description: Built-in call control tools (hangup, voicemail detection).
+        allOf:
+        - $ref: '#/components/schemas/TemplateTool'
+      - title: Utility tool
+        description: First-party utility tools such as current date/time lookup.
+        allOf:
+        - $ref: '#/components/schemas/BuiltInTool'
+      - title: Webhook
+        description: Call your backend via HTTP (LLM-invoked or system-triggered).
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolUpdate'
+      - title: Human transfer
+        description: Transfer the caller to a phone number (requires an outbound connection).
+        allOf:
+        - $ref: '#/components/schemas/HumanTransferTool'
+      discriminator:
+        propertyName: type
+    IdleNudgesConfig:
+      type: object
+      additionalProperties: false
+      required:
+      - first_nudge_text
+      - second_nudge_text
+      - final_hangup_text
+      properties:
+        enabled:
+          type: boolean
+          default: true
+        first_nudge_delay_seconds:
+          type: integer
+          minimum: 1
+          default: 15
+        second_nudge_delay_seconds:
+          type: integer
+          minimum: 1
+          default: 30
+        hangup_delay_seconds:
+          type: integer
+          minimum: 1
+          default: 15
+        first_nudge_text:
+          type: string
+          minLength: 1
+          maxLength: 500
+        second_nudge_text:
+          type: string
+          minLength: 1
+          maxLength: 500
+        final_hangup_text:
+          type: string
+          minLength: 1
+          maxLength: 500
+      description: 'Optional silence recovery behavior. The runtime can send two follow-up nudges,
+
+        then speak a final message and hang up.
+
+        '
+    WebhookToolOut:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - name
+      - description
+      - url
+      - parameters
+      - source
+      properties:
+        type:
+          type: string
+          enum:
+          - webhook
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+          maxLength: 64
+          pattern: ^[a-z_][a-z0-9_]*$
+        description:
+          type: string
+          maxLength: 500
+        llm_result_instructions:
+          type: string
+          maxLength: 2000
+          nullable: true
+          description: Static instructions for how the model should use successful webhook results. Does not support runtime personalization.
+        url:
+          type: string
+          description: Webhook URL. Runtime personalization is allowed only in path segments and query parameter values. Scheme, host, port, credentials, fragments, and query parameter names must remain literal.
+        parameters:
+          type: object
+          additionalProperties: true
+        auth_type:
+          type: string
+          nullable: true
+          description: Auth type (bearer/hmac). Secrets are write-only and never returned.
+        http_method:
+          type: string
+          enum:
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+          nullable: true
+        webhook_format:
+          type: string
+          enum:
+          - envelope
+          - raw
+          nullable: true
+        timeout_seconds:
+          type: number
+          nullable: true
+        wait_for_response:
+          type: boolean
+          nullable: true
+        show_results_to_llm:
+          type: boolean
+          nullable: true
+        source:
+          type: string
+          enum:
+          - contextual
+          - system
+        system:
+          $ref: '#/components/schemas/SystemToolConfig'
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+    SystemEvent:
+      type: string
+      enum:
+      - call_start
+      - first_user_message
+      - call_end
+      - tool_succeeded
+      - tool_failed
+    SystemToolConfig:
+      type: object
+      additionalProperties: false
+      required:
+      - triggers
+      properties:
+        triggers:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/SystemTrigger'
+        arguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SystemArgumentRow'
+          default: []
+      description: Configuration for system-triggered webhook tools.
+    UUID:
+      type: string
+      format: uuid
+      example: 550e8400-e29b-41d4-a716-446655440000
+    WebhookToolAuthUpdate:
+      oneOf:
+      - title: Bearer token auth
+        description: Omit `token` to keep the existing secret.
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolAuthBearerUpdate'
+      - title: HMAC signature auth
+        description: Omit `secret` to keep the existing secret.
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolAuthHmacUpdate'
+      discriminator:
+        propertyName: type
+    RuntimeVariableDefinition:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - description
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          description: Runtime variable name available to the model during the call.
+        description:
+          type: string
+          maxLength: 500
+          description: LLM-visible description of what value should be stored.
+    SystemArgumentSourceTemplate:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - template
+      properties:
+        type:
+          type: string
+          enum:
+          - template
+        template:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    TemplateToolOut:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - template
+      properties:
+        type:
+          type: string
+          enum:
+          - template
+        id:
+          $ref: '#/components/schemas/UUID'
+        template:
+          type: string
+          enum:
+          - hangup
+          - voicemail_detection
+        prompt:
+          type: string
+          nullable: true
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+    HumanTransferToolOut:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - name
+      - phone_number
+      properties:
+        type:
+          type: string
+          enum:
+          - human_transfer
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+          maxLength: 64
+          pattern: ^[a-z_][a-z0-9_]*$
+        description:
+          type: string
+          maxLength: 500
+          nullable: true
+        phone_number:
+          type: string
+          description: Phone number or templated value.
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+    TemplateVariableMeta:
+      type: object
+      additionalProperties: true
+      properties:
+        required:
+          type: boolean
+        default:
+          type: string
+    ToolOut:
+      oneOf:
+      - title: Template tool
+        allOf:
+        - $ref: '#/components/schemas/TemplateToolOut'
+      - title: Utility tool
+        allOf:
+        - $ref: '#/components/schemas/BuiltInTool'
+      - title: Webhook
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolOut'
+      - title: Human transfer
+        allOf:
+        - $ref: '#/components/schemas/HumanTransferToolOut'
+      discriminator:
+        propertyName: type
+    ToolExecutionPolicy:
+      type: object
+      properties:
+        pre_action_message:
+          $ref: '#/components/schemas/PreActionMessagePolicy'
+    ModelsFallbacks:
+      type: object
+      additionalProperties: false
+      properties:
+        stt:
+          type: array
+          items:
+            type: string
+          default: []
+        llm:
+          type: array
+          items:
+            type: string
+          default: []
+        tts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TtsFallbackModel'
+          default: []
+    WebhookToolAuthHmacCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - secret
+      properties:
+        type:
+          type: string
+          enum:
+          - hmac
+        secret:
+          type: string
+    PreActionMessagePolicy:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        text:
+          type: string
+          maxLength: 500
+          nullable: true
+      description: 'Optional "pre action" message behavior for tools.
+
+        When enabled, `text` is required (except for the built-in `hangup` tool).
+
+        This field is static configuration and does not support runtime personalization.
+
+        '
+    WebhookToolAuthBearerUpdate:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - bearer
+        token:
+          type: string
+          nullable: true
+          description: Omit to keep the existing secret.
+    VoiceAgentCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - system_prompt
+      - greeting
+      - language
+      - region
+      - models
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        system_prompt:
+          type: string
+          description: System prompt (Handlebars template).
+        greeting:
+          type: string
+          description: Default greeting.
+        inbound_greeting:
+          type: string
+          nullable: true
+          description: Optional greeting override for inbound calls.
+        outbound_greeting:
+          type: string
+          nullable: true
+          description: Optional greeting override for outbound calls.
+        language:
+          type: string
+          maxLength: 10
+        region:
+          type: string
+          enum:
+          - us-east
+          - eu-central
+          - ap-south
+          description: Region where the agent runs.
+        models:
+          $ref: '#/components/schemas/ModelsConfig'
+        idle_nudges:
+          $ref: '#/components/schemas/IdleNudgesConfig'
+          nullable: true
+        enable_interruptions:
+          type: boolean
+          default: true
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolCreate'
+          default: []
+        sip_inbound_trunk_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+        sip_outbound_trunk_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+        template_defaults:
+          type: object
+          additionalProperties:
+            type: string
+          default: {}
+        runtime_variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuntimeVariableDefinition'
+          default: []
+    SystemArgumentSourceSimple:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - first_user_message
+          - call_id
+          - room_name
+          - job_id
+          - agent_id
+          - agent_name
+          - phone_number
+          - trigger_event
+          - call_end_reason
+    SystemArgumentSource:
+      oneOf:
+      - title: Constant
+        description: Use a fixed value.
+        allOf:
+        - $ref: '#/components/schemas/SystemArgumentSourceConstant'
+      - title: Templated value
+        description: Use a free-text value with `{{variable}}` placeholders resolved at tool execution time.
+        allOf:
+        - $ref: '#/components/schemas/SystemArgumentSourceTemplate'
+      - title: Transcript excerpt
+        description: Inject recent transcript messages (bounded by max messages/chars).
+        allOf:
+        - $ref: '#/components/schemas/SystemArgumentSourceTranscriptMessages'
+      - title: Call context field
+        description: Pull a field from the current call/session context (for example, call_id or other runtime metadata).
+        allOf:
+        - $ref: '#/components/schemas/SystemArgumentSourceSimple'
+      discriminator:
+        propertyName: type
+    VoiceAgentDuplicateCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          description: Name for the duplicated agent.
+    ToolCreate:
+      oneOf:
+      - title: Template tool
+        description: Built-in call control tools (hangup, voicemail detection).
+        allOf:
+        - $ref: '#/components/schemas/TemplateTool'
+      - title: Utility tool
+        description: First-party utility tools such as current date/time lookup.
+        allOf:
+        - $ref: '#/components/schemas/BuiltInTool'
+      - title: Webhook
+        description: Call your backend via HTTP (LLM-invoked or system-triggered).
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolCreate'
+      - title: Human transfer
+        description: Transfer the caller to a phone number (requires an outbound connection).
+        allOf:
+        - $ref: '#/components/schemas/HumanTransferTool'
+      discriminator:
+        propertyName: type
+    TemplateTool:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - id
+      - template
+      properties:
+        type:
+          type: string
+          enum:
+          - template
+        id:
+          $ref: '#/components/schemas/UUID'
+        template:
+          type: string
+          enum:
+          - hangup
+          - voicemail_detection
+        prompt:
+          type: string
+          nullable: true
+          description: Optional override for the default tool prompt.
+        execution_policy:
+          $ref: '#/components/schemas/ToolExecutionPolicy'
+    WebhookToolAuthCreate:
+      oneOf:
+      - title: Bearer token auth
+        description: 'Send an `Authorization: Bearer <token>` header.'
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolAuthBearerCreate'
+      - title: HMAC signature auth
+        description: Send an `X-Signature-256` header (HMAC-SHA256 of the JSON body).
+        allOf:
+        - $ref: '#/components/schemas/WebhookToolAuthHmacCreate'
+      discriminator:
+        propertyName: type
+    SystemTrigger:
+      type: object
+      additionalProperties: false
+      required:
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/SystemEvent'
+        source_tool_id:
+          $ref: '#/components/schemas/UUID'
+          nullable: true
+      description: 'For `tool_succeeded` and `tool_failed`, `source_tool_id` is required.
+
+        For all other events, `source_tool_id` must be omitted.
+
+        '
+  responses:
+    ForbiddenError:
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            forbidden:
+              summary: Access denied
+              value:
+                detail: You do not have access to this resource.
+    NotFoundError:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            not-found:
+              summary: Resource not found
+              value:
+                detail: The requested resource was not found.
+    BadGatewayError:
+      description: Bad gateway.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            upstream-failure:
+              summary: Upstream provider or dispatcher failed
+              value:
+                detail: The upstream service failed to process the request.
+    ConflictError:
+      description: Conflict.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            conflict:
+              summary: Resource already exists or cannot be changed in current state
+              value:
+                detail: The requested operation conflicts with the current resource state.
+    ValidationError:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            validation-error:
+              summary: Request validation failed
+              value:
+                detail:
+                - loc:
+                  - body
+                  - language
+                  msg: Input should be a valid string
+                  type: string_type
+    BadRequestError:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            bad-request:
+              summary: Generic bad request
+              value:
+                detail: The request could not be processed.
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            internal-server-error:
+              summary: Unexpected application error
+              value:
+                detail: An unexpected internal error occurred.
+    UnauthorizedError:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Authentication failed
+              value:
+                detail: Authentication is required for this endpoint.
+  parameters:
+    AgentIdPath:
+      name: agent_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+      description: Voice agent ID.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key

@@ -1,0 +1,204 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Agents Account Orpheus English API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Orpheus English
+  description: Orpheus TTS with emotion control.
+paths:
+  /v1/tts/slng/canopylabs/orpheus:en:
+    post:
+      operationId: slng/canopylabs/orpheus:en
+      summary: Orpheus (English)
+      description: Synthesize speech using Orpheus with emotion control.
+      tags:
+      - Orpheus English
+      parameters:
+      - $ref: '#/components/parameters/XWorldPartSlngOrpheus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrpheusTtsRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  voice: tara
+                  prompt: Hello, this is a test of text to speech synthesis.
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+components:
+  schemas:
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    SpeechSpeedMultiplier:
+      type: number
+      minimum: 0.5
+      maximum: 2
+      description: Speed multiplier (0.5-2.0).
+    TextToSynthesize:
+      type: string
+      minLength: 1
+      description: Text to synthesize.
+    TtsVoiceRequestBase:
+      type: object
+      properties:
+        text:
+          $ref: '#/components/schemas/TextToSynthesize'
+        voice:
+          type: string
+          description: Voice identifier.
+    OrpheusTtsRequest:
+      allOf:
+      - $ref: '#/components/schemas/TtsVoiceSpeedRequestBase'
+      - type: object
+        properties:
+          prompt:
+            $ref: '#/components/schemas/TextToSynthesize'
+          text:
+            allOf:
+            - $ref: '#/components/schemas/TextToSynthesize'
+            description: Text to synthesize (legacy, use prompt).
+          voice:
+            type: string
+            description: Voice identifier.
+            enum:
+            - tara
+            - leah
+            - jess
+            - leo
+            - dan
+            - mia
+            - zac
+            - zoe
+            default: tara
+          stream:
+            type: boolean
+            description: Enable streaming response.
+          emotion:
+            type: string
+            description: Emotion to apply.
+            enum:
+            - neutral
+            - happy
+            - sad
+            - angry
+            - surprised
+    TtsVoiceSpeedRequestBase:
+      allOf:
+      - $ref: '#/components/schemas/TtsVoiceRequestBase'
+      - type: object
+        properties:
+          speed:
+            $ref: '#/components/schemas/SpeechSpeedMultiplier'
+  responses:
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+  parameters:
+    XWorldPartSlngOrpheus:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key

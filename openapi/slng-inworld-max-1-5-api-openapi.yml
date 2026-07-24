@@ -1,0 +1,442 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Agents Account Inworld Max 1.5 API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Inworld Max 1.5
+  description: Inworld Max 1.5 for multilingual, expressive synthesis.
+paths:
+  /v1/tts/slng/inworld/max:1.5:
+    post:
+      operationId: slng/inworld/max:1.5
+      summary: Inworld Max 1.5
+      description: Synthesize speech using SLNG-hosted Inworld Max 1.5.
+      tags:
+      - Inworld Max 1.5
+      parameters:
+      - $ref: '#/components/parameters/XRegionSlngInworldMax'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngInworldMaxRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  text: Hello, this is a test of Inworld text to speech.
+                  voice: Ashley
+                  modelId: inworld-tts-1.5-max
+              wordTimestamps:
+                summary: Request word-level timestamps
+                value:
+                  text: Hello, world!
+                  voice: Ashley
+                  timestampType: WORD
+              characterTimestamps:
+                summary: Request character-level timestamps
+                value:
+                  text: Hello world.
+                  voice: Ashley
+                  timestampType: CHARACTER
+      responses:
+        '200':
+          $ref: '#/components/responses/SlngInworldMaxSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+components:
+  schemas:
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    SlngInworldMaxSuccessBody:
+      type: object
+      description: Inworld Max 1.5 synthesis result. Inworld's native response, passed through by the gateway.
+      properties:
+        audioContent:
+          type: string
+          format: byte
+          description: Base64-encoded audio in the requested encoding. Max 16MB.
+        usage:
+          type: object
+          description: Synthesis usage details.
+          properties:
+            processedCharactersCount:
+              type: integer
+              description: Number of input characters processed.
+            modelId:
+              type: string
+              description: Model used for synthesis.
+        timestampInfo:
+          type: object
+          description: Timestamp metadata. Present only when timestampType is WORD or CHARACTER.
+          properties:
+            wordAlignment:
+              type: object
+              description: Per-word alignment. Present when timestampType is WORD.
+              properties:
+                words:
+                  type: array
+                  items:
+                    type: string
+                  description: Aligned words in order.
+                wordStartTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: Start time per word in seconds.
+                wordEndTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: End time per word in seconds.
+                phoneticDetails:
+                  type: array
+                  description: Per-word phoneme and viseme timing. Only available on TTS 1.5+ and TTS-2 models.
+                  items:
+                    type: object
+                    properties:
+                      wordIndex:
+                        type: integer
+                        description: 0-based index of the word this entry belongs to.
+                      phones:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            phoneSymbol:
+                              type: string
+                              description: IPA phoneme symbol.
+                            startTimeSeconds:
+                              type: number
+                              description: Phoneme start time in seconds.
+                            durationSeconds:
+                              type: number
+                              description: Phoneme duration in seconds.
+                            visemeSymbol:
+                              type: string
+                              description: Viseme for lip-sync (e.g. aei, o, bmp, l, r, qw).
+                      isPartial:
+                        type: boolean
+                        description: True if the word is potentially unstable (streaming only).
+            characterAlignment:
+              type: object
+              description: Per-character alignment. Present when timestampType is CHARACTER.
+              properties:
+                characters:
+                  type: array
+                  items:
+                    type: string
+                  description: Aligned characters including punctuation and spaces.
+                characterStartTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: Start time per character in seconds.
+                characterEndTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: End time per character in seconds.
+    SlngInworldMaxRequest:
+      type: object
+      description: Inworld Max 1.5 synthesis request, SLNG-hosted. Audio output is configured with flat fields (encoding, sample_rate, bit_rate, speaking_rate) that the gateway maps to Inworld's audioConfig.
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Text to synthesize. Max 2,000 characters.
+        voice:
+          type: string
+          default: Ashley
+          description: Inworld voice ID. Voices are multilingual — each has a native language but can speak any supported language via the `language` parameter (best results when `language` matches the voice's native language). See the full catalog at https://docs.slng.ai/voices/inworld.
+        modelId:
+          type: string
+          enum:
+          - inworld-tts-1.5-max
+          default: inworld-tts-1.5-max
+          description: ID of the Inworld TTS model.
+        language:
+          $ref: '#/components/schemas/SlngInworldMaxLanguage'
+        deliveryMode:
+          type: string
+          enum:
+          - DELIVERY_MODE_UNSPECIFIED
+          - STABLE
+          - BALANCED
+          - CREATIVE
+          description: Only applies to inworld-tts-2. Controls output variation; ignored on Max 1.5.
+        temperature:
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
+          maximum: 2
+          default: 1
+          description: Higher values produce more expressive output; lower values more deterministic. Range (0, 2].
+        timestampType:
+          type: string
+          enum:
+          - TIMESTAMP_TYPE_UNSPECIFIED
+          - WORD
+          - CHARACTER
+          default: TIMESTAMP_TYPE_UNSPECIFIED
+          description: Controls timestamp metadata returned with the audio. Adds latency.
+        applyTextNormalization:
+          type: string
+          enum:
+          - APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+          - 'ON'
+          - 'OFF'
+          default: APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+          description: Expands numbers, dates, and abbreviations before synthesis. Disabling may reduce latency.
+        encoding:
+          type: string
+          enum:
+          - LINEAR16
+          - MP3
+          - OGG_OPUS
+          - ALAW
+          - MULAW
+          - FLAC
+          - PCM
+          - WAV
+          default: MP3
+          description: Output audio format. Maps to Inworld audioConfig.audioEncoding.
+        sample_rate:
+          type: integer
+          enum:
+          - 8000
+          - 16000
+          - 22050
+          - 24000
+          - 32000
+          - 44100
+          - 48000
+          default: 48000
+          description: Output sample rate in Hz. Maps to Inworld audioConfig.sampleRateHertz.
+        bit_rate:
+          type: integer
+          description: Bits per second. Only applies to compressed formats (MP3, OGG_OPUS). Maps to Inworld audioConfig.bitRate.
+        speaking_rate:
+          type: number
+          minimum: 0.5
+          maximum: 1.5
+          default: 1
+          description: Playback speed. Values below 0.8 not recommended for quality. Maps to Inworld audioConfig.speakingRate.
+    SlngInworldMaxLanguage:
+      type: string
+      description: BCP-47 language tag specifying the language the voice should speak the text in. Optional — when omitted, Inworld uses the voice's original prompt and auto-detects the language from the text. Voices are multilingual; best results when this matches the voice's native language. These are the 15 core languages supported by inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85 experimental languages). An invalid code returns an error.
+      enum:
+      - ar-SA
+      - de-DE
+      - en-US
+      - es-ES
+      - fr-FR
+      - he-IL
+      - hi-IN
+      - it-IT
+      - ja-JP
+      - ko-KR
+      - nl-NL
+      - pl-PL
+      - pt-BR
+      - ru-RU
+      - zh-CN
+  responses:
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    SlngInworldMaxSuccess:
+      description: 'Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld''s native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngInworldMaxSuccessBody'
+          examples:
+            basic:
+              summary: Synthesis result (audioContent truncated for brevity)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 48
+                  modelId: inworld-tts-1.5-max
+            wordTimestamps:
+              summary: Result with WORD timestamps (timestampType=WORD)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 13
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  wordAlignment:
+                    words:
+                    - Hello,
+                    - world!
+                    wordStartTimeSeconds:
+                    - 0
+                    - 0.51
+                    wordEndTimeSeconds:
+                    - 0.51
+                    - 1.04
+                    phoneticDetails:
+                    - wordIndex: 0
+                      isPartial: false
+                      phones:
+                      - phoneSymbol: h
+                        startTimeSeconds: 0
+                        durationSeconds: 0.17
+                        visemeSymbol: aei
+                      - phoneSymbol: ə
+                        startTimeSeconds: 0.17
+                        durationSeconds: 0.05
+                        visemeSymbol: aei
+                      - phoneSymbol: l
+                        startTimeSeconds: 0.22
+                        durationSeconds: 0.11
+                        visemeSymbol: l
+                      - phoneSymbol: oʊ1
+                        startTimeSeconds: 0.33
+                        durationSeconds: 0.18
+                        visemeSymbol: o
+            characterTimestamps:
+              summary: Result with CHARACTER timestamps (timestampType=CHARACTER)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 12
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  characterAlignment:
+                    characters:
+                    - H
+                    - e
+                    - l
+                    - l
+                    - o
+                    - w
+                    - o
+                    - r
+                    - l
+                    - d
+                    - .
+                    characterStartTimeSeconds:
+                    - 0
+                    - 0.11
+                    - 0.21
+                    - 0.32
+                    - 0.42
+                    - 0.57
+                    - 0.66
+                    - 0.75
+                    - 0.84
+                    - 0.93
+                    - 1.02
+                    characterEndTimeSeconds:
+                    - 0.11
+                    - 0.21
+                    - 0.32
+                    - 0.42
+                    - 0.53
+                    - 0.66
+                    - 0.75
+                    - 0.84
+                    - 0.93
+                    - 1.02
+                    - 1.11
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+  parameters:
+    XRegionSlngInworldMax:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - us-east-1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key

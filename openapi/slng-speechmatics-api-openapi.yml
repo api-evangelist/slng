@@ -1,0 +1,805 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Agents Account Speechmatics API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Speechmatics
+  description: Create and manage asynchronous transcription jobs.
+paths:
+  /v1/batch/jobs:
+    post:
+      summary: Create batch job
+      description: 'Submit audio for asynchronous transcription. Supports file upload (`multipart/form-data`), URL input, and presigned S3 upload (`application/json`). For the presigned-upload flow, the first call (`mode: "presign"`) returns **200 OK** with an upload URL — the job is not created until step 3. All other submission paths return **202 Accepted** with `status: QUEUED`.'
+      operationId: batchJobsCreate
+      tags:
+      - Speechmatics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - title: URL input
+                type: object
+                required:
+                - input_url
+                - transcription_config
+                properties:
+                  input_url:
+                    type: string
+                    format: uri
+                    description: HTTPS URL of the audio file to transcribe. Must be publicly accessible or a presigned URL.
+                  job_id:
+                    type: string
+                    description: Custom alphanumeric identifier for the job. Auto-generated if omitted.
+                    pattern: ^[a-zA-Z0-9]+$
+                  model_code:
+                    type: string
+                    description: Model to use for transcription.
+                    default: slng/speechmatics/batch:15.0.0
+                  transcription_config:
+                    $ref: '#/components/schemas/TranscriptionConfig'
+                  metadata:
+                    type: object
+                    description: Arbitrary key-value metadata to attach to the job.
+                  tracking:
+                    $ref: '#/components/schemas/Tracking'
+                  output_config:
+                    $ref: '#/components/schemas/OutputConfig'
+              - title: 'Presigned upload: request a URL'
+                type: object
+                required:
+                - mode
+                - filename
+                - transcription_config
+                properties:
+                  mode:
+                    type: string
+                    enum:
+                    - presign
+                    description: Set to `presign` to request a presigned S3 upload URL.
+                  filename:
+                    type: string
+                    description: Name of the file to upload.
+                  content_type:
+                    type: string
+                    description: 'MIME type of the file. Default: `application/octet-stream`.'
+                  job_id:
+                    type: string
+                    description: Custom alphanumeric identifier for the job. Auto-generated if omitted.
+                    pattern: ^[a-zA-Z0-9]+$
+                  transcription_config:
+                    $ref: '#/components/schemas/TranscriptionConfig'
+                  tracking:
+                    $ref: '#/components/schemas/Tracking'
+                  output_config:
+                    $ref: '#/components/schemas/OutputConfig'
+              - title: 'Presigned upload: create the job'
+                type: object
+                required:
+                - s3_key
+                - transcription_config
+                properties:
+                  s3_key:
+                    type: string
+                    description: S3 key returned from the presign step.
+                  job_id:
+                    type: string
+                    description: Job ID returned from the presign step.
+                    pattern: ^[a-zA-Z0-9]+$
+                  model_code:
+                    type: string
+                    description: Model to use for transcription.
+                  transcription_config:
+                    $ref: '#/components/schemas/TranscriptionConfig'
+                  metadata:
+                    type: object
+                    description: Arbitrary key-value metadata to attach to the job.
+                  tracking:
+                    $ref: '#/components/schemas/Tracking'
+                  output_config:
+                    $ref: '#/components/schemas/OutputConfig'
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              - transcription_config
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 'The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.'
+                job_id:
+                  type: string
+                  description: Custom alphanumeric identifier for the job. Auto-generated if omitted.
+                  pattern: ^[a-zA-Z0-9]+$
+                  example: myjob123
+                metadata:
+                  type: string
+                  description: JSON object with arbitrary key-value metadata to attach to the job.
+                model_code:
+                  type: string
+                  description: Model to use for transcription.
+                  default: slng/speechmatics/batch:15.0.0
+                transcription_config:
+                  $ref: '#/components/schemas/TranscriptionConfig'
+                tracking:
+                  $ref: '#/components/schemas/Tracking'
+                output_config:
+                  $ref: '#/components/schemas/OutputConfig'
+            encoding:
+              transcription_config:
+                contentType: application/json
+              tracking:
+                contentType: application/json
+              output_config:
+                contentType: application/json
+              metadata:
+                contentType: application/json
+      responses:
+        '200':
+          description: '**Presign mode only.** Returns a presigned upload URL; the job is not created yet. See the [Batch guide](/batch-guide#method-3-presigned-upload) for the full upload flow.'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - job_id
+                - transcription_config
+                - input_s3_uri
+                - output_s3_prefix
+                - upload
+                properties:
+                  job_id:
+                    type: string
+                    description: Job identifier to reuse in step 3.
+                  transcription_config:
+                    $ref: '#/components/schemas/TranscriptionConfig'
+                  tracking:
+                    $ref: '#/components/schemas/Tracking'
+                  output_config:
+                    $ref: '#/components/schemas/OutputConfig'
+                  input_s3_uri:
+                    type: string
+                    description: '`s3://bucket/key` of the future upload.'
+                  output_s3_prefix:
+                    type: string
+                    description: '`s3://bucket/outputs/<jobId>/` where transcripts will land.'
+                  upload:
+                    type: object
+                    required:
+                    - url
+                    - s3_key
+                    - s3_uri
+                    - expires_in
+                    - headers
+                    properties:
+                      url:
+                        type: string
+                        format: uri
+                        description: Presigned `PUT` URL.
+                      s3_key:
+                        type: string
+                        description: S3 key the URL writes to. Pass as `s3_key` in step 3.
+                      s3_uri:
+                        type: string
+                        description: Same key, full `s3://` URI.
+                      expires_in:
+                        type: integer
+                        description: URL lifetime in seconds (30 min).
+                      headers:
+                        type: object
+                        additionalProperties:
+                          type: string
+                        description: Headers the upload request must send (e.g. `Content-Type`).
+              example:
+                job_id: job8f3a1b2c4d5e6f7890abcdef12345678
+                transcription_config:
+                  language: en
+                  operating_point: standard
+                  diarization: none
+                input_s3_uri: s3://slng-production-batch-input/inputs/job8f3a.../audio.wav
+                output_s3_prefix: s3://slng-production-batch-output/outputs/job8f3a.../
+                upload:
+                  url: https://slng-production-batch-input.s3.amazonaws.com/inputs/job8f3a.../audio.wav?X-Amz-Algorithm=...
+                  s3_key: inputs/job8f3a.../audio.wav
+                  s3_uri: s3://slng-production-batch-input/inputs/job8f3a.../audio.wav
+                  expires_in: 1800
+                  headers:
+                    Content-Type: application/octet-stream
+        '202':
+          description: Job accepted and queued for processing (multipart upload, URL input, or presigned-upload step 3).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcknowledgement'
+              example:
+                job_id: myjob123
+                status: QUEUED
+        '400':
+          description: Validation error (bad request body, unsupported `model_code`, invalid `job_id`, missing/invalid `transcription_config`, invalid `input_url`, etc.).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: job_id must be alphanumeric
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          description: File too large. Maximum size is 1 GB.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: File too large. Maximum size is 1 GB.
+        '500':
+          $ref: '#/components/responses/InternalError'
+    get:
+      summary: List batch jobs
+      description: Returns a paginated list of jobs for your organization. Supports filtering by status, model, and submission date range, plus sorting.
+      operationId: batchJobsList
+      tags:
+      - Speechmatics
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number (1-based).
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        description: Number of items per page.
+      - name: status
+        in: query
+        schema:
+          type: string
+        description: 'Comma-separated statuses to filter by. Allowed values: `QUEUED`, `IN_PROGRESS`, `DECODING`, `DONE`, `FAILED`, `DELETED`.'
+        example: DONE,FAILED
+      - name: model_code
+        in: query
+        schema:
+          type: string
+        description: Filter by model code (exact match).
+        example: slng/speechmatics/batch:15.0.0
+      - name: submitted_after
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filter jobs submitted after this ISO 8601 datetime.
+        example: '2026-04-01T00:00:00Z'
+      - name: submitted_before
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filter jobs submitted before this ISO 8601 datetime.
+        example: '2026-04-30T23:59:59Z'
+      - name: sort_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - submitted_at
+          - status
+          - model_code
+          default: submitted_at
+        description: Field to sort results by.
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        description: Sort direction.
+      responses:
+        '200':
+          description: Paginated job list. Each item follows the `BatchJob` schema.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BatchJob'
+                  meta:
+                    type: object
+                    description: Pagination envelope.
+                    properties:
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      total:
+                        type: integer
+                      pages:
+                        type: integer
+              example:
+                items:
+                - job_id: myjob123
+                  status: DONE
+                  model_code: slng/speechmatics/batch:15.0.0
+                  submitted_at: '2026-04-01T12:00:00Z'
+                - job_id: myjob456
+                  status: IN_PROGRESS
+                  model_code: slng/speechmatics/batch:15.0.0
+                  submitted_at: '2026-04-02T09:30:00Z'
+                meta:
+                  page: 1
+                  page_size: 20
+                  total: 142
+                  pages: 8
+        '400':
+          description: Validation error (invalid status, sort field, sort order, or datetime format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: 'Invalid status value(s): BOGUS. Allowed: DECODING, DELETED, DONE, FAILED, IN_PROGRESS, QUEUED'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/batch/jobs/{jobId}:
+    get:
+      summary: Get batch job
+      description: Returns the full details of a job (status, config, timestamps, error info). Poll until `status` reaches `DONE` or `FAILED`.
+      operationId: batchJobsGet
+      tags:
+      - Speechmatics
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Job detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchJob'
+              example:
+                job_id: myjob123
+                status: DONE
+                model_code: slng/speechmatics/batch:15.0.0
+                job_config:
+                  type: transcription
+                  transcription_config:
+                    language: en
+                    operating_point: standard
+                    diarization: none
+                  tracking:
+                    title: Meeting
+                    reference: ref-123
+                input_metadata:
+                  size_bytes: 1543210
+                  duration_seconds: 312.4
+                  format: wav
+                  mime_type: audio/wav
+                output_metadata: {}
+                error_message: null
+                submitted_at: '2026-04-13T12:00:00Z'
+                started_at: '2026-04-13T12:00:05Z'
+                completed_at: '2026-04-13T12:01:30Z'
+                deleted_at: null
+                expired_at: null
+                updated_at: '2026-04-13T12:01:30Z'
+        '400':
+          description: Validation error (non-alphanumeric `jobId`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: job_id must be alphanumeric
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      summary: Delete batch job
+      description: Delete a completed or failed job. Only jobs in a terminal status (`DONE` or `FAILED`) can be deleted.
+      operationId: batchJobsDelete
+      tags:
+      - Speechmatics
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '202':
+          description: Job deletion accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcknowledgement'
+              example:
+                job_id: myjob123
+                status: DELETED
+        '400':
+          description: Validation error (non-alphanumeric `jobId`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: job_id must be alphanumeric
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: The job is not in a terminal status (`DONE` or `FAILED`) and cannot be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Job must be DONE or FAILED to delete
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/batch/jobs/{jobId}/files:
+    get:
+      summary: Get batch job files
+      description: Returns signed download URLs for the input audio and the output transcripts of a completed job. Outputs are returned per available format (`json`, `txt`, `srt`); missing formats are omitted.
+      operationId: batchJobsFiles
+      tags:
+      - Speechmatics
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Input and output files with signed download URLs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    description: The job identifier.
+                  inputs:
+                    type: array
+                    description: Uploaded audio files.
+                    items:
+                      $ref: '#/components/schemas/JobFile'
+                  outputs:
+                    type: array
+                    description: One entry per available output format. Missing formats are omitted.
+                    items:
+                      $ref: '#/components/schemas/JobOutputFile'
+              example:
+                job_id: myjob123
+                inputs:
+                - key: inputs/myjob123.wav
+                  s3_uri: s3://slng-production-batch-input/inputs/myjob123.wav
+                  download_url: https://slng-production-batch-input.s3.amazonaws.com/inputs/myjob123.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...
+                outputs:
+                - format: json
+                  key: outputs/myjob123.json
+                  s3_uri: s3://slng-production-batch-output/outputs/myjob123.json
+                  download_url: https://slng-production-batch-output.s3.amazonaws.com/outputs/myjob123.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...
+                - format: txt
+                  key: outputs/myjob123.txt
+                  s3_uri: s3://slng-production-batch-output/outputs/myjob123.txt
+                  download_url: https://slng-production-batch-output.s3.amazonaws.com/outputs/myjob123.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...
+                - format: srt
+                  key: outputs/myjob123.srt
+                  s3_uri: s3://slng-production-batch-output/outputs/myjob123.srt
+                  download_url: https://slng-production-batch-output.s3.amazonaws.com/outputs/myjob123.srt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...
+        '400':
+          description: Validation error (non-alphanumeric `jobId`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: job_id must be alphanumeric
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    JobAcknowledgement:
+      type: object
+      description: Minimal acknowledgement returned when a job is queued or marked for deletion. Poll `GET /v1/batch/jobs/{jobId}` for the full record.
+      required:
+      - job_id
+      - status
+      properties:
+        job_id:
+          type: string
+          description: Alphanumeric job identifier.
+        status:
+          type: string
+          description: Initial status. `QUEUED` on creation; `DELETED` on deletion.
+    Tracking:
+      type: object
+      description: Metadata for organizing and filtering jobs.
+      properties:
+        title:
+          type: string
+          description: Human-readable job title.
+          example: Meeting recording
+        reference:
+          type: string
+          description: External reference identifier.
+          example: ref-123
+        tags:
+          type: array
+          description: Labels for categorizing the job.
+          items:
+            type: string
+          example:
+          - meeting
+          - q1-review
+        details:
+          type: string
+          description: Free-text notes about the job.
+          example: Q1 planning session
+    OutputConfig:
+      type: object
+      description: Output format settings.
+      properties:
+        srt_overrides:
+          type: object
+          description: SRT subtitle formatting options.
+          properties:
+            max_line_length:
+              type: integer
+              description: Maximum characters per subtitle line.
+              example: 80
+            max_lines:
+              type: integer
+              description: Maximum lines per subtitle block.
+              example: 2
+    JobFile:
+      type: object
+      description: An input file associated with a job, with a signed download URL.
+      required:
+      - key
+      - s3_uri
+      - download_url
+      properties:
+        key:
+          type: string
+          description: S3 object key.
+        s3_uri:
+          type: string
+          description: Full `s3://bucket/key` URI.
+        download_url:
+          type: string
+          format: uri
+          description: Signed URL to download the file. Expires after approximately 1 hour.
+    TranscriptionConfig:
+      type: object
+      description: Transcription settings.
+      properties:
+        language:
+          type: string
+          description: Language code for the audio.
+          default: en
+          example: en
+        operating_point:
+          type: string
+          description: Accuracy level.
+          enum:
+          - standard
+          - enhanced
+          default: standard
+        diarization:
+          type: string
+          description: Speaker separation mode.
+          enum:
+          - none
+          - speaker
+          - channel
+          default: none
+        domain:
+          type: string
+          description: Domain-specific language model to use.
+        output_locale:
+          type: string
+          description: Locale for formatting output (e.g. dates, numbers).
+        enable_entities:
+          type: boolean
+          description: Detect and format entities such as dates, times, and addresses.
+        additional_vocab:
+          type: array
+          description: Custom words or phrases to improve recognition accuracy.
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+              sounds_like:
+                type: array
+                items:
+                  type: string
+    Error:
+      type: object
+      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
+      required:
+      - error
+      additionalProperties: false
+      properties:
+        error:
+          type: string
+    BatchJob:
+      type: object
+      description: A batch transcription job.
+      required:
+      - job_id
+      - status
+      properties:
+        job_id:
+          type: string
+          description: Alphanumeric job identifier.
+        api_key_id:
+          type: string
+          description: API key that submitted the job. May differ from the API key used to call this endpoint when the job was created via the dashboard.
+        organisation_id:
+          type: string
+          format: uuid
+          description: Organisation that owns the job.
+        model_code:
+          type: string
+          description: Model used (e.g. `slng/speechmatics/batch:15.0.0`).
+        status:
+          type: string
+          description: Public-facing job status.
+          enum:
+          - QUEUED
+          - IN_PROGRESS
+          - DECODING
+          - POST_PROCESSING
+          - DONE
+          - FAILED
+          - DELETED
+        job_config:
+          type: object
+          description: Full job-config object as submitted (`type`, `transcription_config`, optional `tracking`, `output_config`).
+          additionalProperties: true
+        input_metadata:
+          type: object
+          description: Measured input file properties (`size_bytes`, `duration_seconds`, `format`, `mime_type`, `source`).
+          additionalProperties: true
+        output_metadata:
+          type: object
+          description: Measured output properties (populated on completion).
+          additionalProperties: true
+        error_message:
+          type: object
+          nullable: true
+          description: Error envelope for `FAILED` jobs. Otherwise `null`.
+          required:
+          - message
+          additionalProperties: false
+          properties:
+            message:
+              type: string
+              description: User-presentable error string (display verbatim).
+        submitted_at:
+          type: string
+          format: date-time
+          description: When the job was created.
+        started_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When processing began.
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the job reached a terminal state.
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the job was deleted.
+        expired_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the job was expired.
+        updated_at:
+          type: string
+          format: date-time
+          description: Last row update.
+    JobOutputFile:
+      type: object
+      description: An output transcript file, with format and signed download URL. Missing formats are omitted from the list.
+      required:
+      - format
+      - key
+      - s3_uri
+      - download_url
+      properties:
+        format:
+          type: string
+          enum:
+          - json
+          - txt
+          - srt
+          description: Output transcript format.
+        key:
+          type: string
+          description: S3 object key.
+        s3_uri:
+          type: string
+          description: Full `s3://bucket/key` URI.
+        download_url:
+          type: string
+          format: uri
+          description: Signed URL to download the file. Expires after approximately 1 hour.
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Internal server error
+    Forbidden:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: API key id not found
+    NotFound:
+      description: Job not found, or not owned by the authenticated API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Job not found
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-zA-Z0-9]+$
+      description: The alphanumeric job identifier.
+      example: myjob123
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key

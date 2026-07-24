@@ -1,0 +1,311 @@
+openapi: 3.0.3
+info:
+  title: SLNG Voice Agents Account Whisper Large v3 API
+  version: 1.0.0
+  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
+
+
+    Base URL: `https://api.agents.slng.ai`
+
+    '
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+- url: https://api.agents.slng.ai
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Whisper Large v3
+  description: Whisper Large v3 with 99+ language support.
+paths:
+  /v1/stt/slng/openai/whisper:large-v3:
+    post:
+      operationId: sttWhisperLargeV3Receive
+      summary: Whisper Large v3
+      description: Receive transcripts from Whisper Large v3
+      tags:
+      - Whisper Large v3
+      parameters:
+      - $ref: '#/components/parameters/XWorldPartSlngWhisper'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WhisperTranscriptionRequest'
+            examples:
+              binary:
+                summary: Binary audio upload
+                value:
+                  audio: <binary>
+                  language: en
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WhisperTranscriptionRequest'
+            examples:
+              url:
+                summary: URL-based transcription
+                value:
+                  url: https://docs.slng.ai/audio/hello.wav
+                  language: en
+      responses:
+        '200':
+          $ref: '#/components/responses/WhisperTranscriptionSuccess'
+        '400':
+          $ref: '#/components/responses/WhisperBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '413':
+          $ref: '#/components/responses/WhisperPayloadTooLarge'
+        '500':
+          $ref: '#/components/responses/WhisperInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+components:
+  schemas:
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    WhisperTranscriptionResponse:
+      type: object
+      description: Whisper STT response format.
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Transcribed text.
+        language:
+          type: string
+          description: Detected language code (may not be present in all variants).
+    WhisperErrorResponse:
+      type: object
+      description: Whisper-specific error response.
+      properties:
+        error:
+          type: string
+          description: Error message.
+      required:
+      - error
+    WhisperTranscriptionRequest:
+      type: object
+      description: Whisper transcription request. Provide either `audio` (multipart upload) or `url` (publicly accessible HTTPS URL).
+      properties:
+        audio:
+          type: string
+          format: binary
+          description: 'Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.'
+        url:
+          type: string
+          description: Publicly accessible audio URL.
+          example: https://docs.slng.ai/audio/hello.wav
+        language:
+          $ref: '#/components/schemas/WhisperLanguageCode'
+    WhisperLanguageCode:
+      type: string
+      description: ISO-639-1 language code. Auto-detected if not specified.
+      example: en
+      enum:
+      - af
+      - am
+      - ar
+      - as
+      - az
+      - ba
+      - be
+      - bg
+      - bn
+      - bo
+      - br
+      - bs
+      - ca
+      - cs
+      - cy
+      - da
+      - de
+      - el
+      - en
+      - es
+      - et
+      - eu
+      - fa
+      - fi
+      - fo
+      - fr
+      - gl
+      - gu
+      - ha
+      - haw
+      - he
+      - hi
+      - hr
+      - ht
+      - hu
+      - hy
+      - id
+      - is
+      - it
+      - ja
+      - jw
+      - ka
+      - kk
+      - km
+      - kn
+      - ko
+      - la
+      - lb
+      - ln
+      - lo
+      - lt
+      - lv
+      - mg
+      - mi
+      - mk
+      - ml
+      - mn
+      - mr
+      - ms
+      - mt
+      - my
+      - ne
+      - nl
+      - nn
+      - 'no'
+      - oc
+      - pa
+      - pl
+      - ps
+      - pt
+      - ro
+      - ru
+      - sa
+      - sd
+      - si
+      - sk
+      - sl
+      - sn
+      - so
+      - sq
+      - sr
+      - su
+      - sv
+      - sw
+      - ta
+      - te
+      - tg
+      - th
+      - tk
+      - tl
+      - tr
+      - tt
+      - uk
+      - ur
+      - uz
+      - vi
+      - yi
+      - yo
+      - zh
+      - yue
+  responses:
+    WhisperInternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhisperErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Failed to process audio file
+    WhisperTranscriptionSuccess:
+      description: Transcription successful.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhisperTranscriptionResponse'
+          examples:
+            english:
+              summary: English transcription
+              value:
+                text: Hello, welcome to SLNG's speech-to-text API.
+                language: en
+            spanish:
+              summary: Spanish transcription
+              value:
+                text: Hola, bienvenido a la API de texto a voz de SLNG.
+                language: es
+    WhisperBadRequest:
+      description: Invalid or missing audio file.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhisperErrorResponse'
+          examples:
+            missing-audio:
+              summary: Missing audio
+              value:
+                error: 'Missing required field: audio'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    WhisperPayloadTooLarge:
+      description: Audio file exceeds 25MB limit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhisperErrorResponse'
+          examples:
+            too-large:
+              summary: File too large
+              value:
+                error: Audio file size exceeds maximum limit of 25MB
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+  parameters:
+    XWorldPartSlngWhisper:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key
