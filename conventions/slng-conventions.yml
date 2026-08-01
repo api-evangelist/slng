@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/, asyncapi/, https://docs.slng.ai/protocols.md, https://docs.slng.ai/region-override.md
+authentication:
+  style: bearer-token
+  header: 'Authorization: Bearer <api_key>'
+  note: >-
+    Opaque API key issued from the SLNG dashboard. Some catalog (read) endpoints
+    accept anonymous requests; an API key personalizes pricing and region availability.
+  cross_ref: authentication/slng-authentication.yml
+protocols:
+  transports: [https, wss]
+  note: >-
+    Every model can be invoked over HTTP (request/response) or WebSocket (wss)
+    for streaming STT/TTS. See asyncapi/ for the streaming surface.
+pagination:
+  style: page-number
+  params: [page, page_size]
+  response_fields: [meta.page, meta.page_size, meta.total, meta.pages]
+  defaults: {page: 1, page_size: 20, max_page_size: 100}
+regional_routing:
+  headers:
+    - name: X-Region-Override
+      description: Force a specific region (e.g. eu-north-1, us-east-1, asia-south1). Auto-selected if omitted.
+    - name: X-World-Part-Override
+      description: Force a world part (e.g. eu, ap, au). Auto-selected if omitted.
+  note: SLNG orchestrates compute across 60+ regions / 11 sovereign hubs for latency and data residency.
+request_tracking:
+  fields:
+    - tag (STT requests) — free-form request-tracking tag
+    - metadata (batch jobs) — arbitrary key-value metadata attached to a job
+  response_ids: metadata.request_id is returned on transcription responses
+idempotency:
+  supported: partial
+  note: >-
+    Batch jobs accept a client-supplied alphanumeric job_id (auto-generated if
+    omitted). No general Idempotency-Key header is documented for the synchronous
+    STT/TTS surface.
+versioning:
+  scheme: uri-path
+  current: v1
+error_envelope:
+  shape: '{"error": string}'
+  provider_shape: '{"error": string, "status": int, "details": string}'
+  cross_ref: errors/slng-problem-types.yml

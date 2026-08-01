@@ -1,0 +1,209 @@
+{
+  "info": {
+    "_postman_id": "2e66bcae-4d42-4fa1-b9f5-5ac61e9635a4",
+    "name": "SLNG Voice Agents Account API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:24.000Z",
+    "updatedAt": "2026-07-28T02:55:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2e66bcae-4d42-4fa1-b9f5-5ac61e9635a4"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "me",
+          "item": [
+            {
+              "name": "Get current account",
+              "id": "21bfb6dc-39ae-4bb5-94ba-fd92257211c4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "me"
+                  ]
+                },
+                "description": "Return the account, organization, and API key associated with the bearer token in the request. Use this to confirm which key is in use and which organization and plan tier it belongs to."
+              },
+              "response": [
+                {
+                  "id": "5b4e7324-0181-4705-9553-73e9bd90b446",
+                  "name": "The authenticated account.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"org_id\": \"<uuid>\",\n  \"org_name\": \"<string>\",\n  \"api_key_label\": \"<string>\",\n  \"tier\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:55:24.000Z",
+                  "updatedAt": "2026-07-28T02:55:24.000Z",
+                  "uid": "35240-5b4e7324-0181-4705-9553-73e9bd90b446"
+                },
+                {
+                  "id": "1bc43765-2d8d-4468-a508-3bff27eee093",
+                  "name": "Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:55:24.000Z",
+                  "updatedAt": "2026-07-28T02:55:24.000Z",
+                  "uid": "35240-1bc43765-2d8d-4468-a508-3bff27eee093"
+                },
+                {
+                  "id": "9949ef67-5043-4317-bcdd-4215fcf22433",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/me",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "me"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:55:24.000Z",
+                  "updatedAt": "2026-07-28T02:55:24.000Z",
+                  "uid": "35240-9949ef67-5043-4317-bcdd-4215fcf22433"
+                }
+              ],
+              "createdAt": "2026-07-28T02:55:24.000Z",
+              "updatedAt": "2026-07-28T02:55:24.000Z",
+              "uid": "35240-21bfb6dc-39ae-4bb5-94ba-fd92257211c4"
+            }
+          ],
+          "id": "5f58c200-e3e9-4789-bad3-71d64ca99c0c",
+          "createdAt": "2026-07-28T02:55:24.000Z",
+          "updatedAt": "2026-07-28T02:55:24.000Z",
+          "uid": "35240-5f58c200-e3e9-4789-bad3-71d64ca99c0c"
+        }
+      ],
+      "id": "728a9864-5d6a-48c8-8e61-232c2385d738",
+      "createdAt": "2026-07-28T02:55:24.000Z",
+      "updatedAt": "2026-07-28T02:55:24.000Z",
+      "uid": "35240-728a9864-5d6a-48c8-8e61-232c2385d738"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

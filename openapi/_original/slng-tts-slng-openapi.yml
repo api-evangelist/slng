@@ -1,0 +1,2367 @@
+openapi: 3.0.3
+info:
+  title: SLNG Gateway API - SLNG TTS
+  version: 0.1.0
+  description: Unified API for speech-to-text and text-to-speech services.
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+  - url: https://api.slng.ai
+    description: Production
+  - url: https://stageapi.slng.ai
+    description: Staging
+security:
+  - BearerAuth: []
+paths:
+  /v1/tts/slng/canopylabs/orpheus:en:
+    post:
+      operationId: slng/canopylabs/orpheus:en
+      summary: Orpheus (English)
+      description: Synthesize speech using Orpheus with emotion control.
+      tags:
+        - Orpheus English
+      parameters:
+        - $ref: '#/components/parameters/XWorldPartSlngOrpheus'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrpheusTtsRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  voice: tara
+                  prompt: Hello, this is a test of text to speech synthesis.
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:ar:
+    post:
+      operationId: rime/arcana:ar
+      summary: Arcana v2 (Arabic)
+      description: Synthesize Arabic speech using Rime Arcana TTS model.
+      tags:
+        - Rime Arcana v2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV1Ar'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcanaTtsRequestAr'
+            examples:
+              basic:
+                summary: Basic Arabic synthesis
+                value:
+                  text: مرحبا من رايم أركانا العربية. اختبار تحويل النص إلى كلام.
+                  speaker: sakina
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:de:
+    post:
+      operationId: rime/arcana:de
+      summary: Arcana v2 (German)
+      description: Synthesize German speech using Rime Arcana TTS model.
+      tags:
+        - Rime Arcana v2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV1De'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcanaTtsRequestDe'
+            examples:
+              basic:
+                summary: Basic German synthesis
+                value:
+                  text: Hallo von Rime Arcana Deutsch. Test der Sprachsynthese.
+                  speaker: lorelei
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:en:
+    post:
+      operationId: rime/arcana:en
+      summary: Arcana v2 (English)
+      description: Synthesize English speech using Rime Arcana TTS model.
+      tags:
+        - Rime Arcana v2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV1En'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcanaTtsRequestEn'
+            examples:
+              basic:
+                summary: Basic English synthesis
+                value:
+                  text: >-
+                    Hello from Rime Arcana English. Testing text to speech
+                    synthesis.
+                  speaker: astra
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:es:
+    post:
+      operationId: rime/arcana:es
+      summary: Arcana v2 (Spanish)
+      description: Synthesize Spanish speech using Rime Arcana TTS model.
+      tags:
+        - Rime Arcana v2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV1Es'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcanaTtsRequestEs'
+            examples:
+              basic:
+                summary: Basic Spanish synthesis
+                value:
+                  text: >-
+                    Hola desde Rime Arcana Español. Probando la síntesis de
+                    texto a voz.
+                  speaker: seraphina
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:fr:
+    post:
+      operationId: rime/arcana:fr
+      summary: Arcana v2 (French)
+      description: Synthesize French speech using Rime Arcana TTS model.
+      tags:
+        - Rime Arcana v2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV1Fr'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcanaTtsRequestFr'
+            examples:
+              basic:
+                summary: Basic French synthesis
+                value:
+                  text: >-
+                    Bonjour depuis Rime Arcana Français. Test de la synthèse
+                    vocale.
+                  speaker: destin
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:3-en:
+    post:
+      operationId: rime/arcana:3-en
+      summary: Arcana v3 (English)
+      description: Synthesize English speech using Rime Arcana v3 TTS model.
+      tags:
+        - Rime Arcana v3
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV3En'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcana3TtsRequestEn'
+            examples:
+              basic:
+                summary: Basic English synthesis
+                value:
+                  text: >-
+                    Hello from Rime Arcana v3 English. Testing text to speech
+                    synthesis.
+                  speaker: astra
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:3-es:
+    post:
+      operationId: rime/arcana:3-es
+      summary: Arcana v3 (Spanish)
+      description: Synthesize Spanish speech using Rime Arcana v3 TTS model.
+      tags:
+        - Rime Arcana v3
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV3Es'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcana3TtsRequestEs'
+            examples:
+              basic:
+                summary: Basic Spanish synthesis
+                value:
+                  text: >-
+                    Hola desde Rime Arcana v3 Español. Probando la síntesis de
+                    texto a voz.
+                  speaker: seraphina
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:3-hi:
+    post:
+      operationId: rime/arcana:3-hi
+      summary: Arcana v3 (Hindi)
+      description: Synthesize Hindi speech using Rime Arcana v3 TTS model.
+      tags:
+        - Rime Arcana v3
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV3Hi'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcana3TtsRequestHi'
+            examples:
+              basic:
+                summary: Basic Hindi synthesis
+                value:
+                  text: >-
+                    नमस्ते Rime Arcana v3 हिंदी से। टेक्स्ट टू स्पीच सिंथेसिस का
+                    परीक्षण।
+                  speaker: astra
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/arcana:3-fr:
+    post:
+      operationId: rime/arcana:3-fr
+      summary: Arcana v3 (French)
+      description: Synthesize French speech using Rime Arcana v3 TTS model.
+      tags:
+        - Rime Arcana v3
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngArcanaV3Fr'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeArcana3TtsRequestFr'
+            examples:
+              basic:
+                summary: Basic French synthesis
+                value:
+                  text: >-
+                    Bonjour depuis Rime Arcana v3 Français. Test de la synthèse
+                    vocale.
+                  speaker: livet_aurelie
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeArcanaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeArcanaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/rime/coda:0-id:
+    post:
+      operationId: rime/coda:0-id
+      summary: Coda (Indonesian)
+      description: Synthesize Bahasa Indonesian speech using Rime Coda TTS model.
+      tags:
+        - Rime Coda
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngCoda0Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RimeCoda0IdTtsRequestId'
+            examples:
+              basic:
+                summary: Basic Indonesian synthesis
+                value:
+                  text: >-
+                    Halo dari Rime Coda Indonesia. Pengujian sintesis teks ke
+                    ucapan.
+                  speaker: pujianti_plesmita
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/RimeCodaBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/RimeCodaInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+  /v1/tts/slng/deepgram/aura:2-en:
+    post:
+      operationId: slng/deepgram/aura:2-en
+      summary: Aura 2 (English)
+      description: Synthesize English speech using SLNG-hosted Deepgram Aura 2.
+      tags:
+        - Deepgram Aura 2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngAuraEn'
+        - $ref: '#/components/parameters/XWorldPartSlngAuraEn'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramAura2EnRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  model: aura-2-thalia-en
+                  text: Hello, this is a test of text to speech synthesis.
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/SlngDeepgramAuraBadRequest'
+        '401':
+          $ref: '#/components/responses/SlngDeepgramAuraUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+  /v1/tts/slng/deepgram/aura:2-es:
+    post:
+      operationId: slng/deepgram/aura:2-es
+      summary: Aura 2 (Spanish)
+      description: Synthesize Spanish speech using SLNG-hosted Deepgram Aura 2.
+      tags:
+        - Deepgram Aura 2
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngAuraEs'
+        - $ref: '#/components/parameters/XWorldPartSlngAuraEs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngDeepgramAura2EsRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  model: aura-2-celeste-es
+                  text: Hola, esto es una prueba de síntesis de texto a voz.
+      responses:
+        '200':
+          $ref: '#/components/responses/TtsSynthesisSuccess'
+        '400':
+          $ref: '#/components/responses/SlngDeepgramAuraBadRequest'
+        '401':
+          $ref: '#/components/responses/SlngDeepgramAuraUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+  /v1/tts/slng/inworld/max:1.5:
+    post:
+      operationId: slng/inworld/max:1.5
+      summary: Inworld Max 1.5
+      description: Synthesize speech using SLNG-hosted Inworld Max 1.5.
+      tags:
+        - Inworld Max 1.5
+      parameters:
+        - $ref: '#/components/parameters/XRegionSlngInworldMax'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlngInworldMaxRequest'
+            examples:
+              basic:
+                summary: Basic synthesis
+                value:
+                  text: Hello, this is a test of Inworld text to speech.
+                  voice: Ashley
+                  modelId: inworld-tts-1.5-max
+              wordTimestamps:
+                summary: Request word-level timestamps
+                value:
+                  text: Hello, world!
+                  voice: Ashley
+                  timestampType: WORD
+              characterTimestamps:
+                summary: Request character-level timestamps
+                value:
+                  text: Hello world.
+                  voice: Ashley
+                  timestampType: CHARACTER
+      responses:
+        '200':
+          $ref: '#/components/responses/SlngInworldMaxSuccess'
+        '400':
+          $ref: '#/components/responses/ProviderBadRequest'
+        '401':
+          $ref: '#/components/responses/ProviderUnauthorized'
+        '500':
+          $ref: '#/components/responses/ProviderInternalServerError'
+        '503':
+          $ref: '#/components/responses/ProviderServiceUnavailable'
+tags:
+  - name: Deepgram Aura 2
+    description: Deepgram Aura 2 for conversational voice agents.
+  - name: Orpheus English
+    description: Orpheus TTS with emotion control.
+  - name: Rime Arcana v2
+    description: Rime Arcana v2 TTS with multi-language support.
+  - name: Rime Arcana v3
+    description: Rime Arcana v3 TTS with multilingual support (English, Hindi).
+  - name: Rime Coda
+    description: Rime Coda TTS for Bahasa Indonesian.
+  - name: Inworld Max 1.5
+    description: Inworld Max 1.5 for multilingual, expressive synthesis.
+components:
+  schemas:
+    SlngDeepgramAura2EsRequest:
+      allOf:
+        - $ref: '#/components/schemas/DeepgramAuraTtsRequestBase'
+        - type: object
+          properties:
+            model:
+              $ref: '#/components/schemas/SlngDeepgramAura2EsModelName'
+          required:
+            - model
+    SlngDeepgramAura2EsModelName:
+      type: string
+      description: >-
+        Spanish voice model. Check the full list with audio samples in the
+        [voice list](https://docs.slng.ai/voices/deepgram-aura#spanish-voices).
+      enum:
+        - aura-2-sirio-es
+        - aura-2-nestor-es
+        - aura-2-carina-es
+        - aura-2-celeste-es
+        - aura-2-alvaro-es
+        - aura-2-diana-es
+        - aura-2-aquila-es
+        - aura-2-selena-es
+        - aura-2-estrella-es
+        - aura-2-javier-es
+    DeepgramAuraTtsRequestBase:
+      type: object
+      properties:
+        text:
+          $ref: '#/components/schemas/TextToSynthesize'
+        encoding:
+          $ref: '#/components/schemas/DeepgramTtsEncoding'
+        sample_rate:
+          $ref: '#/components/schemas/DeepgramTtsSampleRate'
+        container:
+          $ref: '#/components/schemas/DeepgramTtsContainer'
+        bit_rate:
+          type: integer
+          description: Output bit rate for lossy encodings.
+          enum:
+            - 8000
+            - 16000
+            - 24000
+            - 32000
+            - 48000
+            - 64000
+            - 96000
+            - 128000
+            - 192000
+            - 256000
+      required:
+        - text
+    DeepgramTtsContainer:
+      type: string
+      description: Output file format container.
+      enum:
+        - none
+        - wav
+        - ogg
+      default: wav
+    DeepgramTtsSampleRate:
+      type: integer
+      description: Output sample rate in Hz.
+      enum:
+        - 8000
+        - 16000
+        - 24000
+        - 32000
+        - 48000
+      default: 24000
+    DeepgramTtsEncoding:
+      type: string
+      description: Output audio encoding.
+      enum:
+        - linear16
+        - mp3
+        - opus
+        - flac
+        - aac
+        - mulaw
+        - alaw
+      default: mp3
+    TextToSynthesize:
+      type: string
+      minLength: 1
+      description: Text to synthesize.
+    SlngInworldMaxRequest:
+      type: object
+      description: >-
+        Inworld Max 1.5 synthesis request, SLNG-hosted. Audio output is
+        configured with flat fields (encoding, sample_rate, bit_rate,
+        speaking_rate) that the gateway maps to Inworld's audioConfig.
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Text to synthesize. Max 2,000 characters.
+        voice:
+          type: string
+          default: Ashley
+          description: >-
+            Inworld voice ID. Voices are multilingual — each has a native
+            language but can speak any supported language via the `language`
+            parameter (best results when `language` matches the voice's native
+            language). See the full catalog at
+            https://docs.slng.ai/voices/inworld.
+        modelId:
+          type: string
+          enum:
+            - inworld-tts-1.5-max
+          default: inworld-tts-1.5-max
+          description: ID of the Inworld TTS model.
+        language:
+          $ref: '#/components/schemas/SlngInworldMaxLanguage'
+        deliveryMode:
+          type: string
+          enum:
+            - DELIVERY_MODE_UNSPECIFIED
+            - STABLE
+            - BALANCED
+            - CREATIVE
+          description: >-
+            Only applies to inworld-tts-2. Controls output variation; ignored on
+            Max 1.5.
+        temperature:
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
+          maximum: 2
+          default: 1
+          description: >-
+            Higher values produce more expressive output; lower values more
+            deterministic. Range (0, 2].
+        timestampType:
+          type: string
+          enum:
+            - TIMESTAMP_TYPE_UNSPECIFIED
+            - WORD
+            - CHARACTER
+          default: TIMESTAMP_TYPE_UNSPECIFIED
+          description: Controls timestamp metadata returned with the audio. Adds latency.
+        applyTextNormalization:
+          type: string
+          enum:
+            - APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+            - 'ON'
+            - 'OFF'
+          default: APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+          description: >-
+            Expands numbers, dates, and abbreviations before synthesis.
+            Disabling may reduce latency.
+        encoding:
+          type: string
+          enum:
+            - LINEAR16
+            - MP3
+            - OGG_OPUS
+            - ALAW
+            - MULAW
+            - FLAC
+            - PCM
+            - WAV
+          default: MP3
+          description: Output audio format. Maps to Inworld audioConfig.audioEncoding.
+        sample_rate:
+          type: integer
+          enum:
+            - 8000
+            - 16000
+            - 22050
+            - 24000
+            - 32000
+            - 44100
+            - 48000
+          default: 48000
+          description: >-
+            Output sample rate in Hz. Maps to Inworld
+            audioConfig.sampleRateHertz.
+        bit_rate:
+          type: integer
+          description: >-
+            Bits per second. Only applies to compressed formats (MP3, OGG_OPUS).
+            Maps to Inworld audioConfig.bitRate.
+        speaking_rate:
+          type: number
+          minimum: 0.5
+          maximum: 1.5
+          default: 1
+          description: >-
+            Playback speed. Values below 0.8 not recommended for quality. Maps
+            to Inworld audioConfig.speakingRate.
+    SlngInworldMaxSuccessBody:
+      type: object
+      description: >-
+        Inworld Max 1.5 synthesis result. Inworld's native response, passed
+        through by the gateway.
+      properties:
+        audioContent:
+          type: string
+          format: byte
+          description: Base64-encoded audio in the requested encoding. Max 16MB.
+        usage:
+          type: object
+          description: Synthesis usage details.
+          properties:
+            processedCharactersCount:
+              type: integer
+              description: Number of input characters processed.
+            modelId:
+              type: string
+              description: Model used for synthesis.
+        timestampInfo:
+          type: object
+          description: >-
+            Timestamp metadata. Present only when timestampType is WORD or
+            CHARACTER.
+          properties:
+            wordAlignment:
+              type: object
+              description: Per-word alignment. Present when timestampType is WORD.
+              properties:
+                words:
+                  type: array
+                  items:
+                    type: string
+                  description: Aligned words in order.
+                wordStartTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: Start time per word in seconds.
+                wordEndTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: End time per word in seconds.
+                phoneticDetails:
+                  type: array
+                  description: >-
+                    Per-word phoneme and viseme timing. Only available on TTS
+                    1.5+ and TTS-2 models.
+                  items:
+                    type: object
+                    properties:
+                      wordIndex:
+                        type: integer
+                        description: 0-based index of the word this entry belongs to.
+                      phones:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            phoneSymbol:
+                              type: string
+                              description: IPA phoneme symbol.
+                            startTimeSeconds:
+                              type: number
+                              description: Phoneme start time in seconds.
+                            durationSeconds:
+                              type: number
+                              description: Phoneme duration in seconds.
+                            visemeSymbol:
+                              type: string
+                              description: >-
+                                Viseme for lip-sync (e.g. aei, o, bmp, l, r,
+                                qw).
+                      isPartial:
+                        type: boolean
+                        description: >-
+                          True if the word is potentially unstable (streaming
+                          only).
+            characterAlignment:
+              type: object
+              description: >-
+                Per-character alignment. Present when timestampType is
+                CHARACTER.
+              properties:
+                characters:
+                  type: array
+                  items:
+                    type: string
+                  description: Aligned characters including punctuation and spaces.
+                characterStartTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: Start time per character in seconds.
+                characterEndTimeSeconds:
+                  type: array
+                  items:
+                    type: number
+                  description: End time per character in seconds.
+    SlngInworldMaxLanguage:
+      type: string
+      description: >-
+        BCP-47 language tag specifying the language the voice should speak the
+        text in. Optional — when omitted, Inworld uses the voice's original
+        prompt and auto-detects the language from the text. Voices are
+        multilingual; best results when this matches the voice's native
+        language. These are the 15 core languages supported by
+        inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85
+        experimental languages). An invalid code returns an error.
+      enum:
+        - ar-SA
+        - de-DE
+        - en-US
+        - es-ES
+        - fr-FR
+        - he-IL
+        - hi-IN
+        - it-IT
+        - ja-JP
+        - ko-KR
+        - nl-NL
+        - pl-PL
+        - pt-BR
+        - ru-RU
+        - zh-CN
+    SlngDeepgramAuraUnauthorizedResponse:
+      type: object
+      description: Unauthorized error response for SLNG-hosted Deepgram Aura TTS requests.
+      properties:
+        title:
+          type: string
+          description: Error title.
+          example: Unauthorized
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 401
+        detail:
+          type: string
+          description: Detailed error message.
+          example: No Authorization Header
+      required:
+        - title
+        - status
+        - detail
+    SlngDeepgramAuraBadRequestResponse:
+      type: object
+      description: >
+        Bad request error for SLNG-hosted Deepgram Aura TTS. Validation errors
+        include `fieldErrors`; provider errors include `details`.
+      properties:
+        error:
+          type: string
+          description: Error message or category.
+          example: Text is required
+        fieldErrors:
+          type: object
+          description: >-
+            Field-level validation errors keyed by field name. Present for
+            request validation errors.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            text:
+              - Required
+        details:
+          type: string
+          description: >-
+            Detailed error message from the provider. Present for provider-side
+            errors.
+          example: >-
+            {"err_code":"INVALID_QUERY_PARAMETER","err_msg":"Failed to
+            deserialize query parameters"}
+      required:
+        - error
+    SlngDeepgramAura2EnRequest:
+      allOf:
+        - $ref: '#/components/schemas/DeepgramAuraTtsRequestBase'
+        - type: object
+          properties:
+            model:
+              $ref: '#/components/schemas/SlngDeepgramAura2EnModelName'
+          required:
+            - model
+    SlngDeepgramAura2EnModelName:
+      type: string
+      description: >-
+        English voice model. Check the full list with audio samples in the
+        [voice list](https://docs.slng.ai/voices/deepgram-aura#english-voices).
+      enum:
+        - aura-2-amalthea-en
+        - aura-2-andromeda-en
+        - aura-2-apollo-en
+        - aura-2-arcas-en
+        - aura-2-aries-en
+        - aura-2-asteria-en
+        - aura-2-athena-en
+        - aura-2-atlas-en
+        - aura-2-aurora-en
+        - aura-2-callista-en
+        - aura-2-cordelia-en
+        - aura-2-cora-en
+        - aura-2-delia-en
+        - aura-2-draco-en
+        - aura-2-electra-en
+        - aura-2-harmonia-en
+        - aura-2-helena-en
+        - aura-2-hera-en
+        - aura-2-hermes-en
+        - aura-2-hyperion-en
+        - aura-2-iris-en
+        - aura-2-janus-en
+        - aura-2-juno-en
+        - aura-2-jupiter-en
+        - aura-2-luna-en
+        - aura-2-mars-en
+        - aura-2-minerva-en
+        - aura-2-neptune-en
+        - aura-2-odysseus-en
+        - aura-2-ophelia-en
+        - aura-2-orion-en
+        - aura-2-orpheus-en
+        - aura-2-pandora-en
+        - aura-2-phoebe-en
+        - aura-2-pluto-en
+        - aura-2-saturn-en
+        - aura-2-selene-en
+        - aura-2-thalia-en
+        - aura-2-theia-en
+        - aura-2-vesta-en
+        - aura-2-zeus-en
+    RimeArcana3TtsRequestHi:
+      description: Rime Arcana v3 TTS request for Hindi.
+      allOf:
+        - $ref: '#/components/schemas/RimeArcana3TtsRequestBase'
+    RimeArcana3TtsRequestEs:
+      description: Rime Arcana v3 TTS request for Spanish.
+      type: object
+      required:
+        - speaker
+      properties:
+        speaker:
+          $ref: '#/components/schemas/RimeArcana3SpeakerEs'
+        modelId:
+          type: string
+          default: arcana-3
+          description: Rime Arcana v3 model identifier.
+        language:
+          type: string
+          enum:
+            - es
+          default: es
+          description: Language code.
+      allOf:
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    RimeArcana3TtsRequestFr:
+      description: Rime Arcana v3 TTS request for French.
+      type: object
+      required:
+        - speaker
+      properties:
+        speaker:
+          $ref: '#/components/schemas/RimeArcanaSpeakerFr'
+        modelId:
+          type: string
+          default: arcana-3
+          description: Rime Arcana v3 model identifier.
+        language:
+          type: string
+          enum:
+            - fr
+          default: fr
+          description: Language code.
+      allOf:
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    RimeArcana3TtsRequestBase:
+      description: Base schema for Rime Arcana v3 TTS requests.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeArcana3Speaker'
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    RimeArcanaTtsRequestCommon:
+      type: object
+      description: Common Rime Arcana TTS options.
+      properties:
+        text:
+          type: string
+          minLength: 1
+          description: Text to synthesize.
+        modelId:
+          $ref: '#/components/schemas/RimeArcanaModelId'
+        repetition_penalty:
+          type: number
+          format: float
+          default: 1.5
+          description: >-
+            The repetition penalty. We do not recommend changing this from the
+            default value. Typical range is 1 to 2. Float that penalizes new
+            tokens based on whether they appear in the prompt and the generated
+            text so far. Values > 1 encourage the model to use new tokens, while
+            values < 1 encourage the model to repeat tokens.
+        temperature:
+          type: number
+          format: float
+          default: 0.5
+          description: >-
+            The temperature. We do not recommend changing this from the default
+            value. Typical range is 0 to 1. Float that controls the randomness
+            of the sampling. Lower values make the model more deterministic,
+            while higher values make the model more random. Zero means greedy
+            sampling.
+        top_p:
+          type: number
+          format: float
+          default: 1
+          description: >-
+            The top p. We do not recommend changing this from the default value.
+            Typical range is 0 to 1. Float that controls the cumulative
+            probability of the top tokens to consider. Must be in (0, 1]. Set to
+            1 to consider all tokens.
+        audioFormat:
+          $ref: '#/components/schemas/RimeArcanaAudioFormat'
+        sample_rate:
+          $ref: '#/components/schemas/RimeArcanaSampleRate'
+        speed:
+          type: number
+          description: Speech rate multiplier (0.25 = half speed, 2.0 = double speed).
+          minimum: 0.25
+          maximum: 2
+          default: 1
+      required:
+        - text
+    RimeArcanaSampleRate:
+      type: integer
+      description: Output sample rate in Hz. Values above 24000 are upsampled.
+      default: 24000
+      enum:
+        - 8000
+        - 16000
+        - 22050
+        - 24000
+        - 44100
+        - 48000
+        - 96000
+    RimeArcanaAudioFormat:
+      type: string
+      description: Output audio format as MIME type.
+      enum:
+        - audio/webm;codecs=opus
+        - audio/ogg;codecs=opus
+        - audio/mp3
+        - audio/wav
+        - audio/pcm
+        - audio/x-mulaw
+      default: audio/wav
+    RimeArcanaModelId:
+      type: string
+      description: 'Model: arcana (most realistic, ~150ms), mistv2 (speed & control, ~70ms).'
+      enum:
+        - arcana
+        - arcana-3
+        - mistv2
+        - mist
+      default: arcana
+    RimeArcana3Speaker:
+      type: string
+      description: >-
+        Voice speaker ID for Rime Arcana v3. Multilingual speakers supporting
+        all languages.
+      default: astra
+      enum:
+        - ahmed_mohamed
+        - akari
+        - albion
+        - alfhild
+        - alzira
+        - amarante
+        - anaya
+        - andersen_johan
+        - anderson_emily
+        - anderson_jake
+        - anderson_james
+        - anderson_kevin
+        - andromeda
+        - anil
+        - arcade
+        - arya
+        - astra
+        - atrium
+        - aurelie
+        - aurelio
+        - aurélie
+        - aviva
+        - baldur
+        - baltasar
+        - batin
+        - bauer_felix
+        - bennett_emily
+        - bennett_ryan
+        - biondi_paul
+        - bond
+        - brooks_jordan
+        - brown_alex
+        - brown_joshua
+        - brown_liam
+        - brown_madison
+        - brown_matthew
+        - brown_sophia
+        - brown_steven
+        - brunetti_tony
+        - bruno_katie
+        - carter_colin
+        - celeste
+        - celestino
+        - celso
+        - chatterjee_rini
+        - chen_david
+        - chen_mei
+        - clark_tyler
+        - cohen_emily
+        - cohen_jared
+        - collins_emily
+        - cooper_logan
+        - cupola
+        - das_sourav
+        - davies_james
+        - dela cruz_maria
+        - dela_cristina
+        - destin
+        - diallo_amara
+        - dubois_emma
+        - duncan_colin
+        - duval_pierre
+        - eliphas
+        - estela
+        - estelle
+        - esther
+        - eucalyptus
+        - evans_jason
+        - fadil
+        - fern
+        - fernandez_carlos
+        - freya
+        - goldberg_ryan
+        - gomez_daniela
+        - gomez_diego
+        - gomez_isabel
+        - gomez_isabella
+        - gomez_javon
+        - gonzalez_maya
+        - gonzalez_michael
+        - gonzalez_ryan
+        - grayson_avery
+        - hanson_ryan
+        - harris_luke
+        - harris_lynette
+        - harrison_brianna
+        - harrison_joey
+        - harrison_mary
+        - hassan_omar
+        - henderson_brittney
+        - hernandez_juanita
+        - holliday_jewel
+        - isadora
+        - iyer_arun
+        - jensen_mikkel
+        - johnny_jackson
+        - johnson_amber
+        - johnson_angela
+        - johnson_asha
+        - johnson_avery
+        - johnson_brianna
+        - johnson_cynthia
+        - johnson_elijah
+        - johnson_james
+        - johnson_jessica
+        - johnson_joshua
+        - johnson_latisha
+        - johnson_lisa
+        - johnson_madison
+        - johnson_malachi
+        - johnson_marcel
+        - johnson_mary
+        - johnson_matt
+        - johnson_matthew
+        - johnson_melissa
+        - johnson_monique
+        - johnson_nia
+        - johnson_tasha
+        - johnson_tia
+        - johnson_walter
+        - kelly_aoife
+        - kelly_jennifer
+        - kelly_john
+        - kelly_maureen
+        - khan_fatima
+        - khan_umar
+        - kim_ashley
+        - kim_daniel
+        - kim_jaehyun
+        - kim_sunny
+        - kima
+        - lark
+        - layla
+        - lee_sarah
+        - levi_david
+        - levine_emily
+        - levine_joshua
+        - levy_hannah
+        - li_michael
+        - li_wei
+        - li_xiao
+        - liesel
+        - lintel
+        - livet_aurelie
+        - lorelei
+        - lucia
+        - luna
+        - luz
+        - lyra
+        - lúcia
+        - maddox_emily
+        - maguire_jason
+        - malik_ahmad
+        - mar
+        - marinelli_giulia
+        - marlu
+        - martinez_amber
+        - martinez_ana
+        - martinez_dylan
+        - martinez_jaime
+        - martinez_leticia
+        - martinez_rosa
+        - martinez_ryan
+        - masonry
+        - mbunda_james
+        - mccarthy_james
+        - mccarthy_teresa
+        - mcdowell_peter
+        - mckinley_robert
+        - mendoza_alonzo
+        - mendoza_jesus
+        - mendoza_luz
+        - merritt_jimmy
+        - miller_cameron
+        - miller_dylan
+        - miller_judy
+        - miller_kelsey
+        - miller_lisa
+        - miller_logan
+        - miyamoto_akari
+        - montgomery_elise
+        - montgomery_emily
+        - morel_marianne
+        - morgan_brianna
+        - morgan_charles
+        - morgan_jeremy
+        - morris_colin
+        - morris_james
+        - morris_leticia
+        - morris_melvin
+        - morton_daine
+        - moss
+        - moyo_david
+        - murphy_colin
+        - murphy_emily
+        - murphy_grace
+        - murphy_hannah
+        - murphy_liam
+        - murphy_nolan
+        - murphy_sean
+        - neal_colin
+        - noa
+        - nova
+        - novak_emily
+        - nowak_joanna
+        - nowak_michal
+        - nozomi
+        - o'connor_brian
+        - oculus
+        - olsson_erik
+        - ori
+        - orion
+        - parapet
+        - park_minseo
+        - park_somin
+        - park_sumin
+        - parker_chloe
+        - patel_amit
+        - patel_asha
+        - pham_daniel
+        - pilaster
+        - pola
+        - qadir
+        - raiden
+        - ramirez_maya
+        - ramos_raul
+        - reddy_arjun
+        - reddy_sunil
+        - ren
+        - ricci_giulia
+        - ricci_lorenzo
+        - rodrigues_miguel
+        - rodriguez_carla
+        - rodriguez_carlos
+        - rodriguez_eduardo
+        - rodriguez_isabela
+        - rodriguez_miguel
+        - rosenfeld_steffi
+        - rossi_matteo
+        - runa
+        - sai
+        - sakina
+        - sakura
+        - salik
+        - santos_angelica
+        - schmidt_joshua
+        - schmidt_julia
+        - schmidt_sophie
+        - schneider_eric
+        - schneider_jack
+        - seraphina
+        - seraphine
+        - shai
+        - sharma_amit
+        - silva_ana
+        - singh_anjali
+        - sirius
+        - smith_heather
+        - smith_lisa
+        - smith_michael
+        - smith_mike
+        - sol
+        - solstice
+        - stucco
+        - séraphine
+        - taru
+        - tauro
+        - thalassa
+        - thomas_sarah
+        - thompson_kevin
+        - torres_miguel
+        - tran_david
+        - tran_jessica
+        - tran_tu
+        - transom
+        - truss
+        - tupou_leilani
+        - ursa
+        - vashti
+        - vespera
+        - violette
+        - walnut
+        - wang_mei
+        - watson_emily
+        - williams_anna
+        - williams_brian
+        - williams_darnell
+        - williams_jennifer
+        - williams_jordan
+        - williams_nathan
+        - williams_ryan
+        - williams_terence
+        - williams_tiffany
+        - wilson_emma
+        - wong_kenny
+        - wright_cooper
+        - wright_jason
+        - wright_julianne
+        - wright_michael
+        - yukiko
+        - zahir
+        - zhang_mei
+    RimeArcana3SpeakerEs:
+      type: string
+      description: Voice speaker ID for Rime Arcana v3 Spanish.
+      default: seraphina
+      enum:
+        - aurelio
+        - celestino
+        - lark
+        - luz
+        - mar
+        - nova
+        - pola
+        - seraphina
+        - sirius
+        - ursa
+    RimeArcana3TtsRequestEn:
+      description: Rime Arcana v3 TTS request for English.
+      allOf:
+        - $ref: '#/components/schemas/RimeArcana3TtsRequestBase'
+    RimeArcanaTtsRequestFr:
+      description: Rime Arcana TTS request for French.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeArcanaSpeakerFr'
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestBase'
+    RimeArcanaTtsRequestBase:
+      description: Base schema for language-specific Rime Arcana TTS requests.
+      allOf:
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    RimeArcanaSpeakerFr:
+      type: string
+      description: Voice speaker ID (French voices).
+      default: livet_aurelie
+      enum:
+        - destin
+        - livet_aurelie
+        - morel_marianne
+        - serrin_joseph
+        - solstice
+    RimeArcanaTtsRequestEs:
+      description: Rime Arcana TTS request for Spanish.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeArcanaSpeakerEs'
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestBase'
+    RimeArcanaSpeakerEs:
+      type: string
+      description: Voice speaker ID (Spanish voices).
+      default: seraphina
+      enum:
+        - eris
+        - lark
+        - nova
+        - pola
+        - seraphina
+        - sirius
+        - ursa
+    RimeArcanaTtsRequestEn:
+      description: Rime Arcana TTS request for English.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeArcanaSpeakerEn'
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestBase'
+    RimeArcanaSpeakerEn:
+      type: string
+      description: Voice speaker ID (English voices).
+      default: astra
+      enum:
+        - ahmed_mohamed
+        - albion
+        - andersen_johan
+        - anderson_emily
+        - anderson_jake
+        - anderson_james
+        - anderson_kevin
+        - andromeda
+        - arcade
+        - astra
+        - atrium
+        - bauer_felix
+        - bennett_emily
+        - bennett_ryan
+        - biondi_paul
+        - bond
+        - brooks_jordan
+        - brown_alex
+        - brown_joshua
+        - brown_liam
+        - brown_madison
+        - brown_matthew
+        - brown_sophia
+        - brown_steven
+        - brunetti_tony
+        - bruno_katie
+        - carter_colin
+        - celeste
+        - chatterjee_rini
+        - chen_david
+        - chen_mei
+        - clark_tyler
+        - cohen_emily
+        - cohen_jared
+        - collins_emily
+        - cooper_logan
+        - cupola
+        - das_sourav
+        - davies_james
+        - dela cruz_maria
+        - dela_cristina
+        - diallo_amara
+        - dubois_emma
+        - duncan_colin
+        - duval_pierre
+        - eliphas
+        - estelle
+        - esther
+        - eucalyptus
+        - evans_jason
+        - fern
+        - fernandez_carlos
+        - goldberg_ryan
+        - gomez_daniela
+        - gomez_diego
+        - gomez_isabel
+        - gomez_isabella
+        - gomez_javon
+        - gonzalez_maya
+        - gonzalez_michael
+        - gonzalez_ryan
+        - grayson_avery
+        - hanson_ryan
+        - harris_luke
+        - harris_lynette
+        - harrison_brianna
+        - harrison_joey
+        - harrison_mary
+        - hassan_omar
+        - henderson_brittney
+        - hernandez_juanita
+        - holliday_jewel
+        - iyer_arun
+        - jensen_mikkel
+        - johnny_jackson
+        - johnson_amber
+        - johnson_angela
+        - johnson_asha
+        - johnson_avery
+        - johnson_brianna
+        - johnson_cynthia
+        - johnson_elijah
+        - johnson_james
+        - johnson_jessica
+        - johnson_joshua
+        - johnson_latisha
+        - johnson_lisa
+        - johnson_madison
+        - johnson_malachi
+        - johnson_marcel
+        - johnson_mary
+        - johnson_matt
+        - johnson_matthew
+        - johnson_melissa
+        - johnson_monique
+        - johnson_nia
+        - johnson_tasha
+        - johnson_tia
+        - johnson_walter
+        - kelly_aoife
+        - kelly_jennifer
+        - kelly_john
+        - kelly_maureen
+        - khan_fatima
+        - khan_umar
+        - kim_ashley
+        - kim_daniel
+        - kim_jaehyun
+        - kim_sunny
+        - kima
+        - lee_sarah
+        - levi_david
+        - levine_emily
+        - levine_joshua
+        - levy_hannah
+        - li_michael
+        - li_wei
+        - li_xiao
+        - lintel
+        - luna
+        - lyra
+        - maddox_emily
+        - maguire_jason
+        - malik_ahmad
+        - marinelli_giulia
+        - marlu
+        - martinez_amber
+        - martinez_ana
+        - martinez_dylan
+        - martinez_jaime
+        - martinez_leticia
+        - martinez_rosa
+        - martinez_ryan
+        - masonry
+        - mbunda_james
+        - mccarthy_james
+        - mccarthy_teresa
+        - mcdowell_peter
+        - mckinley_robert
+        - mendoza_alonzo
+        - mendoza_jesus
+        - mendoza_luz
+        - merritt_jimmy
+        - miller_cameron
+        - miller_dylan
+        - miller_judy
+        - miller_kelsey
+        - miller_lisa
+        - miller_logan
+        - miyamoto_akari
+        - montgomery_elise
+        - montgomery_emily
+        - morgan_brianna
+        - morgan_charles
+        - morgan_jeremy
+        - morris_colin
+        - morris_james
+        - morris_leticia
+        - morris_melvin
+        - morton_daine
+        - moss
+        - moyo_david
+        - murphy_colin
+        - murphy_emily
+        - murphy_grace
+        - murphy_hannah
+        - murphy_liam
+        - murphy_nolan
+        - murphy_sean
+        - neal_colin
+        - novak_emily
+        - nowak_joanna
+        - nowak_michal
+        - o'connor_brian
+        - oculus
+        - olsson_erik
+        - orion
+        - parapet
+        - park_minseo
+        - park_somin
+        - park_sumin
+        - parker_chloe
+        - patel_amit
+        - patel_asha
+        - pham_daniel
+        - pilaster
+        - pola
+        - ramirez_maya
+        - ramos_raul
+        - reddy_arjun
+        - reddy_sunil
+        - ricci_giulia
+        - ricci_lorenzo
+        - rodrigues_miguel
+        - rodriguez_carla
+        - rodriguez_carlos
+        - rodriguez_eduardo
+        - rodriguez_isabela
+        - rodriguez_miguel
+        - rossi_matteo
+        - santos_angelica
+        - schmidt_joshua
+        - schmidt_julia
+        - schmidt_sophie
+        - schneider_eric
+        - schneider_jack
+        - sharma_amit
+        - silva_ana
+        - singh_anjali
+        - sirius
+        - smith_heather
+        - smith_lisa
+        - smith_michael
+        - smith_mike
+        - stucco
+        - tauro
+        - thalassa
+        - thomas_sarah
+        - thompson_kevin
+        - torres_miguel
+        - tran_david
+        - tran_jessica
+        - tran_tu
+        - transom
+        - truss
+        - tupou_leilani
+        - ursa
+        - vashti
+        - vespera
+        - walnut
+        - wang_mei
+        - watson_emily
+        - williams_anna
+        - williams_brian
+        - williams_darnell
+        - williams_jennifer
+        - williams_jordan
+        - williams_nathan
+        - williams_ryan
+        - williams_terence
+        - williams_tiffany
+        - wilson_emma
+        - wong_kenny
+        - wright_cooper
+        - wright_jason
+        - wright_julianne
+        - wright_michael
+        - zhang_mei
+    RimeArcanaTtsRequestDe:
+      description: Rime Arcana TTS request for German.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeArcanaSpeakerDe'
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestBase'
+    RimeArcanaSpeakerDe:
+      type: string
+      description: Voice speaker ID (German voices).
+      default: sigurd
+      enum:
+        - bergmann_katharina
+        - lorelei
+        - rosenfeld_steffi
+        - runa
+        - sigurd
+    ProviderErrorResponse:
+      type: object
+      description: >
+        Provider error response. Contains error information from the upstream
+        provider.
+
+        Common errors include invalid speakers, unsupported languages, or
+        malformed requests.
+      properties:
+        error:
+          type: string
+          description: >-
+            Error type or category (e.g., "TTS service error", "Validation
+            error").
+          example: TTS service error
+        status:
+          type: number
+          description: >-
+            Original HTTP status code from the provider (may differ from gateway
+            response code).
+          example: 400
+        details:
+          type: string
+          description: >
+            Detailed error message from the provider. For TTS errors, this
+            typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the
+            selected model/language).
+          example: >-
+            Rime TTS API error: 400 Bad Request - Invalid argument: Invalid
+            speaker: aurelie
+      required:
+        - error
+    RimeArcanaTtsRequestAr:
+      description: Rime Arcana TTS request for Arabic.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeArcanaSpeakerAr'
+        - $ref: '#/components/schemas/RimeArcanaTtsRequestBase'
+    RimeArcanaSpeakerAr:
+      type: string
+      description: Voice speaker ID (Arabic voices).
+      default: sakina
+      enum:
+        - haqq
+        - layla
+        - qadir
+        - sakina
+        - shams
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
+    OrpheusTtsRequest:
+      allOf:
+        - $ref: '#/components/schemas/TtsVoiceSpeedRequestBase'
+        - type: object
+          properties:
+            prompt:
+              $ref: '#/components/schemas/TextToSynthesize'
+            text:
+              allOf:
+                - $ref: '#/components/schemas/TextToSynthesize'
+              description: Text to synthesize (legacy, use prompt).
+            voice:
+              type: string
+              description: Voice identifier.
+              enum:
+                - tara
+                - leah
+                - jess
+                - leo
+                - dan
+                - mia
+                - zac
+                - zoe
+              default: tara
+            stream:
+              type: boolean
+              description: Enable streaming response.
+            emotion:
+              type: string
+              description: Emotion to apply.
+              enum:
+                - neutral
+                - happy
+                - sad
+                - angry
+                - surprised
+    TtsVoiceSpeedRequestBase:
+      allOf:
+        - $ref: '#/components/schemas/TtsVoiceRequestBase'
+        - type: object
+          properties:
+            speed:
+              $ref: '#/components/schemas/SpeechSpeedMultiplier'
+    SpeechSpeedMultiplier:
+      type: number
+      minimum: 0.5
+      maximum: 2
+      description: Speed multiplier (0.5-2.0).
+    TtsVoiceRequestBase:
+      type: object
+      properties:
+        text:
+          $ref: '#/components/schemas/TextToSynthesize'
+        voice:
+          type: string
+          description: Voice identifier.
+    RimeCoda0IdTtsRequestId:
+      description: Rime Coda TTS request for Bahasa Indonesian.
+      allOf:
+        - $ref: '#/components/schemas/RimeCoda0IdTtsRequestBase'
+    RimeCoda0IdTtsRequestBase:
+      description: Base schema for Rime Coda Indonesian TTS requests.
+      allOf:
+        - type: object
+          required:
+            - speaker
+          properties:
+            speaker:
+              $ref: '#/components/schemas/RimeCoda0IdSpeaker'
+        - $ref: '#/components/schemas/RimeCodaTtsRequestCommon'
+    RimeCodaTtsRequestCommon:
+      type: object
+      description: Common Rime Coda TTS options.
+      properties:
+        text:
+          type: string
+          minLength: 1
+          description: Text to synthesize.
+        modelId:
+          $ref: '#/components/schemas/RimeCodaModelId'
+        lang:
+          $ref: '#/components/schemas/RimeCodaLanguage'
+        top_p:
+          type: number
+          format: float
+          default: 1
+          description: >-
+            The top p. Float that controls the cumulative probability of the top
+            tokens to consider. Must be in (0, 1]. Set to 1 to consider all
+            tokens.
+        audioFormat:
+          $ref: '#/components/schemas/RimeArcanaAudioFormat'
+        sample_rate:
+          $ref: '#/components/schemas/RimeArcanaSampleRate'
+        speed:
+          type: number
+          description: Speech rate multiplier (0.25 = half speed, 2.0 = double speed).
+          minimum: 0.25
+          maximum: 2
+          default: 1
+        segment:
+          type: boolean
+          default: false
+          description: Enable segment markers in output.
+      required:
+        - text
+    RimeCodaModelId:
+      type: string
+      description: Rime Coda model identifier.
+      enum:
+        - coda
+      default: coda
+    RimeCodaLanguage:
+      type: string
+      description: Language code. Coda Indonesian variant only supports Bahasa Indonesian.
+      enum:
+        - id
+      default: id
+    RimeCoda0IdSpeaker:
+      type: string
+      description: Voice speaker ID for Rime Coda Indonesian.
+      default: pujianti_plesmita
+      enum:
+        - pujianti_plesmita
+        - siswoko_sigit
+        - taryadi_dani
+        - usmany_tatianna
+  responses:
+    SlngDeepgramAuraUnauthorized:
+      description: >
+        Unauthorized error for SLNG-hosted Deepgram Aura TTS. Returned when the
+        Authorization header is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngDeepgramAuraUnauthorizedResponse'
+          example:
+            title: Unauthorized
+            status: 401
+            detail: No Authorization Header
+    SlngDeepgramAuraBadRequest:
+      description: >
+        Bad request for SLNG-hosted Deepgram Aura TTS. Can be a validation error
+        (missing/invalid fields) or a provider error (invalid query parameters).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngDeepgramAuraBadRequestResponse'
+          examples:
+            Missing required field:
+              summary: Validation error — missing required field
+              value:
+                error: Text is required
+                fieldErrors:
+                  text:
+                    - Required
+            Invalid encoding value:
+              summary: Invalid encoding value
+              value:
+                error: TTS service error
+                details: >-
+                  {"err_code":"INVALID_QUERY_PARAMETER","err_msg":"Failed to
+                  deserialize query parameters: unknown variant `sss`, expected
+                  one of `linear16`, `mulaw`, `alaw`, `mp3`, `opus`, `flac`,
+                  `aac`","request_id":"9740fb95-d205-49f4-91c5-ab2f97bb09fa"}
+            Model not found:
+              summary: Model or version not found
+              value:
+                error: TTS service error
+                details: >-
+                  {"err_code":"Bad Request","err_msg":"No such model/version
+                  combination
+                  found.","request_id":"8ccc6b44-5f96-4d21-9b4d-3011fa36b2e9"}
+    RimeArcanaInternalServerError:
+      description: >
+        Rime Arcana TTS internal error. Note: Some validation errors (e.g.,
+        invalid speaker)
+
+        may currently return 500 instead of 400. Check the error details for
+        specifics.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: TTS service error
+                details: Internal processing error
+            invalid-speaker-as-500:
+              summary: Invalid speaker (returned as 500)
+              description: |
+                Invalid speaker errors may currently return 500 instead of 400.
+                The details field will indicate the actual validation error.
+              value:
+                error: TTS service error
+                details: >-
+                  Rime TTS API error: 400 Bad Request - Invalid argument:
+                  Invalid speaker: aurelie
+    RimeArcanaBadRequest:
+      description: >
+        Rime Arcana TTS bad request. Common causes include invalid speaker ID
+        for the
+
+        selected language variant, unsupported model, unsupported audio format,
+        or malformed request body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            invalid-speaker:
+              summary: Invalid speaker ID
+              description: >
+                Speaker ID not available for this language variant. Each Arcana
+                language
+
+                has specific voices - check the endpoint schema for valid
+                speakers.
+              value:
+                error: TTS service error
+                details: >-
+                  Rime TTS API error: 400 Bad Request - Invalid argument:
+                  Invalid speaker: aurelie
+            invalid-speaker-for-language:
+              summary: Speaker not available for language
+              description: Using a speaker from a different language variant.
+              value:
+                error: TTS service error
+                details: >-
+                  Rime TTS API error: 400 Bad Request - Invalid argument:
+                  Invalid speaker: astra
+            missing-text:
+              summary: Missing text field
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+            unsupported-model:
+              summary: Unsupported model
+              description: The specified modelId is not supported by Rime Arcana.
+              value:
+                error: TTS service error
+                details: 'Rime TTS API error: 400 Bad Request - Unsupported model'
+    RimeCodaInternalServerError:
+      description: >
+        Rime Coda TTS internal error. Note: Some validation errors (e.g.,
+        invalid speaker) may currently return 500 instead of 400. Check the
+        error details for specifics.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: TTS service error
+                details: Internal processing error
+    RimeCodaBadRequest:
+      description: >
+        Rime Coda TTS bad request. Common causes include invalid speaker ID,
+        unsupported audio format, or malformed request body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            invalid-speaker:
+              summary: Invalid speaker ID
+              value:
+                error: TTS service error
+                details: >-
+                  Rime TTS API error: 400 Bad Request - Invalid argument:
+                  Invalid speaker
+            missing-text:
+              summary: Missing text field
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    SlngInworldMaxSuccess:
+      description: >
+        Synthesis successful. Unlike other SLNG TTS models (which return raw
+        audio bytes), Inworld Max responds with JSON: the request is
+        SLNG-normalized but the response is Inworld's native body passed through
+        unchanged, carrying base64-encoded audio plus usage and optional
+        timestamp metadata.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngInworldMaxSuccessBody'
+          examples:
+            basic:
+              summary: Synthesis result (audioContent truncated for brevity)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 48
+                  modelId: inworld-tts-1.5-max
+            wordTimestamps:
+              summary: Result with WORD timestamps (timestampType=WORD)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 13
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  wordAlignment:
+                    words:
+                      - Hello,
+                      - world!
+                    wordStartTimeSeconds:
+                      - 0
+                      - 0.51
+                    wordEndTimeSeconds:
+                      - 0.51
+                      - 1.04
+                    phoneticDetails:
+                      - wordIndex: 0
+                        isPartial: false
+                        phones:
+                          - phoneSymbol: h
+                            startTimeSeconds: 0
+                            durationSeconds: 0.17
+                            visemeSymbol: aei
+                          - phoneSymbol: ə
+                            startTimeSeconds: 0.17
+                            durationSeconds: 0.05
+                            visemeSymbol: aei
+                          - phoneSymbol: l
+                            startTimeSeconds: 0.22
+                            durationSeconds: 0.11
+                            visemeSymbol: l
+                          - phoneSymbol: oʊ1
+                            startTimeSeconds: 0.33
+                            durationSeconds: 0.18
+                            visemeSymbol: o
+            characterTimestamps:
+              summary: Result with CHARACTER timestamps (timestampType=CHARACTER)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 12
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  characterAlignment:
+                    characters:
+                      - H
+                      - e
+                      - l
+                      - l
+                      - o
+                      - w
+                      - o
+                      - r
+                      - l
+                      - d
+                      - .
+                    characterStartTimeSeconds:
+                      - 0
+                      - 0.11
+                      - 0.21
+                      - 0.32
+                      - 0.42
+                      - 0.57
+                      - 0.66
+                      - 0.75
+                      - 0.84
+                      - 0.93
+                      - 1.02
+                    characterEndTimeSeconds:
+                      - 0.11
+                      - 0.21
+                      - 0.32
+                      - 0.42
+                      - 0.53
+                      - 0.66
+                      - 0.75
+                      - 0.84
+                      - 0.93
+                      - 1.02
+                      - 1.11
+  parameters:
+    XWorldPartSlngAuraEn:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu
+          - na
+    XWorldPartSlngAuraEs:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu
+    XRegionSlngAuraEn:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+          - us-east-1
+    XRegionSlngAuraEs:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XRegionSlngArcanaV3En:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - ap-southeast-2
+          - asia-south1
+          - eu-north-1
+    XRegionSlngArcanaV3Es:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XRegionSlngArcanaV3Hi:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - ap-southeast-2
+          - eu-north-1
+    XRegionSlngArcanaV3Fr:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XRegionSlngCoda0Id:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - asia-southeast2
+    XRegionSlngArcanaV1En:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - ap-southeast-2
+    XRegionSlngArcanaV1Ar:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XRegionSlngArcanaV1De:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XRegionSlngArcanaV1Es:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XRegionSlngArcanaV1Fr:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu-north-1
+    XWorldPartSlngOrpheus:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - eu
+    XRegionSlngInworldMax:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+          - us-east-1
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        API key issued by SLNG. Pass as `Authorization: Bearer <token>`.

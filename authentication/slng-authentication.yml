@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.slng.ai/authentication.md
+docs: https://docs.slng.ai/authentication.md
+summary:
+  types:
+  - http
+  style: bearer-token
+  header: 'Authorization: Bearer <SLNG_API_KEY>'
+  key_management: Keys created/deleted at https://app.slng.ai/api-keys; secret shown once at creation, not retrievable later.
+  rotation: Keys cannot be rotated in place; create a new key and cut over, then delete the old one.
+  websocket_auth: Authorization header, or a `token` query parameter for browser clients that cannot set headers.
+  byok: Add an `X-Slng-Provider-Key` header alongside the SLNG key to run against your own upstream provider account (Bring Your Own Key).
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API key
+  sources:
+  - openapi/slng-agents-openapi.yml
+  - openapi/slng-batch-openapi.json
+  - openapi/slng-management-slng-openapi.yml
+  - openapi/slng-me-openapi.json
+  - openapi/slng-stt-slng-openapi.yml
+  - openapi/slng-tts-pronunciation-dictionaries-openapi.yml
+  - openapi/slng-tts-slng-openapi.yml

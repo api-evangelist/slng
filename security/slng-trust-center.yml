@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: searched
+source: https://trust.slng.ai, https://slng.ai, https://docs.slng.ai
+url: https://trust.slng.ai
+certifications:
+  - ISO 27001
+  - HIPAA
+  - GDPR
+evidence:
+  - source: https://docs.slng.ai
+    keywords: [iso 27001 certified, hipaa compliant, gdpr compliant, trust center]
+  - source: https://trust.slng.ai
+    keywords: [trust center]
+note: >-
+  SLNG positions itself as a compliance-first, in-region speech AI gateway;
+  ISO 27001 certification plus HIPAA and GDPR compliance are stated on the site
+  and Trust Center. Data residency is enforced by routing compute in-region.

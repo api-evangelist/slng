@@ -1,0 +1,14 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.slng.ai/changelog.md, openapi/
+versioning:
+  scheme: uri-path
+  current: v1
+  api_release_version: v0.53.0
+  note: Endpoints are namespaced under /v1/; the API itself ships dated semver releases (v0.x.y) tracked in the changelog.
+changelog: https://docs.slng.ai/changelog.md
+deprecation:
+  policy_url: null
+  note: Breaking changes are announced in the dated changelog; no standalone deprecation-policy page or Sunset/Deprecation header contract was found.
+status_page: null
+deprecated_operations: []

@@ -1,0 +1,454 @@
+{
+  "info": {
+    "_postman_id": "a0208eda-2b8f-4d9b-9303-4f290bf77dca",
+    "name": "SLNG Voice Agents Account Orpheus English API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:33.000Z",
+    "updatedAt": "2026-07-28T02:55:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a0208eda-2b8f-4d9b-9303-4f290bf77dca"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "tts",
+          "item": [
+            {
+              "name": "slng",
+              "item": [
+                {
+                  "name": "canopylabs",
+                  "item": [
+                    {
+                      "name": "orpheus:en",
+                      "item": [
+                        {
+                          "name": "Orpheus (English)",
+                          "id": "66dcb985-4722-4d2b-bd3c-4466802c56cc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target world part override. Auto-selected if not provided.",
+                                "key": "X-World-Part-Override",
+                                "value": "eu"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"speed\": \"<number>\",\n  \"prompt\": \"<string>\",\n  \"stream\": \"<boolean>\",\n  \"emotion\": \"sad\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/canopylabs/orpheus:en",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "canopylabs",
+                                "orpheus:en"
+                              ]
+                            },
+                            "description": "Synthesize speech using Orpheus with emotion control."
+                          },
+                          "response": [
+                            {
+                              "id": "f62a21f1-1fe8-4b6d-a165-2b67709e14e1",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"speed\": \"<number>\",\n  \"prompt\": \"<string>\",\n  \"stream\": \"<boolean>\",\n  \"emotion\": \"sad\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/canopylabs/orpheus:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "canopylabs",
+                                    "orpheus:en"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:55:33.000Z",
+                              "updatedAt": "2026-07-28T02:55:33.000Z",
+                              "uid": "35240-f62a21f1-1fe8-4b6d-a165-2b67709e14e1"
+                            },
+                            {
+                              "id": "23a1855b-02d2-4c8d-bb1f-75853a16be20",
+                              "name": "Bad request - invalid parameters provided.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"speed\": \"<number>\",\n  \"prompt\": \"<string>\",\n  \"stream\": \"<boolean>\",\n  \"emotion\": \"sad\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/canopylabs/orpheus:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "canopylabs",
+                                    "orpheus:en"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:33.000Z",
+                              "updatedAt": "2026-07-28T02:55:33.000Z",
+                              "uid": "35240-23a1855b-02d2-4c8d-bb1f-75853a16be20"
+                            },
+                            {
+                              "id": "6a8cfac1-00c0-458a-8618-b2715c571278",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"speed\": \"<number>\",\n  \"prompt\": \"<string>\",\n  \"stream\": \"<boolean>\",\n  \"emotion\": \"sad\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/canopylabs/orpheus:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "canopylabs",
+                                    "orpheus:en"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:33.000Z",
+                              "updatedAt": "2026-07-28T02:55:33.000Z",
+                              "uid": "35240-6a8cfac1-00c0-458a-8618-b2715c571278"
+                            },
+                            {
+                              "id": "5e948927-4bed-4db3-b7bc-78a6d4d378b6",
+                              "name": "Internal server error from the provider.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"speed\": \"<number>\",\n  \"prompt\": \"<string>\",\n  \"stream\": \"<boolean>\",\n  \"emotion\": \"sad\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/canopylabs/orpheus:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "canopylabs",
+                                    "orpheus:en"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:33.000Z",
+                              "updatedAt": "2026-07-28T02:55:33.000Z",
+                              "uid": "35240-5e948927-4bed-4db3-b7bc-78a6d4d378b6"
+                            },
+                            {
+                              "id": "ddfe7d64-ae1c-44f2-8d6e-cf5a1179119b",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"speed\": \"<number>\",\n  \"prompt\": \"<string>\",\n  \"stream\": \"<boolean>\",\n  \"emotion\": \"sad\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/canopylabs/orpheus:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "canopylabs",
+                                    "orpheus:en"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:33.000Z",
+                              "updatedAt": "2026-07-28T02:55:33.000Z",
+                              "uid": "35240-ddfe7d64-ae1c-44f2-8d6e-cf5a1179119b"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:55:33.000Z",
+                          "updatedAt": "2026-07-28T02:55:33.000Z",
+                          "uid": "35240-66dcb985-4722-4d2b-bd3c-4466802c56cc"
+                        }
+                      ],
+                      "id": "2931e70f-23f0-4834-bb6c-c3bedaeed6a9",
+                      "createdAt": "2026-07-28T02:55:33.000Z",
+                      "updatedAt": "2026-07-28T02:55:33.000Z",
+                      "uid": "35240-2931e70f-23f0-4834-bb6c-c3bedaeed6a9"
+                    }
+                  ],
+                  "id": "ddfb1936-3944-4380-a91a-84d5946433c3",
+                  "createdAt": "2026-07-28T02:55:33.000Z",
+                  "updatedAt": "2026-07-28T02:55:33.000Z",
+                  "uid": "35240-ddfb1936-3944-4380-a91a-84d5946433c3"
+                }
+              ],
+              "id": "04257826-8f50-4a0f-82e4-4d870dd6894e",
+              "createdAt": "2026-07-28T02:55:33.000Z",
+              "updatedAt": "2026-07-28T02:55:33.000Z",
+              "uid": "35240-04257826-8f50-4a0f-82e4-4d870dd6894e"
+            }
+          ],
+          "id": "ca96b331-7c1d-4841-83af-7901543fe344",
+          "createdAt": "2026-07-28T02:55:33.000Z",
+          "updatedAt": "2026-07-28T02:55:33.000Z",
+          "uid": "35240-ca96b331-7c1d-4841-83af-7901543fe344"
+        }
+      ],
+      "id": "275c87a3-3ca3-42ee-93c5-784ef0b443ff",
+      "createdAt": "2026-07-28T02:55:33.000Z",
+      "updatedAt": "2026-07-28T02:55:33.000Z",
+      "uid": "35240-275c87a3-3ca3-42ee-93c5-784ef0b443ff"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

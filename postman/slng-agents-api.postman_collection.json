@@ -1,0 +1,3204 @@
+{
+  "info": {
+    "_postman_id": "943b3eae-fe8b-4a41-96ec-d0982523cbd1",
+    "name": "SLNG Voice Account Agents API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:25.000Z",
+    "updatedAt": "2026-07-28T02:55:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-943b3eae-fe8b-4a41-96ec-d0982523cbd1"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "agents",
+          "item": [
+            {
+              "name": "{agent_id}",
+              "item": [
+                {
+                  "name": "duplicate",
+                  "item": [
+                    {
+                      "name": "Duplicate agent",
+                      "id": "50a9f6a3-964f-4ef7-b97b-a6c854c6b9fd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id",
+                            "duplicate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "182f9fa5-2db1-4fa5-ae86-f40e8ccc26f3",
+                              "key": "agent_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Voice agent ID."
+                            }
+                          ]
+                        },
+                        "description": "Create a server-side copy of an existing voice agent.\n\nThe duplicate copies the stored agent configuration, including prompts, models, tools,\ntemplate defaults, selected region, and outbound telephony settings.\n\nThe duplicate does not copy call history or the inbound connection. SLNG creates\nand manages a runtime API key for the duplicated agent automatically.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "ae1c8e7b-2cf1-4f7e-aef1-3d738771cede",
+                          "name": "Duplicated agent.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"organisation_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-super-3-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"hangup\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"ipsume23\": {\n      \"required\": \"<boolean>\",\n      \"default\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-ae1c8e7b-2cf1-4f7e-aef1-3d738771cede"
+                        },
+                        {
+                          "id": "9bc6344b-6567-4d72-b422-07bc050b1222",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-9bc6344b-6567-4d72-b422-07bc050b1222"
+                        },
+                        {
+                          "id": "895242d0-1589-4d13-8fc6-d47615c00423",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-895242d0-1589-4d13-8fc6-d47615c00423"
+                        },
+                        {
+                          "id": "e7df2b3b-706e-400f-b47b-df6ada99a4ae",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-e7df2b3b-706e-400f-b47b-df6ada99a4ae"
+                        },
+                        {
+                          "id": "3d1811d7-1245-4094-9ebb-c19896566fb6",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-3d1811d7-1245-4094-9ebb-c19896566fb6"
+                        },
+                        {
+                          "id": "1b9de662-db92-4e47-bb64-f481feba1eff",
+                          "name": "Conflict.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-1b9de662-db92-4e47-bb64-f481feba1eff"
+                        },
+                        {
+                          "id": "6bc5d12b-48ef-4b9f-8846-be67910f3a6b",
+                          "name": "Validation error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-6bc5d12b-48ef-4b9f-8846-be67910f3a6b"
+                        },
+                        {
+                          "id": "07b78071-0b00-41d3-a8ee-8061404caf6b",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/duplicate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "duplicate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                          "createdAt": "2026-07-28T02:55:25.000Z",
+                          "updatedAt": "2026-07-28T02:55:25.000Z",
+                          "uid": "35240-07b78071-0b00-41d3-a8ee-8061404caf6b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-50a9f6a3-964f-4ef7-b97b-a6c854c6b9fd"
+                    }
+                  ],
+                  "id": "74aabe79-03b2-4293-9fee-4cecc373ae9a",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-74aabe79-03b2-4293-9fee-4cecc373ae9a"
+                },
+                {
+                  "name": "Get agent",
+                  "id": "4843f579-f30f-4803-b204-1f5705ea7252",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents",
+                        ":agent_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "45ba378d-3002-483f-a844-02ae0f8040b6",
+                          "key": "agent_id",
+                          "value": "<uuid>",
+                          "description": "(Required) Voice agent ID."
+                        }
+                      ]
+                    },
+                    "description": "Get a single voice agent by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "074e80f5-38f5-407a-9932-0f29c0836a28",
+                      "name": "Agent.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"organisation_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-super-3-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"hangup\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"ipsume23\": {\n      \"required\": \"<boolean>\",\n      \"default\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-074e80f5-38f5-407a-9932-0f29c0836a28"
+                    },
+                    {
+                      "id": "30f1b567-507d-4850-8642-f077cfad131b",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-30f1b567-507d-4850-8642-f077cfad131b"
+                    },
+                    {
+                      "id": "483c9868-4d12-4d74-853b-601a6e8782c3",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-483c9868-4d12-4d74-853b-601a6e8782c3"
+                    },
+                    {
+                      "id": "ac272b73-91e0-400f-b281-bb4dec44abf8",
+                      "name": "Not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-ac272b73-91e0-400f-b281-bb4dec44abf8"
+                    },
+                    {
+                      "id": "48c12cd8-5e96-4954-8510-f0913bfed4ff",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-48c12cd8-5e96-4954-8510-f0913bfed4ff"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-4843f579-f30f-4803-b204-1f5705ea7252"
+                },
+                {
+                  "name": "Update agent (partial)",
+                  "id": "430e8e99-763a-4433-a7d2-bbed8c8b7e11",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents",
+                        ":agent_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2ef1238c-7e67-4b29-8d68-df06c4783fb6",
+                          "key": "agent_id",
+                          "value": "<uuid>",
+                          "description": "(Required) Voice agent ID."
+                        }
+                      ]
+                    },
+                    "description": "Partially update a voice agent."
+                  },
+                  "response": [
+                    {
+                      "id": "cb86436d-58fc-4b7a-8430-d9b0bbc7ca2c",
+                      "name": "Updated agent.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"organisation_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-super-3-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"hangup\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"ipsume23\": {\n      \"required\": \"<boolean>\",\n      \"default\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-cb86436d-58fc-4b7a-8430-d9b0bbc7ca2c"
+                    },
+                    {
+                      "id": "79640fd3-2f04-44b8-8f36-ec89f18a409b",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-79640fd3-2f04-44b8-8f36-ec89f18a409b"
+                    },
+                    {
+                      "id": "187987ab-95d2-40c3-9d88-bd05289481f1",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-187987ab-95d2-40c3-9d88-bd05289481f1"
+                    },
+                    {
+                      "id": "abebac27-2f21-49fe-b834-6c8f0e1bc903",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-abebac27-2f21-49fe-b834-6c8f0e1bc903"
+                    },
+                    {
+                      "id": "601e2290-105d-4bb3-8c8d-fb6fd34806b4",
+                      "name": "Not found.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-601e2290-105d-4bb3-8c8d-fb6fd34806b4"
+                    },
+                    {
+                      "id": "ce8685eb-7786-44f9-9341-8cfce1ef1b19",
+                      "name": "Conflict.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-ce8685eb-7786-44f9-9341-8cfce1ef1b19"
+                    },
+                    {
+                      "id": "97c767b6-b2fd-4439-b24b-e738a3ebe917",
+                      "name": "Validation error.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-97c767b6-b2fd-4439-b24b-e738a3ebe917"
+                    },
+                    {
+                      "id": "e85804bf-8458-4364-b904-771dd79c4fd7",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-e85804bf-8458-4364-b904-771dd79c4fd7"
+                    },
+                    {
+                      "id": "dac9050c-55bf-495e-9832-1131f19dfaf3",
+                      "name": "Bad gateway.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"non4\": \"<string>\",\n    \"adipisicing_e8\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Gateway",
+                      "code": 502,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-dac9050c-55bf-495e-9832-1131f19dfaf3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-430e8e99-763a-4433-a7d2-bbed8c8b7e11"
+                },
+                {
+                  "name": "Replace agent",
+                  "id": "fd9fe109-132c-4723-a086-e14d3d98cb11",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents",
+                        ":agent_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e2dd7792-5d55-4891-8ba4-48698754c3e0",
+                          "key": "agent_id",
+                          "value": "<uuid>",
+                          "description": "(Required) Voice agent ID."
+                        }
+                      ]
+                    },
+                    "description": "Replace a voice agent (full update)."
+                  },
+                  "response": [
+                    {
+                      "id": "9c01a09e-0e57-4959-abf4-3bda2e76ac71",
+                      "name": "Replaced agent.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"organisation_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-super-3-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"hangup\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"ipsume23\": {\n      \"required\": \"<boolean>\",\n      \"default\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-9c01a09e-0e57-4959-abf4-3bda2e76ac71"
+                    },
+                    {
+                      "id": "18310aca-f8b1-40c5-9bf3-3621f17af253",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-18310aca-f8b1-40c5-9bf3-3621f17af253"
+                    },
+                    {
+                      "id": "5b81adb9-4e70-4992-8d06-82284519a207",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-5b81adb9-4e70-4992-8d06-82284519a207"
+                    },
+                    {
+                      "id": "e7a885ca-b505-4142-9ad1-4ea59ff22858",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-e7a885ca-b505-4142-9ad1-4ea59ff22858"
+                    },
+                    {
+                      "id": "df6958d9-95de-40f9-bed9-808420147d37",
+                      "name": "Not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-df6958d9-95de-40f9-bed9-808420147d37"
+                    },
+                    {
+                      "id": "59c592fd-8f31-447e-9e1c-bf2c12e1612b",
+                      "name": "Conflict.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-59c592fd-8f31-447e-9e1c-bf2c12e1612b"
+                    },
+                    {
+                      "id": "6dbc7d46-bf2d-4f46-80ea-be19761e323f",
+                      "name": "Validation error.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-6dbc7d46-bf2d-4f46-80ea-be19761e323f"
+                    },
+                    {
+                      "id": "438678ac-9652-41fc-8a7e-88ef054326c3",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-438678ac-9652-41fc-8a7e-88ef054326c3"
+                    },
+                    {
+                      "id": "6194b77f-2b49-445b-8729-3103c2756a27",
+                      "name": "Bad gateway.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Gateway",
+                      "code": 502,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-6194b77f-2b49-445b-8729-3103c2756a27"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-fd9fe109-132c-4723-a086-e14d3d98cb11"
+                },
+                {
+                  "name": "Delete agent",
+                  "id": "f18c16dd-af32-46e4-ba40-5b76e75090ae",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents",
+                        ":agent_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "abf19c1f-c21f-4f3c-84e1-d1abd3eb72a5",
+                          "key": "agent_id",
+                          "value": "<uuid>",
+                          "description": "(Required) Voice agent ID."
+                        }
+                      ]
+                    },
+                    "description": "Soft-delete a voice agent."
+                  },
+                  "response": [
+                    {
+                      "id": "7123ecc0-29b5-4f9c-9524-0a97c8bf2fb4",
+                      "name": "Deleted.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-7123ecc0-29b5-4f9c-9524-0a97c8bf2fb4"
+                    },
+                    {
+                      "id": "064626ae-0e9a-4034-bfe7-5580ddc969cf",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-064626ae-0e9a-4034-bfe7-5580ddc969cf"
+                    },
+                    {
+                      "id": "bfeeebe1-24ce-425b-8366-00276824ddb0",
+                      "name": "Forbidden.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-bfeeebe1-24ce-425b-8366-00276824ddb0"
+                    },
+                    {
+                      "id": "5bb88991-8528-4a93-8d29-08bd042b7ba9",
+                      "name": "Not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-5bb88991-8528-4a93-8d29-08bd042b7ba9"
+                    },
+                    {
+                      "id": "e6b52114-05fe-4267-9e61-a8b900134cdd",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "agent_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                      "createdAt": "2026-07-28T02:55:25.000Z",
+                      "updatedAt": "2026-07-28T02:55:25.000Z",
+                      "uid": "35240-e6b52114-05fe-4267-9e61-a8b900134cdd"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-f18c16dd-af32-46e4-ba40-5b76e75090ae"
+                }
+              ],
+              "id": "18c7495f-b621-4d06-805c-ee0b151d3b2d",
+              "createdAt": "2026-07-28T02:55:25.000Z",
+              "updatedAt": "2026-07-28T02:55:25.000Z",
+              "uid": "35240-18c7495f-b621-4d06-805c-ee0b151d3b2d"
+            },
+            {
+              "name": "List agents",
+              "id": "bce1e485-18d6-46c0-a910-c6db23b5d8a9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/agents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "agents"
+                  ]
+                },
+                "description": "List all voice agents for your organisation."
+              },
+              "response": [
+                {
+                  "id": "8d3af545-2924-4aed-943b-49838de793f9",
+                  "name": "List of agents.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"organisation_id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"system_prompt\": \"<string>\",\n    \"greeting\": \"<string>\",\n    \"language\": \"<string>\",\n    \"region\": \"<string>\",\n    \"models\": {\n      \"stt\": \"<string>\",\n      \"llm\": \"bedrock-mantle/nvidia.nemotron-super-3-120b\",\n      \"tts\": \"<string>\",\n      \"tts_voice\": \"<string>\",\n      \"stt_kwargs\": {},\n      \"llm_kwargs\": {},\n      \"tts_kwargs\": {},\n      \"fallbacks\": {},\n      \"stt_final_timeout_s\": \"<number>\",\n      \"llm_first_token_timeout_s\": \"<number>\",\n      \"tts_first_audio_timeout_s\": \"<number>\",\n      \"failure_audio_enabled\": true\n    },\n    \"idle_nudges\": {\n      \"first_nudge_text\": \"<string>\",\n      \"second_nudge_text\": \"<string>\",\n      \"final_hangup_text\": \"<string>\",\n      \"enabled\": true,\n      \"first_nudge_delay_seconds\": 15,\n      \"second_nudge_delay_seconds\": 30,\n      \"hangup_delay_seconds\": 15\n    },\n    \"enable_interruptions\": \"<boolean>\",\n    \"tools\": [\n      {\n        \"type\": \"template\",\n        \"id\": \"<uuid>\",\n        \"template\": \"hangup\",\n        \"prompt\": \"<string>\",\n        \"execution_policy\": {\n          \"pre_action_message\": {\n            \"enabled\": false,\n            \"text\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"type\": \"template\",\n        \"id\": \"<uuid>\",\n        \"template\": \"hangup\",\n        \"prompt\": \"<string>\",\n        \"execution_policy\": {\n          \"pre_action_message\": {\n            \"enabled\": false,\n            \"text\": \"<string>\"\n          }\n        }\n      }\n    ],\n    \"template_variables\": {\n      \"magna94\": {\n        \"required\": \"<boolean>\",\n        \"default\": \"<string>\",\n        \"ipsumf_0\": true\n      },\n      \"laborisaa\": {\n        \"required\": \"<boolean>\",\n        \"default\": \"<string>\"\n      }\n    },\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"inbound_greeting\": \"<string>\",\n    \"outbound_greeting\": \"<string>\",\n    \"sip_inbound_trunk_id\": \"<uuid>\",\n    \"sip_outbound_trunk_id\": \"<uuid>\",\n    \"runtime_variables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"deleted_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"organisation_id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"system_prompt\": \"<string>\",\n    \"greeting\": \"<string>\",\n    \"language\": \"<string>\",\n    \"region\": \"<string>\",\n    \"models\": {\n      \"stt\": \"<string>\",\n      \"llm\": \"groq/openai/gpt-oss-120b\",\n      \"tts\": \"<string>\",\n      \"tts_voice\": \"<string>\",\n      \"stt_kwargs\": {},\n      \"llm_kwargs\": {},\n      \"tts_kwargs\": {},\n      \"fallbacks\": {},\n      \"stt_final_timeout_s\": \"<number>\",\n      \"llm_first_token_timeout_s\": \"<number>\",\n      \"tts_first_audio_timeout_s\": \"<number>\",\n      \"failure_audio_enabled\": true\n    },\n    \"idle_nudges\": {\n      \"first_nudge_text\": \"<string>\",\n      \"second_nudge_text\": \"<string>\",\n      \"final_hangup_text\": \"<string>\",\n      \"enabled\": true,\n      \"first_nudge_delay_seconds\": 15,\n      \"second_nudge_delay_seconds\": 30,\n      \"hangup_delay_seconds\": 15\n    },\n    \"enable_interruptions\": \"<boolean>\",\n    \"tools\": [\n      {\n        \"type\": \"template\",\n        \"id\": \"<uuid>\",\n        \"template\": \"voicemail_detection\",\n        \"prompt\": \"<string>\",\n        \"execution_policy\": {\n          \"pre_action_message\": {\n            \"enabled\": false,\n            \"text\": \"<string>\"\n          }\n        }\n      },\n      {\n        \"type\": \"template\",\n        \"id\": \"<uuid>\",\n        \"template\": \"voicemail_detection\",\n        \"prompt\": \"<string>\",\n        \"execution_policy\": {\n          \"pre_action_message\": {\n            \"enabled\": false,\n            \"text\": \"<string>\"\n          }\n        }\n      }\n    ],\n    \"template_variables\": {\n      \"adipisicing0\": {\n        \"required\": \"<boolean>\",\n        \"default\": \"<string>\"\n      }\n    },\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"inbound_greeting\": \"<string>\",\n    \"outbound_greeting\": \"<string>\",\n    \"sip_inbound_trunk_id\": \"<uuid>\",\n    \"sip_outbound_trunk_id\": \"<uuid>\",\n    \"runtime_variables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"deleted_at\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-8d3af545-2924-4aed-943b-49838de793f9"
+                },
+                {
+                  "id": "4a43b056-be93-4f47-9280-0113812b2cc7",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-4a43b056-be93-4f47-9280-0113812b2cc7"
+                },
+                {
+                  "id": "f0a0574d-4514-4a61-ba40-92cea90be54b",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-f0a0574d-4514-4a61-ba40-92cea90be54b"
+                },
+                {
+                  "id": "9e2deb35-b903-4265-a8c4-565d19b8cefa",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-9e2deb35-b903-4265-a8c4-565d19b8cefa"
+                }
+              ],
+              "createdAt": "2026-07-28T02:55:25.000Z",
+              "updatedAt": "2026-07-28T02:55:25.000Z",
+              "uid": "35240-bce1e485-18d6-46c0-a910-c6db23b5d8a9"
+            },
+            {
+              "name": "Create agent",
+              "id": "a6741408-6681-4351-b34a-692d84147c80",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/agents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "agents"
+                  ]
+                },
+                "description": "Create a new voice agent."
+              },
+              "response": [
+                {
+                  "id": "8f6a396d-c56e-40d1-9f63-8ea8ffa43f7b",
+                  "name": "Agent created.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"organisation_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-super-3-120b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"<uuid>\",\n      \"template\": \"hangup\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"enabled\": false,\n          \"text\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"ipsume23\": {\n      \"required\": \"<boolean>\",\n      \"default\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-8f6a396d-c56e-40d1-9f63-8ea8ffa43f7b"
+                },
+                {
+                  "id": "c537e781-1947-419b-98a9-5201d87ffda2",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-c537e781-1947-419b-98a9-5201d87ffda2"
+                },
+                {
+                  "id": "953724c5-3c0a-4825-b3aa-fee3a23a1b87",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-953724c5-3c0a-4825-b3aa-fee3a23a1b87"
+                },
+                {
+                  "id": "9861f9f2-90d8-4de5-8467-2b45fbab5092",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-9861f9f2-90d8-4de5-8467-2b45fbab5092"
+                },
+                {
+                  "id": "503ae6ba-6e58-4116-85de-87cd5cb1b358",
+                  "name": "Not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-503ae6ba-6e58-4116-85de-87cd5cb1b358"
+                },
+                {
+                  "id": "6e5bbbd2-e435-4cac-a3e6-1bb5d257a9dd",
+                  "name": "Conflict.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-6e5bbbd2-e435-4cac-a3e6-1bb5d257a9dd"
+                },
+                {
+                  "id": "fc943303-f53e-4966-bc2c-2a6bf5b5fe59",
+                  "name": "Validation error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-fc943303-f53e-4966-bc2c-2a6bf5b5fe59"
+                },
+                {
+                  "id": "4e505743-f72c-4db8-942d-865fafffc6ad",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-4e505743-f72c-4db8-942d-865fafffc6ad"
+                },
+                {
+                  "id": "3d4ddfd1-23b4-48fe-b177-28543980c869",
+                  "name": "Bad gateway.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"ap-south\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"bedrock-mantle/nvidia.nemotron-nano-3-30b\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Bad Gateway",
+                  "code": 502,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"occaecat_33\": \"consectetur proident eu commodo\",\n  \"veniam60\": \"tempor\"\n}",
+                  "createdAt": "2026-07-28T02:55:25.000Z",
+                  "updatedAt": "2026-07-28T02:55:25.000Z",
+                  "uid": "35240-3d4ddfd1-23b4-48fe-b177-28543980c869"
+                }
+              ],
+              "createdAt": "2026-07-28T02:55:25.000Z",
+              "updatedAt": "2026-07-28T02:55:25.000Z",
+              "uid": "35240-a6741408-6681-4351-b34a-692d84147c80"
+            }
+          ],
+          "id": "13589ea2-6ff7-49b1-a74f-0cde87ab5e8f",
+          "createdAt": "2026-07-28T02:55:25.000Z",
+          "updatedAt": "2026-07-28T02:55:25.000Z",
+          "uid": "35240-13589ea2-6ff7-49b1-a74f-0cde87ab5e8f"
+        }
+      ],
+      "id": "8ea13304-2124-4ba3-86a8-00d758aa0c1f",
+      "createdAt": "2026-07-28T02:55:25.000Z",
+      "updatedAt": "2026-07-28T02:55:25.000Z",
+      "uid": "35240-8ea13304-2124-4ba3-86a8-00d758aa0c1f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

@@ -1,0 +1,2019 @@
+{
+  "info": {
+    "_postman_id": "076e85be-4fa3-4725-88ec-8c26fa2f545c",
+    "name": "SLNG Voice Agents Account Calls API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:26.000Z",
+    "updatedAt": "2026-07-28T02:55:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-076e85be-4fa3-4725-88ec-8c26fa2f545c"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "agents",
+          "item": [
+            {
+              "name": "{agent_id}",
+              "item": [
+                {
+                  "name": "calls",
+                  "item": [
+                    {
+                      "name": "{call_id}",
+                      "item": [
+                        {
+                          "name": "tool-executions",
+                          "item": [
+                            {
+                              "name": "Submit tool execution",
+                              "id": "c2dc896a-27ab-4ebd-bf31-127542930877",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id",
+                                    "tool-executions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "44a0a735-5dc9-49b8-af4d-44f0aaa0b858",
+                                      "key": "agent_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Voice agent ID."
+                                    },
+                                    {
+                                      "id": "cb68a6da-ae3e-4e55-98ce-66deaca5b022",
+                                      "key": "call_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Call ID."
+                                    }
+                                  ]
+                                },
+                                "description": "Append a tool execution record to a call.\n\nThis endpoint is primarily used by SLNG-managed agent runtimes to report\ncontextual and system tool activity back to the Agents API.\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "feeafb29-6913-4757-9e3e-1223922831ec",
+                                  "name": "Tool execution recorded.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "agents",
+                                        ":agent_id",
+                                        "calls",
+                                        ":call_id",
+                                        "tool-executions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "agent_id"
+                                        },
+                                        {
+                                          "key": "call_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:55:27.000Z",
+                                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                                  "uid": "35240-feeafb29-6913-4757-9e3e-1223922831ec"
+                                },
+                                {
+                                  "id": "94d4af05-4935-4d62-881c-6349326f2ccc",
+                                  "name": "Unauthorized.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "agents",
+                                        ":agent_id",
+                                        "calls",
+                                        ":call_id",
+                                        "tool-executions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "agent_id"
+                                        },
+                                        {
+                                          "key": "call_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:55:27.000Z",
+                                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                                  "uid": "35240-94d4af05-4935-4d62-881c-6349326f2ccc"
+                                },
+                                {
+                                  "id": "9bcc74e1-b17a-442a-bac7-708fd225de72",
+                                  "name": "Forbidden.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "agents",
+                                        ":agent_id",
+                                        "calls",
+                                        ":call_id",
+                                        "tool-executions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "agent_id"
+                                        },
+                                        {
+                                          "key": "call_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:55:27.000Z",
+                                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                                  "uid": "35240-9bcc74e1-b17a-442a-bac7-708fd225de72"
+                                },
+                                {
+                                  "id": "9cada92c-9cda-476a-9c40-ca4d9b136430",
+                                  "name": "Not found.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "agents",
+                                        ":agent_id",
+                                        "calls",
+                                        ":call_id",
+                                        "tool-executions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "agent_id"
+                                        },
+                                        {
+                                          "key": "call_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:55:27.000Z",
+                                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                                  "uid": "35240-9cada92c-9cda-476a-9c40-ca4d9b136430"
+                                },
+                                {
+                                  "id": "2f3a4655-4e3e-4cfa-90c4-e99710202754",
+                                  "name": "Validation error.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "agents",
+                                        ":agent_id",
+                                        "calls",
+                                        ":call_id",
+                                        "tool-executions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "agent_id"
+                                        },
+                                        {
+                                          "key": "call_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:55:27.000Z",
+                                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                                  "uid": "35240-2f3a4655-4e3e-4cfa-90c4-e99710202754"
+                                },
+                                {
+                                  "id": "3b3e0e0f-1d70-48b0-ab74-50aca587b50c",
+                                  "name": "Internal server error.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tool_name\": \"<string>\",\n  \"tool_kind\": \"webhook\",\n  \"invocation_source\": \"system\",\n  \"started_at\": \"<dateTime>\",\n  \"finished_at\": \"<dateTime>\",\n  \"duration_ms\": \"<integer>\",\n  \"outcome\": \"succeeded\",\n  \"tool_id\": \"<string>\",\n  \"trigger_event\": \"<string>\",\n  \"source_tool_id\": \"<string>\",\n  \"http_status\": \"<integer>\",\n  \"error_code\": \"<string>\",\n  \"error_type\": \"<string>\",\n  \"wait_for_response\": \"<boolean>\",\n  \"show_results_to_llm\": \"<boolean>\",\n  \"target_url\": \"<string>\",\n  \"arguments_preview\": {\n    \"nullable\": true\n  },\n  \"result_preview\": {\n    \"nullable\": true\n  },\n  \"error_message\": \"<string>\",\n  \"stack_trace\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id/tool-executions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "agents",
+                                        ":agent_id",
+                                        "calls",
+                                        ":call_id",
+                                        "tool-executions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "agent_id"
+                                        },
+                                        {
+                                          "key": "call_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:55:27.000Z",
+                                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                                  "uid": "35240-3b3e0e0f-1d70-48b0-ab74-50aca587b50c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-c2dc896a-27ab-4ebd-bf31-127542930877"
+                            }
+                          ],
+                          "id": "c9b2b843-3129-4250-8282-e0ad2ad9ed08",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-c9b2b843-3129-4250-8282-e0ad2ad9ed08"
+                        },
+                        {
+                          "name": "Get call",
+                          "id": "31e5d789-0eb8-469c-9dcc-103b37a503ce",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls",
+                                ":call_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ab5515db-3930-4990-926b-eae7aad36f1e",
+                                  "key": "agent_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Voice agent ID."
+                                },
+                                {
+                                  "id": "8c1c702d-bbef-4a78-8df4-ed0c0e386a7f",
+                                  "key": "call_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Call ID."
+                                }
+                              ]
+                            },
+                            "description": "Get details of a specific call."
+                          },
+                          "response": [
+                            {
+                              "id": "5cb0aa9d-18d3-48e3-aada-7d7f1bceca83",
+                              "name": "Call.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "agent_id"
+                                    },
+                                    {
+                                      "key": "call_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"agent_id\": \"<uuid>\",\n  \"phone_number\": \"<string>\",\n  \"call_direction\": \"<string>\",\n  \"arguments\": {\n    \"occaecat_da5\": -55874920,\n    \"nisia92\": true\n  },\n  \"rendered_prompt\": \"<string>\",\n  \"livekit_room_name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"web_session_origin\": \"api\",\n  \"livekit_dispatch_id\": \"<string>\",\n  \"call_started_at\": \"<dateTime>\",\n  \"call_ended_at\": \"<dateTime>\",\n  \"call_duration_ms\": \"<integer>\",\n  \"call_end_reason\": \"<string>\",\n  \"finalized_at\": \"<dateTime>\",\n  \"call_duration_source\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"livekit_session_report\": {\n    \"incididunt_26\": -74214235\n  },\n  \"call_events\": [\n    {\n      \"v\": 1,\n      \"created_at\": \"<number>\",\n      \"event\": \"<string>\",\n      \"level\": \"info\",\n      \"component\": \"stt\",\n      \"from_model\": \"<string>\",\n      \"to_model\": \"<string>\",\n      \"reason\": \"hard_fail\",\n      \"timeout_s\": \"<number>\",\n      \"error_type\": \"<string>\",\n      \"error_code\": \"<integer>\"\n    },\n    {\n      \"v\": 1,\n      \"created_at\": \"<number>\",\n      \"event\": \"<string>\",\n      \"level\": \"info\",\n      \"component\": \"llm\",\n      \"from_model\": \"<string>\",\n      \"to_model\": \"<string>\",\n      \"reason\": \"timeout\",\n      \"timeout_s\": \"<number>\",\n      \"error_type\": \"<string>\",\n      \"error_code\": \"<integer>\"\n    }\n  ],\n  \"tool_executions\": [\n    {\n      \"tool_name\": \"<string>\",\n      \"tool_kind\": \"webhook\",\n      \"invocation_source\": \"system\",\n      \"started_at\": \"<dateTime>\",\n      \"finished_at\": \"<dateTime>\",\n      \"duration_ms\": \"<integer>\",\n      \"outcome\": \"skipped\",\n      \"trigger_event\": \"<string>\",\n      \"http_status\": \"<integer>\",\n      \"error_code\": \"<string>\",\n      \"error_type\": \"<string>\"\n    },\n    {\n      \"tool_name\": \"<string>\",\n      \"tool_kind\": \"built_in\",\n      \"invocation_source\": \"system\",\n      \"started_at\": \"<dateTime>\",\n      \"finished_at\": \"<dateTime>\",\n      \"duration_ms\": \"<integer>\",\n      \"outcome\": \"cancelled\",\n      \"trigger_event\": \"<string>\",\n      \"http_status\": \"<integer>\",\n      \"error_code\": \"<string>\",\n      \"error_type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-5cb0aa9d-18d3-48e3-aada-7d7f1bceca83"
+                            },
+                            {
+                              "id": "cccc4f89-3a42-4548-83a8-7ecb1884fe6e",
+                              "name": "Unauthorized.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "agent_id"
+                                    },
+                                    {
+                                      "key": "call_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-cccc4f89-3a42-4548-83a8-7ecb1884fe6e"
+                            },
+                            {
+                              "id": "f9e5b7ef-ecf4-4970-a6cb-0b3fa9e5c5cd",
+                              "name": "Forbidden.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "agent_id"
+                                    },
+                                    {
+                                      "key": "call_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-f9e5b7ef-ecf4-4970-a6cb-0b3fa9e5c5cd"
+                            },
+                            {
+                              "id": "d6fe8609-4fa7-411c-9479-070a37b34091",
+                              "name": "Not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "agent_id"
+                                    },
+                                    {
+                                      "key": "call_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-d6fe8609-4fa7-411c-9479-070a37b34091"
+                            },
+                            {
+                              "id": "f945c94d-2218-47ef-a7f7-46de255627ee",
+                              "name": "Validation error.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "agent_id"
+                                    },
+                                    {
+                                      "key": "call_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-f945c94d-2218-47ef-a7f7-46de255627ee"
+                            },
+                            {
+                              "id": "9e399acc-d4db-4744-b26d-82db4db81d9f",
+                              "name": "Internal server error.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/agents/:agent_id/calls/:call_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "agents",
+                                    ":agent_id",
+                                    "calls",
+                                    ":call_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "agent_id"
+                                    },
+                                    {
+                                      "key": "call_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:27.000Z",
+                              "updatedAt": "2026-07-28T02:55:27.000Z",
+                              "uid": "35240-9e399acc-d4db-4744-b26d-82db4db81d9f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-31e5d789-0eb8-469c-9dcc-103b37a503ce"
+                        }
+                      ],
+                      "id": "4f26b8ec-9bfb-4321-9f18-00b1465627ad",
+                      "createdAt": "2026-07-28T02:55:27.000Z",
+                      "updatedAt": "2026-07-28T02:55:27.000Z",
+                      "uid": "35240-4f26b8ec-9bfb-4321-9f18-00b1465627ad"
+                    },
+                    {
+                      "name": "Dispatch call",
+                      "id": "c8bb79b2-a02b-47b4-9060-e5cccbc7df30",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id",
+                            "calls"
+                          ],
+                          "variable": [
+                            {
+                              "id": "38829458-4bff-4915-93ba-e9bb3f35c33c",
+                              "key": "agent_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Voice agent ID."
+                            }
+                          ]
+                        },
+                        "description": "Dispatch an outbound call for a voice agent.\n\nNote: outbound calls require the agent to be configured with an outbound connection.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "16ef5f67-2aa7-434b-9a21-68dd99f3437f",
+                          "name": "Call dispatched.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"call_id\": \"<uuid>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-16ef5f67-2aa7-434b-9a21-68dd99f3437f"
+                        },
+                        {
+                          "id": "e30a79ec-ff60-447c-903e-a175d0535cef",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-e30a79ec-ff60-447c-903e-a175d0535cef"
+                        },
+                        {
+                          "id": "c3139c67-0638-4506-a08d-fec6aac36d79",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-c3139c67-0638-4506-a08d-fec6aac36d79"
+                        },
+                        {
+                          "id": "5d3527c6-a75a-4ba0-a903-7db00356b23b",
+                          "name": "Payment required.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Payment Required",
+                          "code": 402,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-5d3527c6-a75a-4ba0-a903-7db00356b23b"
+                        },
+                        {
+                          "id": "0dccbc25-c73b-4256-ab2c-f1a65af8b5e3",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-0dccbc25-c73b-4256-ab2c-f1a65af8b5e3"
+                        },
+                        {
+                          "id": "29eccb87-5e41-4f27-a223-5b46a94ff12f",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-29eccb87-5e41-4f27-a223-5b46a94ff12f"
+                        },
+                        {
+                          "id": "9808c425-f4d7-4bdf-85d2-a616a3b4c2f1",
+                          "name": "Validation error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-9808c425-f4d7-4bdf-85d2-a616a3b4c2f1"
+                        },
+                        {
+                          "id": "88abd6fc-a1e1-412e-a52d-4a90f0c0ec04",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-88abd6fc-a1e1-412e-a52d-4a90f0c0ec04"
+                        },
+                        {
+                          "id": "3bd44bcf-f36e-4371-a0f6-183245725672",
+                          "name": "Bad gateway.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"arguments\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Gateway",
+                          "code": 502,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-3bd44bcf-f36e-4371-a0f6-183245725672"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:55:27.000Z",
+                      "updatedAt": "2026-07-28T02:55:27.000Z",
+                      "uid": "35240-c8bb79b2-a02b-47b4-9060-e5cccbc7df30"
+                    },
+                    {
+                      "name": "List calls",
+                      "id": "66879933-ffe9-464f-8bec-12d29fb8c8aa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id",
+                            "calls"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter calls by status.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number (1-indexed).",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Page size.",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "7b699612-0623-4b74-882f-621c25f48743",
+                              "key": "agent_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Voice agent ID."
+                            }
+                          ]
+                        },
+                        "description": "List calls for a voice agent (paginated)."
+                      },
+                      "response": [
+                        {
+                          "id": "1f15fdb3-f893-4082-9839-ee36e0646c2f",
+                          "name": "Paginated calls.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter calls by status.",
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number (1-indexed).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Page size.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"id\": \"<uuid>\",\n      \"agent_id\": \"<uuid>\",\n      \"phone_number\": \"<string>\",\n      \"call_direction\": \"<string>\",\n      \"arguments\": {\n        \"in_b9a\": \"Lorem Duis elit incididunt magna\",\n        \"sintd\": false\n      },\n      \"rendered_prompt\": \"<string>\",\n      \"livekit_room_name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"web_session_origin\": \"api\",\n      \"livekit_dispatch_id\": \"<string>\",\n      \"call_started_at\": \"<dateTime>\",\n      \"call_ended_at\": \"<dateTime>\",\n      \"call_duration_ms\": \"<integer>\",\n      \"call_end_reason\": \"<string>\",\n      \"finalized_at\": \"<dateTime>\",\n      \"call_duration_source\": \"<string>\",\n      \"error_message\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"agent_id\": \"<uuid>\",\n      \"phone_number\": \"<string>\",\n      \"call_direction\": \"<string>\",\n      \"arguments\": {\n        \"consequatdc\": true,\n        \"reprehenderit47\": \"fugiat magna reprehenderit\",\n        \"dolor_1\": \"aliquip sit et voluptate\"\n      },\n      \"rendered_prompt\": \"<string>\",\n      \"livekit_room_name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"web_session_origin\": \"api\",\n      \"livekit_dispatch_id\": \"<string>\",\n      \"call_started_at\": \"<dateTime>\",\n      \"call_ended_at\": \"<dateTime>\",\n      \"call_duration_ms\": \"<integer>\",\n      \"call_end_reason\": \"<string>\",\n      \"finalized_at\": \"<dateTime>\",\n      \"call_duration_source\": \"<string>\",\n      \"error_message\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"total\": \"<integer>\",\n    \"pages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-1f15fdb3-f893-4082-9839-ee36e0646c2f"
+                        },
+                        {
+                          "id": "3ee30373-9f81-4ee0-9006-08cd884667e8",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter calls by status.",
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number (1-indexed).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Page size.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-3ee30373-9f81-4ee0-9006-08cd884667e8"
+                        },
+                        {
+                          "id": "ffb7f92e-768e-40e4-874c-d5528e48abd2",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter calls by status.",
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number (1-indexed).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Page size.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-ffb7f92e-768e-40e4-874c-d5528e48abd2"
+                        },
+                        {
+                          "id": "cc50a2c9-d348-46c8-a779-dc036f758296",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter calls by status.",
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number (1-indexed).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Page size.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-cc50a2c9-d348-46c8-a779-dc036f758296"
+                        },
+                        {
+                          "id": "9ccd16f0-01ee-42e8-8eca-1c3a68750dc3",
+                          "name": "Validation error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter calls by status.",
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number (1-indexed).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Page size.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-9ccd16f0-01ee-42e8-8eca-1c3a68750dc3"
+                        },
+                        {
+                          "id": "e6533727-de7f-48b3-9f2e-52aef4dfca2b",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/calls?status=<string>&page=1&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "calls"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter calls by status.",
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number (1-indexed).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Page size.",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:27.000Z",
+                          "updatedAt": "2026-07-28T02:55:27.000Z",
+                          "uid": "35240-e6533727-de7f-48b3-9f2e-52aef4dfca2b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:55:27.000Z",
+                      "updatedAt": "2026-07-28T02:55:27.000Z",
+                      "uid": "35240-66879933-ffe9-464f-8bec-12d29fb8c8aa"
+                    }
+                  ],
+                  "id": "1eb07c38-2907-4e21-9d00-6692637278f6",
+                  "createdAt": "2026-07-28T02:55:27.000Z",
+                  "updatedAt": "2026-07-28T02:55:27.000Z",
+                  "uid": "35240-1eb07c38-2907-4e21-9d00-6692637278f6"
+                }
+              ],
+              "id": "0e41c6e8-8a28-4f84-bfd4-47fbbd97c51b",
+              "createdAt": "2026-07-28T02:55:27.000Z",
+              "updatedAt": "2026-07-28T02:55:27.000Z",
+              "uid": "35240-0e41c6e8-8a28-4f84-bfd4-47fbbd97c51b"
+            }
+          ],
+          "id": "20c8dcde-a120-44cd-84ec-60842a33300f",
+          "createdAt": "2026-07-28T02:55:27.000Z",
+          "updatedAt": "2026-07-28T02:55:27.000Z",
+          "uid": "35240-20c8dcde-a120-44cd-84ec-60842a33300f"
+        }
+      ],
+      "id": "b3183630-db6d-46b2-bcaa-6cc78ef00408",
+      "createdAt": "2026-07-28T02:55:27.000Z",
+      "updatedAt": "2026-07-28T02:55:27.000Z",
+      "uid": "35240-b3183630-db6d-46b2-bcaa-6cc78ef00408"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

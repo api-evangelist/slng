@@ -1,22 +1,368 @@
 aid: slng
-name: Slng
-description: Slng is a company surfaced as a portfolio company of earlybird and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/slng.png
+name: SLNG
+description: >-
+  SLNG is a compliance-first speech AI gateway that gives developers a single,
+  unified API for speech-to-text, text-to-speech, and LLM-driven voice agents
+  across 30+ models from providers like Deepgram, Rime, Cartesia, ElevenLabs,
+  and OpenAI Whisper. The platform acts as an execution layer between an
+  orchestrator and the models, routing each request to in-region compute across
+  60+ regions and 11 sovereign hubs for low latency and local data residency
+  (GDPR), with ISO 27001 certification and HIPAA compliance. Every model is
+  reachable over HTTP or streaming WebSocket, with bring-your-own-key billing,
+  batch transcription, pronunciation dictionaries, and per-minute pricing.
+  Founded in Barcelona in 2025 and backed by a pre-seed round led by Earlybird.
 url: https://raw.githubusercontent.com/api-evangelist/slng/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - earlybird
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: producer
+x-tier-reason: enriched-from-live-api
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Speech
+- Voice
+- Speech to Text
+- Text to Speech
+- Voice AI
+- Voice Agents
+- Transcription
+- Speech Recognition
+- Artificial Intelligence
+- API Gateway
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: slng:slng-account-api
+  name: SLNG Account API
+  description: Inspect the authenticated account and organization.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-account-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-agents-api
+  name: SLNG Agents API
+  description: Voice agent CRUD.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-agents-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-calls-api
+  name: SLNG Calls API
+  description: Call dispatch and status.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-calls-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-catalog-api
+  name: SLNG Catalog API
+  description: Discover and inspect available models in the SLNG catalog.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-catalog-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-deepgram-aura-2-api
+  name: SLNG Deepgram Aura 2 API
+  description: Deepgram Aura 2 for conversational voice agents.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Deepgram Aura 2
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-deepgram-aura-2-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-deepgram-nova-3-api
+  name: SLNG Deepgram Nova 3 API
+  description: Deepgram Nova 3 with VAD and speaker diarization.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Deepgram Nova 3
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-deepgram-nova-3-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-inworld-max-1-5-api
+  name: SLNG Inworld Max 1.5 API
+  description: Inworld Max 1.5 for multilingual, expressive synthesis.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Inworld Max 1.5
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-inworld-max-1-5-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-orpheus-english-api
+  name: SLNG Orpheus English API
+  description: Orpheus TTS with emotion control.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Orpheus English
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-orpheus-english-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-pronunciation-dictionaries-api
+  name: SLNG Pronunciation dictionaries API
+  description: Manage reusable pronunciation rewrite dictionaries for TTS.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Pronunciation dictionaries
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-pronunciation-dictionaries-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-rime-arcana-v2-api
+  name: SLNG Rime Arcana v2 API
+  description: Rime Arcana v2 TTS with multi-language support.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Rime Arcana v2
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-rime-arcana-v2-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-rime-arcana-v3-api
+  name: SLNG Rime Arcana v3 API
+  description: Rime Arcana v3 TTS with multilingual support (English, Hindi).
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Rime Arcana v3
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-rime-arcana-v3-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-rime-coda-api
+  name: SLNG Rime Coda API
+  description: Rime Coda TTS for Bahasa Indonesian.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Rime Coda
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-rime-coda-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-sessions-api
+  name: SLNG Sessions API
+  description: Web (non-telephony) sessions.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-sessions-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-speechmatics-api
+  name: SLNG Speechmatics API
+  description: Create and manage asynchronous transcription jobs.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Speechmatics
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-speechmatics-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+- aid: slng:slng-whisper-large-v3-api
+  name: SLNG Whisper Large v3 API
+  description: Whisper Large v3 with 99+ language support.
+  humanURL: https://docs.slng.ai
+  baseURL: https://api.slng.ai
+  tags:
+  - Whisper Large v3
+  properties:
+  - type: OpenAPI
+    url: openapi/slng-whisper-large-v3-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-stt-slng-asyncapi.yml
+  - type: AsyncAPI
+    url: asyncapi/slng-tts-slng-asyncapi.yml
+common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/slng/overview
+- type: DeveloperPortal
+  url: https://docs.slng.ai
+- type: Documentation
+  url: https://docs.slng.ai
+- type: APIReference
+  url: https://docs.slng.ai/api-reference/overview
+- type: GettingStarted
+  url: https://docs.slng.ai/getting-started
+- type: Blog
+  url: https://slng.ai/blog
+- type: GitHubOrganization
+  url: https://github.com/slng-ai
+- type: SignUp
+  url: https://app.slng.ai
+- type: Pricing
+  url: https://slng.ai/pricing
+- type: TermsOfService
+  url: https://slng.ai/legal/terms-of-service
+- type: PrivacyPolicy
+  url: https://slng.ai/legal/privacy-policy
+- type: Support
+  url: mailto:support@slng.ai
+- type: ChangeLog
+  url: changelog/slng-changelog.yml
+- type: TrustCenter
+  url: https://trust.slng.ai
+- type: Compliance
+  url: security/slng-trust-center.yml
+- type: Authentication
+  url: authentication/slng-authentication.yml
+- type: DomainSecurity
+  url: security/slng-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/slng-agentic-access.yml
+- type: Packages
+  url: packages/slng-packages.yml
+- type: SDKs
+  url: packages/slng-packages.yml
+- type: CLI
+  url: cli/slng-cli.yml
+- type: MCPServer
+  url: mcp/slng-mcp.yml
+- type: LLMsTxt
+  url: llms/slng-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Conventions
+  url: conventions/slng-conventions.yml
+- type: ErrorCatalog
+  url: errors/slng-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/slng-lifecycle.yml
+- type: Sandbox
+  url: sandbox/slng-sandbox.yml
+- type: DataModel
+  url: data-model/slng-data-model.yml
+- type: Conformance
+  url: conformance/slng-conformance.yml
+- type: Overlay
+  url: overlays/slng-stt-overlay.yaml
+- type: Overlay
+  url: overlays/slng-tts-overlay.yaml
+- type: Overlay
+  url: overlays/slng-agents-overlay.yaml
+- type: Overlay
+  url: overlays/slng-batch-overlay.yaml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 38
+  pass: local-v1

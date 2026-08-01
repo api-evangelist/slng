@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/ servers[] + published request examples, https://docs.slng.ai
+environments:
+  - name: production
+    hosts:
+      - https://api.slng.ai
+      - https://api.agents.slng.ai
+      - https://api.batch.slng.ai
+  - name: staging
+    hosts:
+      - https://stageapi.slng.ai
+      - https://stageapi.batch.slng.ai
+    note: Staging gateway published in the OpenAPI servers[] list for pre-production testing.
+test_assets:
+  audio_samples_note: Publicly hosted sample audio clips used verbatim in the API reference examples.
+  audio_samples:
+    - https://docs.slng.ai/audio/hello.wav
+    - https://docs.slng.ai/audio/hello-es.wav
+    - https://docs.slng.ai/audio/hello-hi.wav
+plan_tiers:
+  - hobby
+notes: >-
+  The model catalog (GET /v1/catalog/models) accepts anonymous requests, so the
+  model surface can be explored without an API key before signing up. No dedicated
+  test-key prefix or magic identifier scheme was documented as of 2026-07-21.

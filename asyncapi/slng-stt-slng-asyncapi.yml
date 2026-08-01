@@ -1,0 +1,3331 @@
+asyncapi: 3.0.0
+info:
+  title: SLNG Gateway API - SLNG STT
+  version: 0.1.0
+  description: SLNG Gateway API
+  contact:
+    name: SLNG Support
+    url: https://slng.ai
+    email: support@slng.ai
+  license:
+    name: Proprietary
+  tags:
+    - name: STT
+      description: Speech-to-Text services
+    - name: Unmute STT Bridge
+      description: SLNG native WebSocket STT protocol bridge.
+    - name: Unmute TTS Bridge
+      description: SLNG native WebSocket TTS protocol bridge.
+servers:
+  production:
+    host: api.slng.ai
+    protocol: wss
+    description: Production
+    security:
+      - $ref: '#/components/securitySchemes/bearer'
+  staging:
+    host: stageapi.slng.ai
+    protocol: wss
+    description: Staging
+    security:
+      - $ref: '#/components/securitySchemes/bearer'
+channels:
+  /v1/stt/slng/openai/whisper:large-v3:
+    address: /v1/stt/slng/openai/whisper:large-v3
+    title: Whisper Large v3
+    summary: Whisper Large v3
+    description: >-
+      Stream real-time transcripts from OpenAI Whisper Large v3 over WebSocket
+      with VAD, partial results, and automatic language detection across 99
+      languages.
+    tags:
+      - name: Whisper Large v3
+    servers:
+      - $ref: '#/servers/production'
+      - $ref: '#/servers/staging'
+    messages:
+      SlngWhisperLargeV3SttInitRequest:
+        $ref: '#/components/messages/SlngWhisperLargeV3SttInitRequest'
+      SttAudioMessage:
+        $ref: '#/components/messages/SttAudioMessage'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      SlngWhisperSttReadyResponse:
+        $ref: '#/components/messages/SlngWhisperSttReadyResponse'
+      SlngWhisperSttPartialTranscript:
+        $ref: '#/components/messages/SlngWhisperSttPartialTranscript'
+      SlngWhisperSttFinalTranscript:
+        $ref: '#/components/messages/SlngWhisperSttFinalTranscript'
+      SttErrorResponse:
+        $ref: '#/components/messages/SttErrorResponse'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngWhisper'
+  /v1/stt/slng/deepgram/nova:3-en:
+    address: /v1/stt/slng/deepgram/nova:3-en
+    title: Nova 3 (English)
+    summary: Nova 3 (English)
+    description: >-
+      Stream real-time English transcripts from SLNG-hosted Deepgram Nova 3 over
+      WebSocket with low-latency partials, finals, and speaker diarization.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3EnSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3EnSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsEn:
+        $ref: '#/components/messages/DeepgramSttResultsEn'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaEn'
+  /v1/stt/slng/deepgram/nova:3-te:
+    address: /v1/stt/slng/deepgram/nova:3-te
+    title: Nova 3 (Telugu)
+    summary: Nova 3 (Telugu)
+    description: >-
+      Stream real-time Telugu speech-to-text from SLNG-hosted Deepgram Nova 3
+      over WebSocket with low-latency partial and final transcripts and VAD.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3TeSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3TeSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsTe:
+        $ref: '#/components/messages/DeepgramSttResultsTe'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaTe'
+  /v1/stt/slng/deepgram/nova:3-mr:
+    address: /v1/stt/slng/deepgram/nova:3-mr
+    title: Nova 3 (Marathi)
+    summary: Nova 3 (Marathi)
+    description: >-
+      Stream real-time Marathi speech-to-text from SLNG-hosted Deepgram Nova 3
+      over WebSocket with low-latency partial and final transcripts and VAD.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3MrSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3MrSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsMr:
+        $ref: '#/components/messages/DeepgramSttResultsMr'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaMr'
+  /v1/stt/slng/deepgram/nova:3-kn:
+    address: /v1/stt/slng/deepgram/nova:3-kn
+    title: Nova 3 (Kannada)
+    summary: Nova 3 (Kannada)
+    description: >-
+      Stream real-time Kannada speech-to-text from SLNG-hosted Deepgram Nova 3
+      over WebSocket with low-latency partial and final transcripts and VAD.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3KnSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3KnSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsKn:
+        $ref: '#/components/messages/DeepgramSttResultsKn'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaKn'
+  /v1/stt/slng/deepgram/nova:3-es:
+    address: /v1/stt/slng/deepgram/nova:3-es
+    title: Nova 3 (Spanish)
+    summary: Nova 3 (Spanish)
+    description: >-
+      Stream real-time Spanish speech-to-text from SLNG-hosted Deepgram Nova 3
+      over WebSocket with low-latency partial and final transcripts and VAD.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3EsSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3EsSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsEs:
+        $ref: '#/components/messages/DeepgramSttResultsEs'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaEs'
+  /v1/stt/slng/deepgram/nova:3-in:
+    address: /v1/stt/slng/deepgram/nova:3-in
+    title: Nova 3 (Indonesian)
+    summary: Nova 3 (Indonesian)
+    description: >-
+      Stream real-time Indonesian speech-to-text from SLNG-hosted Deepgram Nova
+      3 over WebSocket with low-latency partial and final transcripts and VAD.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3InSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3InSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsIn:
+        $ref: '#/components/messages/DeepgramSttResultsIn'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaIn'
+  /v1/stt/slng/deepgram/nova:3-hi:
+    address: /v1/stt/slng/deepgram/nova:3-hi
+    title: Nova 3 (Hindi)
+    summary: Nova 3 (Hindi)
+    description: >-
+      Stream real-time Hindi speech-to-text from SLNG-hosted Deepgram Nova 3
+      over WebSocket with low-latency partial and final transcripts and VAD.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3HiSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3HiSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsHi:
+        $ref: '#/components/messages/DeepgramSttResultsHi'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaHi'
+  /v1/stt/slng/deepgram/nova:3-multi:
+    address: /v1/stt/slng/deepgram/nova:3-multi
+    title: Nova 3 (Multi-Language)
+    summary: Nova 3 (Multi-Language)
+    description: >-
+      Stream real-time multilingual transcripts from SLNG-hosted Deepgram Nova 3
+      over WebSocket with automatic language detection across supported
+      languages.
+    tags:
+      - name: Deepgram Nova 3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramNova3MultiSttInitRequest:
+        $ref: '#/components/messages/SlngDeepgramNova3MultiSttInitRequest'
+      DeepgramSttBinaryAudio:
+        $ref: '#/components/messages/DeepgramSttBinaryAudio'
+      SttFinalizeMessage:
+        $ref: '#/components/messages/SttFinalizeMessage'
+      SttCloseMessage:
+        $ref: '#/components/messages/SttCloseMessage'
+      KeepaliveMessage:
+        $ref: '#/components/messages/KeepaliveMessage'
+      DeepgramSttMetadata:
+        $ref: '#/components/messages/DeepgramSttMetadata'
+      DeepgramSttResultsMulti:
+        $ref: '#/components/messages/DeepgramSttResultsMulti'
+      DeepgramSttError:
+        $ref: '#/components/messages/DeepgramSttError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngNovaMulti'
+operations:
+  sttWhisperLargeV3ReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Initialize session on Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SlngWhisperLargeV3SttInitRequest
+    description: Initialize session on Whisper Large v3
+    tags: []
+  sttWhisperLargeV3ReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Send audio frame to Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SttAudioMessage
+    description: Send audio frame to Whisper Large v3
+    tags: []
+  sttWhisperLargeV3ReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Force-finalize buffered audio on Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Whisper Large v3
+    tags: []
+  sttWhisperLargeV3ReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Close audio stream on Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SttCloseMessage
+    description: Close audio stream on Whisper Large v3
+    tags: []
+  sttWhisperLargeV3SendReady:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Receive ready signal from Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SlngWhisperSttReadyResponse
+    description: Receive ready signal from Whisper Large v3
+    tags: []
+  sttWhisperLargeV3SendPartialTranscript:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Receive partial transcript from Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SlngWhisperSttPartialTranscript
+    description: Receive partial transcript from Whisper Large v3
+    tags: []
+  sttWhisperLargeV3SendFinalTranscript:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Receive final transcript from Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SlngWhisperSttFinalTranscript
+    description: Receive final transcript from Whisper Large v3
+    tags: []
+  sttWhisperLargeV3SendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3'
+    summary: Receive error from Whisper Large v3
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1openai~1whisper:large-v3/messages/SttErrorResponse
+    description: Receive error from Whisper Large v3
+    tags: []
+  sttSlngDeepgramNova3EnReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Initialize session on Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/SlngDeepgramNova3EnSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (English)
+    tags: []
+  sttSlngDeepgramNova3TeReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Initialize session on Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/SlngDeepgramNova3TeSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Telugu)
+    tags: []
+  sttSlngDeepgramNova3MrReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Initialize session on Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/SlngDeepgramNova3MrSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Marathi)
+    tags: []
+  sttSlngDeepgramNova3KnReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Initialize session on Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/SlngDeepgramNova3KnSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Kannada)
+    tags: []
+  sttSlngDeepgramNova3EnReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Send audio frame to Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (English)
+    tags: []
+  sttSlngDeepgramNova3TeReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Send audio frame to Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Telugu)
+    tags: []
+  sttSlngDeepgramNova3MrReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Send audio frame to Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Marathi)
+    tags: []
+  sttSlngDeepgramNova3KnReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Send audio frame to Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Kannada)
+    tags: []
+  sttSlngDeepgramNova3EnReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (English)
+    tags: []
+  sttSlngDeepgramNova3TeReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Telugu)
+    tags: []
+  sttSlngDeepgramNova3MrReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Marathi)
+    tags: []
+  sttSlngDeepgramNova3KnReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Kannada)
+    tags: []
+  sttSlngDeepgramNova3EnReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Close audio stream on Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (English)
+    tags: []
+  sttSlngDeepgramNova3TeReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Close audio stream on Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Telugu)
+    tags: []
+  sttSlngDeepgramNova3MrReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Close audio stream on Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Marathi)
+    tags: []
+  sttSlngDeepgramNova3KnReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Close audio stream on Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Kannada)
+    tags: []
+  sttSlngDeepgramNova3EnReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Send keepalive on Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (English)
+    tags: []
+  sttSlngDeepgramNova3TeReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Send keepalive on Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Telugu)
+    tags: []
+  sttSlngDeepgramNova3MrReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Send keepalive on Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Marathi)
+    tags: []
+  sttSlngDeepgramNova3KnReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Send keepalive on Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Kannada)
+    tags: []
+  sttSlngDeepgramNova3EnSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Receive Deepgram session metadata from Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3TeSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Receive Deepgram session metadata from Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3MrSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Receive Deepgram session metadata from Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3KnSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Receive Deepgram session metadata from Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3EnSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Receive transcription results from Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/DeepgramSttResultsEn
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3TeSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Receive transcription results from Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/DeepgramSttResultsTe
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3MrSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Receive transcription results from Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/DeepgramSttResultsMr
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3KnSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Receive transcription results from Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/DeepgramSttResultsKn
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3EnSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en'
+    summary: Receive error from Deepgram Nova 3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-en/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (English)
+    tags: []
+  sttSlngDeepgramNova3TeSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te'
+    summary: Receive error from Deepgram Nova 3 (Telugu)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-te/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Telugu)
+    tags: []
+  sttSlngDeepgramNova3MrSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr'
+    summary: Receive error from Deepgram Nova 3 (Marathi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-mr/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Marathi)
+    tags: []
+  sttSlngDeepgramNova3KnSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn'
+    summary: Receive error from Deepgram Nova 3 (Kannada)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-kn/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Kannada)
+    tags: []
+  sttSlngDeepgramNova3EsReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Initialize session on Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/SlngDeepgramNova3EsSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Spanish)
+    tags: []
+  sttSlngDeepgramNova3EsReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Send audio frame to Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Spanish)
+    tags: []
+  sttSlngDeepgramNova3EsReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Spanish)
+    tags: []
+  sttSlngDeepgramNova3EsReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Close audio stream on Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Spanish)
+    tags: []
+  sttSlngDeepgramNova3EsReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Send keepalive on Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Spanish)
+    tags: []
+  sttSlngDeepgramNova3EsSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Receive Deepgram session metadata from Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3EsSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Receive transcription results from Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/DeepgramSttResultsEs
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3EsSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es'
+    summary: Receive error from Deepgram Nova 3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-es/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Spanish)
+    tags: []
+  sttSlngDeepgramNova3InReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Initialize session on Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/SlngDeepgramNova3InSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Indonesian)
+    tags: []
+  sttSlngDeepgramNova3InReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Send audio frame to Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Indonesian)
+    tags: []
+  sttSlngDeepgramNova3InReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Indonesian)
+    tags: []
+  sttSlngDeepgramNova3InReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Close audio stream on Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Indonesian)
+    tags: []
+  sttSlngDeepgramNova3InReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Send keepalive on Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Indonesian)
+    tags: []
+  sttSlngDeepgramNova3InSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Receive Deepgram session metadata from Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3InSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Receive transcription results from Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/DeepgramSttResultsIn
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3InSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in'
+    summary: Receive error from Deepgram Nova 3 (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-in/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Indonesian)
+    tags: []
+  sttSlngDeepgramNova3HiReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Initialize session on Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/SlngDeepgramNova3HiSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Hindi)
+    tags: []
+  sttSlngDeepgramNova3HiReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Send audio frame to Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Hindi)
+    tags: []
+  sttSlngDeepgramNova3HiReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Hindi)
+    tags: []
+  sttSlngDeepgramNova3HiReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Close audio stream on Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Hindi)
+    tags: []
+  sttSlngDeepgramNova3HiReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Send keepalive on Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Hindi)
+    tags: []
+  sttSlngDeepgramNova3HiSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Receive Deepgram session metadata from Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3HiSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Receive transcription results from Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/DeepgramSttResultsHi
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3HiSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi'
+    summary: Receive error from Deepgram Nova 3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-hi/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Hindi)
+    tags: []
+  sttSlngDeepgramNova3MultiReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Initialize session on Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/SlngDeepgramNova3MultiSttInitRequest
+    description: Initialize session on Deepgram Nova 3 (Multi-Language)
+    tags: []
+  sttSlngDeepgramNova3MultiReceiveAudio:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Send audio frame to Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/DeepgramSttBinaryAudio
+    description: Send audio frame to Deepgram Nova 3 (Multi-Language)
+    tags: []
+  sttSlngDeepgramNova3MultiReceiveFinalize:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Force-finalize buffered audio on Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/SttFinalizeMessage
+    description: Force-finalize buffered audio on Deepgram Nova 3 (Multi-Language)
+    tags: []
+  sttSlngDeepgramNova3MultiReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Close audio stream on Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/SttCloseMessage
+    description: Close audio stream on Deepgram Nova 3 (Multi-Language)
+    tags: []
+  sttSlngDeepgramNova3MultiReceiveKeepalive:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Send keepalive on Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/KeepaliveMessage
+    description: Send keepalive on Deepgram Nova 3 (Multi-Language)
+    tags: []
+  sttSlngDeepgramNova3MultiSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Receive Deepgram session metadata from Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/DeepgramSttMetadata
+    description: >
+      Receive Deepgram Metadata message. Sent when the backend connects and
+      again after the session ends. Informational — do not wait for it before
+      streaming audio.
+    tags: []
+  sttSlngDeepgramNova3MultiSendResults:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Receive transcription results from Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/DeepgramSttResultsMulti
+    description: >
+      Receive Deepgram Results message. Use is_final to distinguish partial
+      (interim) from final transcripts, and speech_final for end-of-utterance.
+    tags: []
+  sttSlngDeepgramNova3MultiSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi'
+    summary: Receive error from Deepgram Nova 3 (Multi-Language)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1stt~1slng~1deepgram~1nova:3-multi/messages/DeepgramSttError
+    description: Receive error from Deepgram Nova 3 (Multi-Language)
+    tags: []
+components:
+  messages:
+    DeepgramSttResultsMulti:
+      name: DeepgramSttResultsMulti
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalMulti
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.52
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: The quick brown fox jumps over the lazy dog.
+                  confidence: 0.9980469
+                  words:
+                    - word: the
+                      start: 0.08
+                      end: 0.16
+                      confidence: 0.9975586
+                      punctuated_word: The
+    SlngDeepgramNova3MultiSttInitRequest:
+      name: SlngDeepgramNova3MultiSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 multi-language STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3MultiSttInitPayload'
+      examples:
+        - name: slngDeepgramInitMulti
+          summary: Multi-language with utterances and paragraphs
+          payload:
+            type: init
+            config:
+              language: multi
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              utterances: true
+              paragraphs: true
+    DeepgramSttResultsIn:
+      name: DeepgramSttResultsIn
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalIn
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.84
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: Halo, ini adalah tes transkripsi suara ke teks.
+                  confidence: 0.9921875
+                  words:
+                    - word: halo
+                      start: 0.08
+                      end: 0.32
+                      confidence: 0.9970703
+                      punctuated_word: Halo,
+                    - word: ini
+                      start: 0.4
+                      end: 0.56
+                      confidence: 0.9951172
+                      punctuated_word: ini
+    SlngDeepgramNova3InSttInitRequest:
+      name: SlngDeepgramNova3InSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Indonesian STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3InSttInitPayload'
+      examples:
+        - name: slngDeepgramInitIn
+          summary: Indonesian transcription with smart formatting
+          payload:
+            type: init
+            config:
+              language: id
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+    DeepgramSttResultsHi:
+      name: DeepgramSttResultsHi
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalHi
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 4.49
+            start: 0
+            is_final: true
+            speech_final: false
+            channel:
+              alternatives:
+                - transcript: >-
+                    इसके बाद हम एक ऐसे खिलाड़ी के बारे में बात करेंगे जिससे इस
+                    world cup में भारतीय fans को
+                  confidence: 0.9980469
+                  words:
+                    - word: इसके
+                      start: 0.08
+                      end: 0.32
+                      confidence: 0.9970703
+                      punctuated_word: इसके
+                    - word: बाद
+                      start: 0.32
+                      end: 0.48
+                      confidence: 0.9980469
+                      punctuated_word: बाद
+    SlngDeepgramNova3HiSttInitRequest:
+      name: SlngDeepgramNova3HiSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Hindi STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3HiSttInitPayload'
+      examples:
+        - name: slngDeepgramInitHi
+          summary: Hindi transcription with diarization
+          payload:
+            type: init
+            config:
+              language: hi
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              diarize: true
+        - name: slngDeepgramInitHiEn
+          summary: English transcription on the Hindi variant
+          payload:
+            type: init
+            config:
+              language: en
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+    DeepgramSttResultsEs:
+      name: DeepgramSttResultsEs
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalEs
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.84
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: Hola, esto es una prueba de transcripción de voz a texto.
+                  confidence: 0.9921875
+                  words:
+                    - word: hola
+                      start: 0.08
+                      end: 0.32
+                      confidence: 0.9970703
+                      punctuated_word: Hola,
+                    - word: esto
+                      start: 0.4
+                      end: 0.56
+                      confidence: 0.9951172
+                      punctuated_word: esto
+    SlngDeepgramNova3EsSttInitRequest:
+      name: SlngDeepgramNova3EsSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Spanish STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3EsSttInitPayload'
+      examples:
+        - name: slngDeepgramInitEs
+          summary: Spanish transcription with smart formatting
+          payload:
+            type: init
+            config:
+              language: es
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+    DeepgramSttError:
+      name: DeepgramSttError
+      title: Error
+      summary: Error from the Deepgram backend or gateway.
+      contentType: application/json
+      payload:
+        type: object
+        description: >
+          Error message. May originate from the gateway (with code field) or
+          from Deepgram directly (with variant and description fields).
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: Error
+          code:
+            type: string
+            description: >-
+              Gateway error code (e.g., backend_connection_failed,
+              stt_metering_unavailable)
+          message:
+            type: string
+            description: Human-readable error description (gateway errors)
+          variant:
+            type: string
+            description: Deepgram error variant (e.g., SchemaError)
+          description:
+            type: string
+            description: Deepgram error description
+      examples:
+        - name: deepgramBackendError
+          summary: Backend connection failure
+          payload:
+            type: Error
+            code: backend_connection_failed
+            message: 'Failed to connect to backend: 500 Internal Server Error'
+        - name: deepgramSchemaError
+          summary: Invalid message schema
+          payload:
+            type: Error
+            variant: SchemaError
+            description: 'Could not deserialize last text message: unknown variant'
+    DeepgramSttResultsEn:
+      name: DeepgramSttResultsEn
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalEn
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.52
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: The quick brown fox jumps over the lazy dog.
+                  confidence: 0.9980469
+                  words:
+                    - word: the
+                      start: 0.08
+                      end: 0.16
+                      confidence: 0.9975586
+                      punctuated_word: The
+                    - word: quick
+                      start: 0.16
+                      end: 0.4
+                      confidence: 0.9951172
+                      punctuated_word: quick
+                    - word: brown
+                      start: 0.4
+                      end: 0.64
+                      confidence: 0.9980469
+                      punctuated_word: brown
+    DeepgramSttResultsTe:
+      name: DeepgramSttResultsTe
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalTe
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.52
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: The quick brown fox jumps over the lazy dog.
+                  confidence: 0.9980469
+                  words:
+                    - word: the
+                      start: 0.08
+                      end: 0.16
+                      confidence: 0.9975586
+                      punctuated_word: The
+                    - word: quick
+                      start: 0.16
+                      end: 0.4
+                      confidence: 0.9951172
+                      punctuated_word: quick
+                    - word: brown
+                      start: 0.4
+                      end: 0.64
+                      confidence: 0.9980469
+                      punctuated_word: brown
+    DeepgramSttResultsTa:
+      name: DeepgramSttResultsTa
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalTa
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.52
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: The quick brown fox jumps over the lazy dog.
+                  confidence: 0.9980469
+                  words:
+                    - word: the
+                      start: 0.08
+                      end: 0.16
+                      confidence: 0.9975586
+                      punctuated_word: The
+                    - word: quick
+                      start: 0.16
+                      end: 0.4
+                      confidence: 0.9951172
+                      punctuated_word: quick
+                    - word: brown
+                      start: 0.4
+                      end: 0.64
+                      confidence: 0.9980469
+                      punctuated_word: brown
+    DeepgramSttResultsMr:
+      name: DeepgramSttResultsMr
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalMr
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.52
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: The quick brown fox jumps over the lazy dog.
+                  confidence: 0.9980469
+                  words:
+                    - word: the
+                      start: 0.08
+                      end: 0.16
+                      confidence: 0.9975586
+                      punctuated_word: The
+                    - word: quick
+                      start: 0.16
+                      end: 0.4
+                      confidence: 0.9951172
+                      punctuated_word: quick
+                    - word: brown
+                      start: 0.4
+                      end: 0.64
+                      confidence: 0.9980469
+                      punctuated_word: brown
+    DeepgramSttResultsKn:
+      name: DeepgramSttResultsKn
+      title: Results
+      summary: >-
+        Deepgram transcription result — partial or final, determined by
+        is_final.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeepgramSttResultsPayload'
+      examples:
+        - name: deepgramResultsFinalKn
+          summary: Final transcription result
+          payload:
+            type: Results
+            channel_index:
+              - 0
+              - 1
+            duration: 3.52
+            start: 0
+            is_final: true
+            speech_final: true
+            channel:
+              alternatives:
+                - transcript: The quick brown fox jumps over the lazy dog.
+                  confidence: 0.9980469
+                  words:
+                    - word: the
+                      start: 0.08
+                      end: 0.16
+                      confidence: 0.9975586
+                      punctuated_word: The
+                    - word: quick
+                      start: 0.16
+                      end: 0.4
+                      confidence: 0.9951172
+                      punctuated_word: quick
+                    - word: brown
+                      start: 0.4
+                      end: 0.64
+                      confidence: 0.9980469
+                      punctuated_word: brown
+    DeepgramSttMetadata:
+      name: DeepgramSttMetadata
+      title: Metadata
+      summary: >
+        Deepgram session metadata. Sent when the backend connects and again
+        after the session ends with final statistics. This is informational — do
+        not wait for it before streaming audio.
+      contentType: application/json
+      payload:
+        type: object
+        description: >
+          Deepgram native Metadata message. Received twice: once when the
+          session opens (duration=0) and once after finalize with the full
+          session summary.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: Metadata
+          request_id:
+            type: string
+            description: Unique Deepgram request identifier
+          created:
+            type: string
+            format: date-time
+            description: Timestamp when the session was created
+          duration:
+            type: number
+            description: >-
+              Total audio duration processed in seconds (0 on initial, populated
+              on final)
+          channels:
+            type: integer
+            description: Number of audio channels
+          sha256:
+            type: string
+            description: SHA-256 hash of the audio (populated on final Metadata only)
+          transaction_key:
+            type: string
+            description: Deprecated field (always "deprecated")
+      examples:
+        - name: deepgramMetadataOpen
+          summary: Session opened (initial Metadata)
+          payload:
+            type: Metadata
+            request_id: a2b1db35-40ff-41f9-9912-dedaeab02228
+            created: 2026-04-01T09:40:09.152Z
+            duration: 0
+            channels: 1
+            sha256: incomplete
+            transaction_key: deprecated
+        - name: deepgramMetadataFinal
+          summary: Session complete (final Metadata)
+          payload:
+            type: Metadata
+            request_id: a2b1db35-40ff-41f9-9912-dedaeab02228
+            created: 2026-04-01T09:40:09.152Z
+            duration: 19.78
+            channels: 1
+            sha256: 34f3ece92c8345e1fbcb497f5189a3b1448457e6ab18d93d6234308580a3fd81
+            transaction_key: deprecated
+    KeepaliveMessage:
+      name: KeepaliveMessage
+      title: Keepalive Message
+      summary: Keep the WebSocket connection alive during silence.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Prevents the connection from being closed due to inactivity. Send
+          periodically during silence to maintain the session.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: keepalive
+      examples:
+        - name: keepalive
+          summary: Send keepalive
+          payload:
+            type: keepalive
+    DeepgramSttBinaryAudio:
+      name: DeepgramSttBinaryAudio
+      title: Binary Audio Frame
+      summary: >
+        Stream raw binary PCM audio frames to be transcribed. Sent as binary
+        WebSocket frames (NOT JSON). Recommended chunk size is 8192 bytes
+        (~256ms at 16kHz linear16). Start streaming immediately after the init
+        message — do not wait for the Metadata response.
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+        description: >
+          Raw binary audio data (linear16 PCM at 16kHz mono). Sent as a binary
+          WebSocket frame — no JSON envelope, no base64 encoding. Each frame is
+          a chunk of raw PCM samples. Example hex dump of one frame (speech
+          waveform): 0000FF00000000FF00000000010101010101010100000000FFFFFFFEFE
+          FEFEFDFEFEFEFEFDFDFEFEFEFEFEFEFEFEFEFFFFFFFFFEFEFEFEFF000100
+          001020303030303030303030201010000FFFFFEFDFDFDFDFEFFFFFFFF00 Each pair
+          of hex digits is one byte. At 16kHz linear16, 8192 bytes = 4096
+          samples = ~256ms of audio.
+      examples:
+        - name: binaryAudioFrame
+          summary: Raw PCM audio frame (~256ms of 16kHz linear16 speech)
+          payload: >-
+            0000FF00000000FF00000000010101010101010100000000FFFFFFFFFFFFFEFEFDFEFEFEFEFDFDFEFEFEFEFEFEFEFEFEFFFFFFFFFEFEFEFEFF000100001020303030303030303030201010000FFFFFEFDFDFDFDFEFFFFFFFF0001020303020201000000FFFDFCFBFAFAFBFAF9F8F7F7F7F6F6F4F2F2F3F7FC000406090F14191A19181715110E0A05FEF9F6F3F0EEECEBEBECEEF2F6F9FC0005090D0F101010100E0C080401
+    SlngDeepgramNova3EnSttInitRequest:
+      name: SlngDeepgramNova3EnSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 English STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3EnSttInitPayload'
+      examples:
+        - name: slngDeepgramInitEn
+          summary: English transcription with utterance segmentation
+          payload:
+            type: init
+            config:
+              language: en
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              utterances: true
+    SlngDeepgramNova3TeSttInitRequest:
+      name: SlngDeepgramNova3TeSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Telugu STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3TeSttInitPayload'
+      examples:
+        - name: slngDeepgramInitTe
+          summary: Telugu transcription with utterance segmentation
+          payload:
+            type: init
+            config:
+              language: te
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              utterances: true
+    SlngDeepgramNova3TaSttInitRequest:
+      name: SlngDeepgramNova3TaSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Tamil STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3TaSttInitPayload'
+      examples:
+        - name: slngDeepgramInitTa
+          summary: Tamil transcription with utterance segmentation
+          payload:
+            type: init
+            config:
+              language: ta
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              utterances: true
+    SlngDeepgramNova3MrSttInitRequest:
+      name: SlngDeepgramNova3MrSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Marathi STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3MrSttInitPayload'
+      examples:
+        - name: slngDeepgramInitMr
+          summary: Marathi transcription with utterance segmentation
+          payload:
+            type: init
+            config:
+              language: mr
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              utterances: true
+    SlngDeepgramNova3KnSttInitRequest:
+      name: SlngDeepgramNova3KnSttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Deepgram Nova 3 Kannada STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngDeepgramNova3KnSttInitPayload'
+      examples:
+        - name: slngDeepgramInitKn
+          summary: Kannada transcription with utterance segmentation
+          payload:
+            type: init
+            config:
+              language: kn
+              sample_rate: 16000
+              encoding: linear16
+              enable_partials: true
+              smart_format: true
+              utterances: true
+    SttErrorResponse:
+      name: SttErrorResponse
+      title: Error Response
+      summary: Indicates an error occurred during recognition.
+      contentType: application/json
+      payload:
+        type: object
+        description: Indicates an error occurred during recognition.
+        required:
+          - type
+          - code
+          - message
+        properties:
+          type:
+            type: string
+            const: error
+          code:
+            type: string
+            description: >-
+              Error code (e.g., auth_error, config_error, rate_limit,
+              provider_error)
+          message:
+            type: string
+            description: Human-readable error description
+      examples:
+        - name: authError
+          summary: Authentication error
+          payload:
+            type: error
+            code: auth_error
+            message: Invalid or expired API key
+    SlngWhisperSttFinalTranscript:
+      name: SlngWhisperSttFinalTranscript
+      title: Final Transcript
+      summary: Final Whisper transcription result with segment-level detail.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Final transcription result from Whisper. Includes the complete
+          transcript, segment-level timing with log probabilities, and total
+          audio duration.
+        required:
+          - type
+          - transcript
+        properties:
+          type:
+            type: string
+            const: final_transcript
+          transcript:
+            type: string
+            description: Final transcription text.
+          confidence:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: Confidence score (0-1).
+          language:
+            type: string
+            description: Detected language code.
+          context_id:
+            type: string
+            description: Context identifier for correlating messages.
+          session_id:
+            type: string
+            description: Session identifier.
+          is_final:
+            type: boolean
+            description: Always true for final transcripts.
+          audio_duration:
+            type: number
+            description: Total duration of audio processed, in seconds.
+          segments:
+            type: array
+            description: Whisper segment-level detail with timing and log probabilities.
+            items:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Transcribed text for this segment.
+                start:
+                  type: number
+                  description: Segment start time in seconds.
+                end:
+                  type: number
+                  description: Segment end time in seconds.
+                avg_logprob:
+                  type: number
+                  description: >-
+                    Average log probability for this segment (higher = more
+                    confident).
+      examples:
+        - name: whisperFinal
+          summary: Final transcription with segment detail
+          payload:
+            type: final_transcript
+            context_id: stt-a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            session_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            transcript: The quick brown fox jumps over the lazy dog.
+            language: en
+            confidence: 1
+            is_final: true
+            audio_duration: 3.84
+            segments:
+              - text: ' The quick brown fox jumps over the lazy dog.'
+                start: 0.066
+                end: 3.71
+                avg_logprob: -0.08
+    SlngWhisperSttPartialTranscript:
+      name: SlngWhisperSttPartialTranscript
+      title: Partial Transcript
+      summary: >-
+        Interim Whisper transcription result, updated as more audio is
+        processed.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Interim transcription result from Whisper. Sent progressively as audio
+          is processed, allowing real-time display of in-progress transcription.
+        required:
+          - type
+          - transcript
+        properties:
+          type:
+            type: string
+            const: partial_transcript
+          transcript:
+            type: string
+            description: Interim transcription text, updated as more audio is processed.
+          confidence:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: Confidence score (0-1).
+          language:
+            type: string
+            description: Detected language code.
+          context_id:
+            type: string
+            description: Context identifier for correlating messages.
+          session_id:
+            type: string
+            description: Session identifier.
+          is_final:
+            type: boolean
+            description: Always false for partial transcripts.
+          audio_duration:
+            type: number
+            description: Duration of audio processed so far, in seconds.
+      examples:
+        - name: whisperPartial
+          summary: Partial transcription in progress
+          payload:
+            type: partial_transcript
+            context_id: stt-a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            session_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            transcript: The quick brown fox jumps over the
+            language: en
+            confidence: 1
+            is_final: false
+            audio_duration: 2.56
+    SlngWhisperSttReadyResponse:
+      name: SlngWhisperSttReadyResponse
+      title: Ready Response
+      summary: Indicates the Whisper session is ready to receive audio.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Indicates the Whisper session is initialized and ready to receive
+          audio. Includes model info, supported commands, and enabled features.
+        required:
+          - type
+          - session_id
+        properties:
+          type:
+            type: string
+            const: ready
+          session_id:
+            type: string
+            description: Unique session identifier.
+          context_id:
+            type: string
+            description: Context identifier for correlating messages within this session.
+          model:
+            type: string
+            description: Model identifier used for this session.
+            example: whisper-large-v3
+          commands:
+            type: array
+            description: Supported control commands for this session.
+            items:
+              type: string
+            example:
+              - flush
+              - stop
+              - clear
+              - context
+          features:
+            type: object
+            description: Capabilities enabled for this session.
+            properties:
+              vad:
+                type: boolean
+                description: Voice Activity Detection enabled.
+              partial_transcripts:
+                type: boolean
+                description: Partial transcript streaming enabled.
+              final_transcripts:
+                type: boolean
+                description: Final transcript delivery enabled.
+              language_detection:
+                type: boolean
+                description: Automatic language detection enabled.
+              speaker_diarization:
+                type: boolean
+                description: >-
+                  Reported by the model but not currently functional. Speaker
+                  labels are not included in transcript payloads.
+      examples:
+        - name: whisperReady
+          summary: Whisper session ready with all features enabled
+          payload:
+            type: ready
+            session_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            context_id: stt-a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            model: whisper-large-v3
+            commands:
+              - flush
+              - stop
+              - clear
+              - context
+            features:
+              vad: true
+              partial_transcripts: true
+              final_transcripts: true
+              language_detection: true
+              speaker_diarization: true
+    SttCloseMessage:
+      name: SttCloseMessage
+      title: Close Message
+      summary: Signal end of audio stream and close the connection.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Signal that no more audio will be sent. The server processes remaining
+          audio, sends final results, then closes the connection.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: close
+      examples:
+        - name: close
+          summary: Close the audio stream
+          payload:
+            type: close
+    SttFinalizeMessage:
+      name: SttFinalizeMessage
+      title: Finalize Message
+      summary: Force-finalize buffered audio tokens without closing the connection.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Mid-stream flush — forces the server to finalize any buffered audio
+          and return results. The connection remains open for further audio.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: finalize
+      examples:
+        - name: finalize
+          summary: Force-finalize buffered audio
+          payload:
+            type: finalize
+    SttAudioMessage:
+      name: SttAudioMessage
+      title: Audio Message
+      summary: Stream an audio frame to be transcribed.
+      contentType: application/json
+      payload:
+        type: object
+        description: Stream an audio frame to be transcribed.
+        required:
+          - type
+          - data
+        properties:
+          type:
+            type: string
+            const: audio
+          data:
+            type: string
+            format: byte
+            description: Base64-encoded audio data
+      examples:
+        - name: audioFrame
+          summary: Send a base64-encoded audio frame
+          payload:
+            type: audio
+            data: UklGRiQAAABXQVZFZm10IBAAAAABAAEA...
+    SlngWhisperLargeV3SttInitRequest:
+      name: SlngWhisperLargeV3SttInitRequest
+      title: Init Request
+      summary: Initialize an SLNG-hosted Whisper Large v3 STT session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlngWhisperSttInitPayload'
+      examples:
+        - name: slngWhisperInitEn
+          summary: English transcription at 16kHz
+          payload:
+            type: init
+            config:
+              language: en
+              sample_rate: 16000
+              encoding: linear16
+  schemas:
+    DeepgramSttResultsPayload:
+      type: object
+      description: >
+        Deepgram native Results message. Contains the transcription in
+        channel.alternatives[0].transcript. Use is_final to distinguish partial
+        (interim) from final results, and speech_final to detect
+        end-of-utterance boundaries.
+      required:
+        - type
+        - channel
+      properties:
+        type:
+          type: string
+          const: Results
+        is_final:
+          type: boolean
+          description: true for final results, false for interim/partial
+        speech_final:
+          type: boolean
+          description: true when endpoint detection fires (end of utterance)
+        channel_index:
+          type: array
+          items:
+            type: integer
+          description: Channel index pair [channel, total_channels]
+        channel:
+          type: object
+          description: Deepgram channel result with transcription alternatives
+          properties:
+            alternatives:
+              type: array
+              items:
+                type: object
+                properties:
+                  transcript:
+                    type: string
+                    description: Transcribed text
+                  confidence:
+                    type: number
+                    description: Confidence score (0-1)
+                  words:
+                    type: array
+                    description: Word-level transcription details
+                    items:
+                      type: object
+                      properties:
+                        word:
+                          type: string
+                        start:
+                          type: number
+                          description: Word start time in seconds
+                        end:
+                          type: number
+                          description: Word end time in seconds
+                        confidence:
+                          type: number
+                        speaker:
+                          type: integer
+                          description: Speaker ID (when diarization enabled)
+                        punctuated_word:
+                          type: string
+        start:
+          type: number
+          description: Start time of this segment in seconds
+        duration:
+          type: number
+          description: Duration of this segment in seconds
+    SlngDeepgramNova3MultiSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language code.
+              default: multi
+              enum:
+                - multi
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    WebsocketHeadersSlngNovaIn:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `asia-southeast2`.
+          enum:
+            - asia-southeast2
+        X-World-Part-Override:
+          type: string
+          description: >-
+            Target world part override. Auto-selected if not provided. Available
+            world parts: `ap`.
+          enum:
+            - ap
+    SlngDeepgramNova3InSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language codes for the Indonesian variant.
+              default: id
+              enum:
+                - id
+                - en
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    WebsocketHeadersSlngNovaHi:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `ap-southeast-2`, `ap-south-1`.
+          enum:
+            - asia-south1
+        X-World-Part-Override:
+          type: string
+          description: >-
+            Target world part override. Auto-selected if not provided. Available
+            world parts: `eu`.
+          enum:
+            - ap
+    SlngDeepgramNova3HiSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language codes for the Hindi variant.
+              default: hi
+              enum:
+                - hi
+                - en
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    SlngDeepgramNova3EsSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported Spanish language code.
+              default: es
+              enum:
+                - es
+                - es-us
+                - es-419
+                - es-ar
+                - es-mx
+                - es-es
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    WebsocketHeadersSlngNovaEn:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `asia-south1`, `australia-southeast1`, `us-east-1`.
+          enum:
+            - asia-south1
+            - australia-southeast1
+            - us-east-1
+    WebsocketHeadersSlngNovaEs:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `us-east-1`.
+          enum:
+            - us-east-1
+    WebsocketHeadersSlngNovaTa:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `ap-south-1`.
+          enum:
+            - ap-south-1
+    WebsocketHeadersSlngNovaTe:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `asia-south1`.
+          enum:
+            - asia-south1
+    WebsocketHeadersSlngNovaMr:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `asia-south1`.
+          enum:
+            - asia-south1
+    WebsocketHeadersSlngNovaKn:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `asia-south1`.
+          enum:
+            - asia-south1
+    WebsocketHeadersSlngNovaMulti:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    SlngDeepgramNova3EnSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported English language code.
+              default: en
+              enum:
+                - en
+                - en-au
+                - en-us
+                - en-nz
+                - en-gb
+                - en-in
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    SlngDeepgramNova3TeSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language codes for the Telugu variant.
+              default: te
+              enum:
+                - te
+                - en
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    SlngDeepgramNova3TaSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language codes for the Tamil variant.
+              default: ta
+              enum:
+                - ta
+                - en
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    SlngDeepgramNova3MrSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language codes for the Marathi variant.
+              default: mr
+              enum:
+                - mr
+                - en
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    SlngDeepgramNova3KnSttInitPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: Recognition configuration options
+          properties:
+            language:
+              type: string
+              description: Supported language codes for the Kannada variant.
+              default: kn
+              enum:
+                - kn
+                - en
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - flac
+                - mulaw
+                - amr-nb
+                - amr-wb
+                - opus
+                - speex
+                - mp3
+                - mp4
+                - webm
+                - aac
+                - ogg
+            enable_partials:
+              type: boolean
+              description: Enable partial/interim transcription results.
+              default: true
+            punctuate:
+              type: boolean
+              description: Add punctuation and capitalization.
+              default: false
+            smart_format:
+              type: boolean
+              description: >-
+                Apply formatting to improve readability (dates, times, numbers,
+                etc.).
+              default: false
+            diarize:
+              type: boolean
+              description: >-
+                Enable speaker diarization. Words assigned speaker numbers
+                starting at 0.
+              default: false
+            numerals:
+              type: boolean
+              description: Convert spoken numbers to digits.
+              default: false
+            profanity_filter:
+              type: boolean
+              description: Filter profanity from transcript.
+              default: false
+            utterances:
+              type: boolean
+              description: Segment transcript into utterances.
+              default: false
+            paragraphs:
+              type: boolean
+              description: Add paragraph formatting.
+              default: false
+            filler_words:
+              type: boolean
+              description: Include filler words (uh, um) in transcript.
+              default: false
+            multichannel:
+              type: boolean
+              description: Enable multi-channel audio processing.
+              default: false
+            endpointing:
+              type: integer
+              minimum: 0
+              default: 10
+              description: >-
+                Time in milliseconds of silence before finalizing speech. Set to
+                0 to disable endpointing entirely.
+            utterance_end_ms:
+              type: integer
+              minimum: 200
+              maximum: 5000
+              default: 1000
+              description: >-
+                Time in milliseconds of silence between words before sending an
+                UtteranceEnd message. Default is 1000ms, minimum 200ms, maximum
+                5000ms. Requires enable_partials to be true.
+    WebsocketHeadersSlngWhisper:
+      type: object
+      properties:
+        X-World-Part-Override:
+          type: string
+          description: >-
+            Target world part override. Auto-selected if not provided. Available
+            world parts: `eu`.
+          enum:
+            - eu
+    SlngWhisperSttInitPayload:
+      type: object
+      description: >-
+        Initialize a Whisper STT session with recognition configuration before
+        streaming audio.
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: init
+        config:
+          type: object
+          description: >-
+            Whisper recognition configuration options. Features like VAD,
+            partial transcripts, and language detection are enabled by default
+            and reported in the ready response.
+          properties:
+            language:
+              $ref: '#/components/schemas/WhisperLanguageCode'
+            sample_rate:
+              type: integer
+              description: Input audio sample rate in Hz.
+              default: 16000
+            encoding:
+              type: string
+              description: Input audio encoding format.
+              default: linear16
+              enum:
+                - linear16
+                - mp3
+                - opus
+    WhisperLanguageCode:
+      type: string
+      description: ISO-639-1 language code. Auto-detected if not specified.
+      example: en
+      enum:
+        - af
+        - am
+        - ar
+        - as
+        - az
+        - ba
+        - be
+        - bg
+        - bn
+        - bo
+        - br
+        - bs
+        - ca
+        - cs
+        - cy
+        - da
+        - de
+        - el
+        - en
+        - es
+        - et
+        - eu
+        - fa
+        - fi
+        - fo
+        - fr
+        - gl
+        - gu
+        - ha
+        - haw
+        - he
+        - hi
+        - hr
+        - ht
+        - hu
+        - hy
+        - id
+        - is
+        - it
+        - ja
+        - jw
+        - ka
+        - kk
+        - km
+        - kn
+        - ko
+        - la
+        - lb
+        - ln
+        - lo
+        - lt
+        - lv
+        - mg
+        - mi
+        - mk
+        - ml
+        - mn
+        - mr
+        - ms
+        - mt
+        - my
+        - ne
+        - nl
+        - nn
+        - 'no'
+        - oc
+        - pa
+        - pl
+        - ps
+        - pt
+        - ro
+        - ru
+        - sa
+        - sd
+        - si
+        - sk
+        - sl
+        - sn
+        - so
+        - sq
+        - sr
+        - su
+        - sv
+        - sw
+        - ta
+        - te
+        - tg
+        - th
+        - tk
+        - tl
+        - tr
+        - tt
+        - uk
+        - ur
+        - uz
+        - vi
+        - yi
+        - yo
+        - zh
+        - yue
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: >
+        API key issued by SLNG. Pass as `Authorization: Bearer <token>` in the
+        WebSocket upgrade request headers.

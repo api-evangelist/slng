@@ -1,0 +1,723 @@
+openapi: 3.0.3
+info:
+  title: SLNG Gateway API - SLNG Management
+  version: 0.1.0
+  description: Management endpoints for discovering and inspecting the SLNG model catalog.
+  contact:
+    name: SLNG Support
+    email: support@slng.ai
+servers:
+  - url: https://api.slng.ai
+    description: Production
+  - url: https://stageapi.slng.ai
+    description: Staging
+security:
+  - BearerAuth: []
+paths:
+  /v1/catalog/models:
+    get:
+      operationId: catalog-models-list
+      summary: List catalog models
+      description: >
+        List the models available in the SLNG catalog. Supports filtering by
+        service type, provider, region, language, use case, capability, and
+        protocol, plus full-text search and pagination. Authentication is
+        optional — an API key personalizes pricing and region availability for
+        your organisation; anonymous requests return public catalog data.
+      tags:
+        - Catalog
+      security:
+        - {}
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CatalogServiceType'
+        - $ref: '#/components/parameters/CatalogLanguage'
+        - $ref: '#/components/parameters/CatalogProviderFilter'
+        - $ref: '#/components/parameters/CatalogRegion'
+        - $ref: '#/components/parameters/CatalogUseCase'
+        - $ref: '#/components/parameters/CatalogCapability'
+        - $ref: '#/components/parameters/CatalogProtocol'
+        - $ref: '#/components/parameters/CatalogSlngHostedOnly'
+        - $ref: '#/components/parameters/CatalogSearch'
+        - $ref: '#/components/parameters/CatalogPage'
+        - $ref: '#/components/parameters/CatalogPageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatalogModelListSuccess'
+        '400':
+          $ref: '#/components/responses/CatalogBadRequest'
+  /v1/catalog/models/{model_code}:
+    get:
+      operationId: catalog-models-detail
+      summary: Get a catalog model
+      description: >
+        Retrieve a single model from the SLNG catalog by its code. The code may
+        contain slashes and colons (for example `slng/rime/arcana:3-en`).
+        Authentication is optional — an API key personalizes pricing and region
+        availability for your organisation.
+      tags:
+        - Catalog
+      security:
+        - {}
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CatalogModelCode'
+        - $ref: '#/components/parameters/CatalogProtocol'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatalogModelDetailSuccess'
+        '400':
+          $ref: '#/components/responses/CatalogBadRequest'
+        '404':
+          $ref: '#/components/responses/CatalogNotFound'
+tags:
+  - name: Catalog
+    description: Discover and inspect available models in the SLNG catalog.
+components:
+  schemas:
+    CatalogModelListResponse:
+      type: object
+      description: Paginated list of catalog models.
+      required:
+        - items
+        - meta
+      properties:
+        items:
+          type: array
+          description: The models on the current page.
+          items:
+            $ref: '#/components/schemas/CatalogModel'
+        meta:
+          $ref: '#/components/schemas/CatalogPaginationMeta'
+    CatalogPaginationMeta:
+      type: object
+      description: Pagination metadata for a catalog listing.
+      required:
+        - page
+        - page_size
+        - total
+        - pages
+      properties:
+        page:
+          type: integer
+          description: The current page number (1-based).
+          example: 1
+        page_size:
+          type: integer
+          description: The number of items per page.
+          example: 20
+        total:
+          type: integer
+          description: The total number of models matching the query.
+          example: 26
+        pages:
+          type: integer
+          description: The total number of pages available.
+          example: 2
+    CatalogModel:
+      type: object
+      description: A single model in the SLNG catalog.
+      required:
+        - code
+        - name
+        - service_type
+        - provider_code
+        - provider
+      properties:
+        code:
+          type: string
+          description: The unique model code used to address the model in API paths.
+          example: slng/rime/arcana:3-en
+        name:
+          type: string
+          description: Human-readable display name.
+          example: Arcana V3 English
+        service_type:
+          type: string
+          description: The service type the model provides.
+          enum:
+            - stt
+            - tts
+          example: tts
+        provider_code:
+          type: string
+          description: The code of the model's provider.
+          example: rime
+        provider:
+          $ref: '#/components/schemas/CatalogProvider'
+        hosted_by:
+          type: string
+          nullable: true
+          description: >-
+            Who hosts the model — `slng` for SLNG-hosted models, otherwise the
+            third-party provider name.
+          example: slng
+        short_description:
+          type: string
+          description: A short one-line description of the model.
+        long_description:
+          type: string
+          description: A longer description of the model and its capabilities.
+        best_for:
+          type: string
+          description: A summary of the use cases the model is best suited for.
+        use_cases:
+          type: array
+          description: Tags describing common use cases.
+          items:
+            type: string
+          example:
+            - Call centers
+            - voice assistant
+            - IVR
+        capabilities:
+          type: array
+          description: Capability tags for the model.
+          items:
+            type: string
+          example:
+            - Streaming
+            - Expressiveness
+            - Latency
+        languages:
+          type: array
+          description: Language codes the model supports.
+          items:
+            type: string
+          example:
+            - en
+        streaming:
+          type: boolean
+          description: Whether the model supports streaming.
+          example: true
+        batch:
+          type: boolean
+          description: Whether the model supports batch (non-streaming) processing.
+          example: false
+        accuracy:
+          type: number
+          nullable: true
+          description: Reported accuracy score, when available.
+        voice_count:
+          type: integer
+          description: The number of voices available for the model (TTS only).
+          example: 0
+        api_path:
+          type: string
+          description: The API path used to invoke the model.
+          example: /v1/tts/slng/rime/arcana:3-en
+        code_example:
+          type: string
+          description: A ready-to-run code example (cURL) for invoking the model.
+        code_examples:
+          $ref: '#/components/schemas/CatalogCodeExamples'
+        docs_url:
+          type: string
+          description: A link to the model's documentation page.
+          example: >-
+            https://docs.slng.ai/api-reference/endpoints/rime-arcana-v3/arcana-v3-english-http
+        tags:
+          type: array
+          description: Free-form tags associated with the model.
+          items:
+            type: string
+        available_regions:
+          type: array
+          description: Region codes where the model is available.
+          items:
+            type: string
+          example:
+            - ap-southeast-2
+            - asia-south1
+            - eu-north-1
+        region_details:
+          type: array
+          description: Per-region availability and latency/pricing details.
+          items:
+            $ref: '#/components/schemas/CatalogRegionDetail'
+        supported_protocols:
+          type: array
+          description: The protocols the model can be invoked over.
+          items:
+            type: string
+            enum:
+              - https
+              - wss
+          example:
+            - https
+            - wss
+        voices:
+          type: array
+          description: The voices available for the model (TTS only).
+          items:
+            $ref: '#/components/schemas/CatalogVoice'
+        similar_models:
+          type: array
+          description: Models similar to this one.
+          items:
+            $ref: '#/components/schemas/CatalogSimilarModel'
+        pricing:
+          $ref: '#/components/schemas/CatalogPricing'
+    CatalogProvider:
+      type: object
+      description: The provider that owns a catalog model.
+      required:
+        - name
+        - code
+      properties:
+        name:
+          type: string
+          description: The provider's display name.
+          example: Rime
+        code:
+          type: string
+          description: The provider's code.
+          example: rime
+        website:
+          type: string
+          nullable: true
+          description: The provider's website, if known.
+        logo_url:
+          type: string
+          nullable: true
+          description: A URL to the provider's logo.
+          example: https://assets.slng.ai/provider-logos/rime-9d9ccf23.jpg
+        created_at:
+          type: string
+          format: date-time
+          description: When the provider record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the provider record was last updated.
+    CatalogRegionDetail:
+      type: object
+      description: Availability and latency/pricing detail for a model in a single region.
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: The region code.
+          example: ap-southeast-2
+        country:
+          type: string
+          description: The country the region is located in.
+          example: Australia
+        world_part_code:
+          type: string
+          description: The world part the region belongs to.
+          example: au
+        latency_ms:
+          type: integer
+          nullable: true
+          description: Measured latency to the region in milliseconds, when available.
+          example: 240
+        price:
+          type: number
+          nullable: true
+          description: The price for using the model in this region, when available.
+        discounted_price:
+          type: number
+          nullable: true
+          description: The discounted price for your organisation, when applicable.
+    CatalogPricing:
+      type: object
+      description: Pricing information for a catalog model.
+      required:
+        - min_price
+        - unit
+      properties:
+        min_price:
+          type: integer
+          description: The minimum price for the model, in the given unit.
+          example: 100
+        unit:
+          type: string
+          description: The unit the price is expressed in.
+          example: microdollars_per_min
+    CatalogVoice:
+      type: object
+      description: A voice available for a TTS model.
+      required:
+        - voice_id
+        - name
+      properties:
+        voice_id:
+          type: string
+          description: The voice identifier used when invoking the model.
+          example: aura-2-hestia-nl
+        name:
+          type: string
+          description: The voice's display name.
+          example: Hestia
+        gender:
+          type: string
+          description: The perceived gender of the voice.
+          example: feminine
+        tone:
+          type: string
+          description: A description of the voice's tone.
+          example: Approachable, Caring, Expressive, Friendly, Knowledgeable
+        use_case:
+          type: string
+          description: The use case the voice is suited for.
+          example: Customer Service
+        age_range:
+          type: string
+          description: The perceived age range of the voice.
+          example: Adult
+        language:
+          type: string
+          description: The language code of the voice.
+          example: nl
+        preview_url:
+          type: string
+          description: A URL to an audio preview of the voice.
+        properties:
+          type: object
+          description: Additional provider-specific voice properties.
+          additionalProperties: true
+        sort_order:
+          type: integer
+          description: The order the voice should be displayed in.
+          example: 0
+        enabled:
+          type: boolean
+          description: Whether the voice is currently enabled.
+          example: true
+        id:
+          type: string
+          description: The internal voice record identifier.
+          example: 4383102e-0e22-4018-8b38-988be2cd70fa
+        model_code:
+          type: string
+          description: The code of the model the voice belongs to.
+          example: deepgram/aura:2
+        created_at:
+          type: string
+          format: date-time
+          description: When the voice record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the voice record was last updated.
+    CatalogSimilarModel:
+      type: object
+      description: A reference to a model similar to the current one.
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: string
+          description: The similar model's code.
+          example: slng/deepgram/aura:2-en
+        name:
+          type: string
+          description: The similar model's display name.
+          example: Aura 2 English
+        provider_name:
+          type: string
+          nullable: true
+          description: The similar model's provider name, when available.
+        service_type:
+          type: string
+          description: The similar model's service type.
+        description:
+          type: string
+          nullable: true
+          description: A short description of the similar model, when available.
+    CatalogCodeExamples:
+      type: object
+      description: >-
+        Ready-to-run code examples for invoking the model in different
+        languages.
+      properties:
+        curl:
+          type: string
+          description: A cURL example.
+        python:
+          type: string
+          description: A Python example.
+        typescript:
+          type: string
+          description: A TypeScript example.
+    CatalogError:
+      type: object
+      description: An error returned by the catalog endpoints.
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Model not found
+  responses:
+    CatalogModelListSuccess:
+      description: A paginated list of catalog models.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CatalogModelListResponse'
+          example:
+            items:
+              - code: slng/rime/arcana:3-en
+                name: Arcana V3 English
+                service_type: tts
+                provider_code: rime
+                provider:
+                  name: Rime
+                  logo_url: https://assets.slng.ai/provider-logos/rime-9d9ccf23.jpg
+                  code: rime
+                  created_at: 2026-03-25T12:43:28.731Z
+                  updated_at: 2026-04-14T16:14:02.621Z
+                hosted_by: slng
+                short_description: >-
+                  Ultra-realistic, expressive voices with low latency and native
+                  multilingual code-switching.
+                long_description: >-
+                  Arcana v3 delivers low-latency conversational TTS with
+                  multilingual code-switching and word-level timestamps.
+                best_for: Voice Assistants, Business Telephony, IVR, TTS
+                use_cases:
+                  - Call centers
+                  - voice assistant
+                  - IVR
+                capabilities:
+                  - Streaming
+                  - Expressiveness
+                  - Latency
+                languages:
+                  - en
+                streaming: true
+                batch: false
+                voice_count: 0
+                api_path: /v1/tts/slng/rime/arcana:3-en
+                docs_url: >-
+                  https://docs.slng.ai/api-reference/endpoints/rime-arcana-v3/arcana-v3-english-http
+                tags: []
+                available_regions:
+                  - ap-southeast-2
+                  - asia-south1
+                  - eu-north-1
+                region_details:
+                  - code: ap-southeast-2
+                    country: Australia
+                    world_part_code: au
+                    latency_ms: 240
+                supported_protocols:
+                  - https
+                  - wss
+                voices: []
+                similar_models:
+                  - code: slng/deepgram/aura:2-en
+                    name: Aura 2 English
+                    service_type: ''
+                pricing:
+                  min_price: 100
+                  unit: microdollars_per_min
+            meta:
+              page: 1
+              page_size: 20
+              total: 26
+              pages: 2
+    CatalogModelDetailSuccess:
+      description: A single catalog model.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CatalogModel'
+          example:
+            code: slng/rime/arcana:3-en
+            name: Arcana V3 English
+            service_type: tts
+            provider_code: rime
+            provider:
+              name: Rime
+              logo_url: https://assets.slng.ai/provider-logos/rime-9d9ccf23.jpg
+              code: rime
+              created_at: 2026-03-25T12:43:28.731Z
+              updated_at: 2026-04-14T16:14:02.621Z
+            hosted_by: slng
+            short_description: >-
+              Ultra-realistic, expressive voices with low latency and native
+              multilingual code-switching.
+            long_description: >-
+              Arcana v3 delivers low-latency conversational TTS with
+              multilingual code-switching and word-level timestamps.
+            best_for: Voice Assistants, Business Telephony, IVR, TTS
+            use_cases:
+              - Call centers
+              - voice assistant
+              - IVR
+            capabilities:
+              - Streaming
+              - Expressiveness
+              - Latency
+            languages:
+              - en
+            streaming: true
+            batch: false
+            voice_count: 0
+            api_path: /v1/tts/slng/rime/arcana:3-en
+            docs_url: >-
+              https://docs.slng.ai/api-reference/endpoints/rime-arcana-v3/arcana-v3-english-http
+            tags: []
+            available_regions:
+              - ap-southeast-2
+              - asia-south1
+              - eu-north-1
+            region_details:
+              - code: ap-southeast-2
+                country: Australia
+                world_part_code: au
+                latency_ms: 240
+            supported_protocols:
+              - https
+              - wss
+            voices: []
+            similar_models:
+              - code: slng/deepgram/aura:2-en
+                name: Aura 2 English
+                service_type: ''
+            pricing:
+              min_price: 100
+              unit: microdollars_per_min
+    CatalogBadRequest:
+      description: >
+        The request was invalid. Returned for unsupported query parameters,
+        out-of-range values, or a malformed model code.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CatalogError'
+          examples:
+            unsupported-parameter:
+              summary: Unsupported query parameter
+              value:
+                error: 'Unsupported query parameter: foo'
+            invalid-page:
+              summary: Page out of range
+              value:
+                error: page must be between 1 and 10000
+            invalid-model-code:
+              summary: Malformed model code
+              value:
+                error: Invalid model code
+    CatalogNotFound:
+      description: No model matches the requested code.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CatalogError'
+          example:
+            error: Model not found
+  parameters:
+    CatalogServiceType:
+      name: service_type
+      in: query
+      required: false
+      description: Filter models by service type.
+      schema:
+        type: string
+        enum:
+          - stt
+          - tts
+    CatalogLanguage:
+      name: language
+      in: query
+      required: false
+      description: Filter models by supported language code (for example `en`).
+      schema:
+        type: string
+    CatalogProviderFilter:
+      name: provider
+      in: query
+      required: false
+      description: Filter models by provider code (for example `rime`).
+      schema:
+        type: string
+    CatalogRegion:
+      name: region
+      in: query
+      required: false
+      description: Filter models by region code (for example `eu-north-1`).
+      schema:
+        type: string
+    CatalogUseCase:
+      name: use_case
+      in: query
+      required: false
+      description: Filter models by use case tag.
+      schema:
+        type: string
+    CatalogCapability:
+      name: capability
+      in: query
+      required: false
+      description: Filter models by capability tag.
+      schema:
+        type: string
+    CatalogProtocol:
+      name: protocol
+      in: query
+      required: false
+      description: Filter models by supported protocol.
+      schema:
+        type: string
+        enum:
+          - https
+          - wss
+    CatalogSlngHostedOnly:
+      name: slng_hosted_only
+      in: query
+      required: false
+      description: >-
+        When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`,
+        or `0`.
+      schema:
+        type: boolean
+    CatalogSearch:
+      name: search
+      in: query
+      required: false
+      description: Full-text search across model names and descriptions.
+      schema:
+        type: string
+        maxLength: 200
+    CatalogPage:
+      name: page
+      in: query
+      required: false
+      description: The page number to return (1-based). Defaults to 1.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 1
+    CatalogPageSize:
+      name: page_size
+      in: query
+      required: false
+      description: The number of items per page. Defaults to 20.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    CatalogModelCode:
+      name: model_code
+      in: path
+      required: true
+      description: >
+        The model code to retrieve. May contain slashes and colons (for example
+        `slng/rime/arcana:3-en`).
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        API key issued by SLNG. Pass as `Authorization: Bearer <token>`.

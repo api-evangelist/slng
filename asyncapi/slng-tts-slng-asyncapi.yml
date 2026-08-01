@@ -1,0 +1,4428 @@
+asyncapi: 3.0.0
+info:
+  title: SLNG Gateway API - SLNG TTS
+  version: 0.1.0
+  description: SLNG Gateway API
+  contact:
+    name: SLNG Support
+    url: https://slng.ai
+    email: support@slng.ai
+  license:
+    name: Proprietary
+  tags:
+    - name: STT
+      description: Speech-to-Text services
+    - name: Unmute STT Bridge
+      description: SLNG native WebSocket STT protocol bridge.
+    - name: Unmute TTS Bridge
+      description: SLNG native WebSocket TTS protocol bridge.
+servers:
+  production:
+    host: api.slng.ai
+    protocol: wss
+    description: Production
+    security:
+      - $ref: '#/components/securitySchemes/bearer'
+  staging:
+    host: stageapi.slng.ai
+    protocol: wss
+    description: Staging
+    security:
+      - $ref: '#/components/securitySchemes/bearer'
+channels:
+  /v1/tts/slng/canopylabs/orpheus:en:
+    address: /v1/tts/slng/canopylabs/orpheus:en
+    title: Orpheus (English)
+    summary: Orpheus (English)
+    description: >-
+      Stream English speech synthesis from SLNG-hosted Canopy Labs Orpheus over
+      WebSocket with emotion control and SLNG's unified low-latency TTS
+      protocol.
+    tags:
+      - name: Orpheus English
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      TtsInitRequest:
+        $ref: '#/components/messages/TtsInitRequest'
+      TtsTextMessage:
+        $ref: '#/components/messages/TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      TtsReadyResponse:
+        $ref: '#/components/messages/TtsReadyResponse'
+      TtsAudioChunk:
+        $ref: '#/components/messages/TtsAudioChunk'
+      TtsSegmentStart:
+        $ref: '#/components/messages/TtsSegmentStart'
+      TtsSegmentEnd:
+        $ref: '#/components/messages/TtsSegmentEnd'
+      TtsFlushed:
+        $ref: '#/components/messages/TtsFlushed'
+      TtsCleared:
+        $ref: '#/components/messages/TtsCleared'
+      TtsAudioEnd:
+        $ref: '#/components/messages/TtsAudioEnd'
+      TtsErrorResponse:
+        $ref: '#/components/messages/TtsErrorResponse'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngOrpheus'
+  /v1/tts/slng/rime/arcana:3-en:
+    address: /v1/tts/slng/rime/arcana:3-en
+    title: Arcana v3 (English)
+    summary: Arcana v3 (English)
+    description: >-
+      Text-to-Speech API for generating English speech using Rime Arcana v3 TTS
+      model. Establishes a WebSocket connection for real-time text-to-speech.
+    tags:
+      - name: Rime Arcana v3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana3TtsInitRequest:
+        $ref: '#/components/messages/SlngRimeArcana3TtsInitRequest'
+      SlngRimeArcana3TtsTextMessage:
+        $ref: '#/components/messages/SlngRimeArcana3TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV3En'
+  /v1/tts/slng/rime/arcana:3-es:
+    address: /v1/tts/slng/rime/arcana:3-es
+    title: Arcana v3 (Spanish)
+    summary: Arcana v3 (Spanish)
+    description: >-
+      Text-to-Speech API for generating Spanish speech using Rime Arcana v3 TTS
+      model. Establishes a WebSocket connection for real-time text-to-speech.
+    tags:
+      - name: Rime Arcana v3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana3TtsInitRequestEs:
+        $ref: '#/components/messages/SlngRimeArcana3TtsInitRequestEs'
+      SlngRimeArcana3TtsTextMessage:
+        $ref: '#/components/messages/SlngRimeArcana3TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV3Es'
+  /v1/tts/slng/rime/arcana:3-fr:
+    address: /v1/tts/slng/rime/arcana:3-fr
+    title: Arcana v3 (French)
+    summary: Arcana v3 (French)
+    description: >-
+      Text-to-Speech API for generating French speech using Rime Arcana v3 TTS
+      model. Establishes a WebSocket connection for real-time text-to-speech.
+    tags:
+      - name: Rime Arcana v3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana3TtsInitRequestFr:
+        $ref: '#/components/messages/SlngRimeArcana3TtsInitRequestFr'
+      SlngRimeArcana3TtsTextMessage:
+        $ref: '#/components/messages/SlngRimeArcana3TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV3Fr'
+  /v1/tts/slng/rime/arcana:3-hi:
+    address: /v1/tts/slng/rime/arcana:3-hi
+    title: Arcana v3 (Hindi)
+    summary: Arcana v3 (Hindi)
+    description: >-
+      Text-to-Speech API for generating Hindi speech using Rime Arcana v3 TTS
+      model. Establishes a WebSocket connection for real-time text-to-speech.
+    tags:
+      - name: Rime Arcana v3
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana3TtsInitRequest:
+        $ref: '#/components/messages/SlngRimeArcana3TtsInitRequest'
+      SlngRimeArcana3TtsTextMessage:
+        $ref: '#/components/messages/SlngRimeArcana3TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV3Hi'
+  /v1/tts/slng/rime/coda:0-id:
+    address: /v1/tts/slng/rime/coda:0-id
+    title: Coda (Indonesian)
+    summary: Coda (Indonesian)
+    description: >-
+      Text-to-Speech API for generating Bahasa Indonesian speech using Rime Coda
+      TTS model. Establishes a WebSocket connection for real-time
+      text-to-speech.
+    tags:
+      - name: Rime Coda
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeCoda0IdTtsInitRequest:
+        $ref: '#/components/messages/SlngRimeCoda0IdTtsInitRequest'
+      SlngRimeCoda0IdTtsTextMessage:
+        $ref: '#/components/messages/SlngRimeCoda0IdTtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeCodaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeCodaTtsAudioChunk'
+      SlngRimeCodaTtsError:
+        $ref: '#/components/messages/SlngRimeCodaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngCoda0Id'
+  /v1/tts/slng/rime/arcana:ar:
+    address: /v1/tts/slng/rime/arcana:ar
+    title: Arcana v2 (Arabic)
+    summary: Arcana v2 (Arabic)
+    description: >-
+      Text-to-Speech API for generating Arabic speech from text using Rime
+      Arcana TTS model. Establishes a WebSocket connection for real-time
+      text-to-speech.
+    tags:
+      - name: Rime Arcana v2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana2TtsInitRequestAr:
+        $ref: '#/components/messages/SlngRimeArcana2TtsInitRequestAr'
+      SlngRimeArcana2TtsTextMessageAr:
+        $ref: '#/components/messages/SlngRimeArcana2TtsTextMessageAr'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV1Ar'
+  /v1/tts/slng/rime/arcana:de:
+    address: /v1/tts/slng/rime/arcana:de
+    title: Arcana v2 (German)
+    summary: Arcana v2 (German)
+    description: >-
+      Text-to-Speech API for generating German speech from text using Rime
+      Arcana TTS model. Establishes a WebSocket connection for real-time
+      text-to-speech.
+    tags:
+      - name: Rime Arcana v2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana2TtsInitRequestDe:
+        $ref: '#/components/messages/SlngRimeArcana2TtsInitRequestDe'
+      SlngRimeArcana2TtsTextMessageDe:
+        $ref: '#/components/messages/SlngRimeArcana2TtsTextMessageDe'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV1De'
+  /v1/tts/slng/rime/arcana:en:
+    address: /v1/tts/slng/rime/arcana:en
+    title: Arcana v2 (English)
+    summary: Arcana v2 (English)
+    description: >-
+      Text-to-Speech API for generating English speech from text using Rime
+      Arcana TTS model. Establishes a WebSocket connection for real-time
+      text-to-speech.
+    tags:
+      - name: Rime Arcana v2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana2TtsInitRequestEn:
+        $ref: '#/components/messages/SlngRimeArcana2TtsInitRequestEn'
+      SlngRimeArcana2TtsTextMessageEn:
+        $ref: '#/components/messages/SlngRimeArcana2TtsTextMessageEn'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV1En'
+  /v1/tts/slng/rime/arcana:es:
+    address: /v1/tts/slng/rime/arcana:es
+    title: Arcana v2 (Spanish)
+    summary: Arcana v2 (Spanish)
+    description: >-
+      Text-to-Speech API for generating Spanish speech from text using Rime
+      Arcana TTS model. Establishes a WebSocket connection for real-time
+      text-to-speech.
+    tags:
+      - name: Rime Arcana v2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana2TtsInitRequestEs:
+        $ref: '#/components/messages/SlngRimeArcana2TtsInitRequestEs'
+      SlngRimeArcana2TtsTextMessageEs:
+        $ref: '#/components/messages/SlngRimeArcana2TtsTextMessageEs'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV1Es'
+  /v1/tts/slng/rime/arcana:fr:
+    address: /v1/tts/slng/rime/arcana:fr
+    title: Arcana v2 (French)
+    summary: Arcana v2 (French)
+    description: >-
+      Text-to-Speech API for generating French speech from text using Rime
+      Arcana TTS model. Establishes a WebSocket connection for real-time
+      text-to-speech.
+    tags:
+      - name: Rime Arcana v2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngRimeArcana2TtsInitRequestFr:
+        $ref: '#/components/messages/SlngRimeArcana2TtsInitRequestFr'
+      SlngRimeArcana2TtsTextMessageFr:
+        $ref: '#/components/messages/SlngRimeArcana2TtsTextMessageFr'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngRimeArcanaTtsAudioChunk:
+        $ref: '#/components/messages/SlngRimeArcanaTtsAudioChunk'
+      SlngRimeArcanaTtsTimestamps:
+        $ref: '#/components/messages/SlngRimeArcanaTtsTimestamps'
+      SlngRimeArcanaTtsError:
+        $ref: '#/components/messages/SlngRimeArcanaTtsError'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngArcanaV1Fr'
+  /v1/tts/slng/deepgram/aura:2-en:
+    address: /v1/tts/slng/deepgram/aura:2-en
+    title: Aura 2 (English)
+    summary: Aura 2 (English)
+    description: >-
+      Stream low-latency conversational English text-to-speech from SLNG-hosted
+      Deepgram Aura 2 over WebSocket, optimized for production voice agents.
+    tags:
+      - name: Deepgram Aura 2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramAura2EnTtsInitRequest:
+        $ref: '#/components/messages/SlngDeepgramAura2EnTtsInitRequest'
+      TtsTextMessage:
+        $ref: '#/components/messages/TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngDeepgramAura2EnMetadataResponse:
+        $ref: '#/components/messages/SlngDeepgramAura2EnMetadataResponse'
+      SlngDeepgramAuraTtsAudioChunk:
+        $ref: '#/components/messages/SlngDeepgramAuraTtsAudioChunk'
+      SlngDeepgramAuraTtsFlushed:
+        $ref: '#/components/messages/SlngDeepgramAuraTtsFlushed'
+      SlngDeepgramAuraTtsCleared:
+        $ref: '#/components/messages/SlngDeepgramAuraTtsCleared'
+      TtsErrorResponse:
+        $ref: '#/components/messages/TtsErrorResponse'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngAuraEn'
+  /v1/tts/slng/deepgram/aura:2-es:
+    address: /v1/tts/slng/deepgram/aura:2-es
+    title: Aura 2 (Spanish)
+    summary: Aura 2 (Spanish)
+    description: >-
+      Stream low-latency conversational Spanish text-to-speech from SLNG-hosted
+      Deepgram Aura 2 over WebSocket, optimized for production voice agents.
+    tags:
+      - name: Deepgram Aura 2
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngDeepgramAura2EsTtsInitRequest:
+        $ref: '#/components/messages/SlngDeepgramAura2EsTtsInitRequest'
+      TtsTextMessage:
+        $ref: '#/components/messages/TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsClearMessage:
+        $ref: '#/components/messages/TtsClearMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      SlngDeepgramAura2EsMetadataResponse:
+        $ref: '#/components/messages/SlngDeepgramAura2EsMetadataResponse'
+      SlngDeepgramAuraTtsAudioChunk:
+        $ref: '#/components/messages/SlngDeepgramAuraTtsAudioChunk'
+      SlngDeepgramAuraTtsFlushed:
+        $ref: '#/components/messages/SlngDeepgramAuraTtsFlushed'
+      SlngDeepgramAuraTtsCleared:
+        $ref: '#/components/messages/SlngDeepgramAuraTtsCleared'
+      TtsErrorResponse:
+        $ref: '#/components/messages/TtsErrorResponse'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngAuraEs'
+  /v1/tts/slng/inworld/max:1.5:
+    address: /v1/tts/slng/inworld/max:1.5
+    title: Inworld Max 1.5
+    summary: Inworld Max 1.5
+    description: >-
+      Stream multilingual speech synthesis from SLNG-hosted Inworld Max 1.5 over
+      WebSocket using SLNG's unified low-latency TTS protocol.
+    tags:
+      - name: Inworld Max 1.5
+    servers:
+      - $ref: '#/servers/production'
+    messages:
+      SlngInworldMaxInitRequest:
+        $ref: '#/components/messages/SlngInworldMaxInitRequest'
+      TtsTextMessage:
+        $ref: '#/components/messages/TtsTextMessage'
+      TtsFlushMessage:
+        $ref: '#/components/messages/TtsFlushMessage'
+      TtsCloseMessage:
+        $ref: '#/components/messages/TtsCloseMessage'
+      TtsAudioChunk:
+        $ref: '#/components/messages/TtsAudioChunk'
+      TtsAudioEnd:
+        $ref: '#/components/messages/TtsAudioEnd'
+      TtsErrorResponse:
+        $ref: '#/components/messages/TtsErrorResponse'
+    bindings:
+      ws:
+        method: GET
+        headers:
+          $ref: '#/components/schemas/WebsocketHeadersSlngInworldMax'
+operations:
+  ttsSlngDeepgramAura2EnReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Initialize session on Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/SlngDeepgramAura2EnTtsInitRequest
+    description: Initialize session on Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Send text to Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/TtsTextMessage
+    description: Send text to Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Flush buffered output on Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/TtsFlushMessage
+    description: Flush buffered output on Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Clear queued output on Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/TtsClearMessage
+    description: Clear queued output on Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Close session on Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/TtsCloseMessage
+    description: Close session on Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Receive metadata response from Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/SlngDeepgramAura2EnMetadataResponse
+    description: Receive metadata response from Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Receive audio chunk from Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/SlngDeepgramAuraTtsAudioChunk
+    description: Receive audio chunk from Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnSendFlushed:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Receive flushed confirmation from Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/SlngDeepgramAuraTtsFlushed
+    description: Receive flushed confirmation from Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnSendCleared:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Receive cleared confirmation from Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/SlngDeepgramAuraTtsCleared
+    description: Receive cleared confirmation from Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EnSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en'
+    summary: Receive error from Aura 2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-en/messages/TtsErrorResponse
+    description: Receive error from Aura 2 (English)
+    tags: []
+  ttsSlngDeepgramAura2EsReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Initialize session on Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/SlngDeepgramAura2EsTtsInitRequest
+    description: Initialize session on Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Send text to Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/TtsTextMessage
+    description: Send text to Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Flush buffered output on Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/TtsFlushMessage
+    description: Flush buffered output on Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Clear queued output on Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/TtsClearMessage
+    description: Clear queued output on Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Close session on Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/TtsCloseMessage
+    description: Close session on Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsSendMetadata:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Receive metadata response from Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/SlngDeepgramAura2EsMetadataResponse
+    description: Receive metadata response from Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Receive audio chunk from Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/SlngDeepgramAuraTtsAudioChunk
+    description: Receive audio chunk from Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsSendFlushed:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Receive flushed confirmation from Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/SlngDeepgramAuraTtsFlushed
+    description: Receive flushed confirmation from Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsSendCleared:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Receive cleared confirmation from Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/SlngDeepgramAuraTtsCleared
+    description: Receive cleared confirmation from Aura 2 (Spanish)
+    tags: []
+  ttsSlngDeepgramAura2EsSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es'
+    summary: Receive error from Aura 2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1deepgram~1aura:2-es/messages/TtsErrorResponse
+    description: Receive error from Aura 2 (Spanish)
+    tags: []
+  ttsSlngInworldMaxReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Initialize session on Inworld Max 1.5
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/SlngInworldMaxInitRequest
+    description: Initialize session on Inworld Max 1.5
+    tags: []
+  ttsSlngInworldMaxReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Send text to Inworld Max 1.5
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/TtsTextMessage'
+    description: Send text to Inworld Max 1.5
+    tags: []
+  ttsSlngInworldMaxReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Flush buffered output on Inworld Max 1.5
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/TtsFlushMessage'
+    description: Flush buffered output on Inworld Max 1.5
+    tags: []
+  ttsSlngInworldMaxReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Close session on Inworld Max 1.5
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/TtsCloseMessage'
+    description: Close session on Inworld Max 1.5
+    tags: []
+  ttsSlngInworldMaxSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Receive audio chunk from Inworld Max 1.5
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/TtsAudioChunk'
+    description: Receive audio chunk from Inworld Max 1.5
+    tags: []
+  ttsSlngInworldMaxSendAudioEnd:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Receive audio end from Inworld Max 1.5
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/TtsAudioEnd'
+    description: Receive audio end from Inworld Max 1.5
+    tags: []
+  ttsSlngInworldMaxSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5'
+    summary: Receive error from Inworld Max 1.5
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1inworld~1max:1.5/messages/TtsErrorResponse'
+    description: Receive error from Inworld Max 1.5
+    tags: []
+  ttsOrpheusEnReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Initialize session on Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsInitRequest
+    description: Initialize session on Orpheus (English)
+    tags: []
+  ttsOrpheusEnReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Send text to Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsTextMessage
+    description: Send text to Orpheus (English)
+    tags: []
+  ttsOrpheusEnReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Flush buffered output on Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsFlushMessage
+    description: Flush buffered output on Orpheus (English)
+    tags: []
+  ttsOrpheusEnReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Clear queued output on Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsClearMessage
+    description: Clear queued output on Orpheus (English)
+    tags: []
+  ttsOrpheusEnReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Close session on Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsCloseMessage
+    description: Close session on Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendReady:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive ready signal from Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsReadyResponse
+    description: Receive ready signal from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive audio chunk from Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsAudioChunk
+    description: Receive audio chunk from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendSegmentStart:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive segment start from Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsSegmentStart
+    description: Receive segment start from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendSegmentEnd:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive segment end from Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsSegmentEnd
+    description: Receive segment end from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendFlushed:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive flushed confirmation from Orpheus (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsFlushed'
+    description: Receive flushed confirmation from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendCleared:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive cleared confirmation from Orpheus (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsCleared'
+    description: Receive cleared confirmation from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendAudioEnd:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive audio end from Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsAudioEnd
+    description: Receive audio end from Orpheus (English)
+    tags: []
+  ttsOrpheusEnSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en'
+    summary: Receive error from Orpheus (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1canopylabs~1orpheus:en/messages/TtsErrorResponse
+    description: Receive error from Orpheus (English)
+    tags: []
+  ttsRimeArcana3EnReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Initialize session on Arcana v3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/SlngRimeArcana3TtsInitRequest
+    description: Initialize session on Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Send text to Arcana v3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/SlngRimeArcana3TtsTextMessage
+    description: Send text to Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Flush buffered output on Arcana v3 (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Clear queued output on Arcana v3 (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Close session on Arcana v3 (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/TtsCloseMessage'
+    description: Close session on Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Receive audio chunk from Arcana v3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Receive word timestamps from Arcana v3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EnSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-en'
+    summary: Receive error from Arcana v3 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-en/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v3 (English)
+    tags: []
+  ttsRimeArcana3EsReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Initialize session on Arcana v3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/SlngRimeArcana3TtsInitRequestEs
+    description: Initialize session on Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Send text to Arcana v3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/SlngRimeArcana3TtsTextMessage
+    description: Send text to Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Flush buffered output on Arcana v3 (Spanish)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Clear queued output on Arcana v3 (Spanish)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Close session on Arcana v3 (Spanish)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/TtsCloseMessage'
+    description: Close session on Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Receive audio chunk from Arcana v3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Receive word timestamps from Arcana v3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3EsSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-es'
+    summary: Receive error from Arcana v3 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-es/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v3 (Spanish)
+    tags: []
+  ttsRimeArcana3FrReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Initialize session on Arcana v3 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/SlngRimeArcana3TtsInitRequestFr
+    description: Initialize session on Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Send text to Arcana v3 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/SlngRimeArcana3TtsTextMessage
+    description: Send text to Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Flush buffered output on Arcana v3 (French)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Clear queued output on Arcana v3 (French)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Close session on Arcana v3 (French)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/TtsCloseMessage'
+    description: Close session on Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Receive audio chunk from Arcana v3 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Receive word timestamps from Arcana v3 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3FrSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr'
+    summary: Receive error from Arcana v3 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-fr/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v3 (French)
+    tags: []
+  ttsRimeArcana3HiReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Initialize session on Arcana v3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/SlngRimeArcana3TtsInitRequest
+    description: Initialize session on Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Send text to Arcana v3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/SlngRimeArcana3TtsTextMessage
+    description: Send text to Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Flush buffered output on Arcana v3 (Hindi)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Clear queued output on Arcana v3 (Hindi)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Close session on Arcana v3 (Hindi)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/TtsCloseMessage'
+    description: Close session on Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Receive audio chunk from Arcana v3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Receive word timestamps from Arcana v3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v3 (Hindi)
+    tags: []
+  ttsRimeArcana3HiSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi'
+    summary: Receive error from Arcana v3 (Hindi)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:3-hi/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v3 (Hindi)
+    tags: []
+  ttsRimeCoda0IdReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Initialize session on Coda (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/SlngRimeCoda0IdTtsInitRequest
+    description: Initialize session on Coda (Indonesian)
+    tags: []
+  ttsRimeCoda0IdReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Send text to Coda (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/SlngRimeCoda0IdTtsTextMessage
+    description: Send text to Coda (Indonesian)
+    tags: []
+  ttsRimeCoda0IdReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Flush buffered output on Coda (Indonesian)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/TtsFlushMessage'
+    description: Flush buffered output on Coda (Indonesian)
+    tags: []
+  ttsRimeCoda0IdReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Clear queued output on Coda (Indonesian)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/TtsClearMessage'
+    description: Clear queued output on Coda (Indonesian)
+    tags: []
+  ttsRimeCoda0IdReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Close session on Coda (Indonesian)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/TtsCloseMessage'
+    description: Close session on Coda (Indonesian)
+    tags: []
+  ttsRimeCoda0IdSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Receive audio chunk from Coda (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/SlngRimeCodaTtsAudioChunk
+    description: Receive audio chunk from Coda (Indonesian)
+    tags: []
+  ttsRimeCoda0IdSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1coda:0-id'
+    summary: Receive error from Coda (Indonesian)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1coda:0-id/messages/SlngRimeCodaTtsError
+    description: Receive error from Coda (Indonesian)
+    tags: []
+  ttsRimeArcanaArReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Initialize session on Arcana v2 (Arabic)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/SlngRimeArcana2TtsInitRequestAr
+    description: Initialize session on Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Send text to Arcana v2 (Arabic)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/SlngRimeArcana2TtsTextMessageAr
+    description: Send text to Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Flush buffered output on Arcana v2 (Arabic)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Clear queued output on Arcana v2 (Arabic)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Close session on Arcana v2 (Arabic)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/TtsCloseMessage'
+    description: Close session on Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Receive audio chunk from Arcana v2 (Arabic)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Receive word timestamps from Arcana v2 (Arabic)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaArSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:ar'
+    summary: Receive error from Arcana v2 (Arabic)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:ar/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v2 (Arabic)
+    tags: []
+  ttsRimeArcanaDeReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Initialize session on Arcana v2 (German)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/SlngRimeArcana2TtsInitRequestDe
+    description: Initialize session on Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Send text to Arcana v2 (German)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/SlngRimeArcana2TtsTextMessageDe
+    description: Send text to Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Flush buffered output on Arcana v2 (German)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Clear queued output on Arcana v2 (German)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Close session on Arcana v2 (German)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/TtsCloseMessage'
+    description: Close session on Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Receive audio chunk from Arcana v2 (German)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Receive word timestamps from Arcana v2 (German)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaDeSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:de'
+    summary: Receive error from Arcana v2 (German)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:de/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v2 (German)
+    tags: []
+  ttsRimeArcanaEnReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Initialize session on Arcana v2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/SlngRimeArcana2TtsInitRequestEn
+    description: Initialize session on Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Send text to Arcana v2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/SlngRimeArcana2TtsTextMessageEn
+    description: Send text to Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Flush buffered output on Arcana v2 (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Clear queued output on Arcana v2 (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Close session on Arcana v2 (English)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/TtsCloseMessage'
+    description: Close session on Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Receive audio chunk from Arcana v2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Receive word timestamps from Arcana v2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEnSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:en'
+    summary: Receive error from Arcana v2 (English)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:en/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v2 (English)
+    tags: []
+  ttsRimeArcanaEsReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Initialize session on Arcana v2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/SlngRimeArcana2TtsInitRequestEs
+    description: Initialize session on Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Send text to Arcana v2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/SlngRimeArcana2TtsTextMessageEs
+    description: Send text to Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Flush buffered output on Arcana v2 (Spanish)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Clear queued output on Arcana v2 (Spanish)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Close session on Arcana v2 (Spanish)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/TtsCloseMessage'
+    description: Close session on Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Receive audio chunk from Arcana v2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Receive word timestamps from Arcana v2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaEsSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:es'
+    summary: Receive error from Arcana v2 (Spanish)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:es/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v2 (Spanish)
+    tags: []
+  ttsRimeArcanaFrReceiveInit:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Initialize session on Arcana v2 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/SlngRimeArcana2TtsInitRequestFr
+    description: Initialize session on Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrReceiveText:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Send text to Arcana v2 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/SlngRimeArcana2TtsTextMessageFr
+    description: Send text to Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrReceiveFlush:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Flush buffered output on Arcana v2 (French)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/TtsFlushMessage'
+    description: Flush buffered output on Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrReceiveClear:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Clear queued output on Arcana v2 (French)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/TtsClearMessage'
+    description: Clear queued output on Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrReceiveClose:
+    action: receive
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Close session on Arcana v2 (French)
+    messages:
+      - $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/TtsCloseMessage'
+    description: Close session on Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrSendAudioChunk:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Receive audio chunk from Arcana v2 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/SlngRimeArcanaTtsAudioChunk
+    description: Receive audio chunk from Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrSendTimestamps:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Receive word timestamps from Arcana v2 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/SlngRimeArcanaTtsTimestamps
+    description: Receive word timestamps from Arcana v2 (French)
+    tags: []
+  ttsRimeArcanaFrSendError:
+    action: send
+    channel:
+      $ref: '#/channels/~1v1~1tts~1slng~1rime~1arcana:fr'
+    summary: Receive error from Arcana v2 (French)
+    messages:
+      - $ref: >-
+          #/channels/~1v1~1tts~1slng~1rime~1arcana:fr/messages/SlngRimeArcanaTtsError
+    description: Receive error from Arcana v2 (French)
+    tags: []
+components:
+  messages:
+    SlngDeepgramAura2EsMetadataResponse:
+      name: SlngDeepgramAura2EsMetadataResponse
+      title: Metadata Response
+      summary: >-
+        Server metadata response after SLNG Deepgram Aura 2 Spanish session
+        initialization.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Metadata response sent by the server after a successful session
+          initialization. Contains model information and a unique request
+          identifier.
+        required:
+          - type
+          - request_id
+          - model_name
+          - model_version
+          - model_uuid
+        properties:
+          type:
+            type: string
+            const: Metadata
+          request_id:
+            type: string
+            format: uuid
+            description: Unique request identifier
+          model_name:
+            type: string
+            description: Name of the model used for synthesis
+          model_version:
+            type: string
+            description: Version of the model
+          model_uuid:
+            type: string
+            format: uuid
+            description: Unique model identifier
+      examples:
+        - name: metadataEs
+          summary: Metadata response for Spanish model
+          payload:
+            type: Metadata
+            request_id: a7e2f4b1-3c89-4d5a-b6e1-9f8a7c6d5e4b
+            model_name: aura-2-celeste-es
+            model_version: 2025-04-15.0
+            model_uuid: f1a2b3c4-5d6e-7f8a-9b0c-1d2e3f4a5b6c
+    SlngDeepgramAura2EsTtsInitRequest:
+      name: SlngDeepgramAura2EsTtsInitRequest
+      title: Init Request
+      summary: Initialize an SLNG Deepgram Aura 2 Spanish TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Initialize a session with model and voice configuration. Encoding
+          restricted to linear16/mulaw/alaw for self-hosted Deepgram WebSocket
+          streaming.
+        required:
+          - type
+          - model
+        properties:
+          type:
+            type: string
+            const: init
+            default: init
+          model:
+            type: string
+            description: Voice model identifier (Spanish)
+            enum:
+              - aura-2-agustina-es
+              - aura-2-alvaro-es
+              - aura-2-antonia-es
+              - aura-2-aquila-es
+              - aura-2-carina-es
+              - aura-2-celeste-es
+              - aura-2-diana-es
+              - aura-2-estrella-es
+              - aura-2-gloria-es
+              - aura-2-javier-es
+              - aura-2-luciano-es
+              - aura-2-nestor-es
+              - aura-2-olivia-es
+              - aura-2-selena-es
+              - aura-2-silvia-es
+              - aura-2-sirio-es
+              - aura-2-valerio-es
+          voice:
+            type: string
+            description: Voice identifier (same as model)
+            enum:
+              - aura-2-agustina-es
+              - aura-2-alvaro-es
+              - aura-2-antonia-es
+              - aura-2-aquila-es
+              - aura-2-carina-es
+              - aura-2-celeste-es
+              - aura-2-diana-es
+              - aura-2-estrella-es
+              - aura-2-gloria-es
+              - aura-2-javier-es
+              - aura-2-luciano-es
+              - aura-2-nestor-es
+              - aura-2-olivia-es
+              - aura-2-selena-es
+              - aura-2-silvia-es
+              - aura-2-sirio-es
+              - aura-2-valerio-es
+          config:
+            type: object
+            description: Synthesis configuration options
+            properties:
+              sample_rate:
+                $ref: '#/components/schemas/SampleRate'
+              encoding:
+                type: string
+                description: >-
+                  Audio encoding format (mp3/opus not supported for self-hosted
+                  Deepgram WebSocket streaming)
+                default: linear16
+                enum:
+                  - linear16
+                  - mulaw
+                  - alaw
+              speed:
+                type: number
+                description: Speech speed multiplier (e.g., 1.0 for normal)
+      examples:
+        - name: deepgramAura2EsInit
+          summary: Initialize SLNG Deepgram Aura 2 Spanish TTS session
+          payload:
+            type: init
+            model: aura-2-celeste-es
+            voice: aura-2-celeste-es
+            config:
+              sample_rate: 24000
+              encoding: linear16
+    SlngDeepgramAuraTtsCleared:
+      name: SlngDeepgramAuraTtsCleared
+      title: Cleared
+      summary: Acknowledges that queued output was cleared from SLNG Deepgram Aura.
+      contentType: application/json
+      payload:
+        type: object
+        description: Acknowledges that queued output was cleared.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: Cleared
+      examples:
+        - name: cleared
+          summary: Clear acknowledged
+          payload:
+            type: Cleared
+    SlngDeepgramAuraTtsFlushed:
+      name: SlngDeepgramAuraTtsFlushed
+      title: Flushed
+      summary: Acknowledges that buffered output was flushed from SLNG Deepgram Aura.
+      contentType: application/json
+      payload:
+        type: object
+        description: Acknowledges that buffered output was flushed.
+        required:
+          - type
+          - sequence_id
+        properties:
+          type:
+            type: string
+            const: Flushed
+          sequence_id:
+            type: integer
+            description: Sequence identifier for the flushed segment
+      examples:
+        - name: flushed
+          summary: Flush acknowledged
+          payload:
+            type: Flushed
+            sequence_id: 0
+    SlngDeepgramAuraTtsAudioChunk:
+      name: SlngDeepgramAuraTtsAudioChunk
+      title: Audio Chunk
+      summary: Raw binary audio buffer from SLNG Deepgram Aura.
+      contentType: application/octet-stream
+      payload:
+        type: object
+        description: >-
+          Raw binary audio data sent as a WebSocket binary frame. This is NOT a
+          JSON message — it is a raw audio buffer (e.g. linear16 PCM bytes). The
+          encoding and sample rate match the values specified in the init
+          message config. The object schema below is for documentation purposes
+          only as required by the AsyncAPI tooling.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: binary
+            description: >-
+              Placeholder discriminator. The actual message is a raw binary
+              WebSocket frame, not JSON.
+      examples:
+        - name: audioChunk
+          summary: Raw binary audio buffer (e.g. linear16 PCM at 24kHz)
+          payload: >-
+            0000FF00000000FF00000000010101010101010100000000FFFFFFFFFFFEFEFDFEFEFEFEFDFDFEFEFEFEFEFEFEFEFEFFFFFFFFFEFEFEFEFF0001000001020303030303030303030201010000FFFFFEFDFDFDFDFEFFFFFFFF0001020303020201000000FFFDFCFBFAFAFBFAF9F8F7F7F7F6F6F4F2F2F3F7FC000406090F14191A19181715110E0A05FEF9F6F3F0EEECEBEBECEEF2F6F9FC0005090D0F101010100E0C080401
+    SlngDeepgramAura2EnMetadataResponse:
+      name: SlngDeepgramAura2EnMetadataResponse
+      title: Metadata Response
+      summary: >-
+        Server metadata response after SLNG Deepgram Aura 2 English session
+        initialization.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Metadata response sent by the server after a successful session
+          initialization. Contains model information and a unique request
+          identifier.
+        required:
+          - type
+          - request_id
+          - model_name
+          - model_version
+          - model_uuid
+        properties:
+          type:
+            type: string
+            const: Metadata
+          request_id:
+            type: string
+            format: uuid
+            description: Unique request identifier
+          model_name:
+            type: string
+            description: Name of the model used for synthesis
+          model_version:
+            type: string
+            description: Version of the model
+          model_uuid:
+            type: string
+            format: uuid
+            description: Unique model identifier
+      examples:
+        - name: metadataEn
+          summary: Metadata response for English model
+          payload:
+            type: Metadata
+            request_id: c16801ea-74b0-4cae-84b6-836463afa8a0
+            model_name: aura-2-andromeda-en
+            model_version: 2025-04-15.0
+            model_uuid: d40bb3c8-0122-484c-87db-943c415fb7d9
+    SlngInworldMaxInitRequest:
+      name: SlngInworldMaxInitRequest
+      title: Init Request (Inworld Max 1.5)
+      summary: Initialize an SLNG-hosted Inworld Max 1.5 session.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Initialize a session with voice and audio configuration. Sent once per
+          WebSocket connection before any text frames. Audio output uses flat
+          fields (encoding, sample_rate, bit_rate, speaking_rate) that the
+          gateway maps to Inworld's audioConfig.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: init
+            default: init
+          voice:
+            type: string
+            default: Ashley
+            description: >-
+              Inworld voice ID. Voices are multilingual — each has a native
+              language but can speak any supported language via the `language`
+              parameter (best results when `language` matches the voice's native
+              language). See the full catalog at
+              https://docs.slng.ai/voices/inworld.
+          modelId:
+            type: string
+            enum:
+              - inworld-tts-1.5-max
+            default: inworld-tts-1.5-max
+            description: ID of the Inworld TTS model.
+          language:
+            $ref: '#/components/schemas/SlngInworldMaxLanguage'
+          deliveryMode:
+            type: string
+            enum:
+              - DELIVERY_MODE_UNSPECIFIED
+              - STABLE
+              - BALANCED
+              - CREATIVE
+            description: >-
+              Only applies to inworld-tts-2. Controls output variation; ignored
+              on Max 1.5.
+          temperature:
+            type: number
+            exclusiveMinimum: 0
+            maximum: 2
+            default: 1
+            description: >-
+              Higher values produce more expressive output; lower values more
+              deterministic. Range (0, 2].
+          timestampType:
+            type: string
+            enum:
+              - TIMESTAMP_TYPE_UNSPECIFIED
+              - WORD
+              - CHARACTER
+            default: TIMESTAMP_TYPE_UNSPECIFIED
+            description: Controls timestamp metadata returned with the audio. Adds latency.
+          applyTextNormalization:
+            type: string
+            enum:
+              - APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+              - 'ON'
+              - 'OFF'
+            default: APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+            description: >-
+              Expands numbers, dates, and abbreviations before synthesis.
+              Disabling may reduce latency.
+          timestampTransportStrategy:
+            type: string
+            enum:
+              - TIMESTAMP_TRANSPORT_STRATEGY_UNSPECIFIED
+              - SYNC
+              - ASYNC
+            description: >-
+              Whether timestamp data arrives synchronously with audio or in
+              trailing messages.
+          autoMode:
+            type: boolean
+            description: When enabled, the server controls flushing automatically.
+          maxBufferDelayMs:
+            type: integer
+            description: Maximum text buffering delay before synthesis starts.
+          bufferCharThreshold:
+            type: integer
+            minimum: 0
+            maximum: 1000
+            description: Character buffer threshold before synthesis starts.
+          encoding:
+            type: string
+            enum:
+              - LINEAR16
+              - MP3
+              - OGG_OPUS
+              - ALAW
+              - MULAW
+              - FLAC
+              - PCM
+              - WAV
+            default: MP3
+            description: Output audio format. Maps to Inworld audioConfig.audioEncoding.
+          sample_rate:
+            type: integer
+            enum:
+              - 8000
+              - 16000
+              - 22050
+              - 24000
+              - 32000
+              - 44100
+              - 48000
+            default: 48000
+            description: >-
+              Output sample rate in Hz. Maps to Inworld
+              audioConfig.sampleRateHertz.
+          bit_rate:
+            type: integer
+            description: >-
+              Bits per second. Only applies to compressed formats (MP3,
+              OGG_OPUS). Maps to Inworld audioConfig.bitRate.
+          speaking_rate:
+            type: number
+            minimum: 0.5
+            maximum: 1.5
+            default: 1
+            description: >-
+              Playback speed. Values below 0.8 not recommended for quality. Maps
+              to Inworld audioConfig.speakingRate.
+      examples:
+        - name: inworldMaxInit
+          summary: Initialize Inworld Max 1.5 session
+          payload:
+            type: init
+            voice: Ashley
+            modelId: inworld-tts-1.5-max
+            language: en-US
+            encoding: MP3
+            sample_rate: 24000
+    SlngDeepgramAura2EnTtsInitRequest:
+      name: SlngDeepgramAura2EnTtsInitRequest
+      title: Init Request (Aura 2 English)
+      summary: Initialize an SLNG Deepgram Aura 2 English TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Initialize a session with model and voice configuration. Encoding
+          restricted to linear16/mulaw/alaw for self-hosted Deepgram WebSocket
+          streaming.
+        required:
+          - type
+          - model
+        properties:
+          type:
+            type: string
+            const: init
+            default: init
+          model:
+            type: string
+            description: Voice model identifier (English)
+            enum:
+              - aura-2-amalthea-en
+              - aura-2-andromeda-en
+              - aura-2-apollo-en
+              - aura-2-arcas-en
+              - aura-2-aries-en
+              - aura-2-asteria-en
+              - aura-2-athena-en
+              - aura-2-atlas-en
+              - aura-2-aurora-en
+              - aura-2-callista-en
+              - aura-2-cordelia-en
+              - aura-2-cora-en
+              - aura-2-delia-en
+              - aura-2-draco-en
+              - aura-2-electra-en
+              - aura-2-harmonia-en
+              - aura-2-helena-en
+              - aura-2-hera-en
+              - aura-2-hermes-en
+              - aura-2-hyperion-en
+              - aura-2-iris-en
+              - aura-2-janus-en
+              - aura-2-juno-en
+              - aura-2-jupiter-en
+              - aura-2-luna-en
+              - aura-2-mars-en
+              - aura-2-minerva-en
+              - aura-2-neptune-en
+              - aura-2-odysseus-en
+              - aura-2-ophelia-en
+              - aura-2-orion-en
+              - aura-2-orpheus-en
+              - aura-2-pandora-en
+              - aura-2-phoebe-en
+              - aura-2-pluto-en
+              - aura-2-saturn-en
+              - aura-2-selene-en
+              - aura-2-thalia-en
+              - aura-2-theia-en
+              - aura-2-vesta-en
+              - aura-2-zeus-en
+          voice:
+            type: string
+            description: Voice identifier (same as model)
+            enum:
+              - aura-2-amalthea-en
+              - aura-2-andromeda-en
+              - aura-2-apollo-en
+              - aura-2-arcas-en
+              - aura-2-aries-en
+              - aura-2-asteria-en
+              - aura-2-athena-en
+              - aura-2-atlas-en
+              - aura-2-aurora-en
+              - aura-2-callista-en
+              - aura-2-cordelia-en
+              - aura-2-cora-en
+              - aura-2-delia-en
+              - aura-2-draco-en
+              - aura-2-electra-en
+              - aura-2-harmonia-en
+              - aura-2-helena-en
+              - aura-2-hera-en
+              - aura-2-hermes-en
+              - aura-2-hyperion-en
+              - aura-2-iris-en
+              - aura-2-janus-en
+              - aura-2-juno-en
+              - aura-2-jupiter-en
+              - aura-2-luna-en
+              - aura-2-mars-en
+              - aura-2-minerva-en
+              - aura-2-neptune-en
+              - aura-2-odysseus-en
+              - aura-2-ophelia-en
+              - aura-2-orion-en
+              - aura-2-orpheus-en
+              - aura-2-pandora-en
+              - aura-2-phoebe-en
+              - aura-2-pluto-en
+              - aura-2-saturn-en
+              - aura-2-selene-en
+              - aura-2-thalia-en
+              - aura-2-theia-en
+              - aura-2-vesta-en
+              - aura-2-zeus-en
+          config:
+            type: object
+            description: Synthesis configuration options
+            properties:
+              sample_rate:
+                $ref: '#/components/schemas/SampleRate'
+              encoding:
+                type: string
+                description: >-
+                  Audio encoding format (mp3/opus not supported for self-hosted
+                  Deepgram WebSocket streaming)
+                default: linear16
+                enum:
+                  - linear16
+                  - mulaw
+                  - alaw
+              speed:
+                type: number
+                description: Speech speed multiplier (e.g., 1.0 for normal)
+      examples:
+        - name: deepgramAura2EnInit
+          summary: Initialize SLNG Deepgram Aura 2 English TTS session
+          payload:
+            type: init
+            model: aura-2-andromeda-en
+            voice: aura-2-andromeda-en
+            config:
+              sample_rate: 24000
+              encoding: linear16
+    SlngRimeArcana2TtsTextMessageFr:
+      name: SlngRimeArcana2TtsTextMessageFr
+      title: Text Message (French)
+      summary: Send French text to synthesize.
+      contentType: application/json
+      payload:
+        type: object
+        description: Send French text to synthesize into audio output.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize.
+      examples:
+        - name: arcana2TextFr
+          summary: Send French text to synthesize
+          payload:
+            type: text
+            text: Bonjour depuis Rime Arcana Français. Test de la synthèse vocale.
+    SlngRimeArcana2TtsInitRequestFr:
+      name: SlngRimeArcana2TtsInitRequestFr
+      title: Init Request (Arcana French)
+      summary: Initialize a French Rime Arcana TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a French Rime Arcana TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana2SpeakerFr'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana2InitFr
+          summary: Initialize French TTS session
+          payload:
+            type: init
+            model: rime/arcana:fr
+            speaker: destin
+            config:
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcana2TtsTextMessageEs:
+      name: SlngRimeArcana2TtsTextMessageEs
+      title: Text Message (Spanish)
+      summary: Send Spanish text to synthesize.
+      contentType: application/json
+      payload:
+        type: object
+        description: Send Spanish text to synthesize into audio output.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize.
+      examples:
+        - name: arcana2TextEs
+          summary: Send Spanish text to synthesize
+          payload:
+            type: text
+            text: >-
+              Hola desde Rime Arcana Español. Probando la síntesis de texto a
+              voz.
+    SlngRimeArcana2TtsInitRequestEs:
+      name: SlngRimeArcana2TtsInitRequestEs
+      title: Init Request (Arcana Spanish)
+      summary: Initialize a Spanish Rime Arcana TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a Spanish Rime Arcana TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana2SpeakerEs'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana2InitEs
+          summary: Initialize Spanish TTS session
+          payload:
+            type: init
+            model: rime/arcana:es
+            speaker: seraphina
+            config:
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcana2TtsTextMessageEn:
+      name: SlngRimeArcana2TtsTextMessageEn
+      title: Text Message (English)
+      summary: Send English text to synthesize.
+      contentType: application/json
+      payload:
+        type: object
+        description: Send English text to synthesize into audio output.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize.
+      examples:
+        - name: arcana2TextEn
+          summary: Send English text to synthesize
+          payload:
+            type: text
+            text: Hello from Rime Arcana English. Testing text to speech synthesis.
+    SlngRimeArcana2TtsInitRequestEn:
+      name: SlngRimeArcana2TtsInitRequestEn
+      title: Init Request (Arcana English)
+      summary: Initialize a English Rime Arcana TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a English Rime Arcana TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana2SpeakerEn'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana2InitEn
+          summary: Initialize English TTS session
+          payload:
+            type: init
+            model: rime/arcana:en
+            speaker: astra
+            config:
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcana2TtsTextMessageDe:
+      name: SlngRimeArcana2TtsTextMessageDe
+      title: Text Message (German)
+      summary: Send German text to synthesize.
+      contentType: application/json
+      payload:
+        type: object
+        description: Send German text to synthesize into audio output.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize.
+      examples:
+        - name: arcana2TextDe
+          summary: Send German text to synthesize
+          payload:
+            type: text
+            text: Hallo von Rime Arcana Deutsch. Test der Sprachsynthese.
+    SlngRimeArcana2TtsInitRequestDe:
+      name: SlngRimeArcana2TtsInitRequestDe
+      title: Init Request (Arcana German)
+      summary: Initialize a German Rime Arcana TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a German Rime Arcana TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana2SpeakerDe'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana2InitDe
+          summary: Initialize German TTS session
+          payload:
+            type: init
+            model: rime/arcana:de
+            speaker: lorelei
+            config:
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcana2TtsTextMessageAr:
+      name: SlngRimeArcana2TtsTextMessageAr
+      title: Text Message (Arabic)
+      summary: Send Arabic text to synthesize.
+      contentType: application/json
+      payload:
+        type: object
+        description: Send Arabic text to synthesize into audio output.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize.
+      examples:
+        - name: arcana2TextAr
+          summary: Send Arabic text to synthesize
+          payload:
+            type: text
+            text: مرحبا من رايم أركانا العربية. اختبار تحويل النص إلى كلام.
+    SlngRimeArcana2TtsInitRequestAr:
+      name: SlngRimeArcana2TtsInitRequestAr
+      title: Init Request (Arcana Arabic)
+      summary: Initialize a Arabic Rime Arcana TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a Arabic Rime Arcana TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana2SpeakerAr'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana2InitAr
+          summary: Initialize Arabic TTS session
+          payload:
+            type: init
+            model: rime/arcana:ar
+            speaker: sakina
+            config:
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcanaTtsError:
+      name: SlngRimeArcanaTtsError
+      title: Error Response (Rime Arcana)
+      summary: Indicates an error occurred during Rime Arcana TTS synthesis.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Indicates an error occurred during Rime Arcana TTS synthesis.
+          Connection remains open after errors.
+        required:
+          - type
+          - message
+        properties:
+          type:
+            type: string
+            const: error
+          message:
+            type: string
+            description: Human-readable error description.
+      examples:
+        - name: arcanaError
+          summary: Error from Rime Arcana TTS
+          payload:
+            type: error
+            message: Text is too long. Maximum 500 characters per request.
+    SlngRimeArcanaTtsTimestamps:
+      name: SlngRimeArcanaTtsTimestamps
+      title: Timestamps (Rime Arcana)
+      summary: Word-level timing data for synthesized audio from Rime Arcana.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Word-level timing data for synthesized audio. Useful for interruption
+          handling and lip-sync.
+        required:
+          - type
+          - word_timestamps
+        properties:
+          type:
+            type: string
+            const: timestamps
+          word_timestamps:
+            type: object
+            description: Word-level timestamp data.
+            required:
+              - words
+              - start
+              - end
+            properties:
+              words:
+                type: array
+                items:
+                  type: string
+                description: Array of words.
+              start:
+                type: array
+                items:
+                  type: number
+                description: Start times in seconds for each word.
+              end:
+                type: array
+                items:
+                  type: number
+                description: End times in seconds for each word.
+      examples:
+        - name: arcanaTimestamps
+          summary: Receive word timestamps from Rime Arcana
+          payload:
+            type: timestamps
+            word_timestamps:
+              words:
+                - Hello
+                - from
+                - Arcana
+              start:
+                - 0
+                - 0.32
+                - 0.58
+              end:
+                - 0.31
+                - 0.57
+                - 1.02
+    SlngRimeArcanaTtsAudioChunk:
+      name: SlngRimeArcanaTtsAudioChunk
+      title: Audio Chunk (Rime Arcana)
+      summary: Chunk of base64-encoded audio data from Rime Arcana TTS.
+      contentType: application/json
+      payload:
+        type: object
+        description: Chunk of base64-encoded audio data from Rime Arcana TTS.
+        required:
+          - type
+          - data
+        properties:
+          type:
+            type: string
+            const: audio_chunk
+          data:
+            type: string
+            format: byte
+            description: Base64-encoded audio data.
+          contextId:
+            type: string
+            nullable: true
+            description: >-
+              Context ID for tracking. Matches the most recent contextId sent by
+              the client at the time of audio generation.
+      examples:
+        - name: arcanaAudioChunk
+          summary: Receive audio chunk from Rime Arcana
+          payload:
+            type: audio_chunk
+            data: UklGRiQAAABXQVZFZm10IBAAAAABAAEA...
+            contextId: ctx_abc123
+    SlngRimeArcana3TtsTextMessage:
+      name: SlngRimeArcana3TtsTextMessage
+      title: Text Message (Arcana v3)
+      summary: Send text to synthesize using Rime Arcana v3.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Send text to synthesize into audio output using Rime Arcana v3. Text
+          accumulates in a buffer until punctuation is encountered. Synthesis
+          begins when sufficient tokens exist for natural prosody. Use the flush
+          message to force synthesis of buffered content.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize. Maximum 500 characters per message.
+      examples:
+        - name: arcana3Text
+          summary: Send text to Rime Arcana v3
+          payload:
+            type: text
+            text: Hello from Rime Arcana v3. Testing text-to-speech synthesis.
+    SlngRimeArcana3TtsInitRequest:
+      name: SlngRimeArcana3TtsInitRequest
+      title: Init Request (Rime Arcana v3)
+      summary: Initialize a Rime Arcana v3 TTS session with multilingual support.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a Rime Arcana v3 TTS session with multilingual support.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana3Speaker'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana3Init
+          summary: Initialize Rime Arcana v3 TTS session
+          payload:
+            type: init
+            model: rime/arcana:3-en
+            speaker: astra
+            config:
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcana3TtsInitRequestEs:
+      name: SlngRimeArcana3TtsInitRequestEs
+      title: Init Request (Rime Arcana v3 Spanish)
+      summary: Initialize a Spanish Rime Arcana v3 TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a Spanish Rime Arcana v3 TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana3SpeakerEs'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana3InitEs
+          summary: Initialize Spanish Rime Arcana v3 TTS session
+          payload:
+            type: init
+            model: rime/arcana:3-es
+            speaker: seraphina
+            config:
+              modelId: arcana-3
+              language: es
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeArcana3TtsInitRequestFr:
+      name: SlngRimeArcana3TtsInitRequestFr
+      title: Init Request (Rime Arcana v3 French)
+      summary: Initialize a French Rime Arcana v3 TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a French Rime Arcana v3 TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeArcana3SpeakerFr'
+          config:
+            $ref: '#/components/schemas/SlngRimeArcana2TtsConfig'
+          repetition_penalty:
+            type: number
+            format: float
+            default: 1.5
+            description: >-
+              The repetition penalty. We do not recommend changing this from the
+              default value. Typical range is 1 to 2. Float that penalizes new
+              tokens based on whether they appear in the prompt and the
+              generated text so far. Values > 1 encourage the model to use new
+              tokens, while values < 1 encourage the model to repeat tokens.
+          temperature:
+            type: number
+            format: float
+            default: 0.5
+            description: >-
+              The temperature. We do not recommend changing this from the
+              default value. Typical range is 0 to 1. Float that controls the
+              randomness of the sampling. Lower values make the model more
+              deterministic, while higher values make the model more random.
+              Zero means greedy sampling.
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. We do not recommend changing this from the default
+              value. Typical range is 0 to 1. Float that controls the cumulative
+              probability of the top tokens to consider. Must be in (0, 1]. Set
+              to 1 to consider all tokens.
+      examples:
+        - name: arcana3InitFr
+          summary: Initialize French Rime Arcana v3 TTS session
+          payload:
+            type: init
+            model: rime/arcana:3-fr
+            speaker: livet_aurelie
+            config:
+              modelId: arcana-3
+              language: fr
+              sample_rate: 24000
+              encoding: pcm
+    SlngRimeCoda0IdTtsInitRequest:
+      name: SlngRimeCoda0IdTtsInitRequest
+      title: Init Request (Rime Coda Indonesian)
+      summary: Initialize a Rime Coda Indonesian TTS session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Initialize a Rime Coda Indonesian TTS session.
+        required:
+          - type
+          - model
+          - speaker
+        properties:
+          type:
+            type: string
+            const: init
+          model:
+            type: string
+            description: The model identifier.
+          speaker:
+            $ref: '#/components/schemas/SlngRimeCoda0IdSpeaker'
+          config:
+            $ref: '#/components/schemas/SlngRimeCodaTtsConfig'
+          top_p:
+            type: number
+            format: float
+            default: 1
+            description: >-
+              The top p. Float that controls the cumulative probability of the
+              top tokens to consider. Must be in (0, 1]. Set to 1 to consider
+              all tokens.
+      examples:
+        - name: codaInit
+          summary: Initialize Rime Coda Indonesian TTS session
+          payload:
+            type: init
+            model: rime/coda:0-id
+            speaker: pujianti_plesmita
+            config:
+              sample_rate: 24000
+              encoding: mp3
+    SlngRimeCoda0IdTtsTextMessage:
+      name: SlngRimeCoda0IdTtsTextMessage
+      title: Text Message (Rime Coda Indonesian)
+      summary: Send text to synthesize using Rime Coda Indonesian.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Send text to synthesize into audio output using Rime Coda. Text
+          accumulates in a buffer until punctuation is encountered. Synthesis
+          begins when sufficient tokens exist for natural prosody. Use the flush
+          message to force synthesis of buffered content.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: The text to synthesize.
+      examples:
+        - name: codaText
+          summary: Send text to Rime Coda Indonesian
+          payload:
+            type: text
+            text: Halo dari Rime Coda Indonesia.
+    SlngRimeCodaTtsAudioChunk:
+      name: SlngRimeCodaTtsAudioChunk
+      title: Audio Chunk (Rime Coda)
+      summary: Chunk of base64-encoded audio data from Rime Coda TTS.
+      contentType: application/json
+      payload:
+        type: object
+        description: Chunk of base64-encoded audio data from Rime Coda TTS.
+        required:
+          - type
+          - data
+        properties:
+          type:
+            type: string
+            const: audio_chunk
+          data:
+            type: string
+            format: byte
+            description: Base64-encoded audio data.
+      examples:
+        - name: codaAudioChunk
+          summary: Receive audio chunk from Rime Coda
+          payload:
+            type: audio_chunk
+            data: UklGRiQAAABXQVZFZm10IBAAAAABAAEA...
+    SlngRimeCodaTtsError:
+      name: SlngRimeCodaTtsError
+      title: Error Response (Rime Coda)
+      summary: Indicates an error occurred during Rime Coda TTS synthesis.
+      contentType: application/json
+      payload:
+        type: object
+        description: Indicates an error occurred during Rime Coda TTS synthesis.
+        required:
+          - type
+          - message
+        properties:
+          type:
+            type: string
+            const: error
+          code:
+            type: string
+            description: Error code from the provider.
+          message:
+            type: string
+            description: Human-readable error description.
+      examples:
+        - name: codaError
+          summary: Error from Rime Coda TTS
+          payload:
+            type: error
+            code: invalid_speaker
+            message: Invalid speaker for Rime Coda Indonesian.
+    TtsErrorResponse:
+      name: TtsErrorResponse
+      title: Error Response
+      summary: Indicates an error occurred during synthesis.
+      contentType: application/json
+      payload:
+        type: object
+        description: Indicates an error occurred during synthesis.
+        required:
+          - type
+          - code
+          - message
+        properties:
+          type:
+            type: string
+            const: error
+          code:
+            type: string
+            description: Error code.
+            enum:
+              - auth_error
+              - config_error
+              - rate_limit
+              - provider_error
+          message:
+            type: string
+            description: Human-readable error description
+      examples:
+        - name: ttsError
+          summary: TTS error response
+          payload:
+            type: error
+            code: provider_error
+            message: Provider returned an unexpected error
+    TtsAudioEnd:
+      name: TtsAudioEnd
+      title: Audio End
+      summary: Signals the end of audio generation.
+      contentType: application/json
+      payload:
+        type: object
+        description: Signals the end of audio generation.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: audio_end
+          duration:
+            type: number
+            description: Total audio duration
+      examples:
+        - name: audioEnd
+          summary: Audio generation complete
+          payload:
+            type: audio_end
+            duration: 3.5
+    TtsCleared:
+      name: TtsCleared
+      title: Cleared
+      summary: Acknowledges that queued output was cleared.
+      contentType: application/json
+      payload:
+        type: object
+        description: Acknowledges that queued output was cleared.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: cleared
+      examples:
+        - name: cleared
+          summary: Clear acknowledged
+          payload:
+            type: cleared
+    TtsFlushed:
+      name: TtsFlushed
+      title: Flushed
+      summary: Acknowledges that buffered output was flushed.
+      contentType: application/json
+      payload:
+        type: object
+        description: Acknowledges that buffered output was flushed.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: flushed
+      examples:
+        - name: flushed
+          summary: Flush acknowledged
+          payload:
+            type: flushed
+    TtsSegmentEnd:
+      name: TtsSegmentEnd
+      title: Segment End
+      summary: Signals the end of a synthesized segment.
+      contentType: application/json
+      payload:
+        type: object
+        description: Signals the end of a synthesized segment.
+        required:
+          - type
+          - segment_id
+        properties:
+          type:
+            type: string
+            const: segment_end
+          segment_id:
+            type: string
+            description: Unique segment identifier
+      examples:
+        - name: segmentEnd
+          summary: Segment end signal
+          payload:
+            type: segment_end
+            segment_id: seg_001
+    TtsSegmentStart:
+      name: TtsSegmentStart
+      title: Segment Start
+      summary: Signals the start of a synthesized segment.
+      contentType: application/json
+      payload:
+        type: object
+        description: Signals the start of a synthesized segment.
+        required:
+          - type
+          - segment_id
+        properties:
+          type:
+            type: string
+            const: segment_start
+          segment_id:
+            type: string
+            description: Unique segment identifier
+      examples:
+        - name: segmentStart
+          summary: Segment start signal
+          payload:
+            type: segment_start
+            segment_id: seg_001
+    TtsAudioChunk:
+      name: TtsAudioChunk
+      title: Audio Chunk
+      summary: Chunk of base64-encoded audio data.
+      contentType: application/json
+      payload:
+        type: object
+        description: Chunk of base64-encoded audio data.
+        required:
+          - type
+          - data
+        properties:
+          type:
+            type: string
+            const: audio_chunk
+          data:
+            type: string
+            format: byte
+            description: Base64-encoded audio data
+          sequence:
+            type: integer
+            description: Sequence number for ordering chunks
+      examples:
+        - name: audioChunk
+          summary: Receive audio chunk
+          payload:
+            type: audio_chunk
+            data: UklGRiQAAABXQVZFZm10IBAAAAABAAEA...
+            sequence: 1
+    TtsReadyResponse:
+      name: TtsReadyResponse
+      title: Ready Response
+      summary: Indicates the session is ready to receive messages.
+      contentType: application/json
+      payload:
+        type: object
+        description: Indicates the session is ready to receive messages.
+        required:
+          - type
+          - session_id
+        properties:
+          type:
+            type: string
+            const: ready
+          session_id:
+            type: string
+            description: Unique session identifier
+      examples:
+        - name: ready
+          summary: TTS session ready
+          payload:
+            type: ready
+            session_id: sess_tts_abc123
+    TtsCloseMessage:
+      name: TtsCloseMessage
+      title: Close Message
+      summary: Close the session and stop any further audio.
+      contentType: application/json
+      payload:
+        type: object
+        description: Close the session and stop any further audio.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: close
+      examples:
+        - name: close
+          summary: Close the session
+          payload:
+            type: close
+    TtsClearMessage:
+      name: TtsClearMessage
+      title: Clear Message
+      summary: Clear any queued text/audio from the current session.
+      contentType: application/json
+      payload:
+        type: object
+        description: Clear any queued text/audio from the current session.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: clear
+      examples:
+        - name: clear
+          summary: Clear queued text/audio
+          payload:
+            type: clear
+    TtsFlushMessage:
+      name: TtsFlushMessage
+      title: Flush Message
+      summary: Force any buffered text/audio to be finalized and delivered.
+      contentType: application/json
+      payload:
+        type: object
+        description: Force any buffered text/audio to be finalized and delivered.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            const: flush
+      examples:
+        - name: flush
+          summary: Flush buffered audio
+          payload:
+            type: flush
+    TtsTextMessage:
+      name: TtsTextMessage
+      title: Text Message
+      summary: Send text to synthesize into audio output.
+      contentType: application/json
+      payload:
+        type: object
+        description: Send text to synthesize into audio output.
+        required:
+          - type
+          - text
+        properties:
+          type:
+            type: string
+            const: text
+          text:
+            type: string
+            description: Text to synthesize
+          flush:
+            type: boolean
+            description: Whether to flush remaining audio immediately after this text
+      examples:
+        - name: textMessage
+          summary: Send text to synthesize
+          payload:
+            type: text
+            text: Hello, this is a test of text-to-speech synthesis.
+    TtsInitRequest:
+      name: TtsInitRequest
+      title: Init Request
+      summary: Initialize a TTS session with model and voice configuration.
+      contentType: application/json
+      payload:
+        type: object
+        description: >-
+          Initialize a session with model and voice configuration before sending
+          text.
+        required:
+          - type
+          - model
+        properties:
+          type:
+            type: string
+            const: init
+            default: init
+          model:
+            $ref: '#/components/schemas/TtsModel'
+          voice:
+            type: string
+            description: Voice identifier
+          config:
+            type: object
+            description: Synthesis configuration options
+            properties:
+              sample_rate:
+                $ref: '#/components/schemas/SampleRate'
+              encoding:
+                type: string
+                description: Audio encoding format
+                enum:
+                  - linear16
+                  - mp3
+                  - opus
+              language:
+                $ref: '#/components/schemas/LanguageCode'
+              speed:
+                type: number
+                description: Speech speed multiplier (e.g., 1.0 for normal)
+      examples:
+        - name: ttsInit
+          summary: Initialize TTS session
+          payload:
+            type: init
+            model: eleven-flash:2.5
+            voice: astra
+            config:
+              sample_rate: 24000
+              encoding: mp3
+  schemas:
+    SampleRate:
+      type: integer
+      description: Audio sample rate in Hz.
+      enum:
+        - 8000
+        - 16000
+        - 22050
+        - 24000
+        - 32000
+        - 44100
+        - 48000
+    WebsocketHeadersSlngAuraEn:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`, `us-east-1`.
+          enum:
+            - eu-north-1
+            - us-east-1
+        X-World-Part-Override:
+          type: string
+          description: >-
+            Target world part override. Auto-selected if not provided. Available
+            world parts: `eu`, `na`.
+          enum:
+            - eu
+            - na
+    WebsocketHeadersSlngAuraEs:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+        X-World-Part-Override:
+          type: string
+          description: >-
+            Target world part override. Auto-selected if not provided. Available
+            world parts: `eu`.
+          enum:
+            - eu
+    SlngRimeArcana2TtsConfig:
+      type: object
+      description: Audio configuration settings for Rime Arcana TTS.
+      properties:
+        sample_rate:
+          type: integer
+          description: Audio sample rate in Hz.
+          enum:
+            - 8000
+            - 16000
+            - 22050
+            - 24000
+            - 32000
+            - 44100
+            - 48000
+          default: 24000
+        encoding:
+          type: string
+          description: Audio encoding format.
+          enum:
+            - mp3
+            - mulaw
+            - pcm
+          default: pcm
+        speed:
+          type: number
+          description: Speech rate multiplier (0.25 = half speed, 2.0 = double speed).
+          minimum: 0.25
+          maximum: 2
+          default: 1
+        segment:
+          type: string
+          description: >-
+            Controls text segmentation for synthesis. 'immediate' synthesizes
+            without waiting, 'never' waits for explicit flush/EOS, 'bySentence'
+            waits for complete sentences.
+          enum:
+            - immediate
+            - never
+            - bySentence
+          default: bySentence
+        modelId:
+          type: string
+          description: >-
+            Model: arcana (most realistic, ~150ms), mistv2 (speed & control,
+            ~70ms).
+          enum:
+            - arcana
+            - arcana-3
+            - mistv2
+            - mist
+          default: arcana
+        language:
+          type: string
+          description: Language code.
+          enum:
+            - en
+            - es
+            - fr
+            - de
+            - ar
+            - he
+            - hi
+            - ja
+            - pt
+          default: en
+    SlngRimeArcana2SpeakerFr:
+      type: string
+      description: Available French voice speakers for SLNG-hosted Rime Arcana v2.
+      default: destin
+      enum:
+        - destin
+        - livet_aurelie
+        - morel_marianne
+        - serrin_joseph
+        - solstice
+    SlngRimeArcana2SpeakerEs:
+      type: string
+      description: Available Spanish voice speakers for SLNG-hosted Rime Arcana v2.
+      default: seraphina
+      enum:
+        - eris
+        - lark
+        - nova
+        - pola
+        - seraphina
+        - sirius
+        - ursa
+    WebsocketHeadersSlngArcanaV1En:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`, `ap-southeast-2`.
+          enum:
+            - ap-southeast-2
+    SlngRimeArcana2SpeakerEn:
+      type: string
+      description: Available English voice speakers for SLNG-hosted Rime Arcana v2.
+      default: astra
+      enum:
+        - ahmed_mohamed
+        - albion
+        - andersen_johan
+        - anderson_emily
+        - anderson_jake
+        - anderson_james
+        - anderson_kevin
+        - andromeda
+        - arcade
+        - astra
+        - atrium
+        - bauer_felix
+        - bennett_emily
+        - bennett_ryan
+        - biondi_paul
+        - bond
+        - brooks_jordan
+        - brown_alex
+        - brown_joshua
+        - brown_liam
+        - brown_madison
+        - brown_matthew
+        - brown_sophia
+        - brown_steven
+        - brunetti_tony
+        - bruno_katie
+        - carter_colin
+        - celeste
+        - chatterjee_rini
+        - chen_david
+        - chen_mei
+        - clark_tyler
+        - cohen_emily
+        - cohen_jared
+        - collins_emily
+        - cooper_logan
+        - cupola
+        - das_sourav
+        - davies_james
+        - dela cruz_maria
+        - dela_cristina
+        - diallo_amara
+        - dubois_emma
+        - duncan_colin
+        - duval_pierre
+        - eliphas
+        - estelle
+        - esther
+        - eucalyptus
+        - evans_jason
+        - fern
+        - fernandez_carlos
+        - goldberg_ryan
+        - gomez_daniela
+        - gomez_diego
+        - gomez_isabel
+        - gomez_isabella
+        - gomez_javon
+        - gonzalez_maya
+        - gonzalez_michael
+        - gonzalez_ryan
+        - grayson_avery
+        - hanson_ryan
+        - harris_luke
+        - harris_lynette
+        - harrison_brianna
+        - harrison_joey
+        - harrison_mary
+        - hassan_omar
+        - henderson_brittney
+        - hernandez_juanita
+        - holliday_jewel
+        - iyer_arun
+        - jensen_mikkel
+        - johnny_jackson
+        - johnson_amber
+        - johnson_angela
+        - johnson_asha
+        - johnson_avery
+        - johnson_brianna
+        - johnson_cynthia
+        - johnson_elijah
+        - johnson_james
+        - johnson_jessica
+        - johnson_joshua
+        - johnson_latisha
+        - johnson_lisa
+        - johnson_madison
+        - johnson_malachi
+        - johnson_marcel
+        - johnson_mary
+        - johnson_matt
+        - johnson_matthew
+        - johnson_melissa
+        - johnson_monique
+        - johnson_nia
+        - johnson_tasha
+        - johnson_tia
+        - johnson_walter
+        - kelly_aoife
+        - kelly_jennifer
+        - kelly_john
+        - kelly_maureen
+        - khan_fatima
+        - khan_umar
+        - kim_ashley
+        - kim_daniel
+        - kim_jaehyun
+        - kim_sunny
+        - kima
+        - lee_sarah
+        - levi_david
+        - levine_emily
+        - levine_joshua
+        - levy_hannah
+        - li_michael
+        - li_wei
+        - li_xiao
+        - lintel
+        - luna
+        - lyra
+        - maddox_emily
+        - maguire_jason
+        - malik_ahmad
+        - marinelli_giulia
+        - marlu
+        - martinez_amber
+        - martinez_ana
+        - martinez_dylan
+        - martinez_jaime
+        - martinez_leticia
+        - martinez_rosa
+        - martinez_ryan
+        - masonry
+        - mbunda_james
+        - mccarthy_james
+        - mccarthy_teresa
+        - mcdowell_peter
+        - mckinley_robert
+        - mendoza_alonzo
+        - mendoza_jesus
+        - mendoza_luz
+        - merritt_jimmy
+        - miller_cameron
+        - miller_dylan
+        - miller_judy
+        - miller_kelsey
+        - miller_lisa
+        - miller_logan
+        - miyamoto_akari
+        - montgomery_elise
+        - montgomery_emily
+        - morgan_brianna
+        - morgan_charles
+        - morgan_jeremy
+        - morris_colin
+        - morris_james
+        - morris_leticia
+        - morris_melvin
+        - morton_daine
+        - moss
+        - moyo_david
+        - murphy_colin
+        - murphy_emily
+        - murphy_grace
+        - murphy_hannah
+        - murphy_liam
+        - murphy_nolan
+        - murphy_sean
+        - neal_colin
+        - novak_emily
+        - nowak_joanna
+        - nowak_michal
+        - o'connor_brian
+        - oculus
+        - olsson_erik
+        - orion
+        - parapet
+        - park_minseo
+        - park_somin
+        - park_sumin
+        - parker_chloe
+        - patel_amit
+        - patel_asha
+        - pham_daniel
+        - pilaster
+        - pola
+        - ramirez_maya
+        - ramos_raul
+        - reddy_arjun
+        - reddy_sunil
+        - ricci_giulia
+        - ricci_lorenzo
+        - rodrigues_miguel
+        - rodriguez_carla
+        - rodriguez_carlos
+        - rodriguez_eduardo
+        - rodriguez_isabela
+        - rodriguez_miguel
+        - rossi_matteo
+        - santos_angelica
+        - schmidt_joshua
+        - schmidt_julia
+        - schmidt_sophie
+        - schneider_eric
+        - schneider_jack
+        - sharma_amit
+        - silva_ana
+        - singh_anjali
+        - sirius
+        - smith_heather
+        - smith_lisa
+        - smith_michael
+        - smith_mike
+        - stucco
+        - tauro
+        - thalassa
+        - thomas_sarah
+        - thompson_kevin
+        - torres_miguel
+        - tran_david
+        - tran_jessica
+        - tran_tu
+        - transom
+        - truss
+        - tupou_leilani
+        - ursa
+        - vashti
+        - vespera
+        - walnut
+        - wang_mei
+        - watson_emily
+        - williams_anna
+        - williams_brian
+        - williams_darnell
+        - williams_jennifer
+        - williams_jordan
+        - williams_nathan
+        - williams_ryan
+        - williams_terence
+        - williams_tiffany
+        - wilson_emma
+        - wong_kenny
+        - wright_cooper
+        - wright_jason
+        - wright_julianne
+        - wright_michael
+        - zhang_mei
+    SlngRimeArcana2SpeakerDe:
+      type: string
+      description: Available German voice speakers for SLNG-hosted Rime Arcana v2.
+      default: lorelei
+      enum:
+        - bergmann_katharina
+        - lorelei
+        - rosenfeld_steffi
+        - runa
+        - sigurd
+    WebsocketHeadersSlngArcanaV1Ar:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    WebsocketHeadersSlngArcanaV1De:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    WebsocketHeadersSlngArcanaV1Es:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    WebsocketHeadersSlngArcanaV1Fr:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    SlngRimeArcana2SpeakerAr:
+      type: string
+      description: Available Arabic voice speakers for SLNG-hosted Rime Arcana v2.
+      default: sakina
+      enum:
+        - haqq
+        - layla
+        - qadir
+        - sakina
+        - shams
+    WebsocketHeadersSlngArcanaV3En:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `ap-southeast-2`, `asia-south1`, `eu-north-1`.
+          enum:
+            - ap-southeast-2
+            - asia-south1
+            - eu-north-1
+    WebsocketHeadersSlngArcanaV3Es:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    WebsocketHeadersSlngArcanaV3Fr:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `eu-north-1`.
+          enum:
+            - eu-north-1
+    WebsocketHeadersSlngArcanaV3Hi:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `ap-southeast-2`, `eu-north-1`.
+          enum:
+            - ap-southeast-2
+            - eu-north-1
+    WebsocketHeadersSlngCoda0Id:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `ap-southeast-2`.
+          enum:
+            - asia-southeast2
+    SlngRimeCoda0IdSpeaker:
+      type: string
+      description: Voice speaker ID for Rime Coda Indonesian.
+      default: pujianti_plesmita
+      enum:
+        - pujianti_plesmita
+        - siswoko_sigit
+        - taryadi_dani
+        - usmany_tatianna
+    SlngRimeCodaTtsConfig:
+      type: object
+      description: Audio configuration settings for Rime Coda TTS.
+      properties:
+        sample_rate:
+          type: integer
+          description: Audio sample rate in Hz. Values above 24000 are upsampled.
+          enum:
+            - 8000
+            - 16000
+            - 22050
+            - 24000
+            - 44100
+            - 48000
+            - 96000
+          default: 24000
+        encoding:
+          type: string
+          description: Audio encoding format.
+          enum:
+            - mp3
+            - wav
+            - pcm
+            - linear16
+            - ulaw
+          default: mp3
+        speed:
+          type: number
+          description: Speech rate multiplier (0.25 = half speed, 2.0 = double speed).
+          minimum: 0.25
+          maximum: 2
+          default: 1
+        segment:
+          type: boolean
+          default: false
+          description: Enable segment markers in output.
+        modelId:
+          type: string
+          description: Rime Coda model identifier.
+          enum:
+            - coda
+          default: coda
+    SlngRimeArcana3Speaker:
+      type: string
+      description: >-
+        Voice speaker ID for Rime Arcana v3. Multilingual speakers supporting
+        all languages.
+      default: astra
+      enum:
+        - ahmed_mohamed
+        - akari
+        - albion
+        - alfhild
+        - alzira
+        - amarante
+        - anaya
+        - andersen_johan
+        - anderson_emily
+        - anderson_jake
+        - anderson_james
+        - anderson_kevin
+        - andromeda
+        - anil
+        - arcade
+        - arya
+        - astra
+        - atrium
+        - aurelie
+        - aurelio
+        - aurélie
+        - aviva
+        - baldur
+        - baltasar
+        - batin
+        - bauer_felix
+        - bennett_emily
+        - bennett_ryan
+        - biondi_paul
+        - bond
+        - brooks_jordan
+        - brown_alex
+        - brown_joshua
+        - brown_liam
+        - brown_madison
+        - brown_matthew
+        - brown_sophia
+        - brown_steven
+        - brunetti_tony
+        - bruno_katie
+        - carter_colin
+        - celeste
+        - celestino
+        - celso
+        - chatterjee_rini
+        - chen_david
+        - chen_mei
+        - clark_tyler
+        - cohen_emily
+        - cohen_jared
+        - collins_emily
+        - cooper_logan
+        - cupola
+        - das_sourav
+        - davies_james
+        - dela cruz_maria
+        - dela_cristina
+        - destin
+        - diallo_amara
+        - dubois_emma
+        - duncan_colin
+        - duval_pierre
+        - eliphas
+        - estela
+        - estelle
+        - esther
+        - eucalyptus
+        - evans_jason
+        - fadil
+        - fern
+        - fernandez_carlos
+        - freya
+        - goldberg_ryan
+        - gomez_daniela
+        - gomez_diego
+        - gomez_isabel
+        - gomez_isabella
+        - gomez_javon
+        - gonzalez_maya
+        - gonzalez_michael
+        - gonzalez_ryan
+        - grayson_avery
+        - hanson_ryan
+        - harris_luke
+        - harris_lynette
+        - harrison_brianna
+        - harrison_joey
+        - harrison_mary
+        - hassan_omar
+        - henderson_brittney
+        - hernandez_juanita
+        - holliday_jewel
+        - isadora
+        - iyer_arun
+        - jensen_mikkel
+        - johnny_jackson
+        - johnson_amber
+        - johnson_angela
+        - johnson_asha
+        - johnson_avery
+        - johnson_brianna
+        - johnson_cynthia
+        - johnson_elijah
+        - johnson_james
+        - johnson_jessica
+        - johnson_joshua
+        - johnson_latisha
+        - johnson_lisa
+        - johnson_madison
+        - johnson_malachi
+        - johnson_marcel
+        - johnson_mary
+        - johnson_matt
+        - johnson_matthew
+        - johnson_melissa
+        - johnson_monique
+        - johnson_nia
+        - johnson_tasha
+        - johnson_tia
+        - johnson_walter
+        - kelly_aoife
+        - kelly_jennifer
+        - kelly_john
+        - kelly_maureen
+        - khan_fatima
+        - khan_umar
+        - kim_ashley
+        - kim_daniel
+        - kim_jaehyun
+        - kim_sunny
+        - kima
+        - lark
+        - layla
+        - lee_sarah
+        - levi_david
+        - levine_emily
+        - levine_joshua
+        - levy_hannah
+        - li_michael
+        - li_wei
+        - li_xiao
+        - liesel
+        - lintel
+        - livet_aurelie
+        - lorelei
+        - lucia
+        - luna
+        - luz
+        - lyra
+        - lúcia
+        - maddox_emily
+        - maguire_jason
+        - malik_ahmad
+        - mar
+        - marinelli_giulia
+        - marlu
+        - martinez_amber
+        - martinez_ana
+        - martinez_dylan
+        - martinez_jaime
+        - martinez_leticia
+        - martinez_rosa
+        - martinez_ryan
+        - masonry
+        - mbunda_james
+        - mccarthy_james
+        - mccarthy_teresa
+        - mcdowell_peter
+        - mckinley_robert
+        - mendoza_alonzo
+        - mendoza_jesus
+        - mendoza_luz
+        - merritt_jimmy
+        - miller_cameron
+        - miller_dylan
+        - miller_judy
+        - miller_kelsey
+        - miller_lisa
+        - miller_logan
+        - miyamoto_akari
+        - montgomery_elise
+        - montgomery_emily
+        - morel_marianne
+        - morgan_brianna
+        - morgan_charles
+        - morgan_jeremy
+        - morris_colin
+        - morris_james
+        - morris_leticia
+        - morris_melvin
+        - morton_daine
+        - moss
+        - moyo_david
+        - murphy_colin
+        - murphy_emily
+        - murphy_grace
+        - murphy_hannah
+        - murphy_liam
+        - murphy_nolan
+        - murphy_sean
+        - neal_colin
+        - noa
+        - nova
+        - novak_emily
+        - nowak_joanna
+        - nowak_michal
+        - nozomi
+        - o'connor_brian
+        - oculus
+        - olsson_erik
+        - ori
+        - orion
+        - parapet
+        - park_minseo
+        - park_somin
+        - park_sumin
+        - parker_chloe
+        - patel_amit
+        - patel_asha
+        - pham_daniel
+        - pilaster
+        - pola
+        - qadir
+        - raiden
+        - ramirez_maya
+        - ramos_raul
+        - reddy_arjun
+        - reddy_sunil
+        - ren
+        - ricci_giulia
+        - ricci_lorenzo
+        - rodrigues_miguel
+        - rodriguez_carla
+        - rodriguez_carlos
+        - rodriguez_eduardo
+        - rodriguez_isabela
+        - rodriguez_miguel
+        - rosenfeld_steffi
+        - rossi_matteo
+        - runa
+        - sai
+        - sakina
+        - sakura
+        - salik
+        - santos_angelica
+        - schmidt_joshua
+        - schmidt_julia
+        - schmidt_sophie
+        - schneider_eric
+        - schneider_jack
+        - seraphina
+        - seraphine
+        - shai
+        - sharma_amit
+        - silva_ana
+        - singh_anjali
+        - sirius
+        - smith_heather
+        - smith_lisa
+        - smith_michael
+        - smith_mike
+        - sol
+        - solstice
+        - stucco
+        - séraphine
+        - taru
+        - tauro
+        - thalassa
+        - thomas_sarah
+        - thompson_kevin
+        - torres_miguel
+        - tran_david
+        - tran_jessica
+        - tran_tu
+        - transom
+        - truss
+        - tupou_leilani
+        - ursa
+        - vashti
+        - vespera
+        - violette
+        - walnut
+        - wang_mei
+        - watson_emily
+        - williams_anna
+        - williams_brian
+        - williams_darnell
+        - williams_jennifer
+        - williams_jordan
+        - williams_nathan
+        - williams_ryan
+        - williams_terence
+        - williams_tiffany
+        - wilson_emma
+        - wong_kenny
+        - wright_cooper
+        - wright_jason
+        - wright_julianne
+        - wright_michael
+        - yukiko
+        - zahir
+        - zhang_mei
+    SlngRimeArcana3SpeakerEs:
+      type: string
+      description: Voice speaker ID for Rime Arcana v3 Spanish.
+      default: seraphina
+      enum:
+        - aurelio
+        - celestino
+        - lark
+        - luz
+        - mar
+        - nova
+        - pola
+        - seraphina
+        - sirius
+        - ursa
+    SlngRimeArcana3SpeakerFr:
+      type: string
+      description: Voice speaker ID for Rime Arcana v3 French.
+      default: livet_aurelie
+      enum:
+        - destin
+        - livet_aurelie
+        - morel_marianne
+        - serrin_joseph
+        - solstice
+    WebsocketHeadersSlngOrpheus:
+      type: object
+      properties:
+        X-World-Part-Override:
+          type: string
+          description: >-
+            Target world part override. Auto-selected if not provided. Available
+            world parts: `eu`.
+          enum:
+            - eu
+    WebsocketHeadersSlngInworldMax:
+      type: object
+      properties:
+        X-Region-Override:
+          type: string
+          description: >-
+            Target region override. Auto-selected if not provided. Available
+            regions: `us-east-1`.
+          enum:
+            - us-east-1
+    SlngInworldMaxLanguage:
+      type: string
+      description: >-
+        BCP-47 language tag specifying the language the voice should speak the
+        text in. Optional — when omitted, Inworld uses the voice's original
+        prompt and auto-detects the language from the text. Voices are
+        multilingual; best results when this matches the voice's native
+        language. These are the 15 core languages supported by
+        inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85
+        experimental languages). An invalid code returns an error.
+      enum:
+        - ar-SA
+        - de-DE
+        - en-US
+        - es-ES
+        - fr-FR
+        - he-IL
+        - hi-IN
+        - it-IT
+        - ja-JP
+        - ko-KR
+        - nl-NL
+        - pl-PL
+        - pt-BR
+        - ru-RU
+        - zh-CN
+    LanguageCode:
+      type: string
+      description: ISO-639-1 language code.
+      enum:
+        - en
+        - ja
+        - zh
+        - de
+        - hi
+        - fr
+        - ko
+        - pt
+        - it
+        - es
+        - id
+        - nl
+        - tr
+        - fil
+        - pl
+        - sv
+        - bg
+        - ro
+        - ar
+        - cs
+        - el
+        - fi
+        - hr
+        - ms
+        - sk
+        - da
+        - ta
+        - uk
+        - ru
+        - hu
+        - 'no'
+        - vi
+    TtsModel:
+      type: string
+      description: TTS model identifier.
+      enum:
+        - aura:2
+        - eleven:3
+        - eleven-flash:2
+        - eleven-flash:2.5
+        - eleven-multilingual:2
+        - canopylabs/orpheus:en
+        - deepgram/aura:2
+        - deepgram/aura:2-en
+        - deepgram/aura:2-es
+        - rime/arcana:3-en
+        - rime/arcana:3-es
+        - rime/arcana:3-hi
+        - rime/arcana:ar
+        - rime/arcana:de
+        - rime/arcana:en
+        - rime/arcana:es
+        - rime/arcana:fr
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: >
+        API key issued by SLNG. Pass as `Authorization: Bearer <token>` in the
+        WebSocket upgrade request headers.

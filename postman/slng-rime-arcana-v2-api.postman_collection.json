@@ -1,0 +1,2006 @@
+{
+  "info": {
+    "_postman_id": "2e80badf-33c2-4e5a-a1f3-84d52fb84127",
+    "name": "SLNG Voice Agents Account Rime Arcana v2 API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:56:35.000Z",
+    "updatedAt": "2026-07-28T02:56:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2e80badf-33c2-4e5a-a1f3-84d52fb84127"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "tts",
+          "item": [
+            {
+              "name": "slng",
+              "item": [
+                {
+                  "name": "rime",
+                  "item": [
+                    {
+                      "name": "arcana:ar",
+                      "item": [
+                        {
+                          "name": "Arcana v2 (Arabic)",
+                          "id": "af9eee7c-165e-4637-94d3-d30a0036a78f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "eu-north-1"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"speaker\": \"sakina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:ar",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "rime",
+                                "arcana:ar"
+                              ]
+                            },
+                            "description": "Synthesize Arabic speech using Rime Arcana TTS model."
+                          },
+                          "response": [
+                            {
+                              "id": "6676ac96-23c8-4764-b1d5-7f5eb08bcce7",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sakina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:ar",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:ar"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-6676ac96-23c8-4764-b1d5-7f5eb08bcce7"
+                            },
+                            {
+                              "id": "62d9e2cd-19dc-4a42-ae67-be1d14e21860",
+                              "name": "Rime Arcana TTS bad request. Common causes include invalid speaker ID for the\nselected language variant, unsupported model, unsupported audio format, or malformed request body.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sakina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:ar",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:ar"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-62d9e2cd-19dc-4a42-ae67-be1d14e21860"
+                            },
+                            {
+                              "id": "f64907b4-9e89-49e0-a5de-b9d517806098",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sakina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:ar",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:ar"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-f64907b4-9e89-49e0-a5de-b9d517806098"
+                            },
+                            {
+                              "id": "fc0ea4c3-3368-4ca7-a5d7-e1a610682571",
+                              "name": "Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)\nmay currently return 500 instead of 400. Check the error details for specifics.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sakina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:ar",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:ar"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-fc0ea4c3-3368-4ca7-a5d7-e1a610682571"
+                            },
+                            {
+                              "id": "42242c42-6e97-41f7-9bf0-1c7e6cdfc3a6",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sakina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:ar",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:ar"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-42242c42-6e97-41f7-9bf0-1c7e6cdfc3a6"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:35.000Z",
+                          "updatedAt": "2026-07-28T02:56:35.000Z",
+                          "uid": "35240-af9eee7c-165e-4637-94d3-d30a0036a78f"
+                        }
+                      ],
+                      "id": "d719e541-d798-4fca-87be-29e58f7ff011",
+                      "createdAt": "2026-07-28T02:56:35.000Z",
+                      "updatedAt": "2026-07-28T02:56:35.000Z",
+                      "uid": "35240-d719e541-d798-4fca-87be-29e58f7ff011"
+                    },
+                    {
+                      "name": "arcana:de",
+                      "item": [
+                        {
+                          "name": "Arcana v2 (German)",
+                          "id": "d5c672ed-9f0e-470f-a0d4-ca5c231422da",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "eu-north-1"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"speaker\": \"sigurd\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:de",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "rime",
+                                "arcana:de"
+                              ]
+                            },
+                            "description": "Synthesize German speech using Rime Arcana TTS model."
+                          },
+                          "response": [
+                            {
+                              "id": "9d31b0fe-f622-4f1a-990c-95612771ecc4",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sigurd\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:de",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:de"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-9d31b0fe-f622-4f1a-990c-95612771ecc4"
+                            },
+                            {
+                              "id": "7a0a59bc-8719-4fe6-97ac-b87b5c12d0fa",
+                              "name": "Rime Arcana TTS bad request. Common causes include invalid speaker ID for the\nselected language variant, unsupported model, unsupported audio format, or malformed request body.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sigurd\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:de",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:de"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-7a0a59bc-8719-4fe6-97ac-b87b5c12d0fa"
+                            },
+                            {
+                              "id": "34318ae7-1148-4763-8435-f707bfb7bd00",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sigurd\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:de",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:de"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-34318ae7-1148-4763-8435-f707bfb7bd00"
+                            },
+                            {
+                              "id": "dc27419a-6e7e-4974-8b05-630d9ab2f2ed",
+                              "name": "Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)\nmay currently return 500 instead of 400. Check the error details for specifics.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sigurd\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:de",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:de"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-dc27419a-6e7e-4974-8b05-630d9ab2f2ed"
+                            },
+                            {
+                              "id": "6da5f70e-9bf4-4872-85a5-05a3719a1573",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"sigurd\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:de",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:de"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-6da5f70e-9bf4-4872-85a5-05a3719a1573"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:35.000Z",
+                          "updatedAt": "2026-07-28T02:56:35.000Z",
+                          "uid": "35240-d5c672ed-9f0e-470f-a0d4-ca5c231422da"
+                        }
+                      ],
+                      "id": "1ccd430c-c52e-4052-ae12-5e3d23acb8c7",
+                      "createdAt": "2026-07-28T02:56:35.000Z",
+                      "updatedAt": "2026-07-28T02:56:35.000Z",
+                      "uid": "35240-1ccd430c-c52e-4052-ae12-5e3d23acb8c7"
+                    },
+                    {
+                      "name": "arcana:en",
+                      "item": [
+                        {
+                          "name": "Arcana v2 (English)",
+                          "id": "bc7a6183-2118-4d6e-8ba9-b026395bd684",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "ap-southeast-2"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"speaker\": \"astra\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:en",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "rime",
+                                "arcana:en"
+                              ]
+                            },
+                            "description": "Synthesize English speech using Rime Arcana TTS model."
+                          },
+                          "response": [
+                            {
+                              "id": "8b9ece88-be45-445e-bd39-f5f824a09f70",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "ap-southeast-2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"astra\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:en"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-8b9ece88-be45-445e-bd39-f5f824a09f70"
+                            },
+                            {
+                              "id": "338ba5e4-47cf-4c69-8ebc-8866778b96e2",
+                              "name": "Rime Arcana TTS bad request. Common causes include invalid speaker ID for the\nselected language variant, unsupported model, unsupported audio format, or malformed request body.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "ap-southeast-2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"astra\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:en"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-338ba5e4-47cf-4c69-8ebc-8866778b96e2"
+                            },
+                            {
+                              "id": "fd43a934-f41f-4966-bbae-eb9d7e11be5a",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "ap-southeast-2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"astra\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:en"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-fd43a934-f41f-4966-bbae-eb9d7e11be5a"
+                            },
+                            {
+                              "id": "d410e111-aa9e-433c-aec2-7dbad0a75026",
+                              "name": "Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)\nmay currently return 500 instead of 400. Check the error details for specifics.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "ap-southeast-2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"astra\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:en"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-d410e111-aa9e-433c-aec2-7dbad0a75026"
+                            },
+                            {
+                              "id": "c1da514b-59a8-4f4e-b1de-c823e1baa10a",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "ap-southeast-2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"astra\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:en"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-c1da514b-59a8-4f4e-b1de-c823e1baa10a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:35.000Z",
+                          "updatedAt": "2026-07-28T02:56:35.000Z",
+                          "uid": "35240-bc7a6183-2118-4d6e-8ba9-b026395bd684"
+                        }
+                      ],
+                      "id": "7df50767-0732-448f-aeb3-46555d196e40",
+                      "createdAt": "2026-07-28T02:56:35.000Z",
+                      "updatedAt": "2026-07-28T02:56:35.000Z",
+                      "uid": "35240-7df50767-0732-448f-aeb3-46555d196e40"
+                    },
+                    {
+                      "name": "arcana:es",
+                      "item": [
+                        {
+                          "name": "Arcana v2 (Spanish)",
+                          "id": "7cef90ab-0c98-41da-a679-0c202faccc6d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "eu-north-1"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"speaker\": \"seraphina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:es",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "rime",
+                                "arcana:es"
+                              ]
+                            },
+                            "description": "Synthesize Spanish speech using Rime Arcana TTS model."
+                          },
+                          "response": [
+                            {
+                              "id": "90e2e0ef-0c12-42d1-84c1-3ee67ebaeae6",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"seraphina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:es"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-90e2e0ef-0c12-42d1-84c1-3ee67ebaeae6"
+                            },
+                            {
+                              "id": "c0a53ba0-96d5-49ab-8bdc-7bdf111068d7",
+                              "name": "Rime Arcana TTS bad request. Common causes include invalid speaker ID for the\nselected language variant, unsupported model, unsupported audio format, or malformed request body.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"seraphina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:es"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-c0a53ba0-96d5-49ab-8bdc-7bdf111068d7"
+                            },
+                            {
+                              "id": "e6e65a1a-98f3-4844-a9ef-e52359cada25",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"seraphina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:es"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-e6e65a1a-98f3-4844-a9ef-e52359cada25"
+                            },
+                            {
+                              "id": "26dac187-d9e6-4b64-8405-fb3892e20d93",
+                              "name": "Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)\nmay currently return 500 instead of 400. Check the error details for specifics.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"seraphina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:es"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-26dac187-d9e6-4b64-8405-fb3892e20d93"
+                            },
+                            {
+                              "id": "4d867cfd-b884-4391-aeff-d64ea8765e5a",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"seraphina\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:es"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-4d867cfd-b884-4391-aeff-d64ea8765e5a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:35.000Z",
+                          "updatedAt": "2026-07-28T02:56:35.000Z",
+                          "uid": "35240-7cef90ab-0c98-41da-a679-0c202faccc6d"
+                        }
+                      ],
+                      "id": "8385b207-1d26-4241-95aa-bb731e31908a",
+                      "createdAt": "2026-07-28T02:56:35.000Z",
+                      "updatedAt": "2026-07-28T02:56:35.000Z",
+                      "uid": "35240-8385b207-1d26-4241-95aa-bb731e31908a"
+                    },
+                    {
+                      "name": "arcana:fr",
+                      "item": [
+                        {
+                          "name": "Arcana v2 (French)",
+                          "id": "43edbd2b-5ca5-4fdc-8eae-3dffa5396cad",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "eu-north-1"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"speaker\": \"livet_aurelie\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:fr",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "rime",
+                                "arcana:fr"
+                              ]
+                            },
+                            "description": "Synthesize French speech using Rime Arcana TTS model."
+                          },
+                          "response": [
+                            {
+                              "id": "fdf35b36-26a7-4f3c-aaf8-b74098cdb8bd",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"livet_aurelie\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:fr",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:fr"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-fdf35b36-26a7-4f3c-aaf8-b74098cdb8bd"
+                            },
+                            {
+                              "id": "a95d8120-97ed-42ce-9061-5dfc5e5ee13a",
+                              "name": "Rime Arcana TTS bad request. Common causes include invalid speaker ID for the\nselected language variant, unsupported model, unsupported audio format, or malformed request body.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"livet_aurelie\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:fr",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:fr"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-a95d8120-97ed-42ce-9061-5dfc5e5ee13a"
+                            },
+                            {
+                              "id": "c50ced18-a264-4140-ad7e-2c568a8031eb",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"livet_aurelie\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:fr",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:fr"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-c50ced18-a264-4140-ad7e-2c568a8031eb"
+                            },
+                            {
+                              "id": "c450fa45-9696-4a14-a4d3-08fe4fb5159d",
+                              "name": "Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)\nmay currently return 500 instead of 400. Check the error details for specifics.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"livet_aurelie\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:fr",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:fr"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-c450fa45-9696-4a14-a4d3-08fe4fb5159d"
+                            },
+                            {
+                              "id": "7b2f146f-48dc-4d23-b0b3-532d83850b78",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"livet_aurelie\",\n  \"text\": \"<string>\",\n  \"modelId\": \"arcana\",\n  \"repetition_penalty\": 1.5,\n  \"temperature\": 0.5,\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/arcana:fr",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "arcana:fr"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:35.000Z",
+                              "updatedAt": "2026-07-28T02:56:35.000Z",
+                              "uid": "35240-7b2f146f-48dc-4d23-b0b3-532d83850b78"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:35.000Z",
+                          "updatedAt": "2026-07-28T02:56:35.000Z",
+                          "uid": "35240-43edbd2b-5ca5-4fdc-8eae-3dffa5396cad"
+                        }
+                      ],
+                      "id": "e6d9cad1-5a5b-44a1-962b-1083c2d47129",
+                      "createdAt": "2026-07-28T02:56:35.000Z",
+                      "updatedAt": "2026-07-28T02:56:35.000Z",
+                      "uid": "35240-e6d9cad1-5a5b-44a1-962b-1083c2d47129"
+                    }
+                  ],
+                  "id": "79b7d510-55e6-47b0-a91e-49f953d3b0a1",
+                  "createdAt": "2026-07-28T02:56:35.000Z",
+                  "updatedAt": "2026-07-28T02:56:35.000Z",
+                  "uid": "35240-79b7d510-55e6-47b0-a91e-49f953d3b0a1"
+                }
+              ],
+              "id": "6625f564-2383-4c0b-ab11-5a1658be2567",
+              "createdAt": "2026-07-28T02:56:35.000Z",
+              "updatedAt": "2026-07-28T02:56:35.000Z",
+              "uid": "35240-6625f564-2383-4c0b-ab11-5a1658be2567"
+            }
+          ],
+          "id": "c57b2702-708e-4876-a25e-b271c87861f8",
+          "createdAt": "2026-07-28T02:56:35.000Z",
+          "updatedAt": "2026-07-28T02:56:35.000Z",
+          "uid": "35240-c57b2702-708e-4876-a25e-b271c87861f8"
+        }
+      ],
+      "id": "17c1abed-24ea-4d66-82c6-985e673c0a8e",
+      "createdAt": "2026-07-28T02:56:35.000Z",
+      "updatedAt": "2026-07-28T02:56:35.000Z",
+      "uid": "35240-17c1abed-24ea-4d66-82c6-985e673c0a8e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

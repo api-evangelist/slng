@@ -1,0 +1,454 @@
+{
+  "info": {
+    "_postman_id": "58fd9549-79f0-4397-8a6f-5fc5c3ed94f7",
+    "name": "SLNG Voice Agents Account Rime Coda API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:56:37.000Z",
+    "updatedAt": "2026-07-28T02:56:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-58fd9549-79f0-4397-8a6f-5fc5c3ed94f7"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "tts",
+          "item": [
+            {
+              "name": "slng",
+              "item": [
+                {
+                  "name": "rime",
+                  "item": [
+                    {
+                      "name": "coda:0-id",
+                      "item": [
+                        {
+                          "name": "Coda (Indonesian)",
+                          "id": "d1971e2c-07f4-4cbe-9923-8e00130e05b5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "asia-southeast2"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/rime/coda:0-id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "rime",
+                                "coda:0-id"
+                              ]
+                            },
+                            "description": "Synthesize Bahasa Indonesian speech using Rime Coda TTS model."
+                          },
+                          "response": [
+                            {
+                              "id": "431ade7f-b640-4336-bc6c-563849ff0147",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "asia-southeast2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/coda:0-id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "coda:0-id"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:56:38.000Z",
+                              "updatedAt": "2026-07-28T02:56:38.000Z",
+                              "uid": "35240-431ade7f-b640-4336-bc6c-563849ff0147"
+                            },
+                            {
+                              "id": "b0e151be-eb6d-4bda-94d8-564cc75032d5",
+                              "name": "Rime Coda TTS bad request. Common causes include invalid speaker ID, unsupported audio format, or malformed request body.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "asia-southeast2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/coda:0-id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "coda:0-id"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:38.000Z",
+                              "updatedAt": "2026-07-28T02:56:38.000Z",
+                              "uid": "35240-b0e151be-eb6d-4bda-94d8-564cc75032d5"
+                            },
+                            {
+                              "id": "f7692d05-5be8-420a-87ba-845fb6221149",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "asia-southeast2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/coda:0-id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "coda:0-id"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:38.000Z",
+                              "updatedAt": "2026-07-28T02:56:38.000Z",
+                              "uid": "35240-f7692d05-5be8-420a-87ba-845fb6221149"
+                            },
+                            {
+                              "id": "1e30acc6-c9c1-49b5-876d-e9d8eb564b39",
+                              "name": "Rime Coda TTS internal error. Note: Some validation errors (e.g., invalid speaker) may currently return 500 instead of 400. Check the error details for specifics.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "asia-southeast2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/coda:0-id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "coda:0-id"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:38.000Z",
+                              "updatedAt": "2026-07-28T02:56:38.000Z",
+                              "uid": "35240-1e30acc6-c9c1-49b5-876d-e9d8eb564b39"
+                            },
+                            {
+                              "id": "d682fd94-e13e-4b63-aae2-2e0d649a9210",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "asia-southeast2"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/rime/coda:0-id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "rime",
+                                    "coda:0-id"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:38.000Z",
+                              "updatedAt": "2026-07-28T02:56:38.000Z",
+                              "uid": "35240-d682fd94-e13e-4b63-aae2-2e0d649a9210"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:38.000Z",
+                          "updatedAt": "2026-07-28T02:56:38.000Z",
+                          "uid": "35240-d1971e2c-07f4-4cbe-9923-8e00130e05b5"
+                        }
+                      ],
+                      "id": "8631965e-0859-4b74-bbf3-4c71fecb75e2",
+                      "createdAt": "2026-07-28T02:56:38.000Z",
+                      "updatedAt": "2026-07-28T02:56:38.000Z",
+                      "uid": "35240-8631965e-0859-4b74-bbf3-4c71fecb75e2"
+                    }
+                  ],
+                  "id": "d0a60070-ba05-41bb-babf-1844f1ed5399",
+                  "createdAt": "2026-07-28T02:56:38.000Z",
+                  "updatedAt": "2026-07-28T02:56:38.000Z",
+                  "uid": "35240-d0a60070-ba05-41bb-babf-1844f1ed5399"
+                }
+              ],
+              "id": "b31e1d1c-0e9c-420c-aeb9-9fd0d340e004",
+              "createdAt": "2026-07-28T02:56:38.000Z",
+              "updatedAt": "2026-07-28T02:56:38.000Z",
+              "uid": "35240-b31e1d1c-0e9c-420c-aeb9-9fd0d340e004"
+            }
+          ],
+          "id": "9a988f14-ee47-49b3-86ca-02847b14e2e5",
+          "createdAt": "2026-07-28T02:56:38.000Z",
+          "updatedAt": "2026-07-28T02:56:38.000Z",
+          "uid": "35240-9a988f14-ee47-49b3-86ca-02847b14e2e5"
+        }
+      ],
+      "id": "1bdc8445-8a98-4433-943d-f9150fc4c29e",
+      "createdAt": "2026-07-28T02:56:38.000Z",
+      "updatedAt": "2026-07-28T02:56:38.000Z",
+      "uid": "35240-1bdc8445-8a98-4433-943d-f9150fc4c29e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

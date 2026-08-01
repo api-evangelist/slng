@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/, asyncapi/, https://docs.slng.ai, https://trust.slng.ai
+standards:
+  - id: bearer-token-auth
+    conforms: true
+    evidence: 'OpenAPI securitySchemes type http scheme bearer (Authorization: Bearer <key>)'
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 security scheme; SLNG uses opaque bearer API keys.
+  - id: oidc
+    conforms: false
+  - id: openapi-3
+    conforms: true
+    evidence: OpenAPI 3.0.3 / 3.1.0 documents published for every service.
+  - id: asyncapi-3
+    conforms: true
+    evidence: AsyncAPI 3.0.0 documents published for the STT/TTS WebSocket surface.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a simple {error} / {error,status,details} envelope, not application/problem+json.
+  - id: cursor-offset-pagination
+    conforms: true
+    evidence: Catalog and batch listings use page/page_size with a meta{page,page_size,total,pages} block.
+  - id: iso-27001
+    conforms: true
+    evidence: ISO 27001 certification stated on slng.ai and trust.slng.ai.
+  - id: hipaa
+    conforms: true
+    evidence: HIPAA compliance stated on slng.ai and trust.slng.ai.
+  - id: gdpr
+    conforms: true
+    evidence: GDPR compliance and in-region data residency stated on slng.ai and trust.slng.ai.

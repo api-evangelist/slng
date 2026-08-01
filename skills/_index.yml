@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/ operations (operationIds verified against the specs)
+skills:
+  - file: slng-transcribe-audio.md
+    name: Transcribe audio with SLNG STT
+    api: openapi/slng-stt-slng-openapi.yml
+    operations: [sttWhisperLargeV3Receive, "slng/deepgram/nova:3-en"]
+  - file: slng-synthesize-speech.md
+    name: Synthesize speech with SLNG TTS
+    api: openapi/slng-tts-slng-openapi.yml
+    operations: ["rime/arcana:3-en", "slng/deepgram/aura:2-en", pronunciation-dictionaries-create]
+  - file: slng-voice-agent-call.md
+    name: Build and dispatch a SLNG voice agent
+    api: openapi/slng-agents-openapi.yml
+    operations: [createAgent, dispatchCall, getCall, listAgentCalls, createWebSession]
+  - file: slng-batch-transcribe.md
+    name: Batch transcribe audio with SLNG
+    api: openapi/slng-batch-openapi.json
+    operations: [batchJobsCreate, batchJobsGet, batchJobsList, batchJobsFiles, batchJobsDelete]

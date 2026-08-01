@@ -1,0 +1,559 @@
+{
+  "info": {
+    "_postman_id": "a834c1ca-7081-4d9b-af6b-e1d5ef747d13",
+    "name": "SLNG Voice Agents Account Catalog API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:27.000Z",
+    "updatedAt": "2026-07-28T02:55:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a834c1ca-7081-4d9b-af6b-e1d5ef747d13"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "catalog",
+          "item": [
+            {
+              "name": "models",
+              "item": [
+                {
+                  "name": "{model_code}",
+                  "item": [
+                    {
+                      "name": "Get a catalog model",
+                      "id": "da6f07e2-5abe-4d91-858b-8198e807d49b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "noauth"
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/catalog/models/:model_code?protocol=https",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "catalog",
+                            "models",
+                            ":model_code"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter models by supported protocol.",
+                              "key": "protocol",
+                              "value": "https"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "963e9de3-dcd7-4dc2-99a9-70f1ad0ac88c",
+                              "key": "model_code",
+                              "value": "<string>",
+                              "description": "(Required) The model code to retrieve. May contain slashes and colons (for example `slng/rime/arcana:3-en`).\n"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single model from the SLNG catalog by its code. The code may contain slashes and colons (for example `slng/rime/arcana:3-en`). Authentication is optional \u2014 an API key personalizes pricing and region availability for your organisation.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "cdfd248e-a53f-4c4c-8211-3f2e60992d79",
+                          "name": "A single catalog model.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/catalog/models/:model_code?protocol=https",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "catalog",
+                                "models",
+                                ":model_code"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter models by supported protocol.",
+                                  "key": "protocol",
+                                  "value": "https"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\",\n  \"service_type\": \"stt\",\n  \"provider_code\": \"<string>\",\n  \"provider\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"website\": \"<string>\",\n    \"logo_url\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"hosted_by\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"long_description\": \"<string>\",\n  \"best_for\": \"<string>\",\n  \"use_cases\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"capabilities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"streaming\": \"<boolean>\",\n  \"batch\": \"<boolean>\",\n  \"accuracy\": \"<number>\",\n  \"voice_count\": \"<integer>\",\n  \"api_path\": \"<string>\",\n  \"code_example\": \"<string>\",\n  \"code_examples\": {\n    \"curl\": \"<string>\",\n    \"python\": \"<string>\",\n    \"typescript\": \"<string>\"\n  },\n  \"docs_url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"available_regions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"region_details\": [\n    {\n      \"code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"world_part_code\": \"<string>\",\n      \"latency_ms\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"discounted_price\": \"<number>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"world_part_code\": \"<string>\",\n      \"latency_ms\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"discounted_price\": \"<number>\"\n    }\n  ],\n  \"supported_protocols\": [\n    \"wss\",\n    \"wss\"\n  ],\n  \"voices\": [\n    {\n      \"voice_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"tone\": \"<string>\",\n      \"use_case\": \"<string>\",\n      \"age_range\": \"<string>\",\n      \"language\": \"<string>\",\n      \"preview_url\": \"<string>\",\n      \"properties\": {\n        \"Excepteure70\": false,\n        \"incididunt68b\": \"ut tempor\",\n        \"nostrudbd3\": -85449897.54710048\n      },\n      \"sort_order\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"model_code\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"voice_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"tone\": \"<string>\",\n      \"use_case\": \"<string>\",\n      \"age_range\": \"<string>\",\n      \"language\": \"<string>\",\n      \"preview_url\": \"<string>\",\n      \"properties\": {\n        \"incididunt_9f2\": 29955647,\n        \"pariatur_a\": \"inc\"\n      },\n      \"sort_order\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"model_code\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"similar_models\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider_name\": \"<string>\",\n      \"service_type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider_name\": \"<string>\",\n      \"service_type\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"pricing\": {\n    \"min_price\": \"<integer>\",\n    \"unit\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:55:28.000Z",
+                          "updatedAt": "2026-07-28T02:55:28.000Z",
+                          "uid": "35240-cdfd248e-a53f-4c4c-8211-3f2e60992d79"
+                        },
+                        {
+                          "id": "a1a054bd-1bbf-49bd-9cfd-09e7acac0883",
+                          "name": "The request was invalid. Returned for unsupported query parameters, out-of-range values, or a malformed model code.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/catalog/models/:model_code?protocol=https",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "catalog",
+                                "models",
+                                ":model_code"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter models by supported protocol.",
+                                  "key": "protocol",
+                                  "value": "https"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:28.000Z",
+                          "updatedAt": "2026-07-28T02:55:28.000Z",
+                          "uid": "35240-a1a054bd-1bbf-49bd-9cfd-09e7acac0883"
+                        },
+                        {
+                          "id": "5f52bb75-c25b-41c2-8b72-c150a35e5548",
+                          "name": "No model matches the requested code.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/catalog/models/:model_code?protocol=https",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "catalog",
+                                "models",
+                                ":model_code"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter models by supported protocol.",
+                                  "key": "protocol",
+                                  "value": "https"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "model_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:55:28.000Z",
+                          "updatedAt": "2026-07-28T02:55:28.000Z",
+                          "uid": "35240-5f52bb75-c25b-41c2-8b72-c150a35e5548"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:55:28.000Z",
+                      "updatedAt": "2026-07-28T02:55:28.000Z",
+                      "uid": "35240-da6f07e2-5abe-4d91-858b-8198e807d49b"
+                    }
+                  ],
+                  "id": "a0427495-88ca-418b-9d98-8d154f8524bd",
+                  "createdAt": "2026-07-28T02:55:28.000Z",
+                  "updatedAt": "2026-07-28T02:55:28.000Z",
+                  "uid": "35240-a0427495-88ca-418b-9d98-8d154f8524bd"
+                },
+                {
+                  "name": "List catalog models",
+                  "id": "7499ecf8-bd7b-44a5-8e3d-e4cc2a3dcfca",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/catalog/models?service_type=stt&language=<string>&provider=<string>&region=<string>&use_case=<string>&capability=<string>&protocol=https&slng_hosted_only=<boolean>&search=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "catalog",
+                        "models"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter models by service type.",
+                          "key": "service_type",
+                          "value": "stt"
+                        },
+                        {
+                          "description": "Filter models by supported language code (for example `en`).",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter models by provider code (for example `rime`).",
+                          "key": "provider",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter models by region code (for example `eu-north-1`).",
+                          "key": "region",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter models by use case tag.",
+                          "key": "use_case",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter models by capability tag.",
+                          "key": "capability",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter models by supported protocol.",
+                          "key": "protocol",
+                          "value": "https"
+                        },
+                        {
+                          "description": "When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`.",
+                          "key": "slng_hosted_only",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Full-text search across model names and descriptions.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The page number to return (1-based). Defaults to 1.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "The number of items per page. Defaults to 20.",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    },
+                    "description": "List the models available in the SLNG catalog. Supports filtering by service type, provider, region, language, use case, capability, and protocol, plus full-text search and pagination. Authentication is optional \u2014 an API key personalizes pricing and region availability for your organisation; anonymous requests return public catalog data.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "50c5ae4d-d42a-4b46-8af6-43afea86d903",
+                      "name": "A paginated list of catalog models.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/catalog/models?service_type=stt&language=<string>&provider=<string>&region=<string>&use_case=<string>&capability=<string>&protocol=https&slng_hosted_only=<boolean>&search=<string>&page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "catalog",
+                            "models"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter models by service type.",
+                              "key": "service_type",
+                              "value": "stt"
+                            },
+                            {
+                              "description": "Filter models by supported language code (for example `en`).",
+                              "key": "language",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by provider code (for example `rime`).",
+                              "key": "provider",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by region code (for example `eu-north-1`).",
+                              "key": "region",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by use case tag.",
+                              "key": "use_case",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by capability tag.",
+                              "key": "capability",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by supported protocol.",
+                              "key": "protocol",
+                              "value": "https"
+                            },
+                            {
+                              "description": "When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`.",
+                              "key": "slng_hosted_only",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Full-text search across model names and descriptions.",
+                              "key": "search",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The page number to return (1-based). Defaults to 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page. Defaults to 20.",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"items\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"service_type\": \"stt\",\n      \"provider_code\": \"<string>\",\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"code\": \"<string>\",\n        \"website\": \"<string>\",\n        \"logo_url\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"hosted_by\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"long_description\": \"<string>\",\n      \"best_for\": \"<string>\",\n      \"use_cases\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"capabilities\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"languages\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"streaming\": \"<boolean>\",\n      \"batch\": \"<boolean>\",\n      \"accuracy\": \"<number>\",\n      \"voice_count\": \"<integer>\",\n      \"api_path\": \"<string>\",\n      \"code_example\": \"<string>\",\n      \"code_examples\": {\n        \"curl\": \"<string>\",\n        \"python\": \"<string>\",\n        \"typescript\": \"<string>\"\n      },\n      \"docs_url\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"available_regions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"region_details\": [\n        {\n          \"code\": \"<string>\",\n          \"country\": \"<string>\",\n          \"world_part_code\": \"<string>\",\n          \"latency_ms\": \"<integer>\",\n          \"price\": \"<number>\",\n          \"discounted_price\": \"<number>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"country\": \"<string>\",\n          \"world_part_code\": \"<string>\",\n          \"latency_ms\": \"<integer>\",\n          \"price\": \"<number>\",\n          \"discounted_price\": \"<number>\"\n        }\n      ],\n      \"supported_protocols\": [\n        \"https\",\n        \"wss\"\n      ],\n      \"voices\": [\n        {\n          \"voice_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"gender\": \"<string>\",\n          \"tone\": \"<string>\",\n          \"use_case\": \"<string>\",\n          \"age_range\": \"<string>\",\n          \"language\": \"<string>\",\n          \"preview_url\": \"<string>\",\n          \"properties\": {\n            \"ipsum_6c6\": false,\n            \"fugiat_2\": -85390672.41360225,\n            \"esse138\": 61641448.664735556\n          },\n          \"sort_order\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"model_code\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        },\n        {\n          \"voice_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"gender\": \"<string>\",\n          \"tone\": \"<string>\",\n          \"use_case\": \"<string>\",\n          \"age_range\": \"<string>\",\n          \"language\": \"<string>\",\n          \"preview_url\": \"<string>\",\n          \"properties\": {\n            \"aliquip_ecb\": -6250506,\n            \"irureb\": 529041.087118417\n          },\n          \"sort_order\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"model_code\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        }\n      ],\n      \"similar_models\": [\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"provider_name\": \"<string>\",\n          \"service_type\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"provider_name\": \"<string>\",\n          \"service_type\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"pricing\": {\n        \"min_price\": \"<integer>\",\n        \"unit\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"service_type\": \"tts\",\n      \"provider_code\": \"<string>\",\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"code\": \"<string>\",\n        \"website\": \"<string>\",\n        \"logo_url\": \"<string>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"hosted_by\": \"<string>\",\n      \"short_description\": \"<string>\",\n      \"long_description\": \"<string>\",\n      \"best_for\": \"<string>\",\n      \"use_cases\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"capabilities\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"languages\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"streaming\": \"<boolean>\",\n      \"batch\": \"<boolean>\",\n      \"accuracy\": \"<number>\",\n      \"voice_count\": \"<integer>\",\n      \"api_path\": \"<string>\",\n      \"code_example\": \"<string>\",\n      \"code_examples\": {\n        \"curl\": \"<string>\",\n        \"python\": \"<string>\",\n        \"typescript\": \"<string>\"\n      },\n      \"docs_url\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"available_regions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"region_details\": [\n        {\n          \"code\": \"<string>\",\n          \"country\": \"<string>\",\n          \"world_part_code\": \"<string>\",\n          \"latency_ms\": \"<integer>\",\n          \"price\": \"<number>\",\n          \"discounted_price\": \"<number>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"country\": \"<string>\",\n          \"world_part_code\": \"<string>\",\n          \"latency_ms\": \"<integer>\",\n          \"price\": \"<number>\",\n          \"discounted_price\": \"<number>\"\n        }\n      ],\n      \"supported_protocols\": [\n        \"wss\",\n        \"wss\"\n      ],\n      \"voices\": [\n        {\n          \"voice_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"gender\": \"<string>\",\n          \"tone\": \"<string>\",\n          \"use_case\": \"<string>\",\n          \"age_range\": \"<string>\",\n          \"language\": \"<string>\",\n          \"preview_url\": \"<string>\",\n          \"properties\": {\n            \"esse__b_\": true,\n            \"voluptate_a2\": false\n          },\n          \"sort_order\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"model_code\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        },\n        {\n          \"voice_id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"gender\": \"<string>\",\n          \"tone\": \"<string>\",\n          \"use_case\": \"<string>\",\n          \"age_range\": \"<string>\",\n          \"language\": \"<string>\",\n          \"preview_url\": \"<string>\",\n          \"properties\": {\n            \"aliqua_0_\": \"ad aliquip ut voluptate\",\n            \"amet0\": \"com\"\n          },\n          \"sort_order\": \"<integer>\",\n          \"enabled\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"model_code\": \"<string>\",\n          \"created_at\": \"<dateTime>\",\n          \"updated_at\": \"<dateTime>\"\n        }\n      ],\n      \"similar_models\": [\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"provider_name\": \"<string>\",\n          \"service_type\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"provider_name\": \"<string>\",\n          \"service_type\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"pricing\": {\n        \"min_price\": \"<integer>\",\n        \"unit\": \"<string>\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"total\": \"<integer>\",\n    \"pages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:55:28.000Z",
+                      "updatedAt": "2026-07-28T02:55:28.000Z",
+                      "uid": "35240-50c5ae4d-d42a-4b46-8af6-43afea86d903"
+                    },
+                    {
+                      "id": "719b1924-da15-4120-a117-bd2ea84af68d",
+                      "name": "The request was invalid. Returned for unsupported query parameters, out-of-range values, or a malformed model code.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/catalog/models?service_type=stt&language=<string>&provider=<string>&region=<string>&use_case=<string>&capability=<string>&protocol=https&slng_hosted_only=<boolean>&search=<string>&page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "catalog",
+                            "models"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter models by service type.",
+                              "key": "service_type",
+                              "value": "stt"
+                            },
+                            {
+                              "description": "Filter models by supported language code (for example `en`).",
+                              "key": "language",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by provider code (for example `rime`).",
+                              "key": "provider",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by region code (for example `eu-north-1`).",
+                              "key": "region",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by use case tag.",
+                              "key": "use_case",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by capability tag.",
+                              "key": "capability",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter models by supported protocol.",
+                              "key": "protocol",
+                              "value": "https"
+                            },
+                            {
+                              "description": "When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`.",
+                              "key": "slng_hosted_only",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Full-text search across model names and descriptions.",
+                              "key": "search",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The page number to return (1-based). Defaults to 1.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page. Defaults to 20.",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:55:28.000Z",
+                      "updatedAt": "2026-07-28T02:55:28.000Z",
+                      "uid": "35240-719b1924-da15-4120-a117-bd2ea84af68d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:55:28.000Z",
+                  "updatedAt": "2026-07-28T02:55:28.000Z",
+                  "uid": "35240-7499ecf8-bd7b-44a5-8e3d-e4cc2a3dcfca"
+                }
+              ],
+              "id": "fd9ecdfd-2bcd-4f5d-9176-dd006085cffc",
+              "createdAt": "2026-07-28T02:55:28.000Z",
+              "updatedAt": "2026-07-28T02:55:28.000Z",
+              "uid": "35240-fd9ecdfd-2bcd-4f5d-9176-dd006085cffc"
+            }
+          ],
+          "id": "1b41def4-ad5b-4e56-84b6-7d0abe3d7928",
+          "createdAt": "2026-07-28T02:55:28.000Z",
+          "updatedAt": "2026-07-28T02:55:28.000Z",
+          "uid": "35240-1b41def4-ad5b-4e56-84b6-7d0abe3d7928"
+        }
+      ],
+      "id": "64fb3f97-4af8-40e9-a78b-13af2e9e571e",
+      "createdAt": "2026-07-28T02:55:28.000Z",
+      "updatedAt": "2026-07-28T02:55:28.000Z",
+      "uid": "35240-64fb3f97-4af8-40e9-a78b-13af2e9e571e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

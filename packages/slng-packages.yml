@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/slng-ai, https://docs.slng.ai/getting-started.md
+packages:
+  - language: typescript
+    registry: github
+    name: slng-ai/sdks
+    url: https://github.com/slng-ai/sdks
+    official: true
+    note: First-party JavaScript/TypeScript SDKs for the SLNG voice API.
+  - language: python
+    registry: pypi
+    name: pipecat-slng
+    url: https://github.com/slng-ai/pipecat-slng
+    install: pip install pipecat-slng
+    official: true
+    note: SLNG STT/TTS integration for the Pipecat voice-agent framework.
+  - language: python
+    registry: pypi
+    name: livekit-plugins-slng
+    url: https://docs.slng.ai/getting-started.md
+    install: pip install livekit-plugins-slng
+    official: true
+    note: SLNG adapter plugin for LiveKit Agents.
+  - language: typescript
+    registry: npm
+    name: n8n-nodes-slng
+    url: https://github.com/slng-ai/n8n-nodes-slng
+    official: true
+    note: SLNG community nodes for the n8n workflow automation platform.
+  - language: multiple
+    registry: github
+    name: slng-ai/skills
+    url: https://github.com/slng-ai/skills
+    install: npx skills add slng-ai/skills
+    official: true
+    note: Packaged agent skills for building on the SLNG API.

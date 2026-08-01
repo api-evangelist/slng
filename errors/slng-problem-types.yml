@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/ 4xx/5xx responses
+format: simple-error-envelope
+envelope:
+  description: >-
+    SLNG returns a compact JSON error envelope. Gateway/account errors use
+    {"error": "<message>"}. Provider (upstream STT/TTS) errors add the upstream
+    status and detail: {"error","status","details"}.
+  fields:
+    error: Human-readable, user-presentable error message (always present).
+    status: Original HTTP status code from the upstream provider (provider errors only).
+    details: Detailed upstream error message (provider errors only).
+problems:
+  - status: 400
+    title: Bad request
+    description: Invalid or missing parameters (e.g. missing audio/text, invalid encoding, unsupported query parameter, malformed model code).
+    source_operation: openapi/slng-stt-slng-openapi.yml#sttWhisperLargeV3Receive
+  - status: 401
+    title: Unauthorized
+    description: Invalid or missing API key.
+    source_operation: openapi/slng-stt-slng-openapi.yml#sttWhisperLargeV3Receive
+  - status: 403
+    title: Forbidden
+    description: Missing or invalid API key / API key id not found.
+    source_operation: openapi/slng-me-openapi.json#meGet
+  - status: 404
+    title: Not found
+    description: No model matches the requested code (catalog); resource not found.
+    source_operation: openapi/slng-management-slng-openapi.yml#catalog-models-detail
+  - status: 413
+    title: Payload too large
+    description: Audio file exceeds the size limit (25MB for Whisper).
+    source_operation: openapi/slng-stt-slng-openapi.yml#sttWhisperLargeV3Receive
+  - status: 500
+    title: Internal server error
+    description: Gateway or upstream provider processing error.
+    source_operation: openapi/slng-stt-slng-openapi.yml#sttWhisperLargeV3Receive
+  - status: 503
+    title: Service unavailable
+    description: Upstream provider service temporarily unavailable.
+    source_operation: openapi/slng-stt-slng-openapi.yml#sttWhisperLargeV3Receive

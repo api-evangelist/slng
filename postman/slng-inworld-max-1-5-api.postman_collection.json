@@ -1,0 +1,454 @@
+{
+  "info": {
+    "_postman_id": "2a37cec4-87fd-47ef-960f-41533fe33113",
+    "name": "SLNG Voice Agents Account Inworld Max 1.5 API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:31.000Z",
+    "updatedAt": "2026-07-28T02:55:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2a37cec4-87fd-47ef-960f-41533fe33113"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "tts",
+          "item": [
+            {
+              "name": "slng",
+              "item": [
+                {
+                  "name": "inworld",
+                  "item": [
+                    {
+                      "name": "max:1.5",
+                      "item": [
+                        {
+                          "name": "Inworld Max 1.5",
+                          "id": "e181f4d8-6f39-4c30-ae3d-5d6ffb1bfbc1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "us-east-1"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"it-IT\",\n  \"deliveryMode\": \"CREATIVE\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/inworld/max:1.5",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "inworld",
+                                "max:1.5"
+                              ]
+                            },
+                            "description": "Synthesize speech using SLNG-hosted Inworld Max 1.5."
+                          },
+                          "response": [
+                            {
+                              "id": "4b5b1062-a815-4f9d-868b-17bee66206dd",
+                              "name": "Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld's native body passed through unchanged, carrying base64-encoded audio plus usage ",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"it-IT\",\n  \"deliveryMode\": \"CREATIVE\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/inworld/max:1.5",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "inworld",
+                                    "max:1.5"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"audioContent\": \"<string>\",\n  \"usage\": {\n    \"processedCharactersCount\": \"<integer>\",\n    \"modelId\": \"<string>\"\n  },\n  \"timestampInfo\": {\n    \"wordAlignment\": {\n      \"words\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"wordStartTimeSeconds\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"wordEndTimeSeconds\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"phoneticDetails\": [\n        {\n          \"wordIndex\": \"<integer>\",\n          \"phones\": [\n            {\n              \"phoneSymbol\": \"<string>\",\n              \"startTimeSeconds\": \"<number>\",\n              \"durationSeconds\": \"<number>\",\n              \"visemeSymbol\": \"<string>\"\n            },\n            {\n              \"phoneSymbol\": \"<string>\",\n              \"startTimeSeconds\": \"<number>\",\n              \"durationSeconds\": \"<number>\",\n              \"visemeSymbol\": \"<string>\"\n            }\n          ],\n          \"isPartial\": \"<boolean>\"\n        },\n        {\n          \"wordIndex\": \"<integer>\",\n          \"phones\": [\n            {\n              \"phoneSymbol\": \"<string>\",\n              \"startTimeSeconds\": \"<number>\",\n              \"durationSeconds\": \"<number>\",\n              \"visemeSymbol\": \"<string>\"\n            },\n            {\n              \"phoneSymbol\": \"<string>\",\n              \"startTimeSeconds\": \"<number>\",\n              \"durationSeconds\": \"<number>\",\n              \"visemeSymbol\": \"<string>\"\n            }\n          ],\n          \"isPartial\": \"<boolean>\"\n        }\n      ]\n    },\n    \"characterAlignment\": {\n      \"characters\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"characterStartTimeSeconds\": [\n        \"<number>\",\n        \"<number>\"\n      ],\n      \"characterEndTimeSeconds\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:55:32.000Z",
+                              "updatedAt": "2026-07-28T02:55:32.000Z",
+                              "uid": "35240-4b5b1062-a815-4f9d-868b-17bee66206dd"
+                            },
+                            {
+                              "id": "9fe14bf7-c86d-4d21-a062-4cee031ac708",
+                              "name": "Bad request - invalid parameters provided.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"it-IT\",\n  \"deliveryMode\": \"CREATIVE\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/inworld/max:1.5",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "inworld",
+                                    "max:1.5"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:32.000Z",
+                              "updatedAt": "2026-07-28T02:55:32.000Z",
+                              "uid": "35240-9fe14bf7-c86d-4d21-a062-4cee031ac708"
+                            },
+                            {
+                              "id": "8ef66160-3807-4cea-a590-7cf80bc246c2",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"it-IT\",\n  \"deliveryMode\": \"CREATIVE\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/inworld/max:1.5",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "inworld",
+                                    "max:1.5"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:32.000Z",
+                              "updatedAt": "2026-07-28T02:55:32.000Z",
+                              "uid": "35240-8ef66160-3807-4cea-a590-7cf80bc246c2"
+                            },
+                            {
+                              "id": "55e60566-1752-4638-ba27-285bb47b1b6c",
+                              "name": "Internal server error from the provider.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"it-IT\",\n  \"deliveryMode\": \"CREATIVE\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/inworld/max:1.5",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "inworld",
+                                    "max:1.5"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:32.000Z",
+                              "updatedAt": "2026-07-28T02:55:32.000Z",
+                              "uid": "35240-55e60566-1752-4638-ba27-285bb47b1b6c"
+                            },
+                            {
+                              "id": "2b557df0-31f4-4a7c-89b2-cc0df67df509",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"it-IT\",\n  \"deliveryMode\": \"CREATIVE\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/inworld/max:1.5",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "inworld",
+                                    "max:1.5"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:32.000Z",
+                              "updatedAt": "2026-07-28T02:55:32.000Z",
+                              "uid": "35240-2b557df0-31f4-4a7c-89b2-cc0df67df509"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:55:32.000Z",
+                          "updatedAt": "2026-07-28T02:55:32.000Z",
+                          "uid": "35240-e181f4d8-6f39-4c30-ae3d-5d6ffb1bfbc1"
+                        }
+                      ],
+                      "id": "948355ba-e75c-4e5d-ae59-e46654d673ad",
+                      "createdAt": "2026-07-28T02:55:32.000Z",
+                      "updatedAt": "2026-07-28T02:55:32.000Z",
+                      "uid": "35240-948355ba-e75c-4e5d-ae59-e46654d673ad"
+                    }
+                  ],
+                  "id": "cf68e7c4-c222-4ea6-90d3-635f2e7d7b8d",
+                  "createdAt": "2026-07-28T02:55:32.000Z",
+                  "updatedAt": "2026-07-28T02:55:32.000Z",
+                  "uid": "35240-cf68e7c4-c222-4ea6-90d3-635f2e7d7b8d"
+                }
+              ],
+              "id": "38c9fb6c-4c7f-43de-8862-3f2c7a45c822",
+              "createdAt": "2026-07-28T02:55:32.000Z",
+              "updatedAt": "2026-07-28T02:55:32.000Z",
+              "uid": "35240-38c9fb6c-4c7f-43de-8862-3f2c7a45c822"
+            }
+          ],
+          "id": "81096cad-178f-4707-9b9f-529092498d50",
+          "createdAt": "2026-07-28T02:55:32.000Z",
+          "updatedAt": "2026-07-28T02:55:32.000Z",
+          "uid": "35240-81096cad-178f-4707-9b9f-529092498d50"
+        }
+      ],
+      "id": "8af3613f-dd1f-4cb9-a15b-58c54b5598c5",
+      "createdAt": "2026-07-28T02:55:32.000Z",
+      "updatedAt": "2026-07-28T02:55:32.000Z",
+      "uid": "35240-8af3613f-dd1f-4cb9-a15b-58c54b5598c5"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+# SLNG Documentation
+
+## Docs
+
+- [Embed a SLNG voice agent on your website](https://docs.slng.ai/agents/embed-web.md): Add a browser-based voice session with a SLNG voice agent to any web page using LiveKit, a React frontend, and a backend proxy that hides your SLNG key.
+- [LiveKit plugin for SLNG](https://docs.slng.ai/agents/livekit-plugin.md): Use the livekit-plugins-slng Python package to connect LiveKit Agents to any STT or TTS model on the SLNG platform with a single configuration switch.
+- [Pipecat plugin for SLNG](https://docs.slng.ai/agents/pipecat-plugin.md): Use the pipecat-slng Python package to connect a Pipecat pipeline to any STT or TTS model on the SLNG gateway by swapping a single model string.
+- [Get current account](https://docs.slng.ai/api-reference/account/get-current-account.md): Return the account, organization, and API key associated with the bearer token in the request. Use this to confirm which key is in use and which organization and plan tier it belongs to.
+- [Create agent](https://docs.slng.ai/api-reference/agents/create-agent.md): Create a new voice agent.
+- [Delete agent](https://docs.slng.ai/api-reference/agents/delete-agent.md): Soft-delete a voice agent.
+- [Duplicate agent](https://docs.slng.ai/api-reference/agents/duplicate-agent.md): Create a server-side copy of an existing voice agent.
+- [Get agent](https://docs.slng.ai/api-reference/agents/get-agent.md): Get a single voice agent by ID.
+- [List agents](https://docs.slng.ai/api-reference/agents/list-agents.md): List all voice agents for your organisation.
+- [Replace agent](https://docs.slng.ai/api-reference/agents/replace-agent.md): Replace a voice agent (full update).
+- [Update agent (partial)](https://docs.slng.ai/api-reference/agents/update-agent-partial.md): Partially update a voice agent.
+- [Cognigy STT](https://docs.slng.ai/api-reference/bridges/cognigy-stt-bridge/cognigy-stt-bridge-http.md): Transcribe audio via Cognigy Voice Gateway protocol bridge.
+- [Cognigy STT](https://docs.slng.ai/api-reference/bridges/cognigy-stt-bridge/cognigy-stt-bridge-ws.md): Stream live audio to SLNG over the Cognigy Voice Gateway WebSocket protocol and receive real-time STT transcripts from any supported model.
+- [Cognigy TTS](https://docs.slng.ai/api-reference/bridges/cognigy-tts-bridge/cognigy-tts-bridge-http.md): Synthesize speech via Cognigy Voice Gateway protocol bridge.
+- [Cognigy TTS](https://docs.slng.ai/api-reference/bridges/cognigy-tts-bridge/cognigy-tts-bridge-ws.md): Stream synthesized speech from SLNG over the Cognigy Voice Gateway WebSocket protocol using any supported text-to-speech model and voice.
+- [Jambonz STT](https://docs.slng.ai/api-reference/bridges/jambonz-stt-bridge/jambonz-stt-bridge-http.md): Transcribe audio via Jambonz custom STT protocol bridge. The model_variant path parameter specifies the target STT model (e.g., deepgram/nova:3, slng/openai/whisper:large-v3).
+- [Jambonz STT](https://docs.slng.ai/api-reference/bridges/jambonz-stt-bridge/jambonz-stt-bridge-ws.md): Reference for the Jambonz custom WebSocket STT bridge channel, including init, audio, stop messages and the model_variant routing parameter.
+- [Jambonz TTS](https://docs.slng.ai/api-reference/bridges/jambonz-tts-bridge/jambonz-tts-bridge-http.md): Synthesize speech via Jambonz custom TTS protocol bridge. The model_variant path parameter specifies the target TTS model (e.g., deepgram/aura:2).
+- [Jambonz TTS](https://docs.slng.ai/api-reference/bridges/jambonz-tts-bridge/jambonz-tts-bridge-ws.md): Reference for the Jambonz custom WebSocket TTS bridge channel, including stream, flush, stop messages, binary audio frames, and model_variant routing.
+- [Dispatch call](https://docs.slng.ai/api-reference/calls/dispatch-call.md): Dispatch an outbound call for a voice agent.
+- [Get call](https://docs.slng.ai/api-reference/calls/get-call.md): Get details of a specific call.
+- [List calls](https://docs.slng.ai/api-reference/calls/list-calls.md): List calls for a voice agent (paginated).
+- [API Reference](https://docs.slng.ai/api-reference/overview.md): Every SLNG endpoint, grouped by capability: the Unified API, text-to-speech, speech-to-text, voice agents, batch, and orchestrator bridges.
+- [Create web session](https://docs.slng.ai/api-reference/sessions/create-web-session.md): Create a browser session for a voice agent.
+- [Create batch job](https://docs.slng.ai/api-reference/speechmatics/create-batch-job.md): Submit audio for asynchronous transcription. Supports file upload (`multipart/form-data`), URL input, and presigned S3 upload (`application/json`). For the presigned-upload flow, the first call (`mode: "presign"`) returns **200 OK** with an upload URL — the job is not created until step 3. All other…
+- [Delete batch job](https://docs.slng.ai/api-reference/speechmatics/delete-batch-job.md): Delete a completed or failed job. Only jobs in a terminal status (`DONE` or `FAILED`) can be deleted.
+- [Get batch job](https://docs.slng.ai/api-reference/speechmatics/get-batch-job.md): Returns the full details of a job (status, config, timestamps, error info). Poll until `status` reaches `DONE` or `FAILED`.
+- [Get batch job files](https://docs.slng.ai/api-reference/speechmatics/get-batch-job-files.md): Returns signed download URLs for the input audio and the output transcripts of a completed job. Outputs are returned per available format (`json`, `txt`, `srt`); missing formats are omitted.
+- [List batch jobs](https://docs.slng.ai/api-reference/speechmatics/list-batch-jobs.md): Returns a paginated list of jobs for your organization. Supports filtering by status, model, and submission date range, plus sorting.
+- [Nova 2](https://docs.slng.ai/api-reference/stt/deepgram-nova-2/nova-2-http.md): Transcribe audio using Deepgram Nova 2 with VAD and speaker diarization.
+- [Nova 2](https://docs.slng.ai/api-reference/stt/deepgram-nova-2/nova-2-ws.md): Stream real-time speech-to-text transcripts from Deepgram Nova 2 over WebSocket with voice activity detection, speaker diarization, and partial results.
+- [Nova 3 Medical](https://docs.slng.ai/api-reference/stt/deepgram-nova-3-medical/nova-3-medical-http.md): Transcribe medical audio using Deepgram Nova 3 Medical with specialized vocabulary.
+- [Nova 3 Medical](https://docs.slng.ai/api-reference/stt/deepgram-nova-3-medical/nova-3-medical-ws.md): Stream real-time medical transcription from Deepgram Nova 3 Medical over WebSocket with healthcare-specific vocabulary, VAD, and speaker diarization.
+- [Nova 3 (English)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-english-http.md): Transcribe English audio using SLNG-hosted Deepgram Nova 3.
+- [Nova 3 (English)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-english-ws.md): Stream real-time English transcripts from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partials, finals, and speaker diarization.
+- [Nova 3 (Hindi)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-hindi-http.md): Transcribe Hindi audio using SLNG-hosted Deepgram Nova 3.
+- [Nova 3 (Hindi)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-hindi-ws.md): Stream real-time Hindi speech-to-text from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partial and final transcripts and VAD.
+- [Nova 3](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-http.md): Transcribe audio using Deepgram Nova 3 with VAD and speaker diarization.
+- [Nova 3 (Indonesian)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-indonesian-ws.md): Stream real-time Indonesian speech-to-text from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partial and final transcripts and VAD.
+- [Nova 3 (Kannada)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-kannada-ws.md): Stream real-time Kannada speech-to-text from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partial and final transcripts and VAD.
+- [Nova 3 (Marathi)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-marathi-ws.md): Stream real-time Marathi speech-to-text from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partial and final transcripts and VAD.
+- [Nova 3 (Multi-Language)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-multi-language-http.md): Transcribe multi-language audio using SLNG-hosted Deepgram Nova 3.
+- [Nova 3 (Multi-Language)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-multi-language-ws.md): Stream real-time multilingual transcripts from SLNG-hosted Deepgram Nova 3 over WebSocket with automatic language detection across supported languages.
+- [Nova 3 (Spanish)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-spanish-http.md): Transcribe Spanish audio using SLNG-hosted Deepgram Nova 3.
+- [Nova 3 (Spanish)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-spanish-ws.md): Stream real-time Spanish speech-to-text from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partial and final transcripts and VAD.
+- [Nova 3 (Telugu)](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-telugu-ws.md): Stream real-time Telugu speech-to-text from SLNG-hosted Deepgram Nova 3 over WebSocket with low-latency partial and final transcripts and VAD.
+- [Nova 3](https://docs.slng.ai/api-reference/stt/deepgram-nova-3/nova-3-ws.md): Stream real-time speech-to-text transcripts from Deepgram Nova 3 over WebSocket with voice activity detection, speaker diarization, and partial results.
+- [Gradium STT default](https://docs.slng.ai/api-reference/stt/gradium-stt/gradium-stt-default-ws.md): Real-time multilingual speech-to-text via streaming WebSocket
+- [Reson8 STT v1](https://docs.slng.ai/api-reference/stt/reson8-stt-v1/reson8-stt-v1-ws.md): Real-time speech-to-text transcription using Reson8 via WebSocket. Supports streaming audio with word-level timestamps, confidence scores, and partial results.
+- [Saaras v3](https://docs.slng.ai/api-reference/stt/sarvam-ai-saaras/saaras-v3-http.md): Transcribe audio using Sarvam AI Saaras with domain-aware speech recognition for 23 languages and flexible output modes.
+- [Saaras v3](https://docs.slng.ai/api-reference/stt/sarvam-ai-saaras/saaras-v3-ws.md): "Stream real-time speech-to-text transcripts from Sarvam AI Saaras v3 over WebSocket with voice activity detection across 23 Indian languages. Session configuration is provided via query parameters on the WebSocket upgrade URL: `language-code`, `mode`, `sample_rate`, `input_audio_codec`, `high_vad_s…
+- [Speech AI Real-time v4](https://docs.slng.ai/api-reference/stt/soniox-speech-ai-real-time-v4/speech-ai-real-time-v4-ws.md): Stream real-time transcripts from Soniox Speech AI v4 over WebSocket with speaker diarization, language detection, and configurable endpoint detection.
+- [Cartesia Sonic 3](https://docs.slng.ai/api-reference/tts/cartesia-sonic-3/cartesia-sonic-3-ws.md): Stream low-latency speech synthesis from Cartesia Sonic 3 over WebSocket with a multilingual catalog of voices and context-aware controls.
+- [Aura 2 (English)](https://docs.slng.ai/api-reference/tts/deepgram-aura-2/aura-2-english-http.md): Synthesize English speech using SLNG-hosted Deepgram Aura 2.
+- [Aura 2 (English)](https://docs.slng.ai/api-reference/tts/deepgram-aura-2/aura-2-english-ws.md): Stream low-latency conversational English text-to-speech from SLNG-hosted Deepgram Aura 2 over WebSocket, optimized for production voice agents.
+- [Aura 2](https://docs.slng.ai/api-reference/tts/deepgram-aura-2/aura-2-http.md): Synthesize speech using Deepgram Aura 2 for conversational voice agents.
+- [Aura 2 (Spanish)](https://docs.slng.ai/api-reference/tts/deepgram-aura-2/aura-2-spanish-http.md): Synthesize Spanish speech using SLNG-hosted Deepgram Aura 2.
+- [Aura 2 (Spanish)](https://docs.slng.ai/api-reference/tts/deepgram-aura-2/aura-2-spanish-ws.md): Stream low-latency conversational Spanish text-to-speech from SLNG-hosted Deepgram Aura 2 over WebSocket, optimized for production voice agents.
+- [Aura 2](https://docs.slng.ai/api-reference/tts/deepgram-aura-2/aura-2-ws.md): Stream low-latency conversational text-to-speech from Deepgram Aura 2 over WebSocket as raw binary frames, optimized for ultra-low-latency voice agents.
+- [Gradium TTS default](https://docs.slng.ai/api-reference/tts/gradium-tts/gradium-tts-default-http.md): Real-time multilingual text-to-speech with streaming WebSocket and one-shot HTTP synthesis
+- [Gradium TTS default](https://docs.slng.ai/api-reference/tts/gradium-tts/gradium-tts-default-ws.md): Real-time multilingual text-to-speech with streaming WebSocket and one-shot HTTP synthesis
+- [Inworld Max 1.5](https://docs.slng.ai/api-reference/tts/inworld-max-1-5/inworld-max-1-5-http.md): Synthesize speech using SLNG-hosted Inworld Max 1.5.
+- [Inworld Max 1.5](https://docs.slng.ai/api-reference/tts/inworld-max-1-5/inworld-max-1-5-ws.md): Stream multilingual speech synthesis from SLNG-hosted Inworld Max 1.5 over WebSocket using SLNG's unified low-latency TTS protocol.
+- [Kugel 1 Turbo](https://docs.slng.ai/api-reference/tts/kugel-1-turbo/kugel-1-turbo-ws.md): Stream low-latency high-quality speech from KugelAudio Kugel 1 Turbo over WebSocket with expressiveness controls and SLNG's unified TTS protocol.
+- [Kugel 1](https://docs.slng.ai/api-reference/tts/kugel-1/kugel-1-ws.md): Stream high-quality speech synthesis from KugelAudio Kugel 1 over WebSocket with expressiveness controls and SLNG's unified TTS protocol.
+- [Kugel 2 Turbo](https://docs.slng.ai/api-reference/tts/kugel-2-turbo/kugel-2-turbo-ws.md): Stream low-latency high-quality speech synthesis from KugelAudio Kugel 2 Turbo over WebSocket with expressiveness controls and SLNG's unified TTS protocol.
+- [Kugel 2](https://docs.slng.ai/api-reference/tts/kugel-2/kugel-2-ws.md): Stream high-quality speech synthesis from KugelAudio Kugel 2 over WebSocket with expressiveness controls and SLNG's unified TTS protocol.
+- [Murf Falcon](https://docs.slng.ai/api-reference/tts/murf-falcon/murf-falcon-ws.md): Stream high-quality multilingual speech synthesis from Murf Falcon over WebSocket with selectable encodings, sample rates, and SLNG's unified TTS protocol.
+- [Create pronunciation dictionary](https://docs.slng.ai/api-reference/tts/pronunciation-dictionaries/create-pronunciation-dictionary-http.md): Create a reusable pronunciation dictionary for TTS rewrite rules.
+- [Delete pronunciation dictionary](https://docs.slng.ai/api-reference/tts/pronunciation-dictionaries/delete-pronunciation-dictionary-http.md): Delete one pronunciation dictionary by name from the authenticated organization.
+- [Get pronunciation dictionary](https://docs.slng.ai/api-reference/tts/pronunciation-dictionaries/get-pronunciation-dictionary-http.md): Read one pronunciation dictionary by name from the authenticated organization.
+- [List pronunciation dictionaries](https://docs.slng.ai/api-reference/tts/pronunciation-dictionaries/list-pronunciation-dictionaries-http.md): List pronunciation dictionaries for the authenticated organization.
+- [Arcana v3 (English)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-english-http.md): Synthesize English speech using Rime Arcana v3 TTS model.
+- [Arcana v3 (English)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-english-ws.md): Text-to-Speech API for generating English speech using Rime Arcana v3 TTS model. Establishes a WebSocket connection for real-time text-to-speech.
+- [Arcana v3 (French)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-french-http.md): Synthesize French speech using Rime Arcana v3 TTS model.
+- [Arcana v3 (French)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-french-ws.md): Text-to-Speech API for generating French speech using Rime Arcana v3 TTS model. Establishes a WebSocket connection for real-time text-to-speech.
+- [Arcana v3 (Hindi)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-hindi-http.md): Synthesize Hindi speech using Rime Arcana v3 TTS model.
+- [Arcana v3 (Hindi)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-hindi-ws.md): Text-to-Speech API for generating Hindi speech using Rime Arcana v3 TTS model. Establishes a WebSocket connection for real-time text-to-speech.
+- [Arcana v3 (Spanish)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-spanish-http.md): Synthesize Spanish speech using Rime Arcana v3 TTS model.
+- [Arcana v3 (Spanish)](https://docs.slng.ai/api-reference/tts/rime-arcana-v3/arcana-v3-spanish-ws.md): Text-to-Speech API for generating Spanish speech using Rime Arcana v3 TTS model. Establishes a WebSocket connection for real-time text-to-speech.
+- [Bulbul Stream v3](https://docs.slng.ai/api-reference/tts/sarvam-ai-bulbul-stream-v3/bulbul-stream-v3-http.md): HTTP-streaming multilingual TTS for Indian languages with 30+ speaker voices. Returns raw audio bytes (chunked) in the codec selected via `output_audio_codec`. Unlike `sarvam/bulbul:v3`, no `X-Duration` header is sent and no JSON envelope is used.
+- [Bulbul v3](https://docs.slng.ai/api-reference/tts/sarvam-ai-bulbul-v3/bulbul-v3-http.md): Synthesize speech using Sarvam AI Bulbul with high-quality multilingual TTS for Indian languages and 30+ speaker voices.
+- [Bulbul v3](https://docs.slng.ai/api-reference/tts/sarvam-ai-bulbul-v3/bulbul-v3-ws.md): Stream multilingual Indian-language speech from Sarvam AI Bulbul v3 over WebSocket with 30+ speaker voices and SLNG's unified low-latency TTS protocol.
+- [Soniox TTS v1](https://docs.slng.ai/api-reference/tts/soniox-tts-v1/soniox-tts-v1-http.md): Real-time text-to-speech with streaming WebSocket and one-shot HTTP synthesis
+- [Soniox TTS v1](https://docs.slng.ai/api-reference/tts/soniox-tts-v1/soniox-tts-v1-ws.md): Stream real-time speech synthesis from Soniox TTS v1 over WebSocket with low-latency incremental audio output and SLNG's unified TTS protocol.
+- [Unified STT](https://docs.slng.ai/api-reference/unified-api/unmute-stt-bridge/unmute-stt-bridge-http.md): Transcribe audio via SLNG's native WebSocket protocol bridge. The model_variant path parameter specifies the target STT model (e.g., deepgram/nova:3, slng/openai/whisper:large-v3).
+- [Unified STT](https://docs.slng.ai/api-reference/unified-api/unmute-stt-bridge/unmute-stt-bridge-ws.md): Stream audio to any SLNG-supported STT model over the unified WebSocket protocol with init, audio, finalize, partial, and final transcript messages.
+- [Unified TTS](https://docs.slng.ai/api-reference/unified-api/unmute-tts-bridge/unmute-tts-bridge-http.md): Synthesize speech via SLNG's native WebSocket protocol bridge. The model_variant path parameter specifies the target TTS model (e.g., deepgram/aura:2).
+- [Unified TTS](https://docs.slng.ai/api-reference/unified-api/unmute-tts-bridge/unmute-tts-bridge-ws.md): Stream synthesized audio from any SLNG-supported TTS model over the unified WebSocket protocol with init, text, flush, and binary audio frames.
+- [Authentication & API Keys](https://docs.slng.ai/authentication.md): Create and manage SLNG keys in the Dashboard, then authenticate requests over HTTP and WebSocket, including key rotation and bringing your own provider key.
+- [How to use Batch API](https://docs.slng.ai/batch-guide.md): Submit audio for asynchronous transcription on the SLNG Batch API using direct file upload, URL input, or presigned S3 upload. Supported formats and limits.
+- [SLNG changelog](https://docs.slng.ai/changelog.md): Release notes for the SLNG speech and language API. New TTS and STT models, voice agent features, breaking changes, and bug fixes.
+- [Agent Infra](https://docs.slng.ai/dashboard/agent-infra.md): Use Agent Infra in the SLNG Dashboard to create voice agents from templates, configure prompts and models, test in-browser, and monitor live call traffic.
+- [Telephony](https://docs.slng.ai/dashboard/telephony.md): Set up SIP trunks and phone-number connections in the SLNG Dashboard for outbound and inbound voice agent calls, including BYOC and managed providers.
+- [SLNG Voice Agent API examples](https://docs.slng.ai/examples/agents-api.md): Code samples for the SLNG Voice Agent API in JavaScript and Python. Create, list, update, test, and delete voice agents through the agent lifecycle.
+- [Dispatching outbound calls](https://docs.slng.ai/examples/agents-calls.md): Send outbound voice agent calls on SLNG with E.164 numbers, SIP trunks, template variables, and call status webhooks. JavaScript and Python code examples.
+- [Configuring SLNG voice agents](https://docs.slng.ai/examples/agents-config.md): Configure SLNG voice agents. Write effective system prompts, wire up tools and webhooks, and use template variables to personalize calls at dispatch time.
+- [Speech-to-text HTTP examples](https://docs.slng.ai/examples/stt-http.md): Code samples in curl, Python, and Node.js for basic transcription, word timestamps, and diarization.
+- [Speech-to-text WebSocket examples](https://docs.slng.ai/examples/stt-websocket.md): Code samples in Python and Node.js for basic transcription, word timestamps, and diarization.
+- [Text-to-speech HTTP examples](https://docs.slng.ai/examples/tts-http.md): Generate speech audio with the SLNG TTS HTTP API. Code samples in curl, Python, and Node.js for basic requests, voice selection, and streaming responses.
+- [Text-to-speech WebSocket examples](https://docs.slng.ai/examples/tts-websocket.md): Stream speech with the SLNG TTS WebSocket API. Python and Node.js code samples for sub-100ms latency, mid-sentence interrupt, and continuous text input.
+- [Adaptive Execution](https://docs.slng.ai/execution-layer/adaptive.md): Not every turn deserves the same execution path. The execution layer adapts on four dimensions, from geography and compliance to cost, latency, and workload.
+- [Bring your own key](https://docs.slng.ai/execution-layer/byok.md): Pass your own provider key on requests so billing runs against your provider account, while the SLNG cache still applies on top.
+- [How It Works](https://docs.slng.ai/execution-layer/how-it-works.md): SLNG runs three stages between your orchestrator and the models, one for each part of the voice pipeline. Each removes a category of unnecessary compute.
+- [The Execution Layer](https://docs.slng.ai/execution-layer/index.md): The execution layer gives you control of your voice calls. It reduces latency and model cost across the pipeline, using your existing tools, while improving reliability.
+- [Output Assembly](https://docs.slng.ai/execution-layer/output-assembly.md): TTS on the execution layer is assembly, not generation. Output is served from cache when possible and synthesized only when genuinely new.
+- [STT Routing](https://docs.slng.ai/execution-layer/stt-routing.md): The first stage of the execution layer routes each turn's audio to the transcription model best suited to it, balancing accuracy, latency, and cost.
+- [Tiered Decisioning](https://docs.slng.ai/execution-layer/tiered-decisioning.md): Not every turn in a voice call needs full LLM inference. SLNG allocates reasoning where it's needed and resolves repeatable turns through shorter paths.
+- [SLNG Unified API](https://docs.slng.ai/execution-layer/unified-api.md): The SLNG Unified API gives you one request format for every STT and TTS model. Swap Deepgram, Rime, Cartesia, and more by changing the URL.
+- [Supported models](https://docs.slng.ai/execution-layer/unified-api-models.md): Full list of TTS and STT models reachable through the SLNG Unified API. Deepgram Nova and Aura, Rime Arcana, ElevenLabs, Cartesia, Sarvam, and more.
+- [Parameters coverage](https://docs.slng.ai/execution-layer/unified-api-parameters.md): Compatibility matrix for the SLNG Unified API. Which TTS and STT request parameters are supported by Deepgram, ElevenLabs, Cartesia, Sarvam, and Rime.
+- [Getting started with SLNG](https://docs.slng.ai/getting-started.md): Authenticate, send your first text-to-speech and speech-to-text requests, and stream over WebSocket with SLNG in about five minutes.
+- [SLNG: the execution layer for voice](https://docs.slng.ai/index.md): Text-to-speech, speech-to-text, and voice agents through one API. Your orchestrator stays, your models stay. Every turn is routed and optimized for lower cost and lower latency.
+- [Drop-in gateway](https://docs.slng.ai/integrations/gateway.md): Point your existing voice stack at the SLNG platform and keep your code. Route speech-to-text and text-to-speech through one base URL to add caching, regional routing, and provider flexibility.
+- [Voice platform integrations](https://docs.slng.ai/integrations/overview.md): Use SLNG STT and TTS through LiveKit Agents, Cognigy Voice Gateway, and Jambonz with no protocol rewrites. Region overrides included.
+- [Models by Language](https://docs.slng.ai/models/by-language.md): Browse SLNG TTS and STT models grouped by supported language: English, Spanish, French, German, Hindi, Japanese, Mandarin, and 30+ Indian languages.
+- [Models by Region](https://docs.slng.ai/models/by-region.md): See which SLNG TTS and STT models are deployed in each AWS region across North America, Europe, and Asia-Pacific for low-latency routing.
+- [Model Catalog](https://docs.slng.ai/models/index.md): Browse the full catalog of TTS and STT models on SLNG. Search by provider, language, or AWS deployment region for production voice agents.
+- [Speech-to-Text Models](https://docs.slng.ai/models/stt.md): Browse every STT model on SLNG: Deepgram Nova, Sarvam Saaras, Soniox Speech AI, and Reson8 transcription, grouped by provider.
+- [Text-to-Speech Models](https://docs.slng.ai/models/tts.md): Browse every TTS model on SLNG: Cartesia, Deepgram Aura, ElevenLabs, KugelAudio, Murf, Rime Arcana, Sarvam, and Soniox voices.
+- [Pronunciation dictionaries](https://docs.slng.ai/pronunciation-dictionaries.md): Create reusable pronunciation dictionaries and attach them to any SLNG TTS request so brand names, acronyms, and domain terms are spoken the way you expect.
+- [HTTP vs. WebSocket protocols](https://docs.slng.ai/protocols.md): Compare HTTP and WebSocket protocols on SLNG. Latency, flow, complexity, and when to use each for text-to-speech and speech-to-text workloads.
+- [Error Codes & Troubleshooting](https://docs.slng.ai/reference/errors.md): Authentication, WebSocket, and pronunciation-dictionary error codes for the SLNG API, plus fixes for common streaming and audio-format issues.
+- [Regional Execution](https://docs.slng.ai/region-override.md): Models run where the data lives. Requests route to the lowest-latency region by default; pin a region or geographic zone with the X-Region-Override and X-World-Part-Override headers.
+- [Command-line interface](https://docs.slng.ai/sdks/cli.md): Install the voiceai CLI and run text-to-speech, speech-to-text, and streaming examples from a terminal.
+- [SDKs and tools](https://docs.slng.ai/sdks/index.md): Install the voiceai CLI, the JavaScript or Python SDK, or drop the slng agent skills into your coding agent.
+- [JavaScript SDK](https://docs.slng.ai/sdks/javascript.md): Install voiceai-sdk on npm and call text-to-speech, speech-to-text, and streaming endpoints from Node, Bun, or Deno.
+- [n8n node](https://docs.slng.ai/sdks/n8n.md): Install the n8n-nodes-slng community node to run SLNG text-to-speech, speech-to-text, and voice-agent calls inside n8n workflows.
+- [Python SDK](https://docs.slng.ai/sdks/python.md): Install voiceai-sdk on PyPI and call text-to-speech, speech-to-text, and streaming endpoints with sync or async clients.
+- [Agent skills](https://docs.slng.ai/sdks/skills.md): Install the slng-ai/skills pack so coding agents like Claude Code can call text-to-speech, transcription, and voice-agent APIs on your behalf.
+- [Speech-to-Text Overview](https://docs.slng.ai/stt/overview.md): Access STT models from multiple providers through a single platform. The execution layer routes each request based on language, accent, noise, and cost.
+- [Text-to-Speech Overview](https://docs.slng.ai/tts/overview.md)
+- [Voice agents on SLNG](https://docs.slng.ai/voice-agents.md): Voice Agents pair an LLM with SLNG's STT and TTS models. Create an agent once, then dispatch it to phone calls or web sessions, with tools, webhooks, and template variables.
+- [Cartesia Sonic 3](https://docs.slng.ai/voices/cartesia-sonic-3.md): Browse Cartesia Sonic 3 voices on SLNG with audio samples — low-latency multilingual TTS across 40+ languages including English, Spanish, French, and Hindi.
+- [Deepgram Aura](https://docs.slng.ai/voices/deepgram-aura.md): Browse Deepgram Aura 2 voices on SLNG with audio samples — natural conversational TTS across English, Spanish, Dutch, French, German, Italian, and Japanese.
+- [Kugel](https://docs.slng.ai/voices/kugel.md): Browse KugelAudio Kugel voices on SLNG with audio samples — expressive multilingual TTS across 25+ languages including English, Hindi, and Chinese.
+- [Murf Falcon](https://docs.slng.ai/voices/murf.md): Browse Murf Falcon voices on SLNG — real-time multilingual TTS over WebSocket with English, Spanish, French, German, Italian, Hindi, and Chinese.
+- [Orpheus](https://docs.slng.ai/voices/orpheus.md): Browse Orpheus English voices on SLNG with audio samples, emotion-control tags, and recommended use cases for natural conversational speech synthesis.
+- [Rime Arcana voices](https://docs.slng.ai/voices/rime-arcana.md): Browse Rime Arcana v2 and v3 voices on SLNG with audio samples and characteristics — supports English, Spanish, French, German, Arabic, and Hindi.
+- [Sarvam Bulbul v3](https://docs.slng.ai/voices/sarvam-bulbul.md): Browse Sarvam Bulbul v3 voices on SLNG — multilingual TTS for 11 Indian languages including Hindi, Tamil, Telugu, Marathi, and Indian English.
+- [Soniox TTS v1](https://docs.slng.ai/voices/soniox.md): Browse Soniox TTS v1 voices on SLNG with audio samples — real-time low-latency text-to-speech with 60+ supported languages and streaming WebSocket synthesis.
+- [WebSocket integration guide](https://docs.slng.ai/websocket-guide.md): Production patterns for SLNG WebSocket integrations. Reconnection, backpressure, audio buffering, error handling, and troubleshooting common issues.
+- [WebSocket API reference](https://docs.slng.ai/websockets.md): Stream text-to-speech and speech-to-text in real time over WebSocket. Message format, init handshake, sub-100ms streaming, and reconnection patterns.
+
+## OpenAPI Specs
+
+- [stt-slng.oas](https://docs.slng.ai/api-reference/openapi/stt-slng.oas.yaml)
+- [bridges-unmute.oas](https://docs.slng.ai/api-reference/openapi/bridges-unmute.oas.yaml)
+- [bridges-jambonz.oas](https://docs.slng.ai/api-reference/openapi/bridges-jambonz.oas.yaml)
+- [bridges-cognigy.oas](https://docs.slng.ai/api-reference/openapi/bridges-cognigy.oas.yaml)
+- [management-slng.oas](https://docs.slng.ai/api-reference/openapi/management-slng.oas.yaml)
+- [me.oas](https://docs.slng.ai/api-reference/me/me.oas.json)
+- [tts-slng.oas](https://docs.slng.ai/api-reference/openapi/tts-slng.oas.yaml)
+- [tts-gradium.oas](https://docs.slng.ai/api-reference/openapi/tts-gradium.oas.yaml)
+- [tts-elevenlabs.oas](https://docs.slng.ai/api-reference/openapi/tts-elevenlabs.oas.yaml)
+- [batch.oas](https://docs.slng.ai/api-reference/batch/batch.oas.json)
+- [agents.oas](https://docs.slng.ai/api-reference/agents/agents.oas.yaml)
+- [tts-sarvam.oas](https://docs.slng.ai/api-reference/openapi/tts-sarvam.oas.yaml)
+- [tts-soniox.oas](https://docs.slng.ai/api-reference/openapi/tts-soniox.oas.yaml)
+- [tts-pronunciation-dictionaries.oas](https://docs.slng.ai/api-reference/openapi/tts-pronunciation-dictionaries.oas.yaml)
+- [stt-deepgram.oas](https://docs.slng.ai/api-reference/openapi/stt-deepgram.oas.yaml)
+- [tts-deepgram.oas](https://docs.slng.ai/api-reference/openapi/tts-deepgram.oas.yaml)
+- [stt-sarvam.oas](https://docs.slng.ai/api-reference/openapi/stt-sarvam.oas.yaml)
+- [gateway.oas](https://docs.slng.ai/api-reference/gateway.oas.yaml)
+
+## AsyncAPI Specs
+
+- [stt-slng.asyncapi](https://docs.slng.ai/api-reference/asyncapi/stt-slng.asyncapi.yaml)
+- [tts-slng.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-slng.asyncapi.yaml)
+- [tts-kugelaudio.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-kugelaudio.asyncapi.yaml)
+- [tts-gradium.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-gradium.asyncapi.yaml)
+- [tts-elevenlabs.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-elevenlabs.asyncapi.yaml)
+- [stt-gradium.asyncapi](https://docs.slng.ai/api-reference/asyncapi/stt-gradium.asyncapi.yaml)
+- [tts-cartesia.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-cartesia.asyncapi.yaml)
+- [bridges-unmute.asyncapi](https://docs.slng.ai/api-reference/asyncapi/bridges-unmute.asyncapi.yaml)
+- [bridges-jambonz.asyncapi](https://docs.slng.ai/api-reference/asyncapi/bridges-jambonz.asyncapi.yaml)
+- [bridges-cognigy.asyncapi](https://docs.slng.ai/api-reference/asyncapi/bridges-cognigy.asyncapi.yaml)
+- [stt-sarvam.asyncapi](https://docs.slng.ai/api-reference/asyncapi/stt-sarvam.asyncapi.yaml)
+- [tts-deepgram.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-deepgram.asyncapi.yaml)
+- [tts-soniox.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-soniox.asyncapi.yaml)
+- [stt-deepgram.asyncapi](https://docs.slng.ai/api-reference/asyncapi/stt-deepgram.asyncapi.yaml)
+- [tts-sarvam.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-sarvam.asyncapi.yaml)
+- [tts-murf.asyncapi](https://docs.slng.ai/api-reference/asyncapi/tts-murf.asyncapi.yaml)
+- [stt-soniox.asyncapi](https://docs.slng.ai/api-reference/asyncapi/stt-soniox.asyncapi.yaml)
+- [stt-reson8.asyncapi](https://docs.slng.ai/api-reference/asyncapi/stt-reson8.asyncapi.yaml)
+- [slng.asyncapi](https://docs.slng.ai/api-reference/asyncapi/slng.asyncapi.yaml)
+- [elevenlabs.asyncapi](https://docs.slng.ai/api-reference/asyncapi/elevenlabs.asyncapi.yaml)
+- [deepgram.asyncapi](https://docs.slng.ai/api-reference/asyncapi/deepgram.asyncapi.yaml)
+- [cognigy.asyncapi](https://docs.slng.ai/api-reference/asyncapi/cognigy.asyncapi.yaml)

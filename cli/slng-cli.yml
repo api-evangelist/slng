@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/slng-ai/homebrew-tap, https://github.com/slng-ai/sdks/releases
+name: voiceai
+description: Voiceai CLI — text-to-speech, speech-to-text, streaming.
+version: 0.1.13
+install:
+  - method: homebrew
+    command: brew install slng-ai/tap/voiceai
+  - method: binary
+    note: Prebuilt binaries published on slng-ai/sdks GitHub releases (cli-v<version>).
+    platforms: [darwin-arm64, darwin-x64, linux-arm64, linux-x64]
+capabilities:
+  - text-to-speech (TTS)
+  - speech-to-text (STT)
+  - streaming (WebSocket)
+homepage: https://slng.ai

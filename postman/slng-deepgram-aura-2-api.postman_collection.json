@@ -1,0 +1,762 @@
+{
+  "info": {
+    "_postman_id": "1193398e-c0e7-417a-9cf6-90b5893bffe2",
+    "name": "SLNG Voice Agents Account Deepgram Aura 2 API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:55:29.000Z",
+    "updatedAt": "2026-07-28T02:55:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1193398e-c0e7-417a-9cf6-90b5893bffe2"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "tts",
+          "item": [
+            {
+              "name": "slng",
+              "item": [
+                {
+                  "name": "deepgram",
+                  "item": [
+                    {
+                      "name": "aura:2-en",
+                      "item": [
+                        {
+                          "name": "Aura 2 (English)",
+                          "id": "b7fb7712-cdad-42a4-b003-ab374b83495a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "us-east-1"
+                              },
+                              {
+                                "description": "Target world part override. Auto-selected if not provided.",
+                                "key": "X-World-Part-Override",
+                                "value": "na"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"model\": \"aura-2-neptune-en\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 48000\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-en",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "deepgram",
+                                "aura:2-en"
+                              ]
+                            },
+                            "description": "Synthesize English speech using SLNG-hosted Deepgram Aura 2."
+                          },
+                          "response": [
+                            {
+                              "id": "03c12f71-41fe-4f83-baed-8e3c5f62f3d7",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "na"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-neptune-en\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 48000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-en"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-03c12f71-41fe-4f83-baed-8e3c5f62f3d7"
+                            },
+                            {
+                              "id": "495a17dc-3dad-484e-a08c-f8f1e3c58eff",
+                              "name": "Bad request for SLNG-hosted Deepgram Aura TTS. Can be a validation error (missing/invalid fields) or a provider error (invalid query parameters).\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "na"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-neptune-en\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 48000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-en"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"fieldErrors\": {\n    \"in_e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"laborumf09\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-495a17dc-3dad-484e-a08c-f8f1e3c58eff"
+                            },
+                            {
+                              "id": "31a12225-92f8-413b-8bf8-8ba099bbc5ac",
+                              "name": "Unauthorized error for SLNG-hosted Deepgram Aura TTS. Returned when the Authorization header is missing or invalid.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "na"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-neptune-en\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 48000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-en"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-31a12225-92f8-413b-8bf8-8ba099bbc5ac"
+                            },
+                            {
+                              "id": "4597d1b2-f28e-4e1f-8a1f-a10db6a245f1",
+                              "name": "Internal server error from the provider.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "us-east-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "na"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-neptune-en\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 48000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-en",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-en"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-4597d1b2-f28e-4e1f-8a1f-a10db6a245f1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:55:29.000Z",
+                          "updatedAt": "2026-07-28T02:55:29.000Z",
+                          "uid": "35240-b7fb7712-cdad-42a4-b003-ab374b83495a"
+                        }
+                      ],
+                      "id": "8b791aad-a30d-4fcc-970c-d0bb3eee39bf",
+                      "createdAt": "2026-07-28T02:55:29.000Z",
+                      "updatedAt": "2026-07-28T02:55:29.000Z",
+                      "uid": "35240-8b791aad-a30d-4fcc-970c-d0bb3eee39bf"
+                    },
+                    {
+                      "name": "aura:2-es",
+                      "item": [
+                        {
+                          "name": "Aura 2 (Spanish)",
+                          "id": "59968354-9c4d-419a-b216-cc4922b2de53",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target region override. Auto-selected if not provided.",
+                                "key": "X-Region-Override",
+                                "value": "eu-north-1"
+                              },
+                              {
+                                "description": "Target world part override. Auto-selected if not provided.",
+                                "key": "X-World-Part-Override",
+                                "value": "eu"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "audio/*"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"model\": \"aura-2-javier-es\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 96000\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-es",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "tts",
+                                "slng",
+                                "deepgram",
+                                "aura:2-es"
+                              ]
+                            },
+                            "description": "Synthesize Spanish speech using SLNG-hosted Deepgram Aura 2."
+                          },
+                          "response": [
+                            {
+                              "id": "2c16404f-b01e-4abf-ab92-eb042ba558ba",
+                              "name": "Synthesis successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "audio/*"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-javier-es\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 96000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-es"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "audio/*"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-2c16404f-b01e-4abf-ab92-eb042ba558ba"
+                            },
+                            {
+                              "id": "4c64b30c-ee04-47b0-a3b3-d0d9f69bc7ac",
+                              "name": "Bad request for SLNG-hosted Deepgram Aura TTS. Can be a validation error (missing/invalid fields) or a provider error (invalid query parameters).\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-javier-es\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 96000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-es"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"fieldErrors\": {\n    \"in_e\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"laborumf09\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-4c64b30c-ee04-47b0-a3b3-d0d9f69bc7ac"
+                            },
+                            {
+                              "id": "23ef742a-7c19-4961-bfe6-14beeee98455",
+                              "name": "Unauthorized error for SLNG-hosted Deepgram Aura TTS. Returned when the Authorization header is missing or invalid.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-javier-es\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 96000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-es"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-23ef742a-7c19-4961-bfe6-14beeee98455"
+                            },
+                            {
+                              "id": "851c6416-fe1a-46c9-a841-f6027c143918",
+                              "name": "Internal server error from the provider.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target region override. Auto-selected if not provided.",
+                                    "key": "X-Region-Override",
+                                    "value": "eu-north-1"
+                                  },
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"model\": \"aura-2-javier-es\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": 96000\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/tts/slng/deepgram/aura:2-es",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "tts",
+                                    "slng",
+                                    "deepgram",
+                                    "aura:2-es"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:55:30.000Z",
+                              "updatedAt": "2026-07-28T02:55:30.000Z",
+                              "uid": "35240-851c6416-fe1a-46c9-a841-f6027c143918"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:55:29.000Z",
+                          "updatedAt": "2026-07-28T02:55:29.000Z",
+                          "uid": "35240-59968354-9c4d-419a-b216-cc4922b2de53"
+                        }
+                      ],
+                      "id": "04052f75-60d0-4985-b7a0-e1d0418ec086",
+                      "createdAt": "2026-07-28T02:55:29.000Z",
+                      "updatedAt": "2026-07-28T02:55:29.000Z",
+                      "uid": "35240-04052f75-60d0-4985-b7a0-e1d0418ec086"
+                    }
+                  ],
+                  "id": "a0f70c38-b40b-4660-ae7b-c308b06c06bb",
+                  "createdAt": "2026-07-28T02:55:29.000Z",
+                  "updatedAt": "2026-07-28T02:55:29.000Z",
+                  "uid": "35240-a0f70c38-b40b-4660-ae7b-c308b06c06bb"
+                }
+              ],
+              "id": "02bdfcf5-6358-4394-9896-efa7929e1f8b",
+              "createdAt": "2026-07-28T02:55:29.000Z",
+              "updatedAt": "2026-07-28T02:55:29.000Z",
+              "uid": "35240-02bdfcf5-6358-4394-9896-efa7929e1f8b"
+            }
+          ],
+          "id": "8f078d39-008f-4fb8-a137-f15bca49614d",
+          "createdAt": "2026-07-28T02:55:29.000Z",
+          "updatedAt": "2026-07-28T02:55:29.000Z",
+          "uid": "35240-8f078d39-008f-4fb8-a137-f15bca49614d"
+        }
+      ],
+      "id": "09c2cabe-6894-40f1-92f1-543c04b9628a",
+      "createdAt": "2026-07-28T02:55:29.000Z",
+      "updatedAt": "2026-07-28T02:55:29.000Z",
+      "uid": "35240-09c2cabe-6894-40f1-92f1-543c04b9628a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

@@ -1,0 +1,698 @@
+{
+  "info": {
+    "_postman_id": "3bda9593-1bc9-4bf1-907c-bdd1ea15b57d",
+    "name": "SLNG Voice Agents Account Sessions API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:56:38.000Z",
+    "updatedAt": "2026-07-28T02:56:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3bda9593-1bc9-4bf1-907c-bdd1ea15b57d"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "agents",
+          "item": [
+            {
+              "name": "{agent_id}",
+              "item": [
+                {
+                  "name": "web-sessions",
+                  "item": [
+                    {
+                      "name": "Create web session",
+                      "id": "f24e54dc-5878-4ae5-992e-289368bbf437",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "agents",
+                            ":agent_id",
+                            "web-sessions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "78edf86b-3a60-4006-8486-cd80d0fcc664",
+                              "key": "agent_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Voice agent ID."
+                            }
+                          ]
+                        },
+                        "description": "Create a browser session for a voice agent.\n\nThis is commonly used for in-browser testing without PSTN.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "653771a1-ba57-48ac-8de0-9428ef11e761",
+                          "name": "Web session created.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"call_id\": \"<uuid>\",\n  \"room_name\": \"<string>\",\n  \"livekit_url\": \"<string>\",\n  \"livekit_token\": \"<string>\",\n  \"max_session_seconds\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-653771a1-ba57-48ac-8de0-9428ef11e761"
+                        },
+                        {
+                          "id": "0ec4023d-8f78-41c0-a484-2f6ccdb4d879",
+                          "name": "Bad request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-0ec4023d-8f78-41c0-a484-2f6ccdb4d879"
+                        },
+                        {
+                          "id": "0548d401-7118-43b8-9f81-02a24dfaebe9",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-0548d401-7118-43b8-9f81-02a24dfaebe9"
+                        },
+                        {
+                          "id": "9a23b917-1c5c-4cab-af6b-c626b57fa8cc",
+                          "name": "Payment required.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Payment Required",
+                          "code": 402,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-9a23b917-1c5c-4cab-af6b-c626b57fa8cc"
+                        },
+                        {
+                          "id": "314c0e5a-a944-4909-846c-1c6bce729e49",
+                          "name": "Forbidden.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-314c0e5a-a944-4909-846c-1c6bce729e49"
+                        },
+                        {
+                          "id": "70fa7bfb-7986-4226-b60c-4d62e1054c47",
+                          "name": "Not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-70fa7bfb-7986-4226-b60c-4d62e1054c47"
+                        },
+                        {
+                          "id": "623f4d7a-ee72-478d-8546-ab711913a72f",
+                          "name": "Validation error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-623f4d7a-ee72-478d-8546-ab711913a72f"
+                        },
+                        {
+                          "id": "1b5558a2-60e5-4637-869c-4a58c7f52fac",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-1b5558a2-60e5-4637-869c-4a58c7f52fac"
+                        },
+                        {
+                          "id": "15d1dab4-69b7-4da0-8601-368e9d831fe9",
+                          "name": "Bad gateway.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"arguments\": {},\n  \"participant_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/agents/:agent_id/web-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "agents",
+                                ":agent_id",
+                                "web-sessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "agent_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Gateway",
+                          "code": 502,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:56:39.000Z",
+                          "updatedAt": "2026-07-28T02:56:39.000Z",
+                          "uid": "35240-15d1dab4-69b7-4da0-8601-368e9d831fe9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:56:39.000Z",
+                      "updatedAt": "2026-07-28T02:56:39.000Z",
+                      "uid": "35240-f24e54dc-5878-4ae5-992e-289368bbf437"
+                    }
+                  ],
+                  "id": "9dd98e82-a223-4edb-9b41-350819effa9e",
+                  "createdAt": "2026-07-28T02:56:39.000Z",
+                  "updatedAt": "2026-07-28T02:56:39.000Z",
+                  "uid": "35240-9dd98e82-a223-4edb-9b41-350819effa9e"
+                }
+              ],
+              "id": "6bc7d626-5121-49f3-bf0f-f318ca602933",
+              "createdAt": "2026-07-28T02:56:39.000Z",
+              "updatedAt": "2026-07-28T02:56:39.000Z",
+              "uid": "35240-6bc7d626-5121-49f3-bf0f-f318ca602933"
+            }
+          ],
+          "id": "08f41a73-d287-4a1c-9b6f-b5aa26683868",
+          "createdAt": "2026-07-28T02:56:39.000Z",
+          "updatedAt": "2026-07-28T02:56:39.000Z",
+          "uid": "35240-08f41a73-d287-4a1c-9b6f-b5aa26683868"
+        }
+      ],
+      "id": "38585c57-3f4f-44fe-b3eb-efcfc749c72f",
+      "createdAt": "2026-07-28T02:56:39.000Z",
+      "updatedAt": "2026-07-28T02:56:39.000Z",
+      "uid": "35240-38585c57-3f4f-44fe-b3eb-efcfc749c72f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

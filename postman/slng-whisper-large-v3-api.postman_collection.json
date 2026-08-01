@@ -1,0 +1,604 @@
+{
+  "info": {
+    "_postman_id": "6eb51428-c1fe-46f7-b952-5f49e4a10668",
+    "name": "SLNG Voice Agents Account Whisper Large v3 API",
+    "description": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:56:41.000Z",
+    "updatedAt": "2026-07-28T02:56:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6eb51428-c1fe-46f7-b952-5f49e4a10668"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "stt",
+          "item": [
+            {
+              "name": "slng",
+              "item": [
+                {
+                  "name": "openai",
+                  "item": [
+                    {
+                      "name": "whisper:large-v3",
+                      "item": [
+                        {
+                          "name": "Whisper Large v3",
+                          "id": "171d7ebc-a9b3-4a09-a9d8-590e0f4289df",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Target world part override. Auto-selected if not provided.",
+                                "key": "X-World-Part-Override",
+                                "value": "eu"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                  "key": "audio",
+                                  "type": "file",
+                                  "value": null
+                                },
+                                {
+                                  "description": "Publicly accessible audio URL.",
+                                  "key": "url",
+                                  "value": "<string>",
+                                  "type": "text"
+                                },
+                                {
+                                  "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                  "key": "language",
+                                  "value": "lt",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "stt",
+                                "slng",
+                                "openai",
+                                "whisper:large-v3"
+                              ]
+                            },
+                            "description": "Receive transcripts from Whisper Large v3"
+                          },
+                          "response": [
+                            {
+                              "id": "4c53a044-f7de-425b-8a1c-3f09dc114a34",
+                              "name": "Transcription successful.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                      "key": "audio",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "Publicly accessible audio URL.",
+                                      "key": "url",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                      "key": "language",
+                                      "value": "lt",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "stt",
+                                    "slng",
+                                    "openai",
+                                    "whisper:large-v3"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"text\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:41.000Z",
+                              "updatedAt": "2026-07-28T02:56:41.000Z",
+                              "uid": "35240-4c53a044-f7de-425b-8a1c-3f09dc114a34"
+                            },
+                            {
+                              "id": "06d01c4c-64c3-4c27-83da-598bb3f4f3dd",
+                              "name": "Invalid or missing audio file.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                      "key": "audio",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "Publicly accessible audio URL.",
+                                      "key": "url",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                      "key": "language",
+                                      "value": "lt",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "stt",
+                                    "slng",
+                                    "openai",
+                                    "whisper:large-v3"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:41.000Z",
+                              "updatedAt": "2026-07-28T02:56:41.000Z",
+                              "uid": "35240-06d01c4c-64c3-4c27-83da-598bb3f4f3dd"
+                            },
+                            {
+                              "id": "7bc44ba2-d78b-49e1-9bfe-b7a43139263a",
+                              "name": "Invalid or missing API key.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                      "key": "audio",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "Publicly accessible audio URL.",
+                                      "key": "url",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                      "key": "language",
+                                      "value": "lt",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "stt",
+                                    "slng",
+                                    "openai",
+                                    "whisper:large-v3"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:41.000Z",
+                              "updatedAt": "2026-07-28T02:56:41.000Z",
+                              "uid": "35240-7bc44ba2-d78b-49e1-9bfe-b7a43139263a"
+                            },
+                            {
+                              "id": "8bf493ba-63d1-4e2e-83df-04ca77f8a276",
+                              "name": "Audio file exceeds 25MB limit.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                      "key": "audio",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "Publicly accessible audio URL.",
+                                      "key": "url",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                      "key": "language",
+                                      "value": "lt",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "stt",
+                                    "slng",
+                                    "openai",
+                                    "whisper:large-v3"
+                                  ]
+                                }
+                              },
+                              "status": "Request Entity Too Large",
+                              "code": 413,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:41.000Z",
+                              "updatedAt": "2026-07-28T02:56:41.000Z",
+                              "uid": "35240-8bf493ba-63d1-4e2e-83df-04ca77f8a276"
+                            },
+                            {
+                              "id": "fee9cf85-63d5-4135-a887-0932626d1d70",
+                              "name": "Internal server error.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                      "key": "audio",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "Publicly accessible audio URL.",
+                                      "key": "url",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                      "key": "language",
+                                      "value": "lt",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "stt",
+                                    "slng",
+                                    "openai",
+                                    "whisper:large-v3"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:41.000Z",
+                              "updatedAt": "2026-07-28T02:56:41.000Z",
+                              "uid": "35240-fee9cf85-63d5-4135-a887-0932626d1d70"
+                            },
+                            {
+                              "id": "8b49f854-a9eb-4392-bb49-71642d37446c",
+                              "name": "Service unavailable.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Target world part override. Auto-selected if not provided.",
+                                    "key": "X-World-Part-Override",
+                                    "value": "eu"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                                      "key": "audio",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "Publicly accessible audio URL.",
+                                      "key": "url",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "ISO-639-1 language code. Auto-detected if not specified. (This can only be one of af,am,ar,as,az,ba,be,bg,bn,bo,br,bs,ca,cs,cy,da,de,el,en,es,et,eu,fa,fi,fo,fr,gl,gu,ha,haw,he,hi,hr,ht,hu,hy,id,is,it,ja,jw,ka,kk,km,kn,ko,la,lb,ln,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,nn,no,oc,pa,pl,ps,pt,ro,ru,sa,sd,si,sk,sl,sn,so,sq,sr,su,sv,sw,ta,te,tg,th,tk,tl,tr,tt,uk,ur,uz,vi,yi,yo,zh,yue)",
+                                      "key": "language",
+                                      "value": "lt",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/stt/slng/openai/whisper:large-v3",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "stt",
+                                    "slng",
+                                    "openai",
+                                    "whisper:large-v3"
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<number>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:56:41.000Z",
+                              "updatedAt": "2026-07-28T02:56:41.000Z",
+                              "uid": "35240-8b49f854-a9eb-4392-bb49-71642d37446c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:56:41.000Z",
+                          "updatedAt": "2026-07-28T02:56:41.000Z",
+                          "uid": "35240-171d7ebc-a9b3-4a09-a9d8-590e0f4289df"
+                        }
+                      ],
+                      "id": "bd042d98-8b87-4f4f-a1f5-f601dd832dbc",
+                      "createdAt": "2026-07-28T02:56:41.000Z",
+                      "updatedAt": "2026-07-28T02:56:41.000Z",
+                      "uid": "35240-bd042d98-8b87-4f4f-a1f5-f601dd832dbc"
+                    }
+                  ],
+                  "id": "249e30bd-fd0c-45d7-98a4-b308822d3c49",
+                  "createdAt": "2026-07-28T02:56:41.000Z",
+                  "updatedAt": "2026-07-28T02:56:41.000Z",
+                  "uid": "35240-249e30bd-fd0c-45d7-98a4-b308822d3c49"
+                }
+              ],
+              "id": "6bf2379d-dc37-4396-97d7-b9f20cb91703",
+              "createdAt": "2026-07-28T02:56:41.000Z",
+              "updatedAt": "2026-07-28T02:56:41.000Z",
+              "uid": "35240-6bf2379d-dc37-4396-97d7-b9f20cb91703"
+            }
+          ],
+          "id": "a7f8c181-4b1c-4658-af81-062287ac8263",
+          "createdAt": "2026-07-28T02:56:41.000Z",
+          "updatedAt": "2026-07-28T02:56:41.000Z",
+          "uid": "35240-a7f8c181-4b1c-4658-af81-062287ac8263"
+        }
+      ],
+      "id": "c2aa5232-290c-4296-9891-f0bd7df48b5a",
+      "createdAt": "2026-07-28T02:56:41.000Z",
+      "updatedAt": "2026-07-28T02:56:41.000Z",
+      "uid": "35240-c2aa5232-290c-4296-9891-f0bd7df48b5a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agents.slng.ai"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.slng.ai/changelog.md
+scheme: semver (API v0.x.y)
+current_version: v0.53.0
+entries:
+  - version: v0.53.0
+    date: '2026-06-16'
+    tags: [Feature, Update]
+    highlights:
+      - Gradium STT and TTS (real-time multilingual WebSocket streaming).
+      - Kugel 2 Turbo low-latency TTS tier.
+      - Rime Arcana v3 French.
+      - ElevenLabs WebSocket controls (auto_mode, sync_alignment, SSML, zero-retention logging).
+  - version: v0.52.3
+    date: '2026-06-12'
+    tags: [Feature, Update]
+    highlights:
+      - Docs reframed around the Execution Layer (STT routing, tiered decisioning, output assembly).
+      - Single consolidated API Reference.
+      - Consolidated Authentication & API Keys and BYOK pages.
+  - version: v0.52.2
+    date: '2026-06-10'
+  - version: v0.52.1
+    date: '2026-06-03'
+  - version: v0.52.0
+    date: '2026-06-02'
+  - version: v0.51.2
+    date: '2026-05-29'
+  - version: v0.51.1
+    date: '2026-05-28'
+  - version: v0.50.1
+    date: '2026-05-26'
+  - version: v0.50.0
+    date: '2026-05-23'
+  - version: v0.49.1
+    date: '2026-05-22'
+note: Recent window only; the live changelog at docs.slng.ai/changelog.md is the source of truth.

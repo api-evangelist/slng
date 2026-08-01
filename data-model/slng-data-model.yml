@@ -1,0 +1,72 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/ schema $refs and id-reference fields
+entities:
+  - name: Account
+    id_field: org_id
+    domain: management-slng / me
+    fields: [name, email, org_id, org_name, api_key_label, tier]
+  - name: CatalogModel
+    id_field: code
+    id_shape: 'slng/<provider>/<model>:<variant> (e.g. slng/rime/arcana:3-en)'
+    domain: management-slng (catalog)
+  - name: CatalogProvider
+    id_field: code
+    domain: management-slng (catalog)
+  - name: CatalogVoice
+    id_field: voice_id
+    domain: management-slng (catalog)
+  - name: VoiceAgent
+    id_field: agent_id
+    domain: agents
+  - name: Call
+    id_field: call_id
+    domain: agents
+  - name: WebSession
+    domain: agents
+  - name: BatchJob
+    id_field: job_id
+    domain: batch
+  - name: PronunciationDictionary
+    domain: tts-pronunciation-dictionaries
+relationships:
+  - from: CatalogModel
+    to: CatalogProvider
+    kind: belongs_to
+    via: provider_code
+  - from: CatalogModel
+    to: CatalogVoice
+    kind: has_many
+    via: voices
+  - from: CatalogVoice
+    to: CatalogModel
+    kind: belongs_to
+    via: model_code
+  - from: CatalogModel
+    to: CatalogSimilarModel
+    kind: has_many
+    via: similar_models
+  - from: VoiceAgent
+    to: Call
+    kind: has_many
+    via: agent_id
+  - from: Call
+    to: VoiceAgent
+    kind: belongs_to
+    via: agent_id
+  - from: WebSession
+    to: VoiceAgent
+    kind: belongs_to
+    via: agent_id
+  - from: VoiceAgent
+    to: CatalogModel
+    kind: has_one
+    via: models.stt / models.tts
+  - from: BatchJob
+    to: BatchJobFile
+    kind: has_many
+    via: files
+  - from: Account
+    to: Organization
+    kind: belongs_to
+    via: org_id
