@@ -1,0 +1,556 @@
+{
+  "item": [
+    {
+      "id": "f79d25df-22b1-42ee-8d53-b4692cfea354",
+      "name": "Whisper Large v3",
+      "description": {
+        "content": "Whisper Large v3 with 99+ language support.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a77eddcc-b093-4874-987f-42a22462cd39",
+          "name": "Whisper Large v3",
+          "request": {
+            "name": "Whisper Large v3",
+            "description": {
+              "content": "Receive transcripts from Whisper Large v3",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "stt",
+                "slng",
+                "openai",
+                "whisper:large-v3"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target world part override. Auto-selected if not provided.",
+                "key": "X-World-Part-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "audio",
+                  "type": "file",
+                  "description": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB."
+                },
+                {
+                  "key": "url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Publicly accessible audio URL."
+                },
+                {
+                  "key": "language",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4805f2f6-e63d-40d8-bde3-ac35b452835b",
+              "name": "Transcription successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "openai",
+                    "whisper:large-v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"text\": \"Hello, welcome to SLNG's speech-to-text API.\",\n  \"language\": \"en\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02590d2a-9f0e-4300-85b9-4feb23a72542",
+              "name": "Invalid or missing audio file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "openai",
+                    "whisper:large-v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Missing required field: audio\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c4684c3-9d9d-40b0-a294-e16129a84f17",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "openai",
+                    "whisper:large-v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d58650c-7eef-4938-826e-cf8e231a60c7",
+              "name": "Audio file exceeds 25MB limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "openai",
+                    "whisper:large-v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Audio file size exceeds maximum limit of 25MB\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "660490d3-f17f-42d0-be0c-f5c7194e9036",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "openai",
+                    "whisper:large-v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Failed to process audio file\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f551c08e-8d24-4192-8580-8f8f6d0bd3a0",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "openai",
+                    "whisper:large-v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df355498-9caa-4db4-9730-484485cef3f7",
+    "name": "SLNG Voice Agents Account Whisper Large v3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

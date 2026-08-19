@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Rime Coda API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rime Coda",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Coda (Indonesian)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/coda:0-id",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize Bahasa Indonesian speech using Rime Coda TTS model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

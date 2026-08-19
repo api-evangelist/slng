@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/me"
+          },
+          "docs": "Return the account, organization, and API key associated with the bearer token in the request. Use this to confirm which key is in use and which organization and plan tier it belongs to."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

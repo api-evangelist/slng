@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Catalog API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List catalog models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/catalog/models",
+            "params": [
+              {
+                "name": "service_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by service type."
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by supported language code (for example `en`)."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by provider code (for example `rime`)."
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by region code (for example `eu-north-1`)."
+              },
+              {
+                "name": "use_case",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by use case tag."
+              },
+              {
+                "name": "capability",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by capability tag."
+              },
+              {
+                "name": "protocol",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by supported protocol."
+              },
+              {
+                "name": "slng_hosted_only",
+                "value": "",
+                "type": "query",
+                "description": "When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search across model names and descriptions."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return (1-based). Defaults to 1."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page. Defaults to 20."
+              }
+            ]
+          },
+          "docs": "List the models available in the SLNG catalog. Supports filtering by service type, provider, region, language, use case, capability, and protocol, plus full-text search and pagination. Authentication is optional — an API key personalizes pricing and region availability for your organisation; anonymous requests return public catalog data.\n"
+        },
+        {
+          "info": {
+            "name": "Get a catalog model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/catalog/models/:model_code",
+            "params": [
+              {
+                "name": "model_code",
+                "value": "",
+                "type": "path",
+                "description": "The model code to retrieve. May contain slashes and colons (for example `slng/rime/arcana:3-en`).\n"
+              },
+              {
+                "name": "protocol",
+                "value": "",
+                "type": "query",
+                "description": "Filter models by supported protocol."
+              }
+            ]
+          },
+          "docs": "Retrieve a single model from the SLNG catalog by its code. The code may contain slashes and colons (for example `slng/rime/arcana:3-en`). Authentication is optional — an API key personalizes pricing and region availability for your organisation.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

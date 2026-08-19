@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Rime Arcana v3 API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rime Arcana v3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Arcana v3 (English)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:3-en",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize English speech using Rime Arcana v3 TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v3 (Spanish)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:3-es",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize Spanish speech using Rime Arcana v3 TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v3 (Hindi)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:3-hi",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize Hindi speech using Rime Arcana v3 TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v3 (French)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:3-fr",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize French speech using Rime Arcana v3 TTS model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

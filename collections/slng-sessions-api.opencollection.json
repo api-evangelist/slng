@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Sessions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create web session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/agents/:agent_id/web-sessions",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Voice agent ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a browser session for a voice agent.\n\nThis is commonly used for in-browser testing without PSTN.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

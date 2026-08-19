@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Calls API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/agents/:agent_id/calls",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Voice agent ID."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter calls by status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-indexed)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size."
+              }
+            ]
+          },
+          "docs": "List calls for a voice agent (paginated)."
+        },
+        {
+          "info": {
+            "name": "Dispatch call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/agents/:agent_id/calls",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Voice agent ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dispatch an outbound call for a voice agent.\n\nNote: outbound calls require the agent to be configured with an outbound connection.\n"
+        },
+        {
+          "info": {
+            "name": "Get call",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/agents/:agent_id/calls/:call_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Voice agent ID."
+              },
+              {
+                "name": "call_id",
+                "value": "",
+                "type": "path",
+                "description": "Call ID."
+              }
+            ]
+          },
+          "docs": "Get details of a specific call."
+        },
+        {
+          "info": {
+            "name": "Submit tool execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/agents/:agent_id/calls/:call_id/tool-executions",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path",
+                "description": "Voice agent ID."
+              },
+              {
+                "name": "call_id",
+                "value": "",
+                "type": "path",
+                "description": "Call ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append a tool execution record to a call.\n\nThis endpoint is primarily used by SLNG-managed agent runtimes to report\ncontextual and system tool activity back to the Agents API.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

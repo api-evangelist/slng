@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Orpheus English API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orpheus English",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Orpheus (English)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/canopylabs/orpheus:en",
+            "headers": [
+              {
+                "name": "X-World-Part-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize speech using Orpheus with emotion control."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

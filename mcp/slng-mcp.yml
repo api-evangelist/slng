@@ -2,68 +2,73 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/ operations (no official hosted SLNG MCP server found as of 2026-07-21)
-note: >-
-  SLNG publishes packaged Agent Skills (github.com/slng-ai/skills) and an n8n node
-  but no hosted/remote MCP server was found. This is a DERIVED candidate tool list
-  mapped one-per-operation from the SLNG OpenAPI definitions.
+note: SLNG publishes packaged Agent Skills (github.com/slng-ai/skills) and an n8n node but no hosted/remote
+  MCP server was found. This is a DERIVED candidate tool list mapped one-per-operation from the SLNG OpenAPI
+  definitions.
 server:
   name: slng
   transport: http
 tools:
-  - name: list_catalog_models
-    description: List STT/TTS models in the SLNG catalog with filters and search.
-    source_operation: openapi/slng-management-slng-openapi.yml#catalog-models-list
-  - name: get_catalog_model
-    description: Retrieve a single catalog model by code.
-    source_operation: openapi/slng-management-slng-openapi.yml#catalog-models-detail
-  - name: get_account
-    description: Return the account, organization, and plan tier for the API key.
-    source_operation: openapi/slng-me-openapi.json#meGet
-  - name: create_batch_job
-    description: Submit audio for asynchronous transcription.
-    source_operation: openapi/slng-batch-openapi.json#batchJobsCreate
-  - name: list_batch_jobs
-    description: List asynchronous transcription jobs.
-    source_operation: openapi/slng-batch-openapi.json#batchJobsList
-  - name: get_batch_job
-    description: Get status and result of a batch transcription job.
-    source_operation: openapi/slng-batch-openapi.json#batchJobsGet
-  - name: delete_batch_job
-    description: Delete a batch transcription job.
-    source_operation: openapi/slng-batch-openapi.json#batchJobsDelete
-  - name: get_batch_job_files
-    description: List output files for a completed batch job.
-    source_operation: openapi/slng-batch-openapi.json#batchJobsFiles
-  - name: list_agents
-    description: List voice agents for the organisation.
-    source_operation: openapi/slng-agents-openapi.yml#listAgents
-  - name: create_agent
-    description: Create a new voice agent.
-    source_operation: openapi/slng-agents-openapi.yml#createAgent
-  - name: get_agent
-    description: Retrieve a voice agent by id.
-    source_operation: openapi/slng-agents-openapi.yml#getAgent
-  - name: update_agent
-    description: Partially update a voice agent.
-    source_operation: openapi/slng-agents-openapi.yml#updateAgent
-  - name: delete_agent
-    description: Delete a voice agent.
-    source_operation: openapi/slng-agents-openapi.yml#deleteAgent
-  - name: dispatch_call
-    description: Dispatch an outbound phone call from an agent.
-    source_operation: openapi/slng-agents-openapi.yml#dispatchCall
-  - name: list_agent_calls
-    description: List calls made by an agent.
-    source_operation: openapi/slng-agents-openapi.yml#listAgentCalls
-  - name: get_call
-    description: Get the status/result of a single call.
-    source_operation: openapi/slng-agents-openapi.yml#getCall
-  - name: create_web_session
-    description: Create a browser (non-telephony) voice session for an agent.
-    source_operation: openapi/slng-agents-openapi.yml#createWebSession
-  - name: create_pronunciation_dictionary
-    description: Create a reusable pronunciation dictionary for TTS.
-    source_operation: openapi/slng-tts-pronunciation-dictionaries-openapi.yml#pronunciation-dictionaries-create
-  - name: list_pronunciation_dictionaries
-    description: List pronunciation dictionaries.
-    source_operation: openapi/slng-tts-pronunciation-dictionaries-openapi.yml#pronunciation-dictionaries-list
+- name: list_catalog_models
+  description: List STT/TTS models in the SLNG catalog with filters and search.
+  source_operation: openapi/slng-management-slng-openapi.yml#catalog-models-list
+- name: get_catalog_model
+  description: Retrieve a single catalog model by code.
+  source_operation: openapi/slng-management-slng-openapi.yml#catalog-models-detail
+- name: get_account
+  description: Return the account, organization, and plan tier for the API key.
+  source_operation: openapi/slng-me-openapi.json#meGet
+- name: create_batch_job
+  description: Submit audio for asynchronous transcription.
+  source_operation: openapi/slng-batch-openapi.json#batchJobsCreate
+- name: list_batch_jobs
+  description: List asynchronous transcription jobs.
+  source_operation: openapi/slng-batch-openapi.json#batchJobsList
+- name: get_batch_job
+  description: Get status and result of a batch transcription job.
+  source_operation: openapi/slng-batch-openapi.json#batchJobsGet
+- name: delete_batch_job
+  description: Delete a batch transcription job.
+  source_operation: openapi/slng-batch-openapi.json#batchJobsDelete
+- name: get_batch_job_files
+  description: List output files for a completed batch job.
+  source_operation: openapi/slng-batch-openapi.json#batchJobsFiles
+- name: list_agents
+  description: List voice agents for the organisation.
+  source_operation: openapi/slng-agents-openapi.yml#listAgents
+- name: create_agent
+  description: Create a new voice agent.
+  source_operation: openapi/slng-agents-openapi.yml#createAgent
+- name: get_agent
+  description: Retrieve a voice agent by id.
+  source_operation: openapi/slng-agents-openapi.yml#getAgent
+- name: update_agent
+  description: Partially update a voice agent.
+  source_operation: openapi/slng-agents-openapi.yml#updateAgent
+- name: delete_agent
+  description: Delete a voice agent.
+  source_operation: openapi/slng-agents-openapi.yml#deleteAgent
+- name: dispatch_call
+  description: Dispatch an outbound phone call from an agent.
+  source_operation: openapi/slng-agents-openapi.yml#dispatchCall
+- name: list_agent_calls
+  description: List calls made by an agent.
+  source_operation: openapi/slng-agents-openapi.yml#listAgentCalls
+- name: get_call
+  description: Get the status/result of a single call.
+  source_operation: openapi/slng-agents-openapi.yml#getCall
+- name: create_web_session
+  description: Create a browser (non-telephony) voice session for an agent.
+  source_operation: openapi/slng-agents-openapi.yml#createWebSession
+- name: create_pronunciation_dictionary
+  description: Create a reusable pronunciation dictionary for TTS.
+  source_operation: openapi/slng-tts-pronunciation-dictionaries-openapi.yml#pronunciation-dictionaries-create
+- name: list_pronunciation_dictionaries
+  description: List pronunciation dictionaries.
+  source_operation: openapi/slng-tts-pronunciation-dictionaries-openapi.yml#pronunciation-dictionaries-list
+deployment:
+  mode: none
+  verified: derived
+  tools: 19
+  checked: '2026-08-12'
+  source: catalog MCP census

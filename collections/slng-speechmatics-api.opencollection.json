@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Speechmatics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Speechmatics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List batch jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/batch/jobs",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-based)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "status",
+                "value": "DONE,FAILED",
+                "type": "query",
+                "description": "Comma-separated statuses to filter by. Allowed values: `QUEUED`, `IN_PROGRESS`, `DECODING`, `DONE`, `FAILED`, `DELETED`."
+              },
+              {
+                "name": "model_code",
+                "value": "slng/speechmatics/batch:15.0.0",
+                "type": "query",
+                "description": "Filter by model code (exact match)."
+              },
+              {
+                "name": "submitted_after",
+                "value": "2026-04-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter jobs submitted after this ISO 8601 datetime."
+              },
+              {
+                "name": "submitted_before",
+                "value": "2026-04-30T23:59:59Z",
+                "type": "query",
+                "description": "Filter jobs submitted before this ISO 8601 datetime."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of jobs for your organization. Supports filtering by status, model, and submission date range, plus sorting."
+        },
+        {
+          "info": {
+            "name": "Create batch job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/batch/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit audio for asynchronous transcription. Supports file upload (`multipart/form-data`), URL input, and presigned S3 upload (`application/json`). For the presigned-upload flow, the first call (`mode: \"presign\"`) returns **200 OK** with an upload URL — the job is not created until step 3. All other submission paths return **202 Accepted** with `status: QUEUED`."
+        },
+        {
+          "info": {
+            "name": "Get batch job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/batch/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "myjob123",
+                "type": "path",
+                "description": "The alphanumeric job identifier."
+              }
+            ]
+          },
+          "docs": "Returns the full details of a job (status, config, timestamps, error info). Poll until `status` reaches `DONE` or `FAILED`."
+        },
+        {
+          "info": {
+            "name": "Delete batch job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agents.slng.ai/v1/batch/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "myjob123",
+                "type": "path",
+                "description": "The alphanumeric job identifier."
+              }
+            ]
+          },
+          "docs": "Delete a completed or failed job. Only jobs in a terminal status (`DONE` or `FAILED`) can be deleted."
+        },
+        {
+          "info": {
+            "name": "Get batch job files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/batch/jobs/:jobId/files",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "myjob123",
+                "type": "path",
+                "description": "The alphanumeric job identifier."
+              }
+            ]
+          },
+          "docs": "Returns signed download URLs for the input audio and the output transcripts of a completed job. Outputs are returned per available format (`json`, `txt`, `srt`); missing formats are omitted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

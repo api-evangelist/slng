@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "4388ac7a-347b-478f-a1b1-9261476392e9",
+      "name": "Inworld Max 1.5",
+      "description": {
+        "content": "Inworld Max 1.5 for multilingual, expressive synthesis.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2922e64f-dadd-4e52-b158-cb7425145a5d",
+          "name": "Inworld Max 1.5",
+          "request": {
+            "name": "Inworld Max 1.5",
+            "description": {
+              "content": "Synthesize speech using SLNG-hosted Inworld Max 1.5.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tts",
+                "slng",
+                "inworld",
+                "max:1.5"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\",\n  \"language\": \"<string>\",\n  \"deliveryMode\": \"<string>\",\n  \"temperature\": 1,\n  \"timestampType\": \"TIMESTAMP_TYPE_UNSPECIFIED\",\n  \"applyTextNormalization\": \"APPLY_TEXT_NORMALIZATION_UNSPECIFIED\",\n  \"encoding\": \"MP3\",\n  \"sample_rate\": 48000,\n  \"bit_rate\": \"<integer>\",\n  \"speaking_rate\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28150028-f6c7-4dd3-99a1-9c1f9b5b3b6b",
+              "name": "Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld's native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "inworld",
+                    "max:1.5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, this is a test of Inworld text to speech.\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"audioContent\": \"SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA\",\n  \"usage\": {\n    \"processedCharactersCount\": 48,\n    \"modelId\": \"inworld-tts-1.5-max\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e02aae81-db86-4946-859a-a00c66ed238d",
+              "name": "Bad request - invalid parameters provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "inworld",
+                    "max:1.5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, this is a test of Inworld text to speech.\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Validation error\",\n  \"details\": \"Missing required field: text\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e8d3c49-801d-426e-a06f-7fab09393dd2",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "inworld",
+                    "max:1.5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, this is a test of Inworld text to speech.\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55bfedb3-f5af-417f-8d77-d1c432ee1638",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "inworld",
+                    "max:1.5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, this is a test of Inworld text to speech.\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c83a00b-8fac-45b3-bba6-8bf21bf33b6b",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "inworld",
+                    "max:1.5"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Hello, this is a test of Inworld text to speech.\",\n  \"voice\": \"Ashley\",\n  \"modelId\": \"inworld-tts-1.5-max\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ed62ffd4-8335-4840-a536-7cb380396914",
+    "name": "SLNG Voice Agents Account Inworld Max 1.5 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

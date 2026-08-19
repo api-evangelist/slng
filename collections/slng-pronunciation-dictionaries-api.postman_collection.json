@@ -1,0 +1,1156 @@
+{
+  "item": [
+    {
+      "id": "b0716074-048c-45fe-96af-52629d806587",
+      "name": "Pronunciation dictionaries",
+      "description": {
+        "content": "Manage reusable pronunciation rewrite dictionaries for TTS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c32acb07-945a-4f6a-a2f7-de5812ac7034",
+          "name": "Create pronunciation dictionary",
+          "request": {
+            "name": "Create pronunciation dictionary",
+            "description": {
+              "content": "Create a reusable pronunciation dictionary for TTS rewrite rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pronunciation",
+                "dictionaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"<string>\",\n          \"replace\": \"<string>\"\n        },\n        {\n          \"match\": \"<string>\",\n          \"replace\": \"<string>\"\n        }\n      ]\n    },\n    \"ipa\": {\n      \"rules\": [\n        {\n          \"match\": \"<string>\",\n          \"ipa\": \"<string>\"\n        },\n        {\n          \"match\": \"<string>\",\n          \"ipa\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1439.1546165416946,\n    \"key_2\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3dcabb3f-8f8a-41ae-b4e4-224a2757d5a1",
+              "name": "Pronunciation dictionary created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"brand-pronunciations\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"B2B\",\n          \"replace\": \"bee to bee\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pd_01abc...\",\n  \"org_id\": \"org_123\",\n  \"name\": \"brand-pronunciations\",\n  \"normalized_name\": \"brand-pronunciations\",\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        }\n      ]\n    },\n    \"ipa\": {\n      \"rules\": [\n        {\n          \"match\": \"SLNG\",\n          \"ipa\": \"slɪŋ\"\n        },\n        {\n          \"match\": \"SLNG\",\n          \"ipa\": \"slɪŋ\"\n        }\n      ]\n    }\n  },\n  \"content_hash\": \"sha256:...\",\n  \"created_at\": \"2026-05-15 12:00:00+00:00\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"created_by_key_label\": \"production-key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78efcb13-a688-40cb-a6f1-c6183cb71a7c",
+              "name": "Invalid pronunciation request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"brand-pronunciations\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"B2B\",\n          \"replace\": \"bee to bee\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"invalid_pronunciation\",\n  \"error\": \"Invalid pronunciation dictionary reference.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e0ddf05-e595-4259-8b54-3d21a7bc97e1",
+              "name": "Missing or unresolved organization context.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"brand-pronunciations\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"B2B\",\n          \"replace\": \"bee to bee\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unauthenticated\",\n  \"error\": \"Missing or invalid organization context.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d974913-e8bf-4e8c-93ee-0f0a926863f9",
+              "name": "Dictionary name already exists in the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"brand-pronunciations\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"B2B\",\n          \"replace\": \"bee to bee\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_conflict\",\n  \"error\": \"Pronunciation dictionary already exists: brand-pronunciations\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9de21505-74c1-4ff7-9b56-d5fa1666e55e",
+              "name": "Pronunciation storage or dependency unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"brand-pronunciations\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"B2B\",\n          \"replace\": \"bee to bee\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unavailable\",\n  \"error\": \"Pronunciation dictionaries are temporarily unavailable.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7a9534e-df6e-4f3f-96df-a153d393a538",
+          "name": "List pronunciation dictionaries",
+          "request": {
+            "name": "List pronunciation dictionaries",
+            "description": {
+              "content": "List pronunciation dictionaries for the authenticated organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pronunciation",
+                "dictionaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "218277c1-2b58-43f5-85f6-dc6b697c5239",
+              "name": "Pronunciation dictionaries for the authenticated organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dictionaries\": [\n    {\n      \"id\": \"pd_01abc...\",\n      \"org_id\": \"org_123\",\n      \"name\": \"brand-pronunciations\",\n      \"normalized_name\": \"brand-pronunciations\",\n      \"modes\": {\n        \"rewrite\": {\n          \"rules\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"ipa\": {\n          \"rules\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"content_hash\": \"sha256:...\",\n      \"created_at\": \"2026-05-15 12:00:00+00:00\",\n      \"metadata\": {\n        \"language\": \"hi-IN\",\n        \"providers\": [\n          \"sarvam\",\n          \"cartesia\"\n        ]\n      },\n      \"created_by_key_label\": \"production-key\"\n    },\n    {\n      \"id\": \"pd_01abc...\",\n      \"org_id\": \"org_123\",\n      \"name\": \"brand-pronunciations\",\n      \"normalized_name\": \"brand-pronunciations\",\n      \"modes\": {\n        \"rewrite\": {\n          \"rules\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"ipa\": {\n          \"rules\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"content_hash\": \"sha256:...\",\n      \"created_at\": \"2026-05-15 12:00:00+00:00\",\n      \"metadata\": {\n        \"language\": \"hi-IN\",\n        \"providers\": [\n          \"sarvam\",\n          \"cartesia\"\n        ]\n      },\n      \"created_by_key_label\": \"production-key\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "724c296d-98a9-4ece-87dd-baa1a0731d76",
+              "name": "Missing or unresolved organization context.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unauthenticated\",\n  \"error\": \"Missing or invalid organization context.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c53a9ab2-bcee-4e3f-b2cb-f3620ad4ec49",
+              "name": "Pronunciation storage or dependency unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unavailable\",\n  \"error\": \"Pronunciation dictionaries are temporarily unavailable.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f0b5242-ca68-4d7b-9c80-7cf5dda9c882",
+          "name": "Get pronunciation dictionary",
+          "request": {
+            "name": "Get pronunciation dictionary",
+            "description": {
+              "content": "Read one pronunciation dictionary by name from the authenticated organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pronunciation",
+                "dictionaries",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Pronunciation dictionary name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "015eb5b2-bb9c-4873-bf47-15a81ee1102b",
+              "name": "Pronunciation dictionary.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"pd_01abc...\",\n  \"org_id\": \"org_123\",\n  \"name\": \"brand-pronunciations\",\n  \"normalized_name\": \"brand-pronunciations\",\n  \"modes\": {\n    \"rewrite\": {\n      \"rules\": [\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        },\n        {\n          \"match\": \"NAIC\",\n          \"replace\": \"en ay eye see\"\n        }\n      ]\n    },\n    \"ipa\": {\n      \"rules\": [\n        {\n          \"match\": \"SLNG\",\n          \"ipa\": \"slɪŋ\"\n        },\n        {\n          \"match\": \"SLNG\",\n          \"ipa\": \"slɪŋ\"\n        }\n      ]\n    }\n  },\n  \"content_hash\": \"sha256:...\",\n  \"created_at\": \"2026-05-15 12:00:00+00:00\",\n  \"metadata\": {\n    \"language\": \"hi-IN\",\n    \"providers\": [\n      \"sarvam\",\n      \"cartesia\"\n    ]\n  },\n  \"created_by_key_label\": \"production-key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d78ab11-5999-4251-8668-c189b3b91941",
+              "name": "Invalid pronunciation request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"invalid_pronunciation\",\n  \"error\": \"Invalid pronunciation dictionary reference.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3df1138b-6a86-48a5-85ff-dbdf3ef6aba7",
+              "name": "Missing or unresolved organization context.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unauthenticated\",\n  \"error\": \"Missing or invalid organization context.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79dfa01d-bd2c-42eb-ba37-91031116b85b",
+              "name": "Dictionary not found in the authenticated organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_not_found\",\n  \"error\": \"Pronunciation dictionary not found: brand-pronunciations\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da84e6cf-5471-4c77-b931-77f59c1e2f90",
+              "name": "Pronunciation storage or dependency unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unavailable\",\n  \"error\": \"Pronunciation dictionaries are temporarily unavailable.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "232de0fa-2b82-4df8-bddb-69ef14fa7bda",
+          "name": "Delete pronunciation dictionary",
+          "request": {
+            "name": "Delete pronunciation dictionary",
+            "description": {
+              "content": "Delete one pronunciation dictionary by name from the authenticated organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "pronunciation",
+                "dictionaries",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Pronunciation dictionary name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d99f29d-35f6-4f54-b1b6-9bf56a3f8771",
+              "name": "Pronunciation dictionary deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24759d56-26cf-4b3c-9ab8-59d889a10227",
+              "name": "Invalid pronunciation request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"invalid_pronunciation\",\n  \"error\": \"Invalid pronunciation dictionary reference.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa5df909-fb20-45d0-b579-d9da7187538c",
+              "name": "Missing or unresolved organization context.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unauthenticated\",\n  \"error\": \"Missing or invalid organization context.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce954d95-24d5-42d1-b1a5-25d0256a4841",
+              "name": "Dictionary not found in the authenticated organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_not_found\",\n  \"error\": \"Pronunciation dictionary not found: brand-pronunciations\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d615e74-0590-4b10-8840-e696dbbe994e",
+              "name": "Pronunciation storage or dependency unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "pronunciation",
+                    "dictionaries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Pronunciation dictionary name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"pronunciation_unavailable\",\n  \"error\": \"Pronunciation dictionaries are temporarily unavailable.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "afaf04f1-794a-4244-b4e6-cd141f90137f",
+    "name": "SLNG Voice Agents Account Pronunciation dictionaries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

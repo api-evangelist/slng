@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Pronunciation dictionaries API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pronunciation dictionaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pronunciation dictionaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/pronunciation/dictionaries"
+          },
+          "docs": "List pronunciation dictionaries for the authenticated organization."
+        },
+        {
+          "info": {
+            "name": "Create pronunciation dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/pronunciation/dictionaries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a reusable pronunciation dictionary for TTS rewrite rules."
+        },
+        {
+          "info": {
+            "name": "Get pronunciation dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agents.slng.ai/v1/pronunciation/dictionaries/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "brand-pronunciations",
+                "type": "path",
+                "description": "Pronunciation dictionary name."
+              }
+            ]
+          },
+          "docs": "Read one pronunciation dictionary by name from the authenticated organization."
+        },
+        {
+          "info": {
+            "name": "Delete pronunciation dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agents.slng.ai/v1/pronunciation/dictionaries/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "brand-pronunciations",
+                "type": "path",
+                "description": "Pronunciation dictionary name."
+              }
+            ]
+          },
+          "docs": "Delete one pronunciation dictionary by name from the authenticated organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

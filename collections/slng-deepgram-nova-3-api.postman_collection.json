@@ -1,0 +1,2627 @@
+{
+  "item": [
+    {
+      "id": "787b2669-4c32-4e8a-bf2e-c3e68049543b",
+      "name": "Deepgram Nova 3",
+      "description": {
+        "content": "Deepgram Nova 3 with VAD and speaker diarization.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b17b531-f8a8-4ad0-9fe1-c40b1b1318f7",
+          "name": "Nova 3 (English)",
+          "request": {
+            "name": "Nova 3 (English)",
+            "description": {
+              "content": "Transcribe English audio using SLNG-hosted Deepgram Nova 3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "stt",
+                "slng",
+                "deepgram",
+                "nova:3-en"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "audio",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "model",
+                  "value": "nova-3",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "enable_partials",
+                  "value": "true",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "punctuate",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "smart_format",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterances",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "paragraphs",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "numerals",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "profanity_filter",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "redact",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "detect_language",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "filler_words",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "multichannel",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "keywords",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "encoding",
+                  "value": "linear16",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "sample_rate",
+                  "value": "16000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "channels",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "endpointing",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterance_end_ms",
+                  "value": "1000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "tag",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "language",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e9375f54-9889-4687-9e50-00e07b818b32",
+              "name": "Transcription successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"channels\": [\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"hello from sunny barcelona\",\n            \"confidence\": 0.98\n          }\n        ]\n      }\n    ]\n  },\n  \"metadata\": {\n    \"request_id\": \"req-123\",\n    \"model\": \"nova-3\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a9629c5-8152-47fd-b8b2-38c0fd078d07",
+              "name": "Bad request - invalid parameters provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Validation error\",\n  \"details\": \"Missing required field: text\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be18efab-ff67-45d3-a0b9-84ec340deab1",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "115310e4-93d7-4435-8f01-eef8300e8ce1",
+              "name": "Audio file exceeds size limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00e9cf3e-d681-46a4-ab92-314638c782c0",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c62a81f-6bd0-4f85-b2fd-a344df402042",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "en",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7130eebb-7fb7-41a5-8c03-03bf82bdeda6",
+          "name": "Nova 3 (Spanish)",
+          "request": {
+            "name": "Nova 3 (Spanish)",
+            "description": {
+              "content": "Transcribe Spanish audio using SLNG-hosted Deepgram Nova 3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "stt",
+                "slng",
+                "deepgram",
+                "nova:3-es"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "audio",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "model",
+                  "value": "nova-3",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "enable_partials",
+                  "value": "true",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "punctuate",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "smart_format",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterances",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "paragraphs",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "numerals",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "profanity_filter",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "redact",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "detect_language",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "filler_words",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "multichannel",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "keywords",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "encoding",
+                  "value": "linear16",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "sample_rate",
+                  "value": "16000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "channels",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "endpointing",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterance_end_ms",
+                  "value": "1000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "tag",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "language",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f43b58df-4f0e-49a9-bf04-e61e517f6a5d",
+              "name": "Transcription successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "es",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"channels\": [\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"hello from sunny barcelona\",\n            \"confidence\": 0.98\n          }\n        ]\n      }\n    ]\n  },\n  \"metadata\": {\n    \"request_id\": \"req-123\",\n    \"model\": \"nova-3\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6337628c-bc5e-4140-a430-c9ee7310b4bb",
+              "name": "Bad request - invalid parameters provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "es",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Validation error\",\n  \"details\": \"Missing required field: text\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47b660a2-ef13-46bf-aeea-333222d0c7b4",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "es",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d7179de-d357-489b-b135-a796d476f7a6",
+              "name": "Audio file exceeds size limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "es",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ebb7317-075c-4e29-8da0-6a47a927ffd5",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "es",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f29bf85-db3b-4837-8eaf-a459e06d63ea",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "es",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b874c023-63e9-4a2f-84ab-3c7ebbf90637",
+          "name": "Nova 3 (Hindi)",
+          "request": {
+            "name": "Nova 3 (Hindi)",
+            "description": {
+              "content": "Transcribe Hindi audio using SLNG-hosted Deepgram Nova 3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "stt",
+                "slng",
+                "deepgram",
+                "nova:3-hi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Target world part override. Auto-selected if not provided.",
+                "key": "X-World-Part-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "audio",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "model",
+                  "value": "nova-3",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "enable_partials",
+                  "value": "true",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "punctuate",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "smart_format",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterances",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "paragraphs",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "numerals",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "profanity_filter",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "redact",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "detect_language",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "filler_words",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "multichannel",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "keywords",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "encoding",
+                  "value": "linear16",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "sample_rate",
+                  "value": "16000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "channels",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "endpointing",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterance_end_ms",
+                  "value": "1000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "tag",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "language",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b76e823b-43a8-4215-ae5d-c89b5fe64df2",
+              "name": "Transcription successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-hi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "hi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"channels\": [\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"hello from sunny barcelona\",\n            \"confidence\": 0.98\n          }\n        ]\n      }\n    ]\n  },\n  \"metadata\": {\n    \"request_id\": \"req-123\",\n    \"model\": \"nova-3\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f00a59e8-f1d0-4f27-bd2e-6a777aec7708",
+              "name": "Bad request - invalid parameters provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-hi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "hi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Validation error\",\n  \"details\": \"Missing required field: text\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65b63d2e-682e-43f1-960e-950e7e2fc680",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-hi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "hi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b3b8e04-4326-495d-bf35-bdf16fd94bca",
+              "name": "Audio file exceeds size limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-hi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "hi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42d6dcc7-ab82-4c16-b8ed-1d6c7f90c122",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-hi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "hi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8364e3b3-c87f-4e9e-8262-f9b784c427c6",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-hi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "hi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9b5dc4d-107a-48ad-b135-89b1fcc681fd",
+          "name": "Nova 3 (Multi-Language)",
+          "request": {
+            "name": "Nova 3 (Multi-Language)",
+            "description": {
+              "content": "Transcribe multi-language audio using SLNG-hosted Deepgram Nova 3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "stt",
+                "slng",
+                "deepgram",
+                "nova:3-multi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "audio",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "model",
+                  "value": "nova-3",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "enable_partials",
+                  "value": "true",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "punctuate",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "smart_format",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterances",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "paragraphs",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "numerals",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "profanity_filter",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "redact",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "detect_language",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "filler_words",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "multichannel",
+                  "value": "false",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "keywords",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "encoding",
+                  "value": "linear16",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "sample_rate",
+                  "value": "16000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "channels",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "endpointing",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "utterance_end_ms",
+                  "value": "1000",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "tag",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "language",
+                  "value": "multi",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b4d733fe-6c15-4f81-9935-683f544532c0",
+              "name": "Transcription successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-multi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "multi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"channels\": [\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"hello from sunny barcelona\",\n            \"confidence\": 0.98\n          }\n        ]\n      }\n    ]\n  },\n  \"metadata\": {\n    \"request_id\": \"req-123\",\n    \"model\": \"nova-3\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52a9fe3d-c98a-49d2-b505-3d6b446d7da5",
+              "name": "Bad request - invalid parameters provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-multi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "multi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Validation error\",\n  \"details\": \"Missing required field: text\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01dbcde2-c036-41a8-9f3a-aa4afa99a2d0",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-multi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "multi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59f525fc-28ca-4d91-b360-f8e48992f0da",
+              "name": "Audio file exceeds size limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-multi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "multi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff6822ca-a76c-4206-9491-f29e86e91448",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-multi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "multi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef5ef296-1f86-47ca-bc31-61561bad1050",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "stt",
+                    "slng",
+                    "deepgram",
+                    "nova:3-multi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "audio",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "language",
+                      "value": "multi",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2999f481-5299-4216-b298-8e1f55fb8bc5",
+    "name": "SLNG Voice Agents Account Deepgram Nova 3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

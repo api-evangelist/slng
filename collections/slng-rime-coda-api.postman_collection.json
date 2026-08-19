@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "5be32a7b-af32-4a1c-a098-720cddf0c2fa",
+      "name": "Rime Coda",
+      "description": {
+        "content": "Rime Coda TTS for Bahasa Indonesian.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "50f2a5b2-7a64-455a-90d1-85266994a1e8",
+          "name": "Coda (Indonesian)",
+          "request": {
+            "name": "Coda (Indonesian)",
+            "description": {
+              "content": "Synthesize Bahasa Indonesian speech using Rime Coda TTS model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tts",
+                "slng",
+                "rime",
+                "coda:0-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "audio/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"speaker\": \"pujianti_plesmita\",\n  \"text\": \"<string>\",\n  \"modelId\": \"coda\",\n  \"lang\": \"id\",\n  \"top_p\": 1,\n  \"audioFormat\": \"audio/wav\",\n  \"sample_rate\": 24000,\n  \"speed\": 1,\n  \"segment\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fac32113-c6e0-4bb3-9b4d-82c78497b6ca",
+              "name": "Synthesis successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "rime",
+                    "coda:0-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "audio/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Halo dari Rime Coda Indonesia. Pengujian sintesis teks ke ucapan.\",\n  \"speaker\": \"pujianti_plesmita\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "audio/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddd7740c-e900-4ee4-a0f2-a3d3b9f2e4ca",
+              "name": "Rime Coda TTS bad request. Common causes include invalid speaker ID, unsupported audio format, or malformed request body.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "rime",
+                    "coda:0-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Halo dari Rime Coda Indonesia. Pengujian sintesis teks ke ucapan.\",\n  \"speaker\": \"pujianti_plesmita\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7942bb58-d3cb-4063-9947-30f124c3c53e",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "rime",
+                    "coda:0-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Halo dari Rime Coda Indonesia. Pengujian sintesis teks ke ucapan.\",\n  \"speaker\": \"pujianti_plesmita\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5d76bda-48cd-4f8c-9394-a4931b9d4aeb",
+              "name": "Rime Coda TTS internal error. Note: Some validation errors (e.g., invalid speaker) may currently return 500 instead of 400. Check the error details for specifics.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "rime",
+                    "coda:0-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Halo dari Rime Coda Indonesia. Pengujian sintesis teks ke ucapan.\",\n  \"speaker\": \"pujianti_plesmita\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "242a3f41-b272-4de3-8a85-3ce3bb413268",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "rime",
+                    "coda:0-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Halo dari Rime Coda Indonesia. Pengujian sintesis teks ke ucapan.\",\n  \"speaker\": \"pujianti_plesmita\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"TTS service error\",\n  \"status\": 400,\n  \"details\": \"Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ad475b4b-c3a1-41d3-8ffa-0598a5705017",
+    "name": "SLNG Voice Agents Account Rime Coda API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2234 @@
+{
+  "item": [
+    {
+      "id": "1dd4d0d8-431a-4b7b-8c0f-65788a1a0a46",
+      "name": "Speechmatics",
+      "description": {
+        "content": "Create and manage asynchronous transcription jobs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3efae11f-bae4-42f5-9ab4-9d96a4c13cf8",
+          "name": "Create batch job",
+          "request": {
+            "name": "Create batch job",
+            "description": {
+              "content": "Submit audio for asynchronous transcription. Supports file upload (`multipart/form-data`), URL input, and presigned S3 upload (`application/json`). For the presigned-upload flow, the first call (`mode: \"presign\"`) returns **200 OK** with an upload URL — the job is not created until step 3. All other submission paths return **202 Accepted** with `status: QUEUED`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`."
+                },
+                {
+                  "key": "transcription_config",
+                  "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                  "type": "text",
+                  "contentType": "application/json",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "job_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Custom alphanumeric identifier for the job. Auto-generated if omitted."
+                },
+                {
+                  "key": "metadata",
+                  "value": "<string>",
+                  "type": "text",
+                  "contentType": "application/json",
+                  "description": "JSON object with arbitrary key-value metadata to attach to the job."
+                },
+                {
+                  "key": "model_code",
+                  "value": "slng/speechmatics/batch:15.0.0",
+                  "type": "text",
+                  "description": "Model to use for transcription."
+                },
+                {
+                  "key": "tracking",
+                  "value": "{\"title\":\"<string>\",\"reference\":\"<string>\",\"tags\":[\"<string>\",\"<string>\"],\"details\":\"<string>\"}",
+                  "type": "text",
+                  "contentType": "application/json",
+                  "description": ""
+                },
+                {
+                  "key": "output_config",
+                  "value": "{\"srt_overrides\":{\"max_line_length\":\"<integer>\",\"max_lines\":\"<integer>\"}}",
+                  "type": "text",
+                  "contentType": "application/json",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "442fd091-6ee8-4c36-b611-a07788b1b062",
+              "name": "**Presign mode only.** Returns a presigned upload URL; the job is not created yet. See the [Batch guide](/batch-guide#method-3-presigned-upload) for the full upload flow.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "transcription_config",
+                      "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Custom alphanumeric identifier for the job. Auto-generated if omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "job_id",
+                      "value": "myjob123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON object with arbitrary key-value metadata to attach to the job.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Model to use for transcription.",
+                        "type": "text/plain"
+                      },
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking",
+                      "value": "{\"title\":\"Meeting recording\",\"reference\":\"ref-123\",\"tags\":[\"meeting\",\"q1-review\"],\"details\":\"Q1 planning session\"}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_config",
+                      "value": "{\"srt_overrides\":{\"max_line_length\":80,\"max_lines\":2}}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"job8f3a1b2c4d5e6f7890abcdef12345678\",\n  \"transcription_config\": {\n    \"language\": \"en\",\n    \"operating_point\": \"standard\",\n    \"diarization\": \"none\"\n  },\n  \"input_s3_uri\": \"s3://slng-production-batch-input/inputs/job8f3a.../audio.wav\",\n  \"output_s3_prefix\": \"s3://slng-production-batch-output/outputs/job8f3a.../\",\n  \"upload\": {\n    \"url\": \"https://slng-production-batch-input.s3.amazonaws.com/inputs/job8f3a.../audio.wav?X-Amz-Algorithm=...\",\n    \"s3_key\": \"inputs/job8f3a.../audio.wav\",\n    \"s3_uri\": \"s3://slng-production-batch-input/inputs/job8f3a.../audio.wav\",\n    \"expires_in\": 1800,\n    \"headers\": {\n      \"Content-Type\": \"application/octet-stream\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1edba7d-e9fa-44ae-9d8d-f40e9139fdf1",
+              "name": "Job accepted and queued for processing (multipart upload, URL input, or presigned-upload step 3).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "transcription_config",
+                      "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Custom alphanumeric identifier for the job. Auto-generated if omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "job_id",
+                      "value": "myjob123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON object with arbitrary key-value metadata to attach to the job.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Model to use for transcription.",
+                        "type": "text/plain"
+                      },
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking",
+                      "value": "{\"title\":\"Meeting recording\",\"reference\":\"ref-123\",\"tags\":[\"meeting\",\"q1-review\"],\"details\":\"Q1 planning session\"}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_config",
+                      "value": "{\"srt_overrides\":{\"max_line_length\":80,\"max_lines\":2}}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"myjob123\",\n  \"status\": \"QUEUED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d9765a5-2f45-4193-b3ea-a67e3b0c63a6",
+              "name": "Validation error (bad request body, unsupported `model_code`, invalid `job_id`, missing/invalid `transcription_config`, invalid `input_url`, etc.).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "transcription_config",
+                      "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Custom alphanumeric identifier for the job. Auto-generated if omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "job_id",
+                      "value": "myjob123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON object with arbitrary key-value metadata to attach to the job.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Model to use for transcription.",
+                        "type": "text/plain"
+                      },
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking",
+                      "value": "{\"title\":\"Meeting recording\",\"reference\":\"ref-123\",\"tags\":[\"meeting\",\"q1-review\"],\"details\":\"Q1 planning session\"}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_config",
+                      "value": "{\"srt_overrides\":{\"max_line_length\":80,\"max_lines\":2}}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"job_id must be alphanumeric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c22cdc67-0534-4220-a452-979a28b090ab",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "transcription_config",
+                      "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Custom alphanumeric identifier for the job. Auto-generated if omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "job_id",
+                      "value": "myjob123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON object with arbitrary key-value metadata to attach to the job.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Model to use for transcription.",
+                        "type": "text/plain"
+                      },
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking",
+                      "value": "{\"title\":\"Meeting recording\",\"reference\":\"ref-123\",\"tags\":[\"meeting\",\"q1-review\"],\"details\":\"Q1 planning session\"}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_config",
+                      "value": "{\"srt_overrides\":{\"max_line_length\":80,\"max_lines\":2}}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"API key id not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30fc1ba0-edd2-48d8-8263-433bc3ddf943",
+              "name": "File too large. Maximum size is 1 GB.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "transcription_config",
+                      "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Custom alphanumeric identifier for the job. Auto-generated if omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "job_id",
+                      "value": "myjob123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON object with arbitrary key-value metadata to attach to the job.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Model to use for transcription.",
+                        "type": "text/plain"
+                      },
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking",
+                      "value": "{\"title\":\"Meeting recording\",\"reference\":\"ref-123\",\"tags\":[\"meeting\",\"q1-review\"],\"details\":\"Q1 planning session\"}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_config",
+                      "value": "{\"srt_overrides\":{\"max_line_length\":80,\"max_lines\":2}}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"File too large. Maximum size is 1 GB.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8541a9b-77b2-4b6c-b7aa-daa51e5f6cb0",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The audio file to transcribe. Supported formats: `wav`, `mp3`, `flac`, `aac`, `ogg`, `m4a`, `mp4`, `amr`, `mpeg`.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "transcription_config",
+                      "value": "{\"language\":\"en\",\"operating_point\":\"standard\",\"diarization\":\"none\",\"domain\":\"<string>\",\"output_locale\":\"<string>\",\"enable_entities\":\"<boolean>\",\"additional_vocab\":[{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]},{\"content\":\"<string>\",\"sounds_like\":[\"<string>\",\"<string>\"]}]}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Custom alphanumeric identifier for the job. Auto-generated if omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "job_id",
+                      "value": "myjob123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON object with arbitrary key-value metadata to attach to the job.",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "Model to use for transcription.",
+                        "type": "text/plain"
+                      },
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking",
+                      "value": "{\"title\":\"Meeting recording\",\"reference\":\"ref-123\",\"tags\":[\"meeting\",\"q1-review\"],\"details\":\"Q1 planning session\"}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_config",
+                      "value": "{\"srt_overrides\":{\"max_line_length\":80,\"max_lines\":2}}",
+                      "type": "text",
+                      "contentType": "application/json"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bfb58c7-0916-4c97-b9ad-5f1d56d7828d",
+          "name": "List batch jobs",
+          "request": {
+            "name": "List batch jobs",
+            "description": {
+              "content": "Returns a paginated list of jobs for your organization. Supports filtering by status, model, and submission date range, plus sorting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (1-based)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Comma-separated statuses to filter by. Allowed values: `QUEUED`, `IN_PROGRESS`, `DECODING`, `DONE`, `FAILED`, `DELETED`."
+                },
+                {
+                  "disabled": false,
+                  "key": "model_code",
+                  "value": "<string>",
+                  "description": "Filter by model code (exact match)."
+                },
+                {
+                  "disabled": false,
+                  "key": "submitted_after",
+                  "value": "<dateTime>",
+                  "description": "Filter jobs submitted after this ISO 8601 datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "submitted_before",
+                  "value": "<dateTime>",
+                  "description": "Filter jobs submitted before this ISO 8601 datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "submitted_at",
+                  "description": "Field to sort results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "desc",
+                  "description": "Sort direction."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "655aaf76-8d8e-45aa-a357-c22cb3b510d6",
+              "name": "Paginated job list. Each item follows the `BatchJob` schema.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "DONE,FAILED"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0"
+                    },
+                    {
+                      "key": "submitted_after",
+                      "value": "2026-04-01T00:00:00Z"
+                    },
+                    {
+                      "key": "submitted_before",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"job_id\": \"myjob123\",\n      \"status\": \"DONE\",\n      \"model_code\": \"slng/speechmatics/batch:15.0.0\",\n      \"submitted_at\": \"2026-04-01T12:00:00Z\"\n    },\n    {\n      \"job_id\": \"myjob456\",\n      \"status\": \"IN_PROGRESS\",\n      \"model_code\": \"slng/speechmatics/batch:15.0.0\",\n      \"submitted_at\": \"2026-04-02T09:30:00Z\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"page_size\": 20,\n    \"total\": 142,\n    \"pages\": 8\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cecbb251-ad22-4ef7-8454-0c38439b6d31",
+              "name": "Validation error (invalid status, sort field, sort order, or datetime format).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "DONE,FAILED"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0"
+                    },
+                    {
+                      "key": "submitted_after",
+                      "value": "2026-04-01T00:00:00Z"
+                    },
+                    {
+                      "key": "submitted_before",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid status value(s): BOGUS. Allowed: DECODING, DELETED, DONE, FAILED, IN_PROGRESS, QUEUED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1b247c3-cfa3-4454-be8d-212a27fb59d5",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "DONE,FAILED"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0"
+                    },
+                    {
+                      "key": "submitted_after",
+                      "value": "2026-04-01T00:00:00Z"
+                    },
+                    {
+                      "key": "submitted_before",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"API key id not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24a3048a-5698-461c-9827-9c1fd044a6b9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "DONE,FAILED"
+                    },
+                    {
+                      "key": "model_code",
+                      "value": "slng/speechmatics/batch:15.0.0"
+                    },
+                    {
+                      "key": "submitted_after",
+                      "value": "2026-04-01T00:00:00Z"
+                    },
+                    {
+                      "key": "submitted_before",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66122493-778d-44a6-9083-c668552eaa2d",
+          "name": "Get batch job",
+          "request": {
+            "name": "Get batch job",
+            "description": {
+              "content": "Returns the full details of a job (status, config, timestamps, error info). Poll until `status` reaches `DONE` or `FAILED`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The alphanumeric job identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6124f6ef-c3f2-4f6e-b896-2700348ca929",
+              "name": "Job detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"myjob123\",\n  \"status\": \"DONE\",\n  \"model_code\": \"slng/speechmatics/batch:15.0.0\",\n  \"job_config\": {\n    \"type\": \"transcription\",\n    \"transcription_config\": {\n      \"language\": \"en\",\n      \"operating_point\": \"standard\",\n      \"diarization\": \"none\"\n    },\n    \"tracking\": {\n      \"title\": \"Meeting\",\n      \"reference\": \"ref-123\"\n    }\n  },\n  \"input_metadata\": {\n    \"size_bytes\": 1543210,\n    \"duration_seconds\": 312.4,\n    \"format\": \"wav\",\n    \"mime_type\": \"audio/wav\"\n  },\n  \"output_metadata\": {},\n  \"error_message\": null,\n  \"submitted_at\": \"2026-04-13T12:00:00Z\",\n  \"started_at\": \"2026-04-13T12:00:05Z\",\n  \"completed_at\": \"2026-04-13T12:01:30Z\",\n  \"deleted_at\": null,\n  \"expired_at\": null,\n  \"updated_at\": \"2026-04-13T12:01:30Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d718d70-751d-4490-a0fd-836190c00bc2",
+              "name": "Validation error (non-alphanumeric `jobId`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"job_id must be alphanumeric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4dc3621-ab9e-4806-9ecc-6f92846cf872",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"API key id not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9680fc4-e3c8-4f38-90c4-85554f5d6871",
+              "name": "Job not found, or not owned by the authenticated API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Job not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c4d4f8a-d8d3-403a-81be-9f690b8997f7",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "599a2cc9-9d0c-4f04-ac28-fe0b4fe74d07",
+          "name": "Delete batch job",
+          "request": {
+            "name": "Delete batch job",
+            "description": {
+              "content": "Delete a completed or failed job. Only jobs in a terminal status (`DONE` or `FAILED`) can be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The alphanumeric job identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4654d1a6-8713-401f-b39f-47857c3084e7",
+              "name": "Job deletion accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"myjob123\",\n  \"status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df9a6255-4c3f-40dc-8b77-d6ce2e1f158c",
+              "name": "Validation error (non-alphanumeric `jobId`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"job_id must be alphanumeric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27a08944-3d05-4c76-8647-d808b7f3f7e3",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"API key id not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cf3029b-0683-4f82-8c15-c1d1b90bf024",
+              "name": "Job not found, or not owned by the authenticated API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Job not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59cdb9de-ffd2-4558-90ba-876c17bb722a",
+              "name": "The job is not in a terminal status (`DONE` or `FAILED`) and cannot be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Job must be DONE or FAILED to delete\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c76e55e3-f84d-475a-b84e-af5b7ddeebf8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a37c3cb0-53b5-4f2c-a011-434c21d36d4a",
+          "name": "Get batch job files",
+          "request": {
+            "name": "Get batch job files",
+            "description": {
+              "content": "Returns signed download URLs for the input audio and the output transcripts of a completed job. Outputs are returned per available format (`json`, `txt`, `srt`); missing formats are omitted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                "jobs",
+                ":jobId",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The alphanumeric job identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "034f048e-3fcf-4a0b-aece-51ae19a91c53",
+              "name": "Input and output files with signed download URLs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"myjob123\",\n  \"inputs\": [\n    {\n      \"key\": \"inputs/myjob123.wav\",\n      \"s3_uri\": \"s3://slng-production-batch-input/inputs/myjob123.wav\",\n      \"download_url\": \"https://slng-production-batch-input.s3.amazonaws.com/inputs/myjob123.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"format\": \"json\",\n      \"key\": \"outputs/myjob123.json\",\n      \"s3_uri\": \"s3://slng-production-batch-output/outputs/myjob123.json\",\n      \"download_url\": \"https://slng-production-batch-output.s3.amazonaws.com/outputs/myjob123.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...\"\n    },\n    {\n      \"format\": \"txt\",\n      \"key\": \"outputs/myjob123.txt\",\n      \"s3_uri\": \"s3://slng-production-batch-output/outputs/myjob123.txt\",\n      \"download_url\": \"https://slng-production-batch-output.s3.amazonaws.com/outputs/myjob123.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...\"\n    },\n    {\n      \"format\": \"srt\",\n      \"key\": \"outputs/myjob123.srt\",\n      \"s3_uri\": \"s3://slng-production-batch-output/outputs/myjob123.srt\",\n      \"download_url\": \"https://slng-production-batch-output.s3.amazonaws.com/outputs/myjob123.srt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600&...\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b79feeb-6c09-4394-a301-a944c0f00d3b",
+              "name": "Validation error (non-alphanumeric `jobId`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"job_id must be alphanumeric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1756332d-e90d-44bc-99f8-0e44d0a8df12",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"API key id not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bdb8520-9506-443b-acd2-ece0e8545e41",
+              "name": "Job not found, or not owned by the authenticated API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Job not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39a3430c-c5e1-4f9d-ac4c-078673cbb948",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    "jobs",
+                    ":jobId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The alphanumeric job identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8206361d-63ea-4858-82d8-c00c9c7d376f",
+    "name": "SLNG Voice Agents Account Speechmatics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

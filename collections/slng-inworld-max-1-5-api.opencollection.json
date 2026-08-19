@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Inworld Max 1.5 API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inworld Max 1.5",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Inworld Max 1.5",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/inworld/max:1.5",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize speech using SLNG-hosted Inworld Max 1.5."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

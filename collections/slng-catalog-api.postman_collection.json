@@ -1,0 +1,519 @@
+{
+  "item": [
+    {
+      "id": "e1008c61-628c-4269-8d08-588c7f7f745d",
+      "name": "Catalog",
+      "description": {
+        "content": "Discover and inspect available models in the SLNG catalog.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a739e391-4be4-4ba8-a15d-254f858d8809",
+          "name": "List catalog models",
+          "request": {
+            "name": "List catalog models",
+            "description": {
+              "content": "List the models available in the SLNG catalog. Supports filtering by service type, provider, region, language, use case, capability, and protocol, plus full-text search and pagination. Authentication is optional — an API key personalizes pricing and region availability for your organisation; anonymous requests return public catalog data.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service_type",
+                  "value": "<string>",
+                  "description": "Filter models by service type."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Filter models by supported language code (for example `en`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>",
+                  "description": "Filter models by provider code (for example `rime`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Filter models by region code (for example `eu-north-1`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "use_case",
+                  "value": "<string>",
+                  "description": "Filter models by use case tag."
+                },
+                {
+                  "disabled": false,
+                  "key": "capability",
+                  "value": "<string>",
+                  "description": "Filter models by capability tag."
+                },
+                {
+                  "disabled": false,
+                  "key": "protocol",
+                  "value": "<string>",
+                  "description": "Filter models by supported protocol."
+                },
+                {
+                  "disabled": false,
+                  "key": "slng_hosted_only",
+                  "value": "<boolean>",
+                  "description": "When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Full-text search across model names and descriptions."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number to return (1-based). Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "The number of items per page. Defaults to 20."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "8edbd463-8704-4c61-b881-a61679b59798",
+              "name": "A paginated list of catalog models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_case",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "protocol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slng_hosted_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"code\": \"slng/rime/arcana:3-en\",\n      \"name\": \"Arcana V3 English\",\n      \"service_type\": \"tts\",\n      \"provider_code\": \"rime\",\n      \"provider\": {\n        \"name\": \"Rime\",\n        \"logo_url\": \"https://assets.slng.ai/provider-logos/rime-9d9ccf23.jpg\",\n        \"code\": \"rime\",\n        \"created_at\": \"2026-03-25 12:43:28.731000+00:00\",\n        \"updated_at\": \"2026-04-14 16:14:02.621000+00:00\"\n      },\n      \"hosted_by\": \"slng\",\n      \"short_description\": \"Ultra-realistic, expressive voices with low latency and native multilingual code-switching.\",\n      \"long_description\": \"Arcana v3 delivers low-latency conversational TTS with multilingual code-switching and word-level timestamps.\",\n      \"best_for\": \"Voice Assistants, Business Telephony, IVR, TTS\",\n      \"use_cases\": [\n        \"Call centers\",\n        \"voice assistant\",\n        \"IVR\"\n      ],\n      \"capabilities\": [\n        \"Streaming\",\n        \"Expressiveness\",\n        \"Latency\"\n      ],\n      \"languages\": [\n        \"en\"\n      ],\n      \"streaming\": true,\n      \"batch\": false,\n      \"voice_count\": 0,\n      \"api_path\": \"/v1/tts/slng/rime/arcana:3-en\",\n      \"docs_url\": \"https://docs.slng.ai/api-reference/endpoints/rime-arcana-v3/arcana-v3-english-http\",\n      \"tags\": [],\n      \"available_regions\": [\n        \"ap-southeast-2\",\n        \"asia-south1\",\n        \"eu-north-1\"\n      ],\n      \"region_details\": [\n        {\n          \"code\": \"ap-southeast-2\",\n          \"country\": \"Australia\",\n          \"world_part_code\": \"au\",\n          \"latency_ms\": 240\n        }\n      ],\n      \"supported_protocols\": [\n        \"https\",\n        \"wss\"\n      ],\n      \"voices\": [],\n      \"similar_models\": [\n        {\n          \"code\": \"slng/deepgram/aura:2-en\",\n          \"name\": \"Aura 2 English\",\n          \"service_type\": \"\"\n        }\n      ],\n      \"pricing\": {\n        \"min_price\": 100,\n        \"unit\": \"microdollars_per_min\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"page\": 1,\n    \"page_size\": 20,\n    \"total\": 26,\n    \"pages\": 2\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0d7a25e-43d7-4ed9-a1ea-072f40d56300",
+              "name": "The request was invalid. Returned for unsupported query parameters, out-of-range values, or a malformed model code.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "use_case",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "capability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "protocol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slng_hosted_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unsupported query parameter: foo\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc27ae5a-a77e-481b-820d-3a7c56db1598",
+          "name": "Get a catalog model",
+          "request": {
+            "name": "Get a catalog model",
+            "description": {
+              "content": "Retrieve a single model from the SLNG catalog by its code. The code may contain slashes and colons (for example `slng/rime/arcana:3-en`). Authentication is optional — an API key personalizes pricing and region availability for your organisation.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "models",
+                ":model_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "protocol",
+                  "value": "<string>",
+                  "description": "Filter models by supported protocol."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_code",
+                  "description": "(Required) The model code to retrieve. May contain slashes and colons (for example `slng/rime/arcana:3-en`).\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "399ea014-8bb7-4ffc-b6ea-32647ad00f55",
+              "name": "A single catalog model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "models",
+                    ":model_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "protocol",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_code",
+                      "description": "(Required) The model code to retrieve. May contain slashes and colons (for example `slng/rime/arcana:3-en`).\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"slng/rime/arcana:3-en\",\n  \"name\": \"Arcana V3 English\",\n  \"service_type\": \"tts\",\n  \"provider_code\": \"rime\",\n  \"provider\": {\n    \"name\": \"Rime\",\n    \"logo_url\": \"https://assets.slng.ai/provider-logos/rime-9d9ccf23.jpg\",\n    \"code\": \"rime\",\n    \"created_at\": \"2026-03-25 12:43:28.731000+00:00\",\n    \"updated_at\": \"2026-04-14 16:14:02.621000+00:00\"\n  },\n  \"hosted_by\": \"slng\",\n  \"short_description\": \"Ultra-realistic, expressive voices with low latency and native multilingual code-switching.\",\n  \"long_description\": \"Arcana v3 delivers low-latency conversational TTS with multilingual code-switching and word-level timestamps.\",\n  \"best_for\": \"Voice Assistants, Business Telephony, IVR, TTS\",\n  \"use_cases\": [\n    \"Call centers\",\n    \"voice assistant\",\n    \"IVR\"\n  ],\n  \"capabilities\": [\n    \"Streaming\",\n    \"Expressiveness\",\n    \"Latency\"\n  ],\n  \"languages\": [\n    \"en\"\n  ],\n  \"streaming\": true,\n  \"batch\": false,\n  \"voice_count\": 0,\n  \"api_path\": \"/v1/tts/slng/rime/arcana:3-en\",\n  \"docs_url\": \"https://docs.slng.ai/api-reference/endpoints/rime-arcana-v3/arcana-v3-english-http\",\n  \"tags\": [],\n  \"available_regions\": [\n    \"ap-southeast-2\",\n    \"asia-south1\",\n    \"eu-north-1\"\n  ],\n  \"region_details\": [\n    {\n      \"code\": \"ap-southeast-2\",\n      \"country\": \"Australia\",\n      \"world_part_code\": \"au\",\n      \"latency_ms\": 240\n    }\n  ],\n  \"supported_protocols\": [\n    \"https\",\n    \"wss\"\n  ],\n  \"voices\": [],\n  \"similar_models\": [\n    {\n      \"code\": \"slng/deepgram/aura:2-en\",\n      \"name\": \"Aura 2 English\",\n      \"service_type\": \"\"\n    }\n  ],\n  \"pricing\": {\n    \"min_price\": 100,\n    \"unit\": \"microdollars_per_min\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec44fa65-2702-4634-8148-ae81169c8c71",
+              "name": "The request was invalid. Returned for unsupported query parameters, out-of-range values, or a malformed model code.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "models",
+                    ":model_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "protocol",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_code",
+                      "description": "(Required) The model code to retrieve. May contain slashes and colons (for example `slng/rime/arcana:3-en`).\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unsupported query parameter: foo\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68273030-3243-4a44-be15-f073fbf9cf58",
+              "name": "No model matches the requested code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "models",
+                    ":model_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "protocol",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_code",
+                      "description": "(Required) The model code to retrieve. May contain slashes and colons (for example `slng/rime/arcana:3-en`).\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Model not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cf74ceef-e394-46e7-a376-0bdc2086fb77",
+    "name": "SLNG Voice Agents Account Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

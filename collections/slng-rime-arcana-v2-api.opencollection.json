@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Rime Arcana v2 API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rime Arcana v2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Arcana v2 (Arabic)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:ar",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize Arabic speech using Rime Arcana TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v2 (German)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:de",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize German speech using Rime Arcana TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v2 (English)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:en",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize English speech using Rime Arcana TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v2 (Spanish)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:es",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize Spanish speech using Rime Arcana TTS model."
+        },
+        {
+          "info": {
+            "name": "Arcana v2 (French)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/rime/arcana:fr",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize French speech using Rime Arcana TTS model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

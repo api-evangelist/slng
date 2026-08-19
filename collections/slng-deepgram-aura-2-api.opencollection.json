@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Deepgram Aura 2 API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deepgram Aura 2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Aura 2 (English)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/deepgram/aura:2-en",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              },
+              {
+                "name": "X-World-Part-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize English speech using SLNG-hosted Deepgram Aura 2."
+        },
+        {
+          "info": {
+            "name": "Aura 2 (Spanish)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/tts/slng/deepgram/aura:2-es",
+            "headers": [
+              {
+                "name": "X-Region-Override",
+                "value": ""
+              },
+              {
+                "name": "X-World-Part-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Synthesize Spanish speech using SLNG-hosted Deepgram Aura 2."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3155 @@
+{
+  "item": [
+    {
+      "id": "b5a45d40-4cbf-463e-b1ea-2c09aaa812d6",
+      "name": "Agents",
+      "description": {
+        "content": "Voice agent CRUD.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f15b4e4-dbee-4893-b787-42ec69dbde82",
+          "name": "List agents",
+          "request": {
+            "name": "List agents",
+            "description": {
+              "content": "List all voice agents for your organisation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4d88e30-7e5b-466c-91be-7f0ebaaf8cab",
+              "name": "List of agents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"string\",\n    \"system_prompt\": \"string\",\n    \"greeting\": \"string\",\n    \"language\": \"string\",\n    \"region\": \"string\",\n    \"models\": {\n      \"stt\": \"slng/deepgram/nova:3-en\",\n      \"llm\": \"groq/openai/gpt-oss-120b\",\n      \"tts\": \"slng/deepgram/aura:2-en\",\n      \"tts_voice\": \"aura-2-thalia-en\",\n      \"stt_kwargs\": {},\n      \"llm_kwargs\": {},\n      \"tts_kwargs\": {},\n      \"fallbacks\": {},\n      \"stt_final_timeout_s\": 233.81111643633434,\n      \"llm_first_token_timeout_s\": 9739.251789764226,\n      \"tts_first_audio_timeout_s\": 9011.306340655234,\n      \"failure_audio_enabled\": true\n    },\n    \"idle_nudges\": {\n      \"first_nudge_text\": \"string\",\n      \"second_nudge_text\": \"string\",\n      \"final_hangup_text\": \"string\",\n      \"enabled\": true,\n      \"first_nudge_delay_seconds\": 15,\n      \"second_nudge_delay_seconds\": 30,\n      \"hangup_delay_seconds\": 15\n    },\n    \"enable_interruptions\": false,\n    \"tools\": [\n      {\n        \"type\": \"template\",\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"template\": \"voicemail_detection\",\n        \"prompt\": \"string\",\n        \"execution_policy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"type\": \"template\",\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"template\": \"hangup\",\n        \"prompt\": \"string\",\n        \"execution_policy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"template_variables\": {\n      \"key_0\": {\n        \"required\": true,\n        \"default\": \"string\",\n        \"key_0\": false,\n        \"key_1\": 2725\n      },\n      \"key_1\": {\n        \"required\": true,\n        \"default\": \"string\",\n        \"key_0\": 3433,\n        \"key_1\": false,\n        \"key_2\": false,\n        \"key_3\": 9976.278017007226\n      },\n      \"key_2\": {\n        \"required\": true,\n        \"default\": \"string\",\n        \"key_0\": \"string\"\n      }\n    },\n    \"created_at\": \"2026-01-15T10:30:00Z\",\n    \"updated_at\": \"2026-01-15T10:30:00Z\",\n    \"inbound_greeting\": \"string\",\n    \"outbound_greeting\": \"string\",\n    \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"runtime_variables\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\"\n      }\n    ],\n    \"deleted_at\": \"2026-01-15T10:30:00Z\"\n  },\n  {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"string\",\n    \"system_prompt\": \"string\",\n    \"greeting\": \"string\",\n    \"language\": \"string\",\n    \"region\": \"string\",\n    \"models\": {\n      \"stt\": \"slng/deepgram/nova:3-en\",\n      \"llm\": \"groq/openai/gpt-oss-120b\",\n      \"tts\": \"slng/deepgram/aura:2-en\",\n      \"tts_voice\": \"aura-2-thalia-en\",\n      \"stt_kwargs\": {},\n      \"llm_kwargs\": {},\n      \"tts_kwargs\": {},\n      \"fallbacks\": {},\n      \"stt_final_timeout_s\": 3359.0080349958175,\n      \"llm_first_token_timeout_s\": 239.87886035487514,\n      \"tts_first_audio_timeout_s\": 8792.919250388612,\n      \"failure_audio_enabled\": true\n    },\n    \"idle_nudges\": {\n      \"first_nudge_text\": \"string\",\n      \"second_nudge_text\": \"string\",\n      \"final_hangup_text\": \"string\",\n      \"enabled\": true,\n      \"first_nudge_delay_seconds\": 15,\n      \"second_nudge_delay_seconds\": 30,\n      \"hangup_delay_seconds\": 15\n    },\n    \"enable_interruptions\": false,\n    \"tools\": [\n      {\n        \"type\": \"template\",\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"template\": \"hangup\",\n        \"prompt\": \"string\",\n        \"execution_policy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"type\": \"template\",\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"template\": \"voicemail_detection\",\n        \"prompt\": \"string\",\n        \"execution_policy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"template_variables\": {\n      \"key_0\": {\n        \"required\": true,\n        \"default\": \"string\",\n        \"key_0\": 5422,\n        \"key_1\": true\n      },\n      \"key_1\": {\n        \"required\": true,\n        \"default\": \"string\",\n        \"key_0\": 5091,\n        \"key_1\": 5247.4868553911165,\n        \"key_2\": true\n      }\n    },\n    \"created_at\": \"2026-01-15T10:30:00Z\",\n    \"updated_at\": \"2026-01-15T10:30:00Z\",\n    \"inbound_greeting\": \"string\",\n    \"outbound_greeting\": \"string\",\n    \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"runtime_variables\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\"\n      }\n    ],\n    \"deleted_at\": \"2026-01-15T10:30:00Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d93f073-aad0-413b-95b5-96b9bb12550a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Authentication is required for this endpoint.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f4dc56c-d137-4751-b814-0afd5d80bf06",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have access to this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0025108-990a-488e-bfd4-db0939121083",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ed91909-0f11-4173-9643-a7e2c76f47af",
+          "name": "Create agent",
+          "request": {
+            "name": "Create agent",
+            "description": {
+              "content": "Create a new voice agent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"<string>\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20de3ac2-ca2e-4751-83f9-2efd9b4c6775",
+              "name": "Agent created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"string\",\n  \"system_prompt\": \"string\",\n  \"greeting\": \"string\",\n  \"language\": \"string\",\n  \"region\": \"string\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"key_0\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"required\": false,\n      \"default\": \"string\"\n    },\n    \"key_2\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": 8243.038889536901\n    }\n  },\n  \"created_at\": \"2026-01-15T10:30:00Z\",\n  \"updated_at\": \"2026-01-15T10:30:00Z\",\n  \"inbound_greeting\": \"string\",\n  \"outbound_greeting\": \"string\",\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "424f9681-78dc-4368-b591-1250680ec29f",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Duplicate tool id detected\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c78a077a-dcb5-4397-b9e4-93d64ef2f678",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"User not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51049247-6003-4dc7-bf66-5da189f0212c",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"User is not a member of any organisation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb1077d6-70cf-432f-85ef-230bd009f4a1",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"No runtime is configured for region 'us-east'\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "492775f1-9d9d-4ec3-b8f1-c50f860c4ec3",
+              "name": "Conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Agent with name 'Appointment Reminder' already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86fec4fd-f150-4896-b7fb-7a37e84d2d27",
+              "name": "Validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"sip_outbound_trunk_id is required when human transfer tools are configured\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c23dff-dc16-4227-9ce9-091b72f907c4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred while creating the agent.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "882e576d-8f98-47b9-b41d-5fc41fb9cccb",
+              "name": "Bad gateway.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder\",\n  \"system_prompt\": \"You are a friendly appointment reminder for {{clinic_name}}. Confirm the patient's upcoming visit or help them reschedule. Keep responses to one or two sentences.\",\n  \"greeting\": \"Hi {{patient_name}}, this is a reminder from {{clinic_name}} about your upcoming appointment.\",\n  \"language\": \"en\",\n  \"region\": \"eu-central\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\"\n  },\n  \"template_defaults\": {\n    \"clinic_name\": \"Downtown Health Clinic\",\n    \"patient_name\": \"there\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Failed to create inbound dispatch rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39d383a4-adbb-46d1-ba5d-28d80a5e753b",
+          "name": "Get agent",
+          "request": {
+            "name": "Get agent",
+            "description": {
+              "content": "Get a single voice agent by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Voice agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6c29336-4b13-4c9b-b799-7eeb9e2a40dc",
+              "name": "Agent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"string\",\n  \"system_prompt\": \"string\",\n  \"greeting\": \"string\",\n  \"language\": \"string\",\n  \"region\": \"string\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"key_0\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"required\": false,\n      \"default\": \"string\"\n    },\n    \"key_2\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": 8243.038889536901\n    }\n  },\n  \"created_at\": \"2026-01-15T10:30:00Z\",\n  \"updated_at\": \"2026-01-15T10:30:00Z\",\n  \"inbound_greeting\": \"string\",\n  \"outbound_greeting\": \"string\",\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fc4ef36-d539-4e68-84db-80ce7a293034",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Authentication is required for this endpoint.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "681b05f0-d17d-4a14-aade-23437f3d414b",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have access to this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d205dc8e-cfff-42e0-8d5b-a813db0a116d",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98e03f00-65d1-41dc-99ca-6182246bbfce",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c171e299-3543-448f-baeb-b997a1cb12f6",
+          "name": "Update agent (partial)",
+          "request": {
+            "name": "Update agent (partial)",
+            "description": {
+              "content": "Partially update a voice agent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Voice agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"<string>\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f5861a9-5fa8-4c83-9f63-668333f9ec9a",
+              "name": "Updated agent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"string\",\n  \"system_prompt\": \"string\",\n  \"greeting\": \"string\",\n  \"language\": \"string\",\n  \"region\": \"string\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"key_0\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"required\": false,\n      \"default\": \"string\"\n    },\n    \"key_2\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": 8243.038889536901\n    }\n  },\n  \"created_at\": \"2026-01-15T10:30:00Z\",\n  \"updated_at\": \"2026-01-15T10:30:00Z\",\n  \"inbound_greeting\": \"string\",\n  \"outbound_greeting\": \"string\",\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5178db7b-dc7c-49bf-914b-526b0e44a8b1",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "669d6cee-3ed7-4fc7-8707-e4a115b54bae",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Authentication is required for this endpoint.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cfd1e77-9f35-465a-95ec-36274a003244",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have access to this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d4e4a74-637d-48bc-8788-8e819a5f4648",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a4be110-6f07-477b-a0ab-613138c907fa",
+              "name": "Conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested operation conflicts with the current resource state.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc0cf678-23fd-4187-99f2-d88f952f4066",
+              "name": "Validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"body\",\n        \"language\"\n      ],\n      \"msg\": \"Input should be a valid string\",\n      \"type\": \"string_type\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c53c5edc-640c-40a6-9791-a2e37ce07eae",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1267627c-de60-4f2a-9342-05b44402ddfb",
+              "name": "Bad gateway.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": \"<boolean>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The upstream service failed to process the request.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21fd0a90-0579-4569-b37d-672ee29edc33",
+          "name": "Replace agent",
+          "request": {
+            "name": "Replace agent",
+            "description": {
+              "content": "Replace a voice agent (full update).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Voice agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"<string>\",\n    \"llm\": \"<string>\",\n    \"tts\": \"<string>\",\n    \"tts_voice\": \"<string>\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"<uuid>\",\n  \"sip_outbound_trunk_id\": \"<uuid>\",\n  \"template_defaults\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "656a075a-ea00-4275-9739-f7040392d4f8",
+              "name": "Replaced agent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"string\",\n  \"system_prompt\": \"string\",\n  \"greeting\": \"string\",\n  \"language\": \"string\",\n  \"region\": \"string\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"key_0\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"required\": false,\n      \"default\": \"string\"\n    },\n    \"key_2\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": 8243.038889536901\n    }\n  },\n  \"created_at\": \"2026-01-15T10:30:00Z\",\n  \"updated_at\": \"2026-01-15T10:30:00Z\",\n  \"inbound_greeting\": \"string\",\n  \"outbound_greeting\": \"string\",\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4813337d-5337-41b5-8e80-79b816d95655",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b04cb50-a30b-4f79-96f9-2dd3ec3e0195",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Authentication is required for this endpoint.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e598874-9bc9-4b20-8f09-439f88a6372a",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have access to this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7be8a9c-5350-4c3e-90c7-950123ad9824",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de18aca2-0fc7-46b6-8326-caef74e7bf74",
+              "name": "Conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested operation conflicts with the current resource state.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec3effb7-f05c-40c1-8456-2be92033d17a",
+              "name": "Validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"body\",\n        \"language\"\n      ],\n      \"msg\": \"Input should be a valid string\",\n      \"type\": \"string_type\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c628809-c10e-4e2f-985a-117428a2db3b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "394aa47f-628e-44a3-9b86-3e0d6f6caebb",
+              "name": "Bad gateway.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"language\": \"<string>\",\n  \"region\": \"<string>\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"inbound_greeting\": \"<string>\",\n  \"outbound_greeting\": \"<string>\",\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"template_defaults\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The upstream service failed to process the request.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64a19765-f41d-4758-a2a7-af533c135a87",
+          "name": "Delete agent",
+          "request": {
+            "name": "Delete agent",
+            "description": {
+              "content": "Soft-delete a voice agent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Voice agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c8aea4a-00c1-4804-95c7-50c1ede67100",
+              "name": "Deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "973053e9-dc10-4e81-81b2-8768928cbc41",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Authentication is required for this endpoint.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "789d2dfa-fbaf-43b7-b77e-98abbe57b168",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have access to this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "142cc3d6-3cd2-4fa9-a326-4a273de728c6",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b9b6a81-e4c1-44d0-a872-e79778f5f4e0",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2985e6b6-7323-42c9-b6fb-97f9c36cbf42",
+          "name": "Duplicate agent",
+          "request": {
+            "name": "Duplicate agent",
+            "description": {
+              "content": "Create a server-side copy of an existing voice agent.\n\nThe duplicate copies the stored agent configuration, including prompts, models, tools,\ntemplate defaults, selected region, and outbound telephony settings.\n\nThe duplicate does not copy call history or the inbound connection. SLNG creates\nand manages a runtime API key for the duplicated agent automatically.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                ":agent_id",
+                "duplicate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agent_id",
+                  "description": "(Required) Voice agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b01721c5-3070-4c18-9125-9e3877dab6a4",
+              "name": "Duplicated agent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"organisation_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"string\",\n  \"system_prompt\": \"string\",\n  \"greeting\": \"string\",\n  \"language\": \"string\",\n  \"region\": \"string\",\n  \"models\": {\n    \"stt\": \"slng/deepgram/nova:3-en\",\n    \"llm\": \"groq/openai/gpt-oss-120b\",\n    \"tts\": \"slng/deepgram/aura:2-en\",\n    \"tts_voice\": \"aura-2-thalia-en\",\n    \"stt_kwargs\": {},\n    \"llm_kwargs\": {},\n    \"tts_kwargs\": {},\n    \"fallbacks\": {},\n    \"stt_final_timeout_s\": \"<number>\",\n    \"llm_first_token_timeout_s\": \"<number>\",\n    \"tts_first_audio_timeout_s\": \"<number>\",\n    \"failure_audio_enabled\": true\n  },\n  \"idle_nudges\": {\n    \"first_nudge_text\": \"<string>\",\n    \"second_nudge_text\": \"<string>\",\n    \"final_hangup_text\": \"<string>\",\n    \"enabled\": true,\n    \"first_nudge_delay_seconds\": 15,\n    \"second_nudge_delay_seconds\": 30,\n    \"hangup_delay_seconds\": 15\n  },\n  \"enable_interruptions\": true,\n  \"tools\": [\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"type\": \"template\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"template\": \"voicemail_detection\",\n      \"prompt\": \"string\",\n      \"execution_policy\": {\n        \"pre_action_message\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"template_variables\": {\n    \"key_0\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"required\": false,\n      \"default\": \"string\"\n    },\n    \"key_2\": {\n      \"required\": true,\n      \"default\": \"string\",\n      \"key_0\": 8243.038889536901\n    }\n  },\n  \"created_at\": \"2026-01-15T10:30:00Z\",\n  \"updated_at\": \"2026-01-15T10:30:00Z\",\n  \"inbound_greeting\": \"string\",\n  \"outbound_greeting\": \"string\",\n  \"sip_inbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"sip_outbound_trunk_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"runtime_variables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"deleted_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d9f1059-ae4b-47f4-8729-16ee83c48a01",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8657523-0906-4f20-a2c6-cd1c4fd73885",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Authentication is required for this endpoint.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5f3163f-2a36-42a8-b8b4-31670aacc4d4",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have access to this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "281ad17b-d88f-41d4-8134-398d1a48d898",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource was not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35ec0ced-ec3a-4816-bc50-720d73788592",
+              "name": "Conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested operation conflicts with the current resource state.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2602ca7-f965-4135-9ff9-dc21cde7c962",
+              "name": "Validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"body\",\n        \"language\"\n      ],\n      \"msg\": \"Input should be a valid string\",\n      \"type\": \"string_type\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66f1200c-148c-4c26-86dd-7c2e51abfcf8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agent_id",
+                      "description": "(Required) Voice agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Appointment Reminder Copy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"An unexpected internal error occurred.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e79762ce-f6f9-4782-b805-5a0e9d293383",
+    "name": "SLNG Voice Account Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

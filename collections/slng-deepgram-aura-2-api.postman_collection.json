@@ -1,0 +1,705 @@
+{
+  "item": [
+    {
+      "id": "4fa98610-b7d3-4d11-936c-803ae7e98714",
+      "name": "Deepgram Aura 2",
+      "description": {
+        "content": "Deepgram Aura 2 for conversational voice agents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db6a8fa3-58ee-4901-a18f-9fdd5d0345c3",
+          "name": "Aura 2 (English)",
+          "request": {
+            "name": "Aura 2 (English)",
+            "description": {
+              "content": "Synthesize English speech using SLNG-hosted Deepgram Aura 2.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tts",
+                "slng",
+                "deepgram",
+                "aura:2-en"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Target world part override. Auto-selected if not provided.",
+                "key": "X-World-Part-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "audio/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d246b864-dc93-44ff-b953-74de08d1b9bd",
+              "name": "Synthesis successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "audio/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-thalia-en\",\n  \"text\": \"Hello, this is a test of text to speech synthesis.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "audio/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eaae604f-4803-4cc1-a92b-1afc03d79729",
+              "name": "Bad request for SLNG-hosted Deepgram Aura TTS. Can be a validation error (missing/invalid fields) or a provider error (invalid query parameters).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-thalia-en\",\n  \"text\": \"Hello, this is a test of text to speech synthesis.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Text is required\",\n  \"fieldErrors\": {\n    \"text\": [\n      \"Required\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "976b9808-c318-496c-93bf-7b6c3909ab44",
+              "name": "Unauthorized error for SLNG-hosted Deepgram Aura TTS. Returned when the Authorization header is missing or invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-thalia-en\",\n  \"text\": \"Hello, this is a test of text to speech synthesis.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"No Authorization Header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ad3255d-a906-4ce0-bd86-0a0bda113783",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-en"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-thalia-en\",\n  \"text\": \"Hello, this is a test of text to speech synthesis.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c34afe2a-48ea-4bf4-bc7c-91d4452bc248",
+          "name": "Aura 2 (Spanish)",
+          "request": {
+            "name": "Aura 2 (Spanish)",
+            "description": {
+              "content": "Synthesize Spanish speech using SLNG-hosted Deepgram Aura 2.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tts",
+                "slng",
+                "deepgram",
+                "aura:2-es"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target region override. Auto-selected if not provided.",
+                "key": "X-Region-Override",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Target world part override. Auto-selected if not provided.",
+                "key": "X-World-Part-Override",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "audio/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"text\": \"<string>\",\n  \"encoding\": \"mp3\",\n  \"sample_rate\": 24000,\n  \"container\": \"wav\",\n  \"bit_rate\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6d4e3a0-89bb-497e-8f02-74feb280e022",
+              "name": "Synthesis successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "audio/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-celeste-es\",\n  \"text\": \"Hola, esto es una prueba de síntesis de texto a voz.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "audio/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58a4bdcf-f2ae-44c3-b7fa-5575425cbbbf",
+              "name": "Bad request for SLNG-hosted Deepgram Aura TTS. Can be a validation error (missing/invalid fields) or a provider error (invalid query parameters).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-celeste-es\",\n  \"text\": \"Hola, esto es una prueba de síntesis de texto a voz.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Text is required\",\n  \"fieldErrors\": {\n    \"text\": [\n      \"Required\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf96f6e1-34c0-4737-b3d2-4beda348d869",
+              "name": "Unauthorized error for SLNG-hosted Deepgram Aura TTS. Returned when the Authorization header is missing or invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-celeste-es\",\n  \"text\": \"Hola, esto es una prueba de síntesis de texto a voz.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"No Authorization Header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "259398b8-6ea4-4fce-ab2e-9b87ab1161f8",
+              "name": "Internal server error from the provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tts",
+                    "slng",
+                    "deepgram",
+                    "aura:2-es"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target region override. Auto-selected if not provided.",
+                    "key": "X-Region-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target world part override. Auto-selected if not provided.",
+                    "key": "X-World-Part-Override",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"aura-2-celeste-es\",\n  \"text\": \"Hola, esto es una prueba de síntesis de texto a voz.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Service error\",\n  \"details\": \"Internal processing error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agents.slng.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0af8b225-351f-46bc-9bd1-6ff5bcc43d4c",
+    "name": "SLNG Voice Agents Account Deepgram Aura 2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.\n\nBase URL: `https://api.agents.slng.ai`\n\n\nContact Support:\n Name: SLNG Support\n Email: support@slng.ai",
+      "type": "text/plain"
+    }
+  }
+}

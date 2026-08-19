@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SLNG Voice Agents Account Whisper Large v3 API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Whisper Large v3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Whisper Large v3",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agents.slng.ai/v1/stt/slng/openai/whisper:large-v3",
+            "headers": [
+              {
+                "name": "X-World-Part-Override",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receive transcripts from Whisper Large v3"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
