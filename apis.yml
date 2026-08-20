@@ -38,6 +38,18 @@ tags:
 - Company
 - Speech
 - Voice
+- Speech-to-Text
+- Text-to-Speech
+- Voice AI
+- Voice Agents
+- Transcription
+- Speech Recognition
+- Artificial Intelligence
+- API Gateway
+tags_raw:
+- Company
+- Speech
+- Voice
 - Speech to Text
 - Text to Speech
 - Voice AI
@@ -186,6 +198,8 @@ apis:
   humanURL: https://docs.slng.ai
   baseURL: https://api.slng.ai
   tags:
+  - Pronunciation Dictionaries
+  tags_raw:
   - Pronunciation dictionaries
   properties:
   - type: OpenAPI
