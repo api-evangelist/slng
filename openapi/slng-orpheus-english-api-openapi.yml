@@ -1,21 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Orpheus English API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+  title: SLNG Gateway API - SLNG TTS Orpheus English API
+  version: 0.1.0
+  description: Unified API for speech-to-text and text-to-speech services.
   contact:
     name: SLNG Support
     email: support@slng.ai
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
-- bearerAuth: []
+- BearerAuth: []
 tags:
 - name: Orpheus English
   description: Orpheus TTS with emotion control.
@@ -53,11 +50,58 @@ paths:
         '503':
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
+  responses:
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
   schemas:
-    AudioBinary:
-      type: string
-      format: binary
-      description: Binary audio data.
+    TtsVoiceRequestBase:
+      type: object
+      properties:
+        text:
+          $ref: '#/components/schemas/TextToSynthesize'
+        voice:
+          type: string
+          description: Voice identifier.
     ProviderErrorResponse:
       type: object
       description: 'Provider error response. Contains error information from the upstream provider.
@@ -84,23 +128,21 @@ components:
           example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
       required:
       - error
-    SpeechSpeedMultiplier:
-      type: number
-      minimum: 0.5
-      maximum: 2
-      description: Speed multiplier (0.5-2.0).
+    TtsVoiceSpeedRequestBase:
+      allOf:
+      - $ref: '#/components/schemas/TtsVoiceRequestBase'
+      - type: object
+        properties:
+          speed:
+            $ref: '#/components/schemas/SpeechSpeedMultiplier'
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
     TextToSynthesize:
       type: string
       minLength: 1
       description: Text to synthesize.
-    TtsVoiceRequestBase:
-      type: object
-      properties:
-        text:
-          $ref: '#/components/schemas/TextToSynthesize'
-        voice:
-          type: string
-          description: Voice identifier.
     OrpheusTtsRequest:
       allOf:
       - $ref: '#/components/schemas/TtsVoiceSpeedRequestBase'
@@ -137,56 +179,11 @@ components:
             - sad
             - angry
             - surprised
-    TtsVoiceSpeedRequestBase:
-      allOf:
-      - $ref: '#/components/schemas/TtsVoiceRequestBase'
-      - type: object
-        properties:
-          speed:
-            $ref: '#/components/schemas/SpeechSpeedMultiplier'
-  responses:
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    ProviderBadRequest:
-      description: Bad request - invalid parameters provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            validation-error:
-              summary: Validation error
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
-    ProviderInternalServerError:
-      description: Internal server error from the provider.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: Service error
-                details: Internal processing error
+    SpeechSpeedMultiplier:
+      type: number
+      minimum: 0.5
+      maximum: 2
+      description: Speed multiplier (0.5-2.0).
   parameters:
     XWorldPartSlngOrpheus:
       name: X-World-Part-Override
@@ -198,7 +195,9 @@ components:
         enum:
         - eu
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: 'API key issued by SLNG. Pass as `Authorization: Bearer <token>`.
+
+        '

@@ -1,21 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Deepgram Nova 3 API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+  title: SLNG Gateway API - SLNG STT Deepgram Nova 3 API
+  version: 0.1.0
+  description: Unified API for speech-to-text and text-to-speech services.
   contact:
     name: SLNG Support
     email: support@slng.ai
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
-- bearerAuth: []
+- BearerAuth: []
 tags:
 - name: Deepgram Nova 3
   description: Deepgram Nova 3 with VAD and speaker diarization.
@@ -194,55 +191,33 @@ paths:
         '503':
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
-  parameters:
-    XRegionSlngNovaEn:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - asia-south1
-        - australia-southeast1
-        - us-east-1
-    XRegionSlngNovaMulti:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - eu-north-1
-    XRegionSlngNovaHi:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - asia-south1
-    XWorldPartSlngNovaHi:
-      name: X-World-Part-Override
-      in: header
-      required: false
-      description: Target world part override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - ap
-    XRegionSlngNovaEs:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - us-east-1
   schemas:
+    SlngDeepgramNova3HiRequest:
+      allOf:
+      - $ref: '#/components/schemas/SttAudioRequestBase'
+      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
+      - type: object
+        properties:
+          language:
+            $ref: '#/components/schemas/SlngDeepgramNova3HiLanguage'
+    SlngDeepgramNova3HiLanguage:
+      type: string
+      description: Supported language codes for the Hindi variant.
+      example: hi
+      enum:
+      - hi
+      - en
+    SttAudioRequestBase:
+      type: object
+      properties:
+        audio:
+          type: string
+          format: binary
+          description: Audio file (multipart) or base64-encoded audio (JSON).
+        url:
+          type: string
+          description: Publicly accessible audio URL.
+          example: https://docs.slng.ai/audio/hello.wav
     SlngDeepgramNova3EsLanguage:
       type: string
       description: Supported Spanish language code.
@@ -254,14 +229,83 @@ components:
       - es-ar
       - es-mx
       - es-es
-    SlngDeepgramNova3HiRequest:
+    SlngDeepgramNova3EnRequest:
       allOf:
       - $ref: '#/components/schemas/SttAudioRequestBase'
       - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
       - type: object
         properties:
           language:
-            $ref: '#/components/schemas/SlngDeepgramNova3HiLanguage'
+            $ref: '#/components/schemas/SlngDeepgramNova3EnLanguage'
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    DeepgramSttResponse:
+      type: object
+      description: 3rd Party Deepgram API response format.
+      required:
+      - results
+      properties:
+        results:
+          type: object
+          properties:
+            channels:
+              type: array
+              items:
+                type: object
+                properties:
+                  alternatives:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        transcript:
+                          type: string
+                        confidence:
+                          type: number
+                  detected_language:
+                    type: string
+        metadata:
+          type: object
+          properties:
+            request_id:
+              type: string
+            model:
+              type: string
+    SlngDeepgramNova3EnLanguage:
+      type: string
+      description: Supported English language code.
+      example: en
+      enum:
+      - en
+      - en-au
+      - en-us
+      - en-nz
+      - en-gb
+      - en-in
     SlngDeepgramNova3MultiRequest:
       allOf:
       - $ref: '#/components/schemas/SttAudioRequestBase'
@@ -270,6 +314,21 @@ components:
         properties:
           language:
             $ref: '#/components/schemas/SlngDeepgramNova3MultiLanguage'
+    SlngDeepgramNova3MultiLanguage:
+      type: string
+      description: Supported language code. Nova 3 Multi auto-detects language; only `multi` is accepted.
+      example: multi
+      default: multi
+      enum:
+      - multi
+    SlngDeepgramNova3EsRequest:
+      allOf:
+      - $ref: '#/components/schemas/SttAudioRequestBase'
+      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
+      - type: object
+        properties:
+          language:
+            $ref: '#/components/schemas/SlngDeepgramNova3EsLanguage'
     SlngDeepgramSttOptionsBase:
       type: object
       description: SLNG-hosted Deepgram STT processing options.
@@ -373,116 +432,6 @@ components:
         tag:
           type: string
           description: Tag for request tracking.
-    SlngDeepgramNova3HiLanguage:
-      type: string
-      description: Supported language codes for the Hindi variant.
-      example: hi
-      enum:
-      - hi
-      - en
-    ProviderErrorResponse:
-      type: object
-      description: 'Provider error response. Contains error information from the upstream provider.
-
-        Common errors include invalid speakers, unsupported languages, or malformed requests.
-
-        '
-      properties:
-        error:
-          type: string
-          description: Error type or category (e.g., "TTS service error", "Validation error").
-          example: TTS service error
-        status:
-          type: number
-          description: Original HTTP status code from the provider (may differ from gateway response code).
-          example: 400
-        details:
-          type: string
-          description: 'Detailed error message from the provider. For TTS errors, this typically includes
-
-            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
-
-            '
-          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
-      required:
-      - error
-    SlngDeepgramNova3EsRequest:
-      allOf:
-      - $ref: '#/components/schemas/SttAudioRequestBase'
-      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
-      - type: object
-        properties:
-          language:
-            $ref: '#/components/schemas/SlngDeepgramNova3EsLanguage'
-    SttAudioRequestBase:
-      type: object
-      properties:
-        audio:
-          type: string
-          format: binary
-          description: Audio file (multipart) or base64-encoded audio (JSON).
-        url:
-          type: string
-          description: Publicly accessible audio URL.
-          example: https://docs.slng.ai/audio/hello.wav
-    SlngDeepgramNova3EnRequest:
-      allOf:
-      - $ref: '#/components/schemas/SttAudioRequestBase'
-      - $ref: '#/components/schemas/SlngDeepgramSttOptionsBase'
-      - type: object
-        properties:
-          language:
-            $ref: '#/components/schemas/SlngDeepgramNova3EnLanguage'
-    DeepgramSttResponse:
-      type: object
-      description: 3rd Party Deepgram API response format.
-      required:
-      - results
-      properties:
-        results:
-          type: object
-          properties:
-            channels:
-              type: array
-              items:
-                type: object
-                properties:
-                  alternatives:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        transcript:
-                          type: string
-                        confidence:
-                          type: number
-                  detected_language:
-                    type: string
-        metadata:
-          type: object
-          properties:
-            request_id:
-              type: string
-            model:
-              type: string
-    SlngDeepgramNova3MultiLanguage:
-      type: string
-      description: Supported language code. Nova 3 Multi auto-detects language; only `multi` is accepted.
-      example: multi
-      default: multi
-      enum:
-      - multi
-    SlngDeepgramNova3EnLanguage:
-      type: string
-      description: Supported English language code.
-      example: en
-      enum:
-      - en
-      - en-au
-      - en-us
-      - en-nz
-      - en-gb
-      - en-in
   responses:
     ProviderInternalServerError:
       description: Internal server error from the provider.
@@ -496,24 +445,6 @@ components:
               value:
                 error: Service error
                 details: Internal processing error
-    SlngDeepgramSttSuccess:
-      description: Transcription successful.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DeepgramSttResponse'
-          examples:
-            basic:
-              summary: Basic transcription
-              value:
-                results:
-                  channels:
-                  - alternatives:
-                    - transcript: hello from sunny barcelona
-                      confidence: 0.98
-                metadata:
-                  request_id: req-123
-                  model: nova-3
     ProviderUnauthorized:
       description: Invalid or missing API key.
       content:
@@ -544,8 +475,76 @@ components:
               value:
                 error: Validation error
                 details: 'Missing required field: text'
+    SlngDeepgramSttSuccess:
+      description: Transcription successful.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeepgramSttResponse'
+          examples:
+            basic:
+              summary: Basic transcription
+              value:
+                results:
+                  channels:
+                  - alternatives:
+                    - transcript: hello from sunny barcelona
+                      confidence: 0.98
+                metadata:
+                  request_id: req-123
+                  model: nova-3
+  parameters:
+    XRegionSlngNovaHi:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - asia-south1
+    XWorldPartSlngNovaHi:
+      name: X-World-Part-Override
+      in: header
+      required: false
+      description: Target world part override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - ap
+    XRegionSlngNovaEs:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - us-east-1
+    XRegionSlngNovaEn:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - asia-south1
+        - australia-southeast1
+        - us-east-1
+    XRegionSlngNovaMulti:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu-north-1
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: 'API key issued by SLNG. Pass as `Authorization: Bearer <token>`.
+
+        '

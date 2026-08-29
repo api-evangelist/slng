@@ -1,19 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
-  contact:
-    name: SLNG Support
-    email: support@slng.ai
+  version: 0.1.0
+  title: SLNG Account API
+  description: Retrieve information about the authenticated account, including the organization and the API key in use.
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
 - bearerAuth: []
 tags:
@@ -46,33 +40,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Internal server error
-    Forbidden:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: API key id not found
   schemas:
-    Error:
-      type: object
-      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
-      required:
-      - error
-      additionalProperties: false
-      properties:
-        error:
-          type: string
     Account:
       type: object
       description: The account associated with the authenticated API key.
@@ -110,8 +78,34 @@ components:
           type: string
           description: Plan tier of the organization.
           example: hobby
+    Error:
+      type: object
+      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
+      required:
+      - error
+      additionalProperties: false
+      properties:
+        error:
+          type: string
+  responses:
+    Forbidden:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: API key id not found
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Internal server error
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: API key from the SLNG dashboard.

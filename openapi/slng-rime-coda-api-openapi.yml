@@ -1,21 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Rime Coda API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+  title: SLNG Gateway API - SLNG TTS Rime Coda API
+  version: 0.1.0
+  description: Unified API for speech-to-text and text-to-speech services.
   contact:
     name: SLNG Support
     email: support@slng.ai
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
-- bearerAuth: []
+- BearerAuth: []
 tags:
 - name: Rime Coda
   description: Rime Coda TTS for Bahasa Indonesian.
@@ -54,15 +51,12 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   schemas:
-    RimeCoda0IdSpeaker:
+    RimeCodaLanguage:
       type: string
-      description: Voice speaker ID for Rime Coda Indonesian.
-      default: pujianti_plesmita
+      description: Language code. Coda Indonesian variant only supports Bahasa Indonesian.
       enum:
-      - pujianti_plesmita
-      - siswoko_sigit
-      - taryadi_dani
-      - usmany_tatianna
+      - id
+      default: id
     ProviderErrorResponse:
       type: object
       description: 'Provider error response. Contains error information from the upstream provider.
@@ -93,23 +87,10 @@ components:
       description: Rime Coda TTS request for Bahasa Indonesian.
       allOf:
       - $ref: '#/components/schemas/RimeCoda0IdTtsRequestBase'
-    RimeArcanaAudioFormat:
+    AudioBinary:
       type: string
-      description: Output audio format as MIME type.
-      enum:
-      - audio/webm;codecs=opus
-      - audio/ogg;codecs=opus
-      - audio/mp3
-      - audio/wav
-      - audio/pcm
-      - audio/x-mulaw
-      default: audio/wav
-    RimeCodaModelId:
-      type: string
-      description: Rime Coda model identifier.
-      enum:
-      - coda
-      default: coda
+      format: binary
+      description: Binary audio data.
     RimeArcanaSampleRate:
       type: integer
       description: Output sample rate in Hz. Values above 24000 are upsampled.
@@ -122,12 +103,6 @@ components:
       - 44100
       - 48000
       - 96000
-    RimeCodaLanguage:
-      type: string
-      description: Language code. Coda Indonesian variant only supports Bahasa Indonesian.
-      enum:
-      - id
-      default: id
     RimeCoda0IdTtsRequestBase:
       description: Base schema for Rime Coda Indonesian TTS requests.
       allOf:
@@ -138,10 +113,23 @@ components:
           speaker:
             $ref: '#/components/schemas/RimeCoda0IdSpeaker'
       - $ref: '#/components/schemas/RimeCodaTtsRequestCommon'
-    AudioBinary:
+    RimeCodaModelId:
       type: string
-      format: binary
-      description: Binary audio data.
+      description: Rime Coda model identifier.
+      enum:
+      - coda
+      default: coda
+    RimeArcanaAudioFormat:
+      type: string
+      description: Output audio format as MIME type.
+      enum:
+      - audio/webm;codecs=opus
+      - audio/ogg;codecs=opus
+      - audio/mp3
+      - audio/wav
+      - audio/pcm
+      - audio/x-mulaw
+      default: audio/wav
     RimeCodaTtsRequestCommon:
       type: object
       description: Common Rime Coda TTS options.
@@ -175,17 +163,36 @@ components:
           description: Enable segment markers in output.
       required:
       - text
-  parameters:
-    XRegionSlngCoda0Id:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - asia-southeast2
+    RimeCoda0IdSpeaker:
+      type: string
+      description: Voice speaker ID for Rime Coda Indonesian.
+      default: pujianti_plesmita
+      enum:
+      - pujianti_plesmita
+      - siswoko_sigit
+      - taryadi_dani
+      - usmany_tatianna
   responses:
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    RimeCodaInternalServerError:
+      description: 'Rime Coda TTS internal error. Note: Some validation errors (e.g., invalid speaker) may currently return 500 instead of 400. Check the error details for specifics.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: TTS service error
+                details: Internal processing error
     ProviderUnauthorized:
       description: Invalid or missing API key.
       content:
@@ -211,34 +218,26 @@ components:
               value:
                 error: Validation error
                 details: 'Missing required field: text'
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
-    RimeCodaInternalServerError:
-      description: 'Rime Coda TTS internal error. Note: Some validation errors (e.g., invalid speaker) may currently return 500 instead of 400. Check the error details for specifics.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: TTS service error
-                details: Internal processing error
     ProviderServiceUnavailable:
       description: Service unavailable.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ProviderErrorResponse'
+  parameters:
+    XRegionSlngCoda0Id:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - asia-southeast2
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: 'API key issued by SLNG. Pass as `Authorization: Bearer <token>`.
+
+        '

@@ -1,21 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Pronunciation dictionaries API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+  title: SLNG Gateway API - SLNG TTS Pronunciation dictionaries API
+  version: 0.1.0
+  description: Pronunciation dictionary management endpoints for SLNG TTS.
   contact:
     name: SLNG Support
     email: support@slng.ai
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
-- bearerAuth: []
+- BearerAuth: []
 tags:
 - name: Pronunciation dictionaries
   description: Manage reusable pronunciation rewrite dictionaries for TTS.
@@ -135,6 +132,17 @@ components:
           description: Pronunciation dictionaries for the authenticated organization.
           items:
             $ref: '#/components/schemas/PronunciationDictionary'
+    PronunciationRewriteMode:
+      type: object
+      required:
+      - rules
+      properties:
+        rules:
+          type: array
+          description: Deterministic rewrite rules. Matching is case-insensitive, whole-word or whole-phrase, longest-match first, and non-recursive.
+          maxItems: 256
+          items:
+            $ref: '#/components/schemas/PronunciationRewriteRule'
     PronunciationIpaMode:
       type: object
       description: IPA entries can be stored but are not executed today.
@@ -144,6 +152,71 @@ components:
           maxItems: 256
           items:
             $ref: '#/components/schemas/PronunciationIpaRule'
+    PronunciationRewriteRule:
+      type: object
+      required:
+      - match
+      - replace
+      properties:
+        match:
+          type: string
+          description: Word or phrase to match.
+          maxLength: 128
+          example: NAIC
+        replace:
+          type: string
+          description: Replacement text sent to the selected TTS model.
+          maxLength: 256
+          example: en ay eye see
+    PronunciationModes:
+      type: object
+      required:
+      - rewrite
+      properties:
+        rewrite:
+          $ref: '#/components/schemas/PronunciationRewriteMode'
+        ipa:
+          $ref: '#/components/schemas/PronunciationIpaMode'
+      description: Pronunciation modes stored on the dictionary. Only `rewrite` is executable today.
+    PronunciationIpaRule:
+      type: object
+      required:
+      - match
+      - ipa
+      properties:
+        match:
+          type: string
+          maxLength: 128
+          description: Word or phrase to match.
+          example: SLNG
+        ipa:
+          type: string
+          maxLength: 256
+          description: IPA pronunciation value. Stored only; not executed today.
+          example: slɪŋ
+    PronunciationDictionaryCreateRequest:
+      type: object
+      required:
+      - name
+      - modes
+      properties:
+        name:
+          type: string
+          description: Unique dictionary name within the authenticated organization.
+          maxLength: 128
+          pattern: ^[A-Za-z0-9._-]+$
+          example: brand-pronunciations
+        metadata:
+          type: object
+          description: Optional application metadata stored with the dictionary.
+          additionalProperties: true
+          example:
+            language: hi-IN
+            providers:
+            - sarvam
+            - cartesia
+        modes:
+          $ref: '#/components/schemas/PronunciationModes'
     PronunciationError:
       type: object
       required:
@@ -172,56 +245,6 @@ components:
           type: string
           description: SLNG request identifier for support.
           example: req_01abc...
-    PronunciationIpaRule:
-      type: object
-      required:
-      - match
-      - ipa
-      properties:
-        match:
-          type: string
-          maxLength: 128
-          description: Word or phrase to match.
-          example: SLNG
-        ipa:
-          type: string
-          maxLength: 256
-          description: IPA pronunciation value. Stored only; not executed today.
-          example: slɪŋ
-    PronunciationRewriteMode:
-      type: object
-      required:
-      - rules
-      properties:
-        rules:
-          type: array
-          description: Deterministic rewrite rules. Matching is case-insensitive, whole-word or whole-phrase, longest-match first, and non-recursive.
-          maxItems: 256
-          items:
-            $ref: '#/components/schemas/PronunciationRewriteRule'
-    PronunciationDictionaryCreateRequest:
-      type: object
-      required:
-      - name
-      - modes
-      properties:
-        name:
-          type: string
-          description: Unique dictionary name within the authenticated organization.
-          maxLength: 128
-          pattern: ^[A-Za-z0-9._-]+$
-          example: brand-pronunciations
-        metadata:
-          type: object
-          description: Optional application metadata stored with the dictionary.
-          additionalProperties: true
-          example:
-            language: hi-IN
-            providers:
-            - sarvam
-            - cartesia
-        modes:
-          $ref: '#/components/schemas/PronunciationModes'
     PronunciationDictionary:
       type: object
       required:
@@ -273,32 +296,6 @@ components:
           type: string
           description: API key label that created the dictionary, when available.
           example: production-key
-    PronunciationModes:
-      type: object
-      required:
-      - rewrite
-      properties:
-        rewrite:
-          $ref: '#/components/schemas/PronunciationRewriteMode'
-        ipa:
-          $ref: '#/components/schemas/PronunciationIpaMode'
-      description: Pronunciation modes stored on the dictionary. Only `rewrite` is executable today.
-    PronunciationRewriteRule:
-      type: object
-      required:
-      - match
-      - replace
-      properties:
-        match:
-          type: string
-          description: Word or phrase to match.
-          maxLength: 128
-          example: NAIC
-        replace:
-          type: string
-          description: Replacement text sent to the selected TTS model.
-          maxLength: 256
-          example: en ay eye see
   responses:
     PronunciationUnauthenticated:
       description: Missing or unresolved organization context.
@@ -312,30 +309,6 @@ components:
               value:
                 code: pronunciation_unauthenticated
                 error: Missing or invalid organization context.
-    PronunciationNotFound:
-      description: Dictionary not found in the authenticated organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            notFound:
-              summary: Dictionary not found
-              value:
-                code: pronunciation_not_found
-                error: 'Pronunciation dictionary not found: brand-pronunciations'
-    PronunciationUnavailable:
-      description: Pronunciation storage or dependency unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            unavailable:
-              summary: Pronunciation service unavailable
-              value:
-                code: pronunciation_unavailable
-                error: Pronunciation dictionaries are temporarily unavailable.
     InvalidPronunciation:
       description: Invalid pronunciation request.
       content:
@@ -348,6 +321,18 @@ components:
               value:
                 code: invalid_pronunciation
                 error: Invalid pronunciation dictionary reference.
+    PronunciationUnavailable:
+      description: Pronunciation storage or dependency unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            unavailable:
+              summary: Pronunciation service unavailable
+              value:
+                code: pronunciation_unavailable
+                error: Pronunciation dictionaries are temporarily unavailable.
     PronunciationConflict:
       description: Dictionary name already exists in the organization.
       content:
@@ -360,6 +345,18 @@ components:
               value:
                 code: pronunciation_conflict
                 error: 'Pronunciation dictionary already exists: brand-pronunciations'
+    PronunciationNotFound:
+      description: Dictionary not found in the authenticated organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            notFound:
+              summary: Dictionary not found
+              value:
+                code: pronunciation_not_found
+                error: 'Pronunciation dictionary not found: brand-pronunciations'
   parameters:
     PronunciationDictionaryName:
       name: name
@@ -372,7 +369,7 @@ components:
         pattern: ^[A-Za-z0-9._-]+$
       example: brand-pronunciations
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      bearerFormat: API Key

@@ -1,21 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Rime Arcana v3 API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+  title: SLNG Gateway API - SLNG TTS Rime Arcana v3 API
+  version: 0.1.0
+  description: Unified API for speech-to-text and text-to-speech services.
   contact:
     name: SLNG Support
     email: support@slng.ai
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
-- bearerAuth: []
+- BearerAuth: []
 tags:
 - name: Rime Arcana v3
   description: Rime Arcana v3 TTS with multilingual support (English, Hindi).
@@ -149,220 +146,90 @@ paths:
         '503':
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
-  parameters:
-    XRegionSlngArcanaV3En:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - ap-southeast-2
-        - asia-south1
-        - eu-north-1
-    XRegionSlngArcanaV3Hi:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - ap-southeast-2
-        - eu-north-1
-    XRegionSlngArcanaV3Fr:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - eu-north-1
-    XRegionSlngArcanaV3Es:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - eu-north-1
-  schemas:
-    RimeArcana3TtsRequestBase:
-      description: Base schema for Rime Arcana v3 TTS requests.
-      allOf:
-      - type: object
-        required:
-        - speaker
-        properties:
-          speaker:
-            $ref: '#/components/schemas/RimeArcana3Speaker'
-      - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
-    RimeArcana3TtsRequestFr:
-      description: Rime Arcana v3 TTS request for French.
-      type: object
-      required:
-      - speaker
-      properties:
-        speaker:
-          $ref: '#/components/schemas/RimeArcanaSpeakerFr'
-        modelId:
-          type: string
-          default: arcana-3
-          description: Rime Arcana v3 model identifier.
-        language:
-          type: string
-          enum:
-          - fr
-          default: fr
-          description: Language code.
-      allOf:
-      - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
-    RimeArcanaSpeakerFr:
-      type: string
-      description: Voice speaker ID (French voices).
-      default: livet_aurelie
-      enum:
-      - destin
-      - livet_aurelie
-      - morel_marianne
-      - serrin_joseph
-      - solstice
-    RimeArcana3TtsRequestHi:
-      description: Rime Arcana v3 TTS request for Hindi.
-      allOf:
-      - $ref: '#/components/schemas/RimeArcana3TtsRequestBase'
-    RimeArcana3TtsRequestEs:
-      description: Rime Arcana v3 TTS request for Spanish.
-      type: object
-      required:
-      - speaker
-      properties:
-        speaker:
-          $ref: '#/components/schemas/RimeArcana3SpeakerEs'
-        modelId:
-          type: string
-          default: arcana-3
-          description: Rime Arcana v3 model identifier.
-        language:
-          type: string
-          enum:
-          - es
-          default: es
-          description: Language code.
-      allOf:
-      - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
-    RimeArcana3TtsRequestEn:
-      description: Rime Arcana v3 TTS request for English.
-      allOf:
-      - $ref: '#/components/schemas/RimeArcana3TtsRequestBase'
-    ProviderErrorResponse:
-      type: object
-      description: 'Provider error response. Contains error information from the upstream provider.
+  responses:
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    RimeArcanaInternalServerError:
+      description: 'Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)
 
-        Common errors include invalid speakers, unsupported languages, or malformed requests.
+        may currently return 500 instead of 400. Check the error details for specifics.
 
         '
-      properties:
-        error:
-          type: string
-          description: Error type or category (e.g., "TTS service error", "Validation error").
-          example: TTS service error
-        status:
-          type: number
-          description: Original HTTP status code from the provider (may differ from gateway response code).
-          example: 400
-        details:
-          type: string
-          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: TTS service error
+                details: Internal processing error
+            invalid-speaker-as-500:
+              summary: Invalid speaker (returned as 500)
+              description: 'Invalid speaker errors may currently return 500 instead of 400.
 
-            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+                The details field will indicate the actual validation error.
 
-            '
-          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
-      required:
-      - error
-    RimeArcana3SpeakerEs:
-      type: string
-      description: Voice speaker ID for Rime Arcana v3 Spanish.
-      default: seraphina
-      enum:
-      - aurelio
-      - celestino
-      - lark
-      - luz
-      - mar
-      - nova
-      - pola
-      - seraphina
-      - sirius
-      - ursa
-    RimeArcanaTtsRequestCommon:
-      type: object
-      description: Common Rime Arcana TTS options.
-      properties:
-        text:
-          type: string
-          minLength: 1
-          description: Text to synthesize.
-        modelId:
-          $ref: '#/components/schemas/RimeArcanaModelId'
-        repetition_penalty:
-          type: number
-          format: float
-          default: 1.5
-          description: The repetition penalty. We do not recommend changing this from the default value. Typical range is 1 to 2. Float that penalizes new tokens based on whether they appear in the prompt and the generated text so far. Values > 1 encourage the model to use new tokens, while values < 1 encourage the model to repeat tokens.
-        temperature:
-          type: number
-          format: float
-          default: 0.5
-          description: The temperature. We do not recommend changing this from the default value. Typical range is 0 to 1. Float that controls the randomness of the sampling. Lower values make the model more deterministic, while higher values make the model more random. Zero means greedy sampling.
-        top_p:
-          type: number
-          format: float
-          default: 1
-          description: The top p. We do not recommend changing this from the default value. Typical range is 0 to 1. Float that controls the cumulative probability of the top tokens to consider. Must be in (0, 1]. Set to 1 to consider all tokens.
-        audioFormat:
-          $ref: '#/components/schemas/RimeArcanaAudioFormat'
-        sample_rate:
-          $ref: '#/components/schemas/RimeArcanaSampleRate'
-        speed:
-          type: number
-          description: Speech rate multiplier (0.25 = half speed, 2.0 = double speed).
-          minimum: 0.25
-          maximum: 2
-          default: 1
-      required:
-      - text
-    RimeArcanaAudioFormat:
-      type: string
-      description: Output audio format as MIME type.
-      enum:
-      - audio/webm;codecs=opus
-      - audio/ogg;codecs=opus
-      - audio/mp3
-      - audio/wav
-      - audio/pcm
-      - audio/x-mulaw
-      default: audio/wav
-    AudioBinary:
-      type: string
-      format: binary
-      description: Binary audio data.
-    RimeArcanaSampleRate:
-      type: integer
-      description: Output sample rate in Hz. Values above 24000 are upsampled.
-      default: 24000
-      enum:
-      - 8000
-      - 16000
-      - 22050
-      - 24000
-      - 44100
-      - 48000
-      - 96000
+                '
+              value:
+                error: TTS service error
+                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+    RimeArcanaBadRequest:
+      description: 'Rime Arcana TTS bad request. Common causes include invalid speaker ID for the
+
+        selected language variant, unsupported model, unsupported audio format, or malformed request body.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            invalid-speaker:
+              summary: Invalid speaker ID
+              description: 'Speaker ID not available for this language variant. Each Arcana language
+
+                has specific voices - check the endpoint schema for valid speakers.
+
+                '
+              value:
+                error: TTS service error
+                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+            invalid-speaker-for-language:
+              summary: Speaker not available for language
+              description: Using a speaker from a different language variant.
+              value:
+                error: TTS service error
+                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: astra'
+            missing-text:
+              summary: Missing text field
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+            unsupported-model:
+              summary: Unsupported model
+              description: The specified modelId is not supported by Rime Arcana.
+              value:
+                error: TTS service error
+                details: 'Rime TTS API error: 400 Bad Request - Unsupported model'
+  schemas:
     RimeArcanaModelId:
       type: string
       description: 'Model: arcana (most realistic, ~150ms), mistv2 (speed & control, ~70ms).'
@@ -372,6 +239,10 @@ components:
       - mistv2
       - mist
       default: arcana
+    RimeArcana3TtsRequestEn:
+      description: Rime Arcana v3 TTS request for English.
+      allOf:
+      - $ref: '#/components/schemas/RimeArcana3TtsRequestBase'
     RimeArcana3Speaker:
       type: string
       description: Voice speaker ID for Rime Arcana v3. Multilingual speakers supporting all languages.
@@ -679,91 +550,219 @@ components:
       - yukiko
       - zahir
       - zhang_mei
-  responses:
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    RimeArcanaBadRequest:
-      description: 'Rime Arcana TTS bad request. Common causes include invalid speaker ID for the
+    RimeArcana3TtsRequestBase:
+      description: Base schema for Rime Arcana v3 TTS requests.
+      allOf:
+      - type: object
+        required:
+        - speaker
+        properties:
+          speaker:
+            $ref: '#/components/schemas/RimeArcana3Speaker'
+      - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    RimeArcanaTtsRequestCommon:
+      type: object
+      description: Common Rime Arcana TTS options.
+      properties:
+        text:
+          type: string
+          minLength: 1
+          description: Text to synthesize.
+        modelId:
+          $ref: '#/components/schemas/RimeArcanaModelId'
+        repetition_penalty:
+          type: number
+          format: float
+          default: 1.5
+          description: The repetition penalty. We do not recommend changing this from the default value. Typical range is 1 to 2. Float that penalizes new tokens based on whether they appear in the prompt and the generated text so far. Values > 1 encourage the model to use new tokens, while values < 1 encourage the model to repeat tokens.
+        temperature:
+          type: number
+          format: float
+          default: 0.5
+          description: The temperature. We do not recommend changing this from the default value. Typical range is 0 to 1. Float that controls the randomness of the sampling. Lower values make the model more deterministic, while higher values make the model more random. Zero means greedy sampling.
+        top_p:
+          type: number
+          format: float
+          default: 1
+          description: The top p. We do not recommend changing this from the default value. Typical range is 0 to 1. Float that controls the cumulative probability of the top tokens to consider. Must be in (0, 1]. Set to 1 to consider all tokens.
+        audioFormat:
+          $ref: '#/components/schemas/RimeArcanaAudioFormat'
+        sample_rate:
+          $ref: '#/components/schemas/RimeArcanaSampleRate'
+        speed:
+          type: number
+          description: Speech rate multiplier (0.25 = half speed, 2.0 = double speed).
+          minimum: 0.25
+          maximum: 2
+          default: 1
+      required:
+      - text
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
+    RimeArcanaSampleRate:
+      type: integer
+      description: Output sample rate in Hz. Values above 24000 are upsampled.
+      default: 24000
+      enum:
+      - 8000
+      - 16000
+      - 22050
+      - 24000
+      - 44100
+      - 48000
+      - 96000
+    RimeArcanaSpeakerFr:
+      type: string
+      description: Voice speaker ID (French voices).
+      default: livet_aurelie
+      enum:
+      - destin
+      - livet_aurelie
+      - morel_marianne
+      - serrin_joseph
+      - solstice
+    RimeArcana3TtsRequestEs:
+      description: Rime Arcana v3 TTS request for Spanish.
+      type: object
+      required:
+      - speaker
+      properties:
+        speaker:
+          $ref: '#/components/schemas/RimeArcana3SpeakerEs'
+        modelId:
+          type: string
+          default: arcana-3
+          description: Rime Arcana v3 model identifier.
+        language:
+          type: string
+          enum:
+          - es
+          default: es
+          description: Language code.
+      allOf:
+      - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
 
-        selected language variant, unsupported model, unsupported audio format, or malformed request body.
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            invalid-speaker:
-              summary: Invalid speaker ID
-              description: 'Speaker ID not available for this language variant. Each Arcana language
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
 
-                has specific voices - check the endpoint schema for valid speakers.
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
 
-                '
-              value:
-                error: TTS service error
-                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
-            invalid-speaker-for-language:
-              summary: Speaker not available for language
-              description: Using a speaker from a different language variant.
-              value:
-                error: TTS service error
-                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: astra'
-            missing-text:
-              summary: Missing text field
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-            unsupported-model:
-              summary: Unsupported model
-              description: The specified modelId is not supported by Rime Arcana.
-              value:
-                error: TTS service error
-                details: 'Rime TTS API error: 400 Bad Request - Unsupported model'
-    RimeArcanaInternalServerError:
-      description: 'Rime Arcana TTS internal error. Note: Some validation errors (e.g., invalid speaker)
-
-        may currently return 500 instead of 400. Check the error details for specifics.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: TTS service error
-                details: Internal processing error
-            invalid-speaker-as-500:
-              summary: Invalid speaker (returned as 500)
-              description: 'Invalid speaker errors may currently return 500 instead of 400.
-
-                The details field will indicate the actual validation error.
-
-                '
-              value:
-                error: TTS service error
-                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
+    RimeArcana3TtsRequestFr:
+      description: Rime Arcana v3 TTS request for French.
+      type: object
+      required:
+      - speaker
+      properties:
+        speaker:
+          $ref: '#/components/schemas/RimeArcanaSpeakerFr'
+        modelId:
+          type: string
+          default: arcana-3
+          description: Rime Arcana v3 model identifier.
+        language:
+          type: string
+          enum:
+          - fr
+          default: fr
+          description: Language code.
+      allOf:
+      - $ref: '#/components/schemas/RimeArcanaTtsRequestCommon'
+    RimeArcana3TtsRequestHi:
+      description: Rime Arcana v3 TTS request for Hindi.
+      allOf:
+      - $ref: '#/components/schemas/RimeArcana3TtsRequestBase'
+    RimeArcanaAudioFormat:
+      type: string
+      description: Output audio format as MIME type.
+      enum:
+      - audio/webm;codecs=opus
+      - audio/ogg;codecs=opus
+      - audio/mp3
+      - audio/wav
+      - audio/pcm
+      - audio/x-mulaw
+      default: audio/wav
+    RimeArcana3SpeakerEs:
+      type: string
+      description: Voice speaker ID for Rime Arcana v3 Spanish.
+      default: seraphina
+      enum:
+      - aurelio
+      - celestino
+      - lark
+      - luz
+      - mar
+      - nova
+      - pola
+      - seraphina
+      - sirius
+      - ursa
+  parameters:
+    XRegionSlngArcanaV3Hi:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - ap-southeast-2
+        - eu-north-1
+    XRegionSlngArcanaV3Fr:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu-north-1
+    XRegionSlngArcanaV3Es:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - eu-north-1
+    XRegionSlngArcanaV3En:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - ap-southeast-2
+        - asia-south1
+        - eu-north-1
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: 'API key issued by SLNG. Pass as `Authorization: Bearer <token>`.
+
+        '

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Sessions API
+  title: SLNG Voice Agents Sessions API
   version: 1.0.0
   description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
 
@@ -83,17 +83,6 @@ paths:
                     detail: 'Failed to dispatch web session: upstream dispatcher unavailable'
 components:
   responses:
-    BadRequestError:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            bad-request:
-              summary: Generic bad request
-              value:
-                detail: The request could not be processed.
     ForbiddenError:
       description: Forbidden.
       content:
@@ -105,17 +94,6 @@ components:
               summary: Access denied
               value:
                 detail: You do not have access to this resource.
-    NotFoundError:
-      description: Not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            not-found:
-              summary: Resource not found
-              value:
-                detail: The requested resource was not found.
     ValidationError:
       description: Validation error.
       content:
@@ -132,17 +110,6 @@ components:
                   - language
                   msg: Input should be a valid string
                   type: string_type
-    UnauthorizedError:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            unauthorized:
-              summary: Authentication failed
-              value:
-                detail: Authentication is required for this endpoint.
     InternalServerError:
       description: Internal server error.
       content:
@@ -154,27 +121,40 @@ components:
               summary: Unexpected application error
               value:
                 detail: An unexpected internal error occurred.
+    NotFoundError:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            not-found:
+              summary: Resource not found
+              value:
+                detail: The requested resource was not found.
+    BadRequestError:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            bad-request:
+              summary: Generic bad request
+              value:
+                detail: The request could not be processed.
+    UnauthorizedError:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Authentication failed
+              value:
+                detail: Authentication is required for this endpoint.
   schemas:
-    UUID:
-      type: string
-      format: uuid
-      example: 550e8400-e29b-41d4-a716-446655440000
-    AgentWebSessionCreate:
-      type: object
-      additionalProperties: false
-      properties:
-        arguments:
-          type: object
-          maxProperties: 32
-          additionalProperties:
-            type: string
-            maxLength: 1024
-          default: {}
-          description: Per-session template argument overrides. Maximum 32 keys. Each value may be up to 1024 characters. Combined value payload may not exceed 8192 characters.
-        participant_name:
-          type: string
-          nullable: true
-          description: Optional display name for the web participant.
     ErrorResponse:
       type: object
       additionalProperties: true
@@ -199,6 +179,27 @@ components:
           - type: array
             items:
               type: object
+    AgentWebSessionCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        arguments:
+          type: object
+          maxProperties: 32
+          additionalProperties:
+            type: string
+            maxLength: 1024
+          default: {}
+          description: Per-session template argument overrides. Maximum 32 keys. Each value may be up to 1024 characters. Combined value payload may not exceed 8192 characters.
+        participant_name:
+          type:
+          - string
+          - 'null'
+          description: Optional display name for the web participant.
+    UUID:
+      type: string
+      format: uuid
+      example: 550e8400-e29b-41d4-a716-446655440000
     AgentWebSessionResponse:
       type: object
       additionalProperties: false

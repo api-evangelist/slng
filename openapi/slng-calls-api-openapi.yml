@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Calls API
+  title: SLNG Voice Agents Calls API
   version: 1.0.0
   description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
 
@@ -197,6 +197,30 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      additionalProperties: true
+      description: 'Error payloads can vary depending on where the error is raised (edge gateway vs backend).
+
+
+        Common shapes include:
+
+        - `{ "error": "message" }`
+
+        - `{ "detail": "message" }`
+
+        - `{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }` (validation)
+
+        '
+      properties:
+        error:
+          type: string
+        detail:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
     PaginatedAgentCallListOut:
       type: object
       additionalProperties: false
@@ -210,6 +234,129 @@ components:
             $ref: '#/components/schemas/AgentCallListItemOut'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    DateTime:
+      type: string
+      format: date-time
+      example: '2026-01-15T10:30:00Z'
+    ToolInvocationSource:
+      type: string
+      enum:
+      - system
+      - contextual
+    ToolExecutionKind:
+      type: string
+      enum:
+      - webhook
+      - template
+      - human_transfer
+      - built_in
+    AgentCallDetailOut:
+      allOf:
+      - $ref: '#/components/schemas/AgentCallListItemOut'
+      - type: object
+        additionalProperties: false
+        properties:
+          livekit_session_report:
+            type:
+            - object
+            - 'null'
+            additionalProperties: true
+            description: Internal runtime diagnostics; structure may change.
+          call_events:
+            type: array
+            items:
+              $ref: '#/components/schemas/CallEvent'
+          tool_executions:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentCallToolExecutionClientOut'
+    AgentCallToolExecutionCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - tool_name
+      - tool_kind
+      - invocation_source
+      - started_at
+      - finished_at
+      - duration_ms
+      - outcome
+      properties:
+        tool_id:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        tool_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        tool_kind:
+          $ref: '#/components/schemas/ToolExecutionKind'
+        invocation_source:
+          $ref: '#/components/schemas/ToolInvocationSource'
+        trigger_event:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          maxLength: 64
+        source_tool_id:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        started_at:
+          $ref: '#/components/schemas/DateTime'
+        finished_at:
+          $ref: '#/components/schemas/DateTime'
+        duration_ms:
+          type: integer
+          minimum: 0
+        outcome:
+          $ref: '#/components/schemas/ToolExecutionOutcome'
+        http_status:
+          type:
+          - integer
+          - 'null'
+          minimum: 100
+          maximum: 999
+        error_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 128
+        error_type:
+          type:
+          - string
+          - 'null'
+          maxLength: 200
+        wait_for_response:
+          type:
+          - boolean
+          - 'null'
+        show_results_to_llm:
+          type:
+          - boolean
+          - 'null'
+        target_url:
+          type:
+          - string
+          - 'null'
+          maxLength: 1024
+          description: Sanitized target URL without query string or fragment details.
+        arguments_preview: {}
+        result_preview: {}
+        error_message:
+          type:
+          - string
+          - 'null'
+          maxLength: 5000
+        stack_trace:
+          type:
+          - string
+          - 'null'
+          maxLength: 20000
     CallEvent:
       type: object
       additionalProperties: false
@@ -239,258 +386,50 @@ components:
           - error
           default: info
         component:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - stt
           - llm
           - tts
-          nullable: true
         from_model:
-          type: string
+          type:
+          - string
+          - 'null'
           maxLength: 500
-          nullable: true
         to_model:
-          type: string
+          type:
+          - string
+          - 'null'
           maxLength: 500
-          nullable: true
         reason:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - hard_fail
           - timeout
-          nullable: true
         timeout_s:
-          type: number
+          type:
+          - number
+          - 'null'
           minimum: 0
-          nullable: true
         error_type:
-          type: string
+          type:
+          - string
+          - 'null'
           maxLength: 200
-          nullable: true
         error_code:
-          type: integer
-          nullable: true
-    AgentCallToolExecutionCreate:
-      type: object
-      additionalProperties: false
-      required:
-      - tool_name
-      - tool_kind
-      - invocation_source
-      - started_at
-      - finished_at
-      - duration_ms
-      - outcome
-      properties:
-        tool_id:
-          type: string
-          maxLength: 255
-          nullable: true
-        tool_name:
-          type: string
-          minLength: 1
-          maxLength: 255
-        tool_kind:
-          $ref: '#/components/schemas/ToolExecutionKind'
-        invocation_source:
-          $ref: '#/components/schemas/ToolInvocationSource'
-        trigger_event:
-          type: string
-          minLength: 1
-          maxLength: 64
-          nullable: true
-        source_tool_id:
-          type: string
-          maxLength: 255
-          nullable: true
-        started_at:
-          $ref: '#/components/schemas/DateTime'
-        finished_at:
-          $ref: '#/components/schemas/DateTime'
-        duration_ms:
-          type: integer
-          minimum: 0
-        outcome:
-          $ref: '#/components/schemas/ToolExecutionOutcome'
-        http_status:
-          type: integer
-          minimum: 100
-          maximum: 999
-          nullable: true
-        error_code:
-          type: string
-          maxLength: 128
-          nullable: true
-        error_type:
-          type: string
-          maxLength: 200
-          nullable: true
-        wait_for_response:
-          type: boolean
-          nullable: true
-        show_results_to_llm:
-          type: boolean
-          nullable: true
-        target_url:
-          type: string
-          maxLength: 1024
-          nullable: true
-          description: Sanitized target URL without query string or fragment details.
-        arguments_preview:
-          nullable: true
-        result_preview:
-          nullable: true
-        error_message:
-          type: string
-          maxLength: 5000
-          nullable: true
-        stack_trace:
-          type: string
-          maxLength: 20000
-          nullable: true
-    ToolExecutionKind:
-      type: string
-      enum:
-      - webhook
-      - template
-      - human_transfer
-      - built_in
-    DateTime:
-      type: string
-      format: date-time
-      example: '2026-01-15T10:30:00Z'
-    ErrorResponse:
-      type: object
-      additionalProperties: true
-      description: 'Error payloads can vary depending on where the error is raised (edge gateway vs backend).
-
-
-        Common shapes include:
-
-        - `{ "error": "message" }`
-
-        - `{ "detail": "message" }`
-
-        - `{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }` (validation)
-
-        '
-      properties:
-        error:
-          type: string
-        detail:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: object
-    AgentCallDetailOut:
-      allOf:
-      - $ref: '#/components/schemas/AgentCallListItemOut'
-      - type: object
-        additionalProperties: false
-        properties:
-          livekit_session_report:
-            type: object
-            nullable: true
-            additionalProperties: true
-            description: Internal runtime diagnostics; structure may change.
-          call_events:
-            type: array
-            items:
-              $ref: '#/components/schemas/CallEvent'
-          tool_executions:
-            type: array
-            items:
-              $ref: '#/components/schemas/AgentCallToolExecutionClientOut'
-    AgentCallResponse:
-      type: object
-      additionalProperties: false
-      required:
-      - call_id
-      - message
-      properties:
-        call_id:
-          $ref: '#/components/schemas/UUID'
-        message:
-          type: string
-          example: Call dispatched successfully
-    AgentCallCreate:
-      type: object
-      additionalProperties: false
-      required:
-      - phone_number
-      properties:
-        phone_number:
-          type: string
-          description: E.164 format phone number or template that resolves to E.164.
-        arguments:
-          type: object
-          maxProperties: 32
-          additionalProperties:
-            type: string
-            maxLength: 1024
-          default: {}
-          description: Per-call template argument overrides. Maximum 32 keys. Each value may be up to 1024 characters. Combined value payload may not exceed 8192 characters.
-    UUID:
-      type: string
-      format: uuid
-      example: 550e8400-e29b-41d4-a716-446655440000
-    ToolExecutionOutcome:
-      type: string
-      enum:
-      - succeeded
-      - failed
-      - timed_out
-      - skipped
-      - cancelled
+          type:
+          - integer
+          - 'null'
     NullableDateTime:
-      type: string
+      type:
+      - string
+      - 'null'
       format: date-time
-      nullable: true
       example: '2026-01-15T10:30:00Z'
-    AgentCallToolExecutionClientOut:
-      type: object
-      additionalProperties: false
-      required:
-      - tool_name
-      - tool_kind
-      - invocation_source
-      - started_at
-      - finished_at
-      - duration_ms
-      - outcome
-      properties:
-        tool_name:
-          type: string
-        tool_kind:
-          $ref: '#/components/schemas/ToolExecutionKind'
-        invocation_source:
-          $ref: '#/components/schemas/ToolInvocationSource'
-        trigger_event:
-          type: string
-          nullable: true
-        started_at:
-          $ref: '#/components/schemas/DateTime'
-        finished_at:
-          $ref: '#/components/schemas/DateTime'
-        duration_ms:
-          type: integer
-        outcome:
-          $ref: '#/components/schemas/ToolExecutionOutcome'
-        http_status:
-          type: integer
-          nullable: true
-        error_code:
-          type: string
-          nullable: true
-        error_type:
-          type: string
-          nullable: true
-    ToolInvocationSource:
-      type: string
-      enum:
-      - system
-      - contextual
     AgentCallListItemOut:
       type: object
       additionalProperties: false
@@ -515,11 +454,12 @@ components:
         call_direction:
           type: string
         web_session_origin:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - dashboard_test
           - api
-          nullable: true
         arguments:
           type: object
           additionalProperties: true
@@ -529,29 +469,34 @@ components:
           type: string
           description: Internal runtime identifier.
         livekit_dispatch_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Internal dispatch identifier.
         call_started_at:
           $ref: '#/components/schemas/NullableDateTime'
         call_ended_at:
           $ref: '#/components/schemas/NullableDateTime'
         call_duration_ms:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         call_end_reason:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         finalized_at:
           $ref: '#/components/schemas/NullableDateTime'
         call_duration_source:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
           type: string
         error_message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         created_at:
           $ref: '#/components/schemas/DateTime'
         updated_at:
@@ -577,29 +522,90 @@ components:
         pages:
           type: integer
           minimum: 0
+    UUID:
+      type: string
+      format: uuid
+      example: 550e8400-e29b-41d4-a716-446655440000
+    AgentCallCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - phone_number
+      properties:
+        phone_number:
+          type: string
+          description: E.164 format phone number or template that resolves to E.164.
+        arguments:
+          type: object
+          maxProperties: 32
+          additionalProperties:
+            type: string
+            maxLength: 1024
+          default: {}
+          description: Per-call template argument overrides. Maximum 32 keys. Each value may be up to 1024 characters. Combined value payload may not exceed 8192 characters.
+    AgentCallToolExecutionClientOut:
+      type: object
+      additionalProperties: false
+      required:
+      - tool_name
+      - tool_kind
+      - invocation_source
+      - started_at
+      - finished_at
+      - duration_ms
+      - outcome
+      properties:
+        tool_name:
+          type: string
+        tool_kind:
+          $ref: '#/components/schemas/ToolExecutionKind'
+        invocation_source:
+          $ref: '#/components/schemas/ToolInvocationSource'
+        trigger_event:
+          type:
+          - string
+          - 'null'
+        started_at:
+          $ref: '#/components/schemas/DateTime'
+        finished_at:
+          $ref: '#/components/schemas/DateTime'
+        duration_ms:
+          type: integer
+        outcome:
+          $ref: '#/components/schemas/ToolExecutionOutcome'
+        http_status:
+          type:
+          - integer
+          - 'null'
+        error_code:
+          type:
+          - string
+          - 'null'
+        error_type:
+          type:
+          - string
+          - 'null'
+    ToolExecutionOutcome:
+      type: string
+      enum:
+      - succeeded
+      - failed
+      - timed_out
+      - skipped
+      - cancelled
+    AgentCallResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - call_id
+      - message
+      properties:
+        call_id:
+          $ref: '#/components/schemas/UUID'
+        message:
+          type: string
+          example: Call dispatched successfully
   responses:
-    ForbiddenError:
-      description: Forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            forbidden:
-              summary: Access denied
-              value:
-                detail: You do not have access to this resource.
-    NotFoundError:
-      description: Not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            not-found:
-              summary: Resource not found
-              value:
-                detail: The requested resource was not found.
     ValidationError:
       description: Validation error.
       content:
@@ -616,17 +622,17 @@ components:
                   - language
                   msg: Input should be a valid string
                   type: string_type
-    InternalServerError:
-      description: Internal server error.
+    NotFoundError:
+      description: Not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
-            internal-server-error:
-              summary: Unexpected application error
+            not-found:
+              summary: Resource not found
               value:
-                detail: An unexpected internal error occurred.
+                detail: The requested resource was not found.
     UnauthorizedError:
       description: Unauthorized.
       content:
@@ -638,7 +644,44 @@ components:
               summary: Authentication failed
               value:
                 detail: Authentication is required for this endpoint.
+    ForbiddenError:
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            forbidden:
+              summary: Access denied
+              value:
+                detail: You do not have access to this resource.
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            internal-server-error:
+              summary: Unexpected application error
+              value:
+                detail: An unexpected internal error occurred.
   parameters:
+    AgentIdPath:
+      name: agent_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+      description: Voice agent ID.
+    PageSizeQuery:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      description: Page size.
     PageQuery:
       name: page
       in: query
@@ -648,13 +691,6 @@ components:
         minimum: 1
         default: 1
       description: Page number (1-indexed).
-    AgentIdPath:
-      name: agent_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UUID'
-      description: Voice agent ID.
     CallStatusQuery:
       name: status
       in: query
@@ -669,14 +705,6 @@ components:
       schema:
         $ref: '#/components/schemas/UUID'
       description: Call ID.
-    PageSizeQuery:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-      description: Page size.
   securitySchemes:
     bearerAuth:
       type: http

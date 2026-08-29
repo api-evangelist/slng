@@ -1,19 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Speechmatics API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
-  contact:
-    name: SLNG Support
-    email: support@slng.ai
+  version: 0.1.0
+  title: SLNG Batch Speechmatics API
+  description: Transcribe audio files asynchronously. Upload a file, monitor the job progress, and download the transcript when it's ready.
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.batch.slng.ai
   description: Production
+- url: https://stageapi.batch.slng.ai
+  description: Staging
 security:
 - bearerAuth: []
 tags:
@@ -543,46 +537,15 @@ components:
         status:
           type: string
           description: Initial status. `QUEUED` on creation; `DELETED` on deletion.
-    Tracking:
+    Error:
       type: object
-      description: Metadata for organizing and filtering jobs.
+      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
+      required:
+      - error
+      additionalProperties: false
       properties:
-        title:
+        error:
           type: string
-          description: Human-readable job title.
-          example: Meeting recording
-        reference:
-          type: string
-          description: External reference identifier.
-          example: ref-123
-        tags:
-          type: array
-          description: Labels for categorizing the job.
-          items:
-            type: string
-          example:
-          - meeting
-          - q1-review
-        details:
-          type: string
-          description: Free-text notes about the job.
-          example: Q1 planning session
-    OutputConfig:
-      type: object
-      description: Output format settings.
-      properties:
-        srt_overrides:
-          type: object
-          description: SRT subtitle formatting options.
-          properties:
-            max_line_length:
-              type: integer
-              description: Maximum characters per subtitle line.
-              example: 80
-            max_lines:
-              type: integer
-              description: Maximum lines per subtitle block.
-              example: 2
     JobFile:
       type: object
       description: An input file associated with a job, with a signed download URL.
@@ -601,60 +564,6 @@ components:
           type: string
           format: uri
           description: Signed URL to download the file. Expires after approximately 1 hour.
-    TranscriptionConfig:
-      type: object
-      description: Transcription settings.
-      properties:
-        language:
-          type: string
-          description: Language code for the audio.
-          default: en
-          example: en
-        operating_point:
-          type: string
-          description: Accuracy level.
-          enum:
-          - standard
-          - enhanced
-          default: standard
-        diarization:
-          type: string
-          description: Speaker separation mode.
-          enum:
-          - none
-          - speaker
-          - channel
-          default: none
-        domain:
-          type: string
-          description: Domain-specific language model to use.
-        output_locale:
-          type: string
-          description: Locale for formatting output (e.g. dates, numbers).
-        enable_entities:
-          type: boolean
-          description: Detect and format entities such as dates, times, and addresses.
-        additional_vocab:
-          type: array
-          description: Custom words or phrases to improve recognition accuracy.
-          items:
-            type: object
-            properties:
-              content:
-                type: string
-              sounds_like:
-                type: array
-                items:
-                  type: string
-    Error:
-      type: object
-      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
-      required:
-      - error
-      additionalProperties: false
-      properties:
-        error:
-          type: string
     BatchJob:
       type: object
       description: A batch transcription job.
@@ -737,6 +646,51 @@ components:
           type: string
           format: date-time
           description: Last row update.
+    TranscriptionConfig:
+      type: object
+      description: Transcription settings.
+      properties:
+        language:
+          type: string
+          description: Language code for the audio.
+          default: en
+          example: en
+        operating_point:
+          type: string
+          description: Accuracy level.
+          enum:
+          - standard
+          - enhanced
+          default: standard
+        diarization:
+          type: string
+          description: Speaker separation mode.
+          enum:
+          - none
+          - speaker
+          - channel
+          default: none
+        domain:
+          type: string
+          description: Domain-specific language model to use.
+        output_locale:
+          type: string
+          description: Locale for formatting output (e.g. dates, numbers).
+        enable_entities:
+          type: boolean
+          description: Detect and format entities such as dates, times, and addresses.
+        additional_vocab:
+          type: array
+          description: Custom words or phrases to improve recognition accuracy.
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+              sounds_like:
+                type: array
+                items:
+                  type: string
     JobOutputFile:
       type: object
       description: An output transcript file, with format and signed download URL. Missing formats are omitted from the list.
@@ -763,7 +717,55 @@ components:
           type: string
           format: uri
           description: Signed URL to download the file. Expires after approximately 1 hour.
+    OutputConfig:
+      type: object
+      description: Output format settings.
+      properties:
+        srt_overrides:
+          type: object
+          description: SRT subtitle formatting options.
+          properties:
+            max_line_length:
+              type: integer
+              description: Maximum characters per subtitle line.
+              example: 80
+            max_lines:
+              type: integer
+              description: Maximum lines per subtitle block.
+              example: 2
+    Tracking:
+      type: object
+      description: Metadata for organizing and filtering jobs.
+      properties:
+        title:
+          type: string
+          description: Human-readable job title.
+          example: Meeting recording
+        reference:
+          type: string
+          description: External reference identifier.
+          example: ref-123
+        tags:
+          type: array
+          description: Labels for categorizing the job.
+          items:
+            type: string
+          example:
+          - meeting
+          - q1-review
+        details:
+          type: string
+          description: Free-text notes about the job.
+          example: Q1 planning session
   responses:
+    NotFound:
+      description: Job not found, or not owned by the authenticated API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Job not found
     InternalError:
       description: Internal server error.
       content:
@@ -780,14 +782,6 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             error: API key id not found
-    NotFound:
-      description: Job not found, or not owned by the authenticated API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Job not found
   parameters:
     jobId:
       name: jobId
@@ -802,4 +796,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: API key from the SLNG dashboard.

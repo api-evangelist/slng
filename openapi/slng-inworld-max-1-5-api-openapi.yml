@@ -1,21 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SLNG Voice Agents Account Inworld Max 1.5 API
-  version: 1.0.0
-  description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
-
-
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+  title: SLNG Gateway API - SLNG TTS Inworld Max 1.5 API
+  version: 0.1.0
+  description: Unified API for speech-to-text and text-to-speech services.
   contact:
     name: SLNG Support
     email: support@slng.ai
 servers:
-- url: https://api.agents.slng.ai
+- url: https://api.slng.ai
   description: Production
+- url: https://stageapi.slng.ai
+  description: Staging
 security:
-- bearerAuth: []
+- BearerAuth: []
 tags:
 - name: Inworld Max 1.5
   description: Inworld Max 1.5 for multilingual, expressive synthesis.
@@ -66,6 +63,142 @@ paths:
         '503':
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
+  responses:
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    SlngInworldMaxSuccess:
+      description: 'Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld''s native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngInworldMaxSuccessBody'
+          examples:
+            basic:
+              summary: Synthesis result (audioContent truncated for brevity)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 48
+                  modelId: inworld-tts-1.5-max
+            wordTimestamps:
+              summary: Result with WORD timestamps (timestampType=WORD)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 13
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  wordAlignment:
+                    words:
+                    - Hello,
+                    - world!
+                    wordStartTimeSeconds:
+                    - 0
+                    - 0.51
+                    wordEndTimeSeconds:
+                    - 0.51
+                    - 1.04
+                    phoneticDetails:
+                    - wordIndex: 0
+                      isPartial: false
+                      phones:
+                      - phoneSymbol: h
+                        startTimeSeconds: 0
+                        durationSeconds: 0.17
+                        visemeSymbol: aei
+                      - phoneSymbol: ə
+                        startTimeSeconds: 0.17
+                        durationSeconds: 0.05
+                        visemeSymbol: aei
+                      - phoneSymbol: l
+                        startTimeSeconds: 0.22
+                        durationSeconds: 0.11
+                        visemeSymbol: l
+                      - phoneSymbol: oʊ1
+                        startTimeSeconds: 0.33
+                        durationSeconds: 0.18
+                        visemeSymbol: o
+            characterTimestamps:
+              summary: Result with CHARACTER timestamps (timestampType=CHARACTER)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 12
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  characterAlignment:
+                    characters:
+                    - H
+                    - e
+                    - l
+                    - l
+                    - o
+                    - w
+                    - o
+                    - r
+                    - l
+                    - d
+                    - .
+                    characterStartTimeSeconds:
+                    - 0
+                    - 0.11
+                    - 0.21
+                    - 0.32
+                    - 0.42
+                    - 0.57
+                    - 0.66
+                    - 0.75
+                    - 0.84
+                    - 0.93
+                    - 1.02
+                    characterEndTimeSeconds:
+                    - 0.11
+                    - 0.21
+                    - 0.32
+                    - 0.42
+                    - 0.53
+                    - 0.66
+                    - 0.75
+                    - 0.84
+                    - 0.93
+                    - 1.02
+                    - 1.11
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
   schemas:
     ProviderErrorResponse:
       type: object
@@ -215,11 +348,10 @@ components:
           description: Only applies to inworld-tts-2. Controls output variation; ignored on Max 1.5.
         temperature:
           type: number
-          minimum: 0
-          exclusiveMinimum: true
           maximum: 2
           default: 1
           description: Higher values produce more expressive output; lower values more deterministic. Range (0, 2].
+          exclusiveMinimum: 0
         timestampType:
           type: string
           enum:
@@ -289,142 +421,6 @@ components:
       - pt-BR
       - ru-RU
       - zh-CN
-  responses:
-    ProviderBadRequest:
-      description: Bad request - invalid parameters provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            validation-error:
-              summary: Validation error
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    SlngInworldMaxSuccess:
-      description: 'Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld''s native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SlngInworldMaxSuccessBody'
-          examples:
-            basic:
-              summary: Synthesis result (audioContent truncated for brevity)
-              value:
-                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
-                usage:
-                  processedCharactersCount: 48
-                  modelId: inworld-tts-1.5-max
-            wordTimestamps:
-              summary: Result with WORD timestamps (timestampType=WORD)
-              value:
-                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
-                usage:
-                  processedCharactersCount: 13
-                  modelId: inworld-tts-1.5-max
-                timestampInfo:
-                  wordAlignment:
-                    words:
-                    - Hello,
-                    - world!
-                    wordStartTimeSeconds:
-                    - 0
-                    - 0.51
-                    wordEndTimeSeconds:
-                    - 0.51
-                    - 1.04
-                    phoneticDetails:
-                    - wordIndex: 0
-                      isPartial: false
-                      phones:
-                      - phoneSymbol: h
-                        startTimeSeconds: 0
-                        durationSeconds: 0.17
-                        visemeSymbol: aei
-                      - phoneSymbol: ə
-                        startTimeSeconds: 0.17
-                        durationSeconds: 0.05
-                        visemeSymbol: aei
-                      - phoneSymbol: l
-                        startTimeSeconds: 0.22
-                        durationSeconds: 0.11
-                        visemeSymbol: l
-                      - phoneSymbol: oʊ1
-                        startTimeSeconds: 0.33
-                        durationSeconds: 0.18
-                        visemeSymbol: o
-            characterTimestamps:
-              summary: Result with CHARACTER timestamps (timestampType=CHARACTER)
-              value:
-                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
-                usage:
-                  processedCharactersCount: 12
-                  modelId: inworld-tts-1.5-max
-                timestampInfo:
-                  characterAlignment:
-                    characters:
-                    - H
-                    - e
-                    - l
-                    - l
-                    - o
-                    - w
-                    - o
-                    - r
-                    - l
-                    - d
-                    - .
-                    characterStartTimeSeconds:
-                    - 0
-                    - 0.11
-                    - 0.21
-                    - 0.32
-                    - 0.42
-                    - 0.57
-                    - 0.66
-                    - 0.75
-                    - 0.84
-                    - 0.93
-                    - 1.02
-                    characterEndTimeSeconds:
-                    - 0.11
-                    - 0.21
-                    - 0.32
-                    - 0.42
-                    - 0.53
-                    - 0.66
-                    - 0.75
-                    - 0.84
-                    - 0.93
-                    - 1.02
-                    - 1.11
-    ProviderInternalServerError:
-      description: Internal server error from the provider.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: Service error
-                details: Internal processing error
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
   parameters:
     XRegionSlngInworldMax:
       name: X-Region-Override
@@ -436,7 +432,9 @@ components:
         enum:
         - us-east-1
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API key
+      description: 'API key issued by SLNG. Pass as `Authorization: Bearer <token>`.
+
+        '
