@@ -51,7 +51,7 @@ tags:
 - Speech
 - Voice
 - Speech-to-Text
-- Text to Speech
+- Text-to-Speech
 - Voice AI
 - Voice Agents
 - Transcription
@@ -210,7 +210,7 @@ apis:
   humanURL: https://docs.slng.ai
   baseURL: https://api.slng.ai
   tags:
-  - Pronunciation dictionaries
+  - Pronunciation Dictionaries
   tags_raw:
   - Pronunciation dictionaries
   properties:
