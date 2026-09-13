@@ -1,0 +1,53 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "SLNG",
+    "identifier": "did:web:slng.ai"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:slng.ai:content:llms-index",
+      "displayName": "SLNG Site Index (llms.txt)",
+      "type": "text/markdown",
+      "url": "https://slng.ai/llms.txt",
+      "representativeQueries": [
+        "what pages does the SLNG website have",
+        "list SLNG marketing pages and blog posts",
+        "find SLNG legal pages"
+      ]
+    },
+    {
+      "identifier": "urn:air:slng.ai:content:sitemap",
+      "displayName": "SLNG Sitemap",
+      "type": "application/xml",
+      "url": "https://slng.ai/sitemap.xml",
+      "representativeQueries": [
+        "crawl all URLs on slng.ai",
+        "find every indexed page on the SLNG website",
+        "get the full sitemap of slng.ai"
+      ]
+    },
+    {
+      "identifier": "urn:air:slng.ai:docs:llms-index",
+      "displayName": "SLNG Developer Docs Index (llms.txt)",
+      "type": "text/markdown",
+      "url": "https://docs.slng.ai/llms.txt",
+      "representativeQueries": [
+        "what SLNG API documentation pages exist",
+        "find the SLNG developer documentation index",
+        "list SLNG API reference pages"
+      ]
+    },
+    {
+      "identifier": "urn:air:slng.ai:mcp:docs-server",
+      "displayName": "SLNG Docs MCP Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://docs.slng.ai/.well-known/mcp.json",
+      "representativeQueries": [
+        "connect to SLNG's MCP server",
+        "what tools does the SLNG MCP server expose",
+        "use SLNG's voice API (TTS/STT) via MCP"
+      ]
+    }
+  ]
+}
