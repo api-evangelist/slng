@@ -51,6 +51,12 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   responses:
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderInternalServerError:
       description: Internal server error from the provider.
       content:
@@ -63,6 +69,12 @@ components:
               value:
                 error: Service error
                 details: Internal processing error
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
     ProviderBadRequest:
       description: Bad request - invalid parameters provided.
       content:
@@ -75,18 +87,6 @@ components:
               value:
                 error: Validation error
                 details: 'Missing required field: text'
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderServiceUnavailable:
       description: Service unavailable.
       content:
@@ -128,21 +128,6 @@ components:
           example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
       required:
       - error
-    TtsVoiceSpeedRequestBase:
-      allOf:
-      - $ref: '#/components/schemas/TtsVoiceRequestBase'
-      - type: object
-        properties:
-          speed:
-            $ref: '#/components/schemas/SpeechSpeedMultiplier'
-    AudioBinary:
-      type: string
-      format: binary
-      description: Binary audio data.
-    TextToSynthesize:
-      type: string
-      minLength: 1
-      description: Text to synthesize.
     OrpheusTtsRequest:
       allOf:
       - $ref: '#/components/schemas/TtsVoiceSpeedRequestBase'
@@ -179,11 +164,26 @@ components:
             - sad
             - angry
             - surprised
+    TextToSynthesize:
+      type: string
+      minLength: 1
+      description: Text to synthesize.
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
     SpeechSpeedMultiplier:
       type: number
       minimum: 0.5
       maximum: 2
       description: Speed multiplier (0.5-2.0).
+    TtsVoiceSpeedRequestBase:
+      allOf:
+      - $ref: '#/components/schemas/TtsVoiceRequestBase'
+      - type: object
+        properties:
+          speed:
+            $ref: '#/components/schemas/SpeechSpeedMultiplier'
   parameters:
     XWorldPartSlngOrpheus:
       name: X-World-Part-Override

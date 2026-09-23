@@ -5,9 +5,7 @@ info:
   description: 'Public API for managing Voice Agents, dispatching outbound calls, and creating web (non-telephony) sessions.
 
 
-    Base URL: `https://api.agents.slng.ai`
-
-    '
+    Base URL: `https://api.agents.slng.ai`'
   contact:
     name: SLNG Support
     email: support@slng.ai
@@ -29,9 +27,7 @@ paths:
       description: 'Create a browser session for a voice agent.
 
 
-        This is commonly used for in-browser testing without PSTN.
-
-        '
+        This is commonly used for in-browser testing without PSTN.'
       tags:
       - Sessions
       requestBody:
@@ -82,78 +78,14 @@ paths:
                   value:
                     detail: 'Failed to dispatch web session: upstream dispatcher unavailable'
 components:
-  responses:
-    ForbiddenError:
-      description: Forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            forbidden:
-              summary: Access denied
-              value:
-                detail: You do not have access to this resource.
-    ValidationError:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            validation-error:
-              summary: Request validation failed
-              value:
-                detail:
-                - loc:
-                  - body
-                  - language
-                  msg: Input should be a valid string
-                  type: string_type
-    InternalServerError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            internal-server-error:
-              summary: Unexpected application error
-              value:
-                detail: An unexpected internal error occurred.
-    NotFoundError:
-      description: Not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            not-found:
-              summary: Resource not found
-              value:
-                detail: The requested resource was not found.
-    BadRequestError:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            bad-request:
-              summary: Generic bad request
-              value:
-                detail: The request could not be processed.
-    UnauthorizedError:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            unauthorized:
-              summary: Authentication failed
-              value:
-                detail: Authentication is required for this endpoint.
+  parameters:
+    AgentIdPath:
+      name: agent_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+      description: Voice agent ID.
   schemas:
     ErrorResponse:
       type: object
@@ -179,27 +111,6 @@ components:
           - type: array
             items:
               type: object
-    AgentWebSessionCreate:
-      type: object
-      additionalProperties: false
-      properties:
-        arguments:
-          type: object
-          maxProperties: 32
-          additionalProperties:
-            type: string
-            maxLength: 1024
-          default: {}
-          description: Per-session template argument overrides. Maximum 32 keys. Each value may be up to 1024 characters. Combined value payload may not exceed 8192 characters.
-        participant_name:
-          type:
-          - string
-          - 'null'
-          description: Optional display name for the web participant.
-    UUID:
-      type: string
-      format: uuid
-      example: 550e8400-e29b-41d4-a716-446655440000
     AgentWebSessionResponse:
       type: object
       additionalProperties: false
@@ -228,14 +139,99 @@ components:
         message:
           type: string
           example: Web session created successfully
-  parameters:
-    AgentIdPath:
-      name: agent_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UUID'
-      description: Voice agent ID.
+    AgentWebSessionCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        arguments:
+          type: object
+          maxProperties: 32
+          additionalProperties:
+            type: string
+            maxLength: 1024
+          default: {}
+          description: Per-session template argument overrides. Maximum 32 keys. Each value may be up to 1024 characters. Combined value payload may not exceed 8192 characters.
+        participant_name:
+          type:
+          - string
+          - 'null'
+          description: Optional display name for the web participant.
+    UUID:
+      type: string
+      format: uuid
+      example: 550e8400-e29b-41d4-a716-446655440000
+  responses:
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            internal-server-error:
+              summary: Unexpected application error
+              value:
+                detail: An unexpected internal error occurred.
+    NotFoundError:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            not-found:
+              summary: Resource not found
+              value:
+                detail: The requested resource was not found.
+    UnauthorizedError:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Authentication failed
+              value:
+                detail: Authentication is required for this endpoint.
+    BadRequestError:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            bad-request:
+              summary: Generic bad request
+              value:
+                detail: The request could not be processed.
+    ForbiddenError:
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            forbidden:
+              summary: Access denied
+              value:
+                detail: You do not have access to this resource.
+    ValidationError:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            validation-error:
+              summary: Request validation failed
+              value:
+                detail:
+                - loc:
+                  - body
+                  - language
+                  msg: Input should be a valid string
+                  type: string_type
   securitySchemes:
     bearerAuth:
       type: http

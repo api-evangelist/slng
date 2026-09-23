@@ -523,29 +523,32 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Internal server error
+    Forbidden:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: API key id not found
+    NotFound:
+      description: Job not found, or not owned by the authenticated API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Job not found
   schemas:
-    JobAcknowledgement:
-      type: object
-      description: Minimal acknowledgement returned when a job is queued or marked for deletion. Poll `GET /v1/batch/jobs/{jobId}` for the full record.
-      required:
-      - job_id
-      - status
-      properties:
-        job_id:
-          type: string
-          description: Alphanumeric job identifier.
-        status:
-          type: string
-          description: Initial status. `QUEUED` on creation; `DELETED` on deletion.
-    Error:
-      type: object
-      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
-      required:
-      - error
-      additionalProperties: false
-      properties:
-        error:
-          type: string
     JobFile:
       type: object
       description: An input file associated with a job, with a signed download URL.
@@ -564,6 +567,90 @@ components:
           type: string
           format: uri
           description: Signed URL to download the file. Expires after approximately 1 hour.
+    JobOutputFile:
+      type: object
+      description: An output transcript file, with format and signed download URL. Missing formats are omitted from the list.
+      required:
+      - format
+      - key
+      - s3_uri
+      - download_url
+      properties:
+        format:
+          type: string
+          enum:
+          - json
+          - txt
+          - srt
+          description: Output transcript format.
+        key:
+          type: string
+          description: S3 object key.
+        s3_uri:
+          type: string
+          description: Full `s3://bucket/key` URI.
+        download_url:
+          type: string
+          format: uri
+          description: Signed URL to download the file. Expires after approximately 1 hour.
+    TranscriptionConfig:
+      type: object
+      description: Transcription settings.
+      properties:
+        language:
+          type: string
+          description: Language code for the audio.
+          default: en
+          example: en
+        operating_point:
+          type: string
+          description: Accuracy level.
+          enum:
+          - standard
+          - enhanced
+          default: standard
+        diarization:
+          type: string
+          description: Speaker separation mode.
+          enum:
+          - none
+          - speaker
+          - channel
+          default: none
+        domain:
+          type: string
+          description: Domain-specific language model to use.
+        output_locale:
+          type: string
+          description: Locale for formatting output (e.g. dates, numbers).
+        enable_entities:
+          type: boolean
+          description: Detect and format entities such as dates, times, and addresses.
+        additional_vocab:
+          type: array
+          description: Custom words or phrases to improve recognition accuracy.
+          items:
+            type: object
+            properties:
+              content:
+                type: string
+              sounds_like:
+                type: array
+                items:
+                  type: string
+    JobAcknowledgement:
+      type: object
+      description: Minimal acknowledgement returned when a job is queued or marked for deletion. Poll `GET /v1/batch/jobs/{jobId}` for the full record.
+      required:
+      - job_id
+      - status
+      properties:
+        job_id:
+          type: string
+          description: Alphanumeric job identifier.
+        status:
+          type: string
+          description: Initial status. `QUEUED` on creation; `DELETED` on deletion.
     BatchJob:
       type: object
       description: A batch transcription job.
@@ -646,77 +733,15 @@ components:
           type: string
           format: date-time
           description: Last row update.
-    TranscriptionConfig:
+    Error:
       type: object
-      description: Transcription settings.
-      properties:
-        language:
-          type: string
-          description: Language code for the audio.
-          default: en
-          example: en
-        operating_point:
-          type: string
-          description: Accuracy level.
-          enum:
-          - standard
-          - enhanced
-          default: standard
-        diarization:
-          type: string
-          description: Speaker separation mode.
-          enum:
-          - none
-          - speaker
-          - channel
-          default: none
-        domain:
-          type: string
-          description: Domain-specific language model to use.
-        output_locale:
-          type: string
-          description: Locale for formatting output (e.g. dates, numbers).
-        enable_entities:
-          type: boolean
-          description: Detect and format entities such as dates, times, and addresses.
-        additional_vocab:
-          type: array
-          description: Custom words or phrases to improve recognition accuracy.
-          items:
-            type: object
-            properties:
-              content:
-                type: string
-              sounds_like:
-                type: array
-                items:
-                  type: string
-    JobOutputFile:
-      type: object
-      description: An output transcript file, with format and signed download URL. Missing formats are omitted from the list.
+      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
       required:
-      - format
-      - key
-      - s3_uri
-      - download_url
+      - error
+      additionalProperties: false
       properties:
-        format:
+        error:
           type: string
-          enum:
-          - json
-          - txt
-          - srt
-          description: Output transcript format.
-        key:
-          type: string
-          description: S3 object key.
-        s3_uri:
-          type: string
-          description: Full `s3://bucket/key` URI.
-        download_url:
-          type: string
-          format: uri
-          description: Signed URL to download the file. Expires after approximately 1 hour.
     OutputConfig:
       type: object
       description: Output format settings.
@@ -757,31 +782,6 @@ components:
           type: string
           description: Free-text notes about the job.
           example: Q1 planning session
-  responses:
-    NotFound:
-      description: Job not found, or not owned by the authenticated API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Job not found
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Internal server error
-    Forbidden:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: API key id not found
   parameters:
     jobId:
       name: jobId

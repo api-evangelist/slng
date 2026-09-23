@@ -64,6 +64,12 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   responses:
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderInternalServerError:
       description: Internal server error from the provider.
       content:
@@ -76,24 +82,6 @@ components:
               value:
                 error: Service error
                 details: Internal processing error
-    ProviderBadRequest:
-      description: Bad request - invalid parameters provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            validation-error:
-              summary: Validation error
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
     SlngInworldMaxSuccess:
       description: 'Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld''s native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.
 
@@ -199,6 +187,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
   schemas:
     ProviderErrorResponse:
       type: object
@@ -315,6 +315,25 @@ components:
                   items:
                     type: number
                   description: End time per character in seconds.
+    SlngInworldMaxLanguage:
+      type: string
+      description: BCP-47 language tag specifying the language the voice should speak the text in. Optional — when omitted, Inworld uses the voice's original prompt and auto-detects the language from the text. Voices are multilingual; best results when this matches the voice's native language. These are the 15 core languages supported by inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85 experimental languages). An invalid code returns an error.
+      enum:
+      - ar-SA
+      - de-DE
+      - en-US
+      - es-ES
+      - fr-FR
+      - he-IL
+      - hi-IN
+      - it-IT
+      - ja-JP
+      - ko-KR
+      - nl-NL
+      - pl-PL
+      - pt-BR
+      - ru-RU
+      - zh-CN
     SlngInworldMaxRequest:
       type: object
       description: Inworld Max 1.5 synthesis request, SLNG-hosted. Audio output is configured with flat fields (encoding, sample_rate, bit_rate, speaking_rate) that the gateway maps to Inworld's audioConfig.
@@ -402,25 +421,6 @@ components:
           maximum: 1.5
           default: 1
           description: Playback speed. Values below 0.8 not recommended for quality. Maps to Inworld audioConfig.speakingRate.
-    SlngInworldMaxLanguage:
-      type: string
-      description: BCP-47 language tag specifying the language the voice should speak the text in. Optional — when omitted, Inworld uses the voice's original prompt and auto-detects the language from the text. Voices are multilingual; best results when this matches the voice's native language. These are the 15 core languages supported by inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85 experimental languages). An invalid code returns an error.
-      enum:
-      - ar-SA
-      - de-DE
-      - en-US
-      - es-ES
-      - fr-FR
-      - he-IL
-      - hi-IN
-      - it-IT
-      - ja-JP
-      - ko-KR
-      - nl-NL
-      - pl-PL
-      - pt-BR
-      - ru-RU
-      - zh-CN
   parameters:
     XRegionSlngInworldMax:
       name: X-Region-Override
