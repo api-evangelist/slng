@@ -523,31 +523,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Internal server error
-    Forbidden:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: API key id not found
-    NotFound:
-      description: Job not found, or not owned by the authenticated API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Job not found
   schemas:
     JobFile:
       type: object
@@ -557,32 +532,6 @@ components:
       - s3_uri
       - download_url
       properties:
-        key:
-          type: string
-          description: S3 object key.
-        s3_uri:
-          type: string
-          description: Full `s3://bucket/key` URI.
-        download_url:
-          type: string
-          format: uri
-          description: Signed URL to download the file. Expires after approximately 1 hour.
-    JobOutputFile:
-      type: object
-      description: An output transcript file, with format and signed download URL. Missing formats are omitted from the list.
-      required:
-      - format
-      - key
-      - s3_uri
-      - download_url
-      properties:
-        format:
-          type: string
-          enum:
-          - json
-          - txt
-          - srt
-          description: Output transcript format.
         key:
           type: string
           description: S3 object key.
@@ -638,19 +587,22 @@ components:
                 type: array
                 items:
                   type: string
-    JobAcknowledgement:
+    OutputConfig:
       type: object
-      description: Minimal acknowledgement returned when a job is queued or marked for deletion. Poll `GET /v1/batch/jobs/{jobId}` for the full record.
-      required:
-      - job_id
-      - status
+      description: Output format settings.
       properties:
-        job_id:
-          type: string
-          description: Alphanumeric job identifier.
-        status:
-          type: string
-          description: Initial status. `QUEUED` on creation; `DELETED` on deletion.
+        srt_overrides:
+          type: object
+          description: SRT subtitle formatting options.
+          properties:
+            max_line_length:
+              type: integer
+              description: Maximum characters per subtitle line.
+              example: 80
+            max_lines:
+              type: integer
+              description: Maximum lines per subtitle block.
+              example: 2
     BatchJob:
       type: object
       description: A batch transcription job.
@@ -733,31 +685,32 @@ components:
           type: string
           format: date-time
           description: Last row update.
-    Error:
+    JobOutputFile:
       type: object
-      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
+      description: An output transcript file, with format and signed download URL. Missing formats are omitted from the list.
       required:
-      - error
-      additionalProperties: false
+      - format
+      - key
+      - s3_uri
+      - download_url
       properties:
-        error:
+        format:
           type: string
-    OutputConfig:
-      type: object
-      description: Output format settings.
-      properties:
-        srt_overrides:
-          type: object
-          description: SRT subtitle formatting options.
-          properties:
-            max_line_length:
-              type: integer
-              description: Maximum characters per subtitle line.
-              example: 80
-            max_lines:
-              type: integer
-              description: Maximum lines per subtitle block.
-              example: 2
+          enum:
+          - json
+          - txt
+          - srt
+          description: Output transcript format.
+        key:
+          type: string
+          description: S3 object key.
+        s3_uri:
+          type: string
+          description: Full `s3://bucket/key` URI.
+        download_url:
+          type: string
+          format: uri
+          description: Signed URL to download the file. Expires after approximately 1 hour.
     Tracking:
       type: object
       description: Metadata for organizing and filtering jobs.
@@ -782,6 +735,53 @@ components:
           type: string
           description: Free-text notes about the job.
           example: Q1 planning session
+    Error:
+      type: object
+      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
+      required:
+      - error
+      additionalProperties: false
+      properties:
+        error:
+          type: string
+    JobAcknowledgement:
+      type: object
+      description: Minimal acknowledgement returned when a job is queued or marked for deletion. Poll `GET /v1/batch/jobs/{jobId}` for the full record.
+      required:
+      - job_id
+      - status
+      properties:
+        job_id:
+          type: string
+          description: Alphanumeric job identifier.
+        status:
+          type: string
+          description: Initial status. `QUEUED` on creation; `DELETED` on deletion.
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Internal server error
+    NotFound:
+      description: Job not found, or not owned by the authenticated API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Job not found
+    Forbidden:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: API key id not found
   parameters:
     jobId:
       name: jobId

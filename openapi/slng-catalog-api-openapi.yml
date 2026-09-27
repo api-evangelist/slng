@@ -66,44 +66,20 @@ paths:
           $ref: '#/components/responses/CatalogNotFound'
 components:
   schemas:
-    CatalogError:
+    CatalogModelListResponse:
       type: object
-      description: An error returned by the catalog endpoints.
+      description: Paginated list of catalog models.
       required:
-      - error
+      - items
+      - meta
       properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Model not found
-    CatalogSimilarModel:
-      type: object
-      description: A reference to a model similar to the current one.
-      required:
-      - code
-      - name
-      properties:
-        code:
-          type: string
-          description: The similar model's code.
-          example: slng/deepgram/aura:2-en
-        name:
-          type: string
-          description: The similar model's display name.
-          example: Aura 2 English
-        provider_name:
-          type:
-          - string
-          - 'null'
-          description: The similar model's provider name, when available.
-        service_type:
-          type: string
-          description: The similar model's service type.
-        description:
-          type:
-          - string
-          - 'null'
-          description: A short description of the similar model, when available.
+        items:
+          type: array
+          description: The models on the current page.
+          items:
+            $ref: '#/components/schemas/CatalogModel'
+        meta:
+          $ref: '#/components/schemas/CatalogPaginationMeta'
     CatalogProvider:
       type: object
       description: The provider that owns a catalog model.
@@ -138,106 +114,6 @@ components:
           type: string
           format: date-time
           description: When the provider record was last updated.
-    CatalogRegionDetail:
-      type: object
-      description: Availability and latency/pricing detail for a model in a single region.
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          description: The region code.
-          example: ap-southeast-2
-        country:
-          type: string
-          description: The country the region is located in.
-          example: Australia
-        world_part_code:
-          type: string
-          description: The world part the region belongs to.
-          example: au
-        latency_ms:
-          type:
-          - integer
-          - 'null'
-          description: Measured latency to the region in milliseconds, when available.
-          example: 240
-        price:
-          type:
-          - number
-          - 'null'
-          description: The price for using the model in this region, when available.
-        discounted_price:
-          type:
-          - number
-          - 'null'
-          description: The discounted price for your organisation, when applicable.
-    CatalogVoice:
-      type: object
-      description: A voice available for a TTS model.
-      required:
-      - voice_id
-      - name
-      properties:
-        voice_id:
-          type: string
-          description: The voice identifier used when invoking the model.
-          example: aura-2-hestia-nl
-        name:
-          type: string
-          description: The voice's display name.
-          example: Hestia
-        gender:
-          type: string
-          description: The perceived gender of the voice.
-          example: feminine
-        tone:
-          type: string
-          description: A description of the voice's tone.
-          example: Approachable, Caring, Expressive, Friendly, Knowledgeable
-        use_case:
-          type: string
-          description: The use case the voice is suited for.
-          example: Customer Service
-        age_range:
-          type: string
-          description: The perceived age range of the voice.
-          example: Adult
-        language:
-          type: string
-          description: The language code of the voice.
-          example: nl
-        preview_url:
-          type: string
-          description: A URL to an audio preview of the voice.
-        properties:
-          type: object
-          description: Additional provider-specific voice properties.
-          additionalProperties: true
-        sort_order:
-          type: integer
-          description: The order the voice should be displayed in.
-          example: 0
-        enabled:
-          type: boolean
-          description: Whether the voice is currently enabled.
-          example: true
-        id:
-          type: string
-          description: The internal voice record identifier.
-          example: 4383102e-0e22-4018-8b38-988be2cd70fa
-        model_code:
-          type: string
-          description: The code of the model the voice belongs to.
-          example: deepgram/aura:2
-        created_at:
-          type: string
-          format: date-time
-          description: When the voice record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: When the voice record was last updated.
     CatalogModel:
       type: object
       description: A single model in the SLNG catalog.
@@ -381,19 +257,6 @@ components:
             $ref: '#/components/schemas/CatalogSimilarModel'
         pricing:
           $ref: '#/components/schemas/CatalogPricing'
-    CatalogCodeExamples:
-      type: object
-      description: Ready-to-run code examples for invoking the model in different languages.
-      properties:
-        curl:
-          type: string
-          description: A cURL example.
-        python:
-          type: string
-          description: A Python example.
-        typescript:
-          type: string
-          description: A TypeScript example.
     CatalogPricing:
       type: object
       description: Pricing information for a catalog model.
@@ -409,6 +272,157 @@ components:
           type: string
           description: The unit the price is expressed in.
           example: microdollars_per_min
+    CatalogRegionDetail:
+      type: object
+      description: Availability and latency/pricing detail for a model in a single region.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          description: The region code.
+          example: ap-southeast-2
+        country:
+          type: string
+          description: The country the region is located in.
+          example: Australia
+        world_part_code:
+          type: string
+          description: The world part the region belongs to.
+          example: au
+        latency_ms:
+          type:
+          - integer
+          - 'null'
+          description: Measured latency to the region in milliseconds, when available.
+          example: 240
+        price:
+          type:
+          - number
+          - 'null'
+          description: The price for using the model in this region, when available.
+        discounted_price:
+          type:
+          - number
+          - 'null'
+          description: The discounted price for your organisation, when applicable.
+    CatalogSimilarModel:
+      type: object
+      description: A reference to a model similar to the current one.
+      required:
+      - code
+      - name
+      properties:
+        code:
+          type: string
+          description: The similar model's code.
+          example: slng/deepgram/aura:2-en
+        name:
+          type: string
+          description: The similar model's display name.
+          example: Aura 2 English
+        provider_name:
+          type:
+          - string
+          - 'null'
+          description: The similar model's provider name, when available.
+        service_type:
+          type: string
+          description: The similar model's service type.
+        description:
+          type:
+          - string
+          - 'null'
+          description: A short description of the similar model, when available.
+    CatalogVoice:
+      type: object
+      description: A voice available for a TTS model.
+      required:
+      - voice_id
+      - name
+      properties:
+        voice_id:
+          type: string
+          description: The voice identifier used when invoking the model.
+          example: aura-2-hestia-nl
+        name:
+          type: string
+          description: The voice's display name.
+          example: Hestia
+        gender:
+          type: string
+          description: The perceived gender of the voice.
+          example: feminine
+        tone:
+          type: string
+          description: A description of the voice's tone.
+          example: Approachable, Caring, Expressive, Friendly, Knowledgeable
+        use_case:
+          type: string
+          description: The use case the voice is suited for.
+          example: Customer Service
+        age_range:
+          type: string
+          description: The perceived age range of the voice.
+          example: Adult
+        language:
+          type: string
+          description: The language code of the voice.
+          example: nl
+        preview_url:
+          type: string
+          description: A URL to an audio preview of the voice.
+        properties:
+          type: object
+          description: Additional provider-specific voice properties.
+          additionalProperties: true
+        sort_order:
+          type: integer
+          description: The order the voice should be displayed in.
+          example: 0
+        enabled:
+          type: boolean
+          description: Whether the voice is currently enabled.
+          example: true
+        id:
+          type: string
+          description: The internal voice record identifier.
+          example: 4383102e-0e22-4018-8b38-988be2cd70fa
+        model_code:
+          type: string
+          description: The code of the model the voice belongs to.
+          example: deepgram/aura:2
+        created_at:
+          type: string
+          format: date-time
+          description: When the voice record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the voice record was last updated.
+    CatalogCodeExamples:
+      type: object
+      description: Ready-to-run code examples for invoking the model in different languages.
+      properties:
+        curl:
+          type: string
+          description: A cURL example.
+        python:
+          type: string
+          description: A Python example.
+        typescript:
+          type: string
+          description: A TypeScript example.
+    CatalogError:
+      type: object
+      description: An error returned by the catalog endpoints.
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Model not found
     CatalogPaginationMeta:
       type: object
       description: Pagination metadata for a catalog listing.
@@ -434,21 +448,36 @@ components:
           type: integer
           description: The total number of pages available.
           example: 2
-    CatalogModelListResponse:
-      type: object
-      description: Paginated list of catalog models.
-      required:
-      - items
-      - meta
-      properties:
-        items:
-          type: array
-          description: The models on the current page.
-          items:
-            $ref: '#/components/schemas/CatalogModel'
-        meta:
-          $ref: '#/components/schemas/CatalogPaginationMeta'
   responses:
+    CatalogBadRequest:
+      description: 'The request was invalid. Returned for unsupported query parameters, out-of-range values, or a malformed model code.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CatalogError'
+          examples:
+            unsupported-parameter:
+              summary: Unsupported query parameter
+              value:
+                error: 'Unsupported query parameter: foo'
+            invalid-page:
+              summary: Page out of range
+              value:
+                error: page must be between 1 and 10000
+            invalid-model-code:
+              summary: Malformed model code
+              value:
+                error: Invalid model code
+    CatalogNotFound:
+      description: No model matches the requested code.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CatalogError'
+          example:
+            error: Model not found
     CatalogModelListSuccess:
       description: A paginated list of catalog models.
       content:
@@ -512,14 +541,6 @@ components:
               page_size: 20
               total: 26
               pages: 2
-    CatalogNotFound:
-      description: No model matches the requested code.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CatalogError'
-          example:
-            error: Model not found
     CatalogModelDetailSuccess:
       description: A single catalog model.
       content:
@@ -577,35 +598,7 @@ components:
             pricing:
               min_price: 100
               unit: microdollars_per_min
-    CatalogBadRequest:
-      description: 'The request was invalid. Returned for unsupported query parameters, out-of-range values, or a malformed model code.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CatalogError'
-          examples:
-            unsupported-parameter:
-              summary: Unsupported query parameter
-              value:
-                error: 'Unsupported query parameter: foo'
-            invalid-page:
-              summary: Page out of range
-              value:
-                error: page must be between 1 and 10000
-            invalid-model-code:
-              summary: Malformed model code
-              value:
-                error: Invalid model code
   parameters:
-    CatalogSlngHostedOnly:
-      name: slng_hosted_only
-      in: query
-      required: false
-      description: When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`.
-      schema:
-        type: boolean
     CatalogServiceType:
       name: service_type
       in: query
@@ -616,11 +609,38 @@ components:
         enum:
         - stt
         - tts
-    CatalogCapability:
-      name: capability
+    CatalogProviderFilter:
+      name: provider
       in: query
       required: false
-      description: Filter models by capability tag.
+      description: Filter models by provider code (for example `rime`).
+      schema:
+        type: string
+    CatalogProtocol:
+      name: protocol
+      in: query
+      required: false
+      description: Filter models by supported protocol.
+      schema:
+        type: string
+        enum:
+        - https
+        - wss
+    CatalogPageSize:
+      name: page_size
+      in: query
+      required: false
+      description: The number of items per page. Defaults to 20.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    CatalogRegion:
+      name: region
+      in: query
+      required: false
+      description: Filter models by region code (for example `eu-north-1`).
       schema:
         type: string
     CatalogLanguage:
@@ -630,11 +650,11 @@ components:
       description: Filter models by supported language code (for example `en`).
       schema:
         type: string
-    CatalogUseCase:
-      name: use_case
+    CatalogCapability:
+      name: capability
       in: query
       required: false
-      description: Filter models by use case tag.
+      description: Filter models by capability tag.
       schema:
         type: string
     CatalogModelCode:
@@ -646,40 +666,6 @@ components:
         '
       schema:
         type: string
-    CatalogPageSize:
-      name: page_size
-      in: query
-      required: false
-      description: The number of items per page. Defaults to 20.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    CatalogProtocol:
-      name: protocol
-      in: query
-      required: false
-      description: Filter models by supported protocol.
-      schema:
-        type: string
-        enum:
-        - https
-        - wss
-    CatalogRegion:
-      name: region
-      in: query
-      required: false
-      description: Filter models by region code (for example `eu-north-1`).
-      schema:
-        type: string
-    CatalogProviderFilter:
-      name: provider
-      in: query
-      required: false
-      description: Filter models by provider code (for example `rime`).
-      schema:
-        type: string
     CatalogSearch:
       name: search
       in: query
@@ -688,6 +674,20 @@ components:
       schema:
         type: string
         maxLength: 200
+    CatalogSlngHostedOnly:
+      name: slng_hosted_only
+      in: query
+      required: false
+      description: When true, return only SLNG-hosted models. Accepts `true`, `false`, `1`, or `0`.
+      schema:
+        type: boolean
+    CatalogUseCase:
+      name: use_case
+      in: query
+      required: false
+      description: Filter models by use case tag.
+      schema:
+        type: string
     CatalogPage:
       name: page
       in: query

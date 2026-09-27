@@ -64,12 +64,6 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   responses:
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderInternalServerError:
       description: Internal server error from the provider.
       content:
@@ -181,12 +175,6 @@ components:
                     - 0.93
                     - 1.02
                     - 1.11
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderBadRequest:
       description: Bad request - invalid parameters provided.
       content:
@@ -199,7 +187,38 @@ components:
               value:
                 error: Validation error
                 details: 'Missing required field: text'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
   schemas:
+    SlngInworldMaxLanguage:
+      type: string
+      description: BCP-47 language tag specifying the language the voice should speak the text in. Optional — when omitted, Inworld uses the voice's original prompt and auto-detects the language from the text. Voices are multilingual; best results when this matches the voice's native language. These are the 15 core languages supported by inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85 experimental languages). An invalid code returns an error.
+      enum:
+      - ar-SA
+      - de-DE
+      - en-US
+      - es-ES
+      - fr-FR
+      - he-IL
+      - hi-IN
+      - it-IT
+      - ja-JP
+      - ko-KR
+      - nl-NL
+      - pl-PL
+      - pt-BR
+      - ru-RU
+      - zh-CN
     ProviderErrorResponse:
       type: object
       description: 'Provider error response. Contains error information from the upstream provider.
@@ -226,6 +245,93 @@ components:
           example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
       required:
       - error
+    SlngInworldMaxRequest:
+      type: object
+      description: Inworld Max 1.5 synthesis request, SLNG-hosted. Audio output is configured with flat fields (encoding, sample_rate, bit_rate, speaking_rate) that the gateway maps to Inworld's audioConfig.
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Text to synthesize. Max 2,000 characters.
+        voice:
+          type: string
+          default: Ashley
+          description: Inworld voice ID. Voices are multilingual — each has a native language but can speak any supported language via the `language` parameter (best results when `language` matches the voice's native language). See the full catalog at https://docs.slng.ai/voices/inworld.
+        modelId:
+          type: string
+          enum:
+          - inworld-tts-1.5-max
+          default: inworld-tts-1.5-max
+          description: ID of the Inworld TTS model.
+        language:
+          $ref: '#/components/schemas/SlngInworldMaxLanguage'
+        deliveryMode:
+          type: string
+          enum:
+          - DELIVERY_MODE_UNSPECIFIED
+          - STABLE
+          - BALANCED
+          - CREATIVE
+          description: Only applies to inworld-tts-2. Controls output variation; ignored on Max 1.5.
+        temperature:
+          type: number
+          maximum: 2
+          default: 1
+          description: Higher values produce more expressive output; lower values more deterministic. Range (0, 2].
+          exclusiveMinimum: 0
+        timestampType:
+          type: string
+          enum:
+          - TIMESTAMP_TYPE_UNSPECIFIED
+          - WORD
+          - CHARACTER
+          default: TIMESTAMP_TYPE_UNSPECIFIED
+          description: Controls timestamp metadata returned with the audio. Adds latency.
+        applyTextNormalization:
+          type: string
+          enum:
+          - APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+          - 'ON'
+          - 'OFF'
+          default: APPLY_TEXT_NORMALIZATION_UNSPECIFIED
+          description: Expands numbers, dates, and abbreviations before synthesis. Disabling may reduce latency.
+        encoding:
+          type: string
+          enum:
+          - LINEAR16
+          - MP3
+          - OGG_OPUS
+          - ALAW
+          - MULAW
+          - FLAC
+          - PCM
+          - WAV
+          default: MP3
+          description: Output audio format. Maps to Inworld audioConfig.audioEncoding.
+        sample_rate:
+          type: integer
+          enum:
+          - 8000
+          - 16000
+          - 22050
+          - 24000
+          - 32000
+          - 44100
+          - 48000
+          default: 48000
+          description: Output sample rate in Hz. Maps to Inworld audioConfig.sampleRateHertz.
+        bit_rate:
+          type: integer
+          description: Bits per second. Only applies to compressed formats (MP3, OGG_OPUS). Maps to Inworld audioConfig.bitRate.
+        speaking_rate:
+          type: number
+          minimum: 0.5
+          maximum: 1.5
+          default: 1
+          description: Playback speed. Values below 0.8 not recommended for quality. Maps to Inworld audioConfig.speakingRate.
     SlngInworldMaxSuccessBody:
       type: object
       description: Inworld Max 1.5 synthesis result. Inworld's native response, passed through by the gateway.
@@ -315,112 +421,6 @@ components:
                   items:
                     type: number
                   description: End time per character in seconds.
-    SlngInworldMaxLanguage:
-      type: string
-      description: BCP-47 language tag specifying the language the voice should speak the text in. Optional — when omitted, Inworld uses the voice's original prompt and auto-detects the language from the text. Voices are multilingual; best results when this matches the voice's native language. These are the 15 core languages supported by inworld-tts-1.5-max (inworld-tts-2 additionally supports ~85 experimental languages). An invalid code returns an error.
-      enum:
-      - ar-SA
-      - de-DE
-      - en-US
-      - es-ES
-      - fr-FR
-      - he-IL
-      - hi-IN
-      - it-IT
-      - ja-JP
-      - ko-KR
-      - nl-NL
-      - pl-PL
-      - pt-BR
-      - ru-RU
-      - zh-CN
-    SlngInworldMaxRequest:
-      type: object
-      description: Inworld Max 1.5 synthesis request, SLNG-hosted. Audio output is configured with flat fields (encoding, sample_rate, bit_rate, speaking_rate) that the gateway maps to Inworld's audioConfig.
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          minLength: 1
-          maxLength: 2000
-          description: Text to synthesize. Max 2,000 characters.
-        voice:
-          type: string
-          default: Ashley
-          description: Inworld voice ID. Voices are multilingual — each has a native language but can speak any supported language via the `language` parameter (best results when `language` matches the voice's native language). See the full catalog at https://docs.slng.ai/voices/inworld.
-        modelId:
-          type: string
-          enum:
-          - inworld-tts-1.5-max
-          default: inworld-tts-1.5-max
-          description: ID of the Inworld TTS model.
-        language:
-          $ref: '#/components/schemas/SlngInworldMaxLanguage'
-        deliveryMode:
-          type: string
-          enum:
-          - DELIVERY_MODE_UNSPECIFIED
-          - STABLE
-          - BALANCED
-          - CREATIVE
-          description: Only applies to inworld-tts-2. Controls output variation; ignored on Max 1.5.
-        temperature:
-          type: number
-          maximum: 2
-          default: 1
-          description: Higher values produce more expressive output; lower values more deterministic. Range (0, 2].
-          exclusiveMinimum: 0
-        timestampType:
-          type: string
-          enum:
-          - TIMESTAMP_TYPE_UNSPECIFIED
-          - WORD
-          - CHARACTER
-          default: TIMESTAMP_TYPE_UNSPECIFIED
-          description: Controls timestamp metadata returned with the audio. Adds latency.
-        applyTextNormalization:
-          type: string
-          enum:
-          - APPLY_TEXT_NORMALIZATION_UNSPECIFIED
-          - 'ON'
-          - 'OFF'
-          default: APPLY_TEXT_NORMALIZATION_UNSPECIFIED
-          description: Expands numbers, dates, and abbreviations before synthesis. Disabling may reduce latency.
-        encoding:
-          type: string
-          enum:
-          - LINEAR16
-          - MP3
-          - OGG_OPUS
-          - ALAW
-          - MULAW
-          - FLAC
-          - PCM
-          - WAV
-          default: MP3
-          description: Output audio format. Maps to Inworld audioConfig.audioEncoding.
-        sample_rate:
-          type: integer
-          enum:
-          - 8000
-          - 16000
-          - 22050
-          - 24000
-          - 32000
-          - 44100
-          - 48000
-          default: 48000
-          description: Output sample rate in Hz. Maps to Inworld audioConfig.sampleRateHertz.
-        bit_rate:
-          type: integer
-          description: Bits per second. Only applies to compressed formats (MP3, OGG_OPUS). Maps to Inworld audioConfig.bitRate.
-        speaking_rate:
-          type: number
-          minimum: 0.5
-          maximum: 1.5
-          default: 1
-          description: Playback speed. Values below 0.8 not recommended for quality. Maps to Inworld audioConfig.speakingRate.
   parameters:
     XRegionSlngInworldMax:
       name: X-Region-Override
