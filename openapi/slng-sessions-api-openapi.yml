@@ -78,103 +78,7 @@ paths:
                   value:
                     detail: 'Failed to dispatch web session: upstream dispatcher unavailable'
 components:
-  responses:
-    ValidationError:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            validation-error:
-              summary: Request validation failed
-              value:
-                detail:
-                - loc:
-                  - body
-                  - language
-                  msg: Input should be a valid string
-                  type: string_type
-    BadRequestError:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            bad-request:
-              summary: Generic bad request
-              value:
-                detail: The request could not be processed.
-    InternalServerError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            internal-server-error:
-              summary: Unexpected application error
-              value:
-                detail: An unexpected internal error occurred.
-    ForbiddenError:
-      description: Forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            forbidden:
-              summary: Access denied
-              value:
-                detail: You do not have access to this resource.
-    NotFoundError:
-      description: Not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            not-found:
-              summary: Resource not found
-              value:
-                detail: The requested resource was not found.
-    UnauthorizedError:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            unauthorized:
-              summary: Authentication failed
-              value:
-                detail: Authentication is required for this endpoint.
   schemas:
-    ErrorResponse:
-      type: object
-      additionalProperties: true
-      description: 'Error payloads can vary depending on where the error is raised (edge gateway vs backend).
-
-
-        Common shapes include:
-
-        - `{ "error": "message" }`
-
-        - `{ "detail": "message" }`
-
-        - `{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }` (validation)
-
-        '
-      properties:
-        error:
-          type: string
-        detail:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: object
     AgentWebSessionResponse:
       type: object
       additionalProperties: false
@@ -220,10 +124,106 @@ components:
           - string
           - 'null'
           description: Optional display name for the web participant.
+    ErrorResponse:
+      type: object
+      additionalProperties: true
+      description: 'Error payloads can vary depending on where the error is raised (edge gateway vs backend).
+
+
+        Common shapes include:
+
+        - `{ "error": "message" }`
+
+        - `{ "detail": "message" }`
+
+        - `{ "detail": [ { "loc": [...], "msg": "...", "type": "..." } ] }` (validation)
+
+        '
+      properties:
+        error:
+          type: string
+        detail:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
     UUID:
       type: string
       format: uuid
       example: 550e8400-e29b-41d4-a716-446655440000
+  responses:
+    ForbiddenError:
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            forbidden:
+              summary: Access denied
+              value:
+                detail: You do not have access to this resource.
+    UnauthorizedError:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Authentication failed
+              value:
+                detail: Authentication is required for this endpoint.
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            internal-server-error:
+              summary: Unexpected application error
+              value:
+                detail: An unexpected internal error occurred.
+    NotFoundError:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            not-found:
+              summary: Resource not found
+              value:
+                detail: The requested resource was not found.
+    BadRequestError:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            bad-request:
+              summary: Generic bad request
+              value:
+                detail: The request could not be processed.
+    ValidationError:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            validation-error:
+              summary: Request validation failed
+              value:
+                detail:
+                - loc:
+                  - body
+                  - language
+                  msg: Input should be a valid string
+                  type: string_type
   parameters:
     AgentIdPath:
       name: agent_id

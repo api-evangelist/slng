@@ -62,20 +62,6 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   schemas:
-    WhisperTranscriptionRequest:
-      type: object
-      description: Whisper transcription request. Provide either `audio` (multipart upload) or `url` (publicly accessible HTTPS URL).
-      properties:
-        audio:
-          type: string
-          format: binary
-          description: 'Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.'
-        url:
-          type: string
-          description: Publicly accessible audio URL.
-          example: https://docs.slng.ai/audio/hello.wav
-        language:
-          $ref: '#/components/schemas/WhisperLanguageCode'
     WhisperErrorResponse:
       type: object
       description: Whisper-specific error response.
@@ -111,6 +97,32 @@ components:
           example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
       required:
       - error
+    WhisperTranscriptionRequest:
+      type: object
+      description: Whisper transcription request. Provide either `audio` (multipart upload) or `url` (publicly accessible HTTPS URL).
+      properties:
+        audio:
+          type: string
+          format: binary
+          description: 'Audio file (multipart) or base64-encoded audio (JSON). Formats: mp3, mp4, mpeg, mpga, m4a, wav, webm. Max 25MB.'
+        url:
+          type: string
+          description: Publicly accessible audio URL.
+          example: https://docs.slng.ai/audio/hello.wav
+        language:
+          $ref: '#/components/schemas/WhisperLanguageCode'
+    WhisperTranscriptionResponse:
+      type: object
+      description: Whisper STT response format.
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Transcribed text.
+        language:
+          type: string
+          description: Detected language code (may not be present in all variants).
     WhisperLanguageCode:
       type: string
       description: ISO-639-1 language code. Auto-detected if not specified.
@@ -216,19 +228,35 @@ components:
       - yo
       - zh
       - yue
-    WhisperTranscriptionResponse:
-      type: object
-      description: Whisper STT response format.
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Transcribed text.
-        language:
-          type: string
-          description: Detected language code (may not be present in all variants).
   responses:
+    WhisperInternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhisperErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Failed to process audio file
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    WhisperBadRequest:
+      description: Invalid or missing audio file.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WhisperErrorResponse'
+          examples:
+            missing-audio:
+              summary: Missing audio
+              value:
+                error: 'Missing required field: audio'
     WhisperTranscriptionSuccess:
       description: Transcription successful.
       content:
@@ -246,29 +274,6 @@ components:
               value:
                 text: Hola, bienvenido a la API de texto a voz de SLNG.
                 language: es
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    WhisperBadRequest:
-      description: Invalid or missing audio file.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WhisperErrorResponse'
-          examples:
-            missing-audio:
-              summary: Missing audio
-              value:
-                error: 'Missing required field: audio'
     WhisperPayloadTooLarge:
       description: Audio file exceeds 25MB limit.
       content:
@@ -280,17 +285,12 @@ components:
               summary: File too large
               value:
                 error: Audio file size exceeds maximum limit of 25MB
-    WhisperInternalServerError:
-      description: Internal server error.
+    ProviderServiceUnavailable:
+      description: Service unavailable.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/WhisperErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: Failed to process audio file
+            $ref: '#/components/schemas/ProviderErrorResponse'
   parameters:
     XWorldPartSlngWhisper:
       name: X-World-Part-Override

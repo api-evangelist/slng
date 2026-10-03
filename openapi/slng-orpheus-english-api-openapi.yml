@@ -51,6 +51,12 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   responses:
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
     ProviderInternalServerError:
       description: Internal server error from the provider.
       content:
@@ -63,6 +69,12 @@ components:
               value:
                 error: Service error
                 details: Internal processing error
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderBadRequest:
       description: Bad request - invalid parameters provided.
       content:
@@ -75,24 +87,12 @@ components:
               value:
                 error: Validation error
                 details: 'Missing required field: text'
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
     ProviderServiceUnavailable:
       description: Service unavailable.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ProviderErrorResponse'
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
   schemas:
     SpeechSpeedMultiplier:
       type: number
@@ -165,13 +165,6 @@ components:
           example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
       required:
       - error
-    TtsVoiceSpeedRequestBase:
-      allOf:
-      - $ref: '#/components/schemas/TtsVoiceRequestBase'
-      - type: object
-        properties:
-          speed:
-            $ref: '#/components/schemas/SpeechSpeedMultiplier'
     AudioBinary:
       type: string
       format: binary
@@ -184,6 +177,13 @@ components:
         voice:
           type: string
           description: Voice identifier.
+    TtsVoiceSpeedRequestBase:
+      allOf:
+      - $ref: '#/components/schemas/TtsVoiceRequestBase'
+      - type: object
+        properties:
+          speed:
+            $ref: '#/components/schemas/SpeechSpeedMultiplier'
   parameters:
     XWorldPartSlngOrpheus:
       name: X-World-Part-Override
