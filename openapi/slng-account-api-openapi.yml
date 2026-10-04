@@ -41,14 +41,6 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   responses:
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: Internal server error
     Forbidden:
       description: Missing or invalid API key.
       content:
@@ -57,7 +49,24 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             error: API key id not found
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Internal server error
   schemas:
+    Error:
+      type: object
+      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
+      required:
+      - error
+      additionalProperties: false
+      properties:
+        error:
+          type: string
     Account:
       type: object
       description: The account associated with the authenticated API key.
@@ -95,15 +104,6 @@ components:
           type: string
           description: Plan tier of the organization.
           example: hobby
-    Error:
-      type: object
-      description: Error envelope. A short, user-presentable string only — no internal codes, stack traces, or upstream raw text.
-      required:
-      - error
-      additionalProperties: false
-      properties:
-        error:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

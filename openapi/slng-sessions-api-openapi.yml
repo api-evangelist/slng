@@ -107,6 +107,10 @@ components:
         message:
           type: string
           example: Web session created successfully
+    UUID:
+      type: string
+      format: uuid
+      example: 550e8400-e29b-41d4-a716-446655440000
     AgentWebSessionCreate:
       type: object
       additionalProperties: false
@@ -148,10 +152,6 @@ components:
           - type: array
             items:
               type: object
-    UUID:
-      type: string
-      format: uuid
-      example: 550e8400-e29b-41d4-a716-446655440000
   responses:
     ForbiddenError:
       description: Forbidden.
@@ -164,17 +164,22 @@ components:
               summary: Access denied
               value:
                 detail: You do not have access to this resource.
-    UnauthorizedError:
-      description: Unauthorized.
+    ValidationError:
+      description: Validation error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
-            unauthorized:
-              summary: Authentication failed
+            validation-error:
+              summary: Request validation failed
               value:
-                detail: Authentication is required for this endpoint.
+                detail:
+                - loc:
+                  - body
+                  - language
+                  msg: Input should be a valid string
+                  type: string_type
     InternalServerError:
       description: Internal server error.
       content:
@@ -186,6 +191,17 @@ components:
               summary: Unexpected application error
               value:
                 detail: An unexpected internal error occurred.
+    UnauthorizedError:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Authentication failed
+              value:
+                detail: Authentication is required for this endpoint.
     NotFoundError:
       description: Not found.
       content:
@@ -208,22 +224,6 @@ components:
               summary: Generic bad request
               value:
                 detail: The request could not be processed.
-    ValidationError:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            validation-error:
-              summary: Request validation failed
-              value:
-                detail:
-                - loc:
-                  - body
-                  - language
-                  msg: Input should be a valid string
-                  type: string_type
   parameters:
     AgentIdPath:
       name: agent_id

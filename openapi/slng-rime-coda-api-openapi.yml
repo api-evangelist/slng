@@ -50,59 +50,20 @@ paths:
         '503':
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
-  responses:
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
-    RimeCodaBadRequest:
-      description: 'Rime Coda TTS bad request. Common causes include invalid speaker ID, unsupported audio format, or malformed request body.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            invalid-speaker:
-              summary: Invalid speaker ID
-              value:
-                error: TTS service error
-                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker'
-            missing-text:
-              summary: Missing text field
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    RimeCodaInternalServerError:
-      description: 'Rime Coda TTS internal error. Note: Some validation errors (e.g., invalid speaker) may currently return 500 instead of 400. Check the error details for specifics.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: TTS service error
-                details: Internal processing error
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
   schemas:
+    RimeCoda0IdSpeaker:
+      type: string
+      description: Voice speaker ID for Rime Coda Indonesian.
+      default: pujianti_plesmita
+      enum:
+      - pujianti_plesmita
+      - siswoko_sigit
+      - taryadi_dani
+      - usmany_tatianna
+    RimeCoda0IdTtsRequestId:
+      description: Rime Coda TTS request for Bahasa Indonesian.
+      allOf:
+      - $ref: '#/components/schemas/RimeCoda0IdTtsRequestBase'
     RimeArcanaAudioFormat:
       type: string
       description: Output audio format as MIME type.
@@ -114,6 +75,16 @@ components:
       - audio/pcm
       - audio/x-mulaw
       default: audio/wav
+    RimeCoda0IdTtsRequestBase:
+      description: Base schema for Rime Coda Indonesian TTS requests.
+      allOf:
+      - type: object
+        required:
+        - speaker
+        properties:
+          speaker:
+            $ref: '#/components/schemas/RimeCoda0IdSpeaker'
+      - $ref: '#/components/schemas/RimeCodaTtsRequestCommon'
     ProviderErrorResponse:
       type: object
       description: 'Provider error response. Contains error information from the upstream provider.
@@ -140,6 +111,10 @@ components:
           example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
       required:
       - error
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
     RimeArcanaSampleRate:
       type: integer
       description: Output sample rate in Hz. Values above 24000 are upsampled.
@@ -152,45 +127,6 @@ components:
       - 44100
       - 48000
       - 96000
-    RimeCoda0IdSpeaker:
-      type: string
-      description: Voice speaker ID for Rime Coda Indonesian.
-      default: pujianti_plesmita
-      enum:
-      - pujianti_plesmita
-      - siswoko_sigit
-      - taryadi_dani
-      - usmany_tatianna
-    AudioBinary:
-      type: string
-      format: binary
-      description: Binary audio data.
-    RimeCoda0IdTtsRequestId:
-      description: Rime Coda TTS request for Bahasa Indonesian.
-      allOf:
-      - $ref: '#/components/schemas/RimeCoda0IdTtsRequestBase'
-    RimeCodaModelId:
-      type: string
-      description: Rime Coda model identifier.
-      enum:
-      - coda
-      default: coda
-    RimeCodaLanguage:
-      type: string
-      description: Language code. Coda Indonesian variant only supports Bahasa Indonesian.
-      enum:
-      - id
-      default: id
-    RimeCoda0IdTtsRequestBase:
-      description: Base schema for Rime Coda Indonesian TTS requests.
-      allOf:
-      - type: object
-        required:
-        - speaker
-        properties:
-          speaker:
-            $ref: '#/components/schemas/RimeCoda0IdSpeaker'
-      - $ref: '#/components/schemas/RimeCodaTtsRequestCommon'
     RimeCodaTtsRequestCommon:
       type: object
       description: Common Rime Coda TTS options.
@@ -224,6 +160,70 @@ components:
           description: Enable segment markers in output.
       required:
       - text
+    RimeCodaModelId:
+      type: string
+      description: Rime Coda model identifier.
+      enum:
+      - coda
+      default: coda
+    RimeCodaLanguage:
+      type: string
+      description: Language code. Coda Indonesian variant only supports Bahasa Indonesian.
+      enum:
+      - id
+      default: id
+  responses:
+    RimeCodaInternalServerError:
+      description: 'Rime Coda TTS internal error. Note: Some validation errors (e.g., invalid speaker) may currently return 500 instead of 400. Check the error details for specifics.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: TTS service error
+                details: Internal processing error
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    RimeCodaBadRequest:
+      description: 'Rime Coda TTS bad request. Common causes include invalid speaker ID, unsupported audio format, or malformed request body.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            invalid-speaker:
+              summary: Invalid speaker ID
+              value:
+                error: TTS service error
+                details: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker'
+            missing-text:
+              summary: Missing text field
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
   parameters:
     XRegionSlngCoda0Id:
       name: X-Region-Override

@@ -121,165 +121,7 @@ paths:
         '503':
           $ref: '#/components/responses/PronunciationUnavailable'
 components:
-  responses:
-    PronunciationUnavailable:
-      description: Pronunciation storage or dependency unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            unavailable:
-              summary: Pronunciation service unavailable
-              value:
-                code: pronunciation_unavailable
-                error: Pronunciation dictionaries are temporarily unavailable.
-    PronunciationConflict:
-      description: Dictionary name already exists in the organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            conflict:
-              summary: Duplicate dictionary name
-              value:
-                code: pronunciation_conflict
-                error: 'Pronunciation dictionary already exists: brand-pronunciations'
-    PronunciationUnauthenticated:
-      description: Missing or unresolved organization context.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            unauthenticated:
-              summary: Missing organization context
-              value:
-                code: pronunciation_unauthenticated
-                error: Missing or invalid organization context.
-    PronunciationNotFound:
-      description: Dictionary not found in the authenticated organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            notFound:
-              summary: Dictionary not found
-              value:
-                code: pronunciation_not_found
-                error: 'Pronunciation dictionary not found: brand-pronunciations'
-    InvalidPronunciation:
-      description: Invalid pronunciation request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PronunciationError'
-          examples:
-            invalidPronunciation:
-              summary: Invalid pronunciation object
-              value:
-                code: invalid_pronunciation
-                error: Invalid pronunciation dictionary reference.
-  parameters:
-    PronunciationDictionaryName:
-      name: name
-      in: path
-      required: true
-      description: Pronunciation dictionary name.
-      schema:
-        type: string
-        maxLength: 128
-        pattern: ^[A-Za-z0-9._-]+$
-      example: brand-pronunciations
   schemas:
-    PronunciationError:
-      type: object
-      required:
-      - code
-      - error
-      properties:
-        code:
-          type: string
-          description: Pronunciation error code.
-          example: invalid_pronunciation
-        error:
-          type: string
-          description: Human-readable error message.
-          example: Invalid pronunciation dictionary reference.
-        fieldErrors:
-          type: object
-          description: Field-level validation errors, when available.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          example:
-            modes:
-            - modes.rewrite is required
-        slng_request_id:
-          type: string
-          description: SLNG request identifier for support.
-          example: req_01abc...
-    PronunciationDictionaryListResponse:
-      type: object
-      required:
-      - dictionaries
-      properties:
-        dictionaries:
-          type: array
-          description: Pronunciation dictionaries for the authenticated organization.
-          items:
-            $ref: '#/components/schemas/PronunciationDictionary'
-    PronunciationDictionaryCreateRequest:
-      type: object
-      required:
-      - name
-      - modes
-      properties:
-        name:
-          type: string
-          description: Unique dictionary name within the authenticated organization.
-          maxLength: 128
-          pattern: ^[A-Za-z0-9._-]+$
-          example: brand-pronunciations
-        metadata:
-          type: object
-          description: Optional application metadata stored with the dictionary.
-          additionalProperties: true
-          example:
-            language: hi-IN
-            providers:
-            - sarvam
-            - cartesia
-        modes:
-          $ref: '#/components/schemas/PronunciationModes'
-    PronunciationIpaRule:
-      type: object
-      required:
-      - match
-      - ipa
-      properties:
-        match:
-          type: string
-          maxLength: 128
-          description: Word or phrase to match.
-          example: SLNG
-        ipa:
-          type: string
-          maxLength: 256
-          description: IPA pronunciation value. Stored only; not executed today.
-          example: slɪŋ
-    PronunciationIpaMode:
-      type: object
-      description: IPA entries can be stored but are not executed today.
-      properties:
-        rules:
-          type: array
-          maxItems: 256
-          items:
-            $ref: '#/components/schemas/PronunciationIpaRule'
     PronunciationRewriteMode:
       type: object
       required:
@@ -291,22 +133,6 @@ components:
           maxItems: 256
           items:
             $ref: '#/components/schemas/PronunciationRewriteRule'
-    PronunciationRewriteRule:
-      type: object
-      required:
-      - match
-      - replace
-      properties:
-        match:
-          type: string
-          description: Word or phrase to match.
-          maxLength: 128
-          example: NAIC
-        replace:
-          type: string
-          description: Replacement text sent to the selected TTS model.
-          maxLength: 256
-          example: en ay eye see
     PronunciationDictionary:
       type: object
       required:
@@ -368,6 +194,180 @@ components:
         ipa:
           $ref: '#/components/schemas/PronunciationIpaMode'
       description: Pronunciation modes stored on the dictionary. Only `rewrite` is executable today.
+    PronunciationError:
+      type: object
+      required:
+      - code
+      - error
+      properties:
+        code:
+          type: string
+          description: Pronunciation error code.
+          example: invalid_pronunciation
+        error:
+          type: string
+          description: Human-readable error message.
+          example: Invalid pronunciation dictionary reference.
+        fieldErrors:
+          type: object
+          description: Field-level validation errors, when available.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            modes:
+            - modes.rewrite is required
+        slng_request_id:
+          type: string
+          description: SLNG request identifier for support.
+          example: req_01abc...
+    PronunciationIpaRule:
+      type: object
+      required:
+      - match
+      - ipa
+      properties:
+        match:
+          type: string
+          maxLength: 128
+          description: Word or phrase to match.
+          example: SLNG
+        ipa:
+          type: string
+          maxLength: 256
+          description: IPA pronunciation value. Stored only; not executed today.
+          example: slɪŋ
+    PronunciationDictionaryCreateRequest:
+      type: object
+      required:
+      - name
+      - modes
+      properties:
+        name:
+          type: string
+          description: Unique dictionary name within the authenticated organization.
+          maxLength: 128
+          pattern: ^[A-Za-z0-9._-]+$
+          example: brand-pronunciations
+        metadata:
+          type: object
+          description: Optional application metadata stored with the dictionary.
+          additionalProperties: true
+          example:
+            language: hi-IN
+            providers:
+            - sarvam
+            - cartesia
+        modes:
+          $ref: '#/components/schemas/PronunciationModes'
+    PronunciationIpaMode:
+      type: object
+      description: IPA entries can be stored but are not executed today.
+      properties:
+        rules:
+          type: array
+          maxItems: 256
+          items:
+            $ref: '#/components/schemas/PronunciationIpaRule'
+    PronunciationDictionaryListResponse:
+      type: object
+      required:
+      - dictionaries
+      properties:
+        dictionaries:
+          type: array
+          description: Pronunciation dictionaries for the authenticated organization.
+          items:
+            $ref: '#/components/schemas/PronunciationDictionary'
+    PronunciationRewriteRule:
+      type: object
+      required:
+      - match
+      - replace
+      properties:
+        match:
+          type: string
+          description: Word or phrase to match.
+          maxLength: 128
+          example: NAIC
+        replace:
+          type: string
+          description: Replacement text sent to the selected TTS model.
+          maxLength: 256
+          example: en ay eye see
+  responses:
+    InvalidPronunciation:
+      description: Invalid pronunciation request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            invalidPronunciation:
+              summary: Invalid pronunciation object
+              value:
+                code: invalid_pronunciation
+                error: Invalid pronunciation dictionary reference.
+    PronunciationUnavailable:
+      description: Pronunciation storage or dependency unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            unavailable:
+              summary: Pronunciation service unavailable
+              value:
+                code: pronunciation_unavailable
+                error: Pronunciation dictionaries are temporarily unavailable.
+    PronunciationUnauthenticated:
+      description: Missing or unresolved organization context.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            unauthenticated:
+              summary: Missing organization context
+              value:
+                code: pronunciation_unauthenticated
+                error: Missing or invalid organization context.
+    PronunciationNotFound:
+      description: Dictionary not found in the authenticated organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            notFound:
+              summary: Dictionary not found
+              value:
+                code: pronunciation_not_found
+                error: 'Pronunciation dictionary not found: brand-pronunciations'
+    PronunciationConflict:
+      description: Dictionary name already exists in the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PronunciationError'
+          examples:
+            conflict:
+              summary: Duplicate dictionary name
+              value:
+                code: pronunciation_conflict
+                error: 'Pronunciation dictionary already exists: brand-pronunciations'
+  parameters:
+    PronunciationDictionaryName:
+      name: name
+      in: path
+      required: true
+      description: Pronunciation dictionary name.
+      schema:
+        type: string
+        maxLength: 128
+        pattern: ^[A-Za-z0-9._-]+$
+      example: brand-pronunciations
   securitySchemes:
     BearerAuth:
       type: http
