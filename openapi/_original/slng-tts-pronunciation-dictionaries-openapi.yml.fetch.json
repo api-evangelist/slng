@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.slng.ai/api-reference/openapi/tts-pronunciation-dictionaries.oas.yaml",
+ "requested_url": "https://docs.slng.ai/api-reference/openapi/tts-pronunciation-dictionaries.oas.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 13803,
+ "sha256": "ac87c303111b3e2ca8d83fc31dd83b8fda98dd6539d5f17dc9047f77bc9a2436",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
