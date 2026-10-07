@@ -323,6 +323,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/slng-tts-slng-asyncapi.yml
 common:
+- type: Plans
+  url: plans/slng-plans-pricing.yml
 - type: Website
   url: https://www.slng.ai/
 - type: PostmanWorkspace
