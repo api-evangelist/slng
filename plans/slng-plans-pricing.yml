@@ -1,0 +1,175 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://slng.ai/pricing
+sources:
+- https://slng.ai/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+  managed_tier: Pay as you go
+published: true
+note: Per-agent-minute component pricing plus optional support add-on and enterprise prepaid minimum.
+  Enterprise mentions a US$ 0.0033 rate not otherwise explained.
+plan_count: 9
+currency: USD
+plans:
+- name: Default Pay as you go
+  price_text: US$ 0.001 for SLNG Edge
+  price: 0.001
+  currency: USD
+  period: per-use
+  unit: agent minute
+  included_quota: Prepaid credit — burns down with usage; auto-recharge; community support; best-effort
+    concurrency
+  overage: Add Models & Orchestrator for + USD 0.003 / agent minute / component
+- name: Basic Support (optional add-on)
+  price_text: US$ 199 / month
+  price: 199
+  currency: USD
+  period: month
+  unit: month
+  included_quota: 24h business-hours email · private ticket queue · priority engineering access
+- name: Enterprise
+  price_text: from US$ 5,000 / month prepaid minimum
+  price: 5000
+  currency: USD
+  period: month
+  unit: prepaid minimum
+  included_quota: Prepaid credit at the same US$ 0.0033 rate; guaranteed concurrency; FDE; SLAs; custom
+    regions
+  overage: Overage trued up end of month via card on file
+- name: Execution Layer
+  price_text: US$ 0.001 / agent min
+  price: 0.001
+  currency: USD
+  period: per-use
+  unit: agent minute
+  included_quota: 15 sovereign regions, caching, PII redaction, SOC 2, ISO 27001, HIPAA, GDPR
+- name: STT
+  price_text: US$ 0.003 / agent min
+  price: 0.003
+  currency: USD
+  period: per-use
+  unit: agent minute
+  included_quota: Deepgram, AssemblyAI, Speechmatics, Gladia, Soniox, Whisper, more
+- name: LLM
+  price_text: US$ 0.003 / agent min
+  price: 0.003
+  currency: USD
+  period: per-use
+  unit: agent minute
+  included_quota: GPT-4o, Claude, Gemini, Llama, more; regional semantic cache
+- name: TTS
+  price_text: US$ 0.003 / agent min
+  price: 0.003
+  currency: USD
+  period: per-use
+  unit: agent minute
+  included_quota: Fish.Audio, Cartesia, Savram, Deepgram, Rime, Soniox plus more
+- name: Worker + SIP Trunk
+  price_text: US$ 0.003 / agent min
+  price: 0.003
+  currency: USD
+  period: per-use
+  unit: agent minute
+  included_quota: LiveKit or Pipecat runtime, SIP connectivity 15 regions, PSTN + DID
+- name: Recording (optional)
+  price_text: US$ 0.003 / min when active
+  price: 0.003
+  currency: USD
+  period: per-use
+  unit: minute
+  included_quota: declared per use case
+rate_limit_statements:
+- Best-effort concurrency, sensible defaults
+- Guaranteed concurrency, dedicated capacity
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - compute
+  - period
+  plans:
+  - name: Default Pay as you go
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Basic Support (optional add-on)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Execution Layer
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: STT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: LLM
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: TTS
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Worker + SIP Trunk
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Recording (optional)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
