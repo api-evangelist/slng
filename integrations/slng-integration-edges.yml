@@ -1,0 +1,26 @@
+edges:
+- partner_name: LiveKit Agents
+  partner: livekit
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/livekit/agents/tree/main/livekit-plugins/livekit-plugins-slng
+  coverage_role:
+  - stt
+  - tts
+  framework_signals:
+    packages:
+    - livekit-plugins-slng
+    roles:
+    - stt
+    - tts
+    vendor_domain: slng.ai
+  matched_by: verified-domain-table
+  detected_by: sweep-voice-ai.py
+  first_seen: '2026-10-15'
+generated: '2026-10-15'
+method: searched
+checked:
+- https://github.com/livekit/agents/tree/main/livekit-plugins
