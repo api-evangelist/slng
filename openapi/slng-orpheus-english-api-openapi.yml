@@ -51,11 +51,26 @@ paths:
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
   schemas:
+    AudioBinary:
+      type: string
+      format: binary
+      description: Binary audio data.
     SpeechSpeedMultiplier:
       type: number
       minimum: 0.5
       maximum: 2
       description: Speed multiplier (0.5-2.0).
+    TextToSynthesize:
+      type: string
+      minLength: 1
+      description: Text to synthesize.
+    TtsVoiceSpeedRequestBase:
+      allOf:
+      - $ref: '#/components/schemas/TtsVoiceRequestBase'
+      - type: object
+        properties:
+          speed:
+            $ref: '#/components/schemas/SpeechSpeedMultiplier'
     TtsVoiceRequestBase:
       type: object
       properties:
@@ -64,32 +79,6 @@ components:
         voice:
           type: string
           description: Voice identifier.
-    ProviderErrorResponse:
-      type: object
-      description: 'Provider error response. Contains error information from the upstream provider.
-
-        Common errors include invalid speakers, unsupported languages, or malformed requests.
-
-        '
-      properties:
-        error:
-          type: string
-          description: Error type or category (e.g., "TTS service error", "Validation error").
-          example: TTS service error
-        status:
-          type: number
-          description: Original HTTP status code from the provider (may differ from gateway response code).
-          example: 400
-        details:
-          type: string
-          description: 'Detailed error message from the provider. For TTS errors, this typically includes
-
-            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
-
-            '
-          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
-      required:
-      - error
     OrpheusTtsRequest:
       allOf:
       - $ref: '#/components/schemas/TtsVoiceSpeedRequestBase'
@@ -126,52 +115,45 @@ components:
             - sad
             - angry
             - surprised
-    TtsVoiceSpeedRequestBase:
-      allOf:
-      - $ref: '#/components/schemas/TtsVoiceRequestBase'
-      - type: object
-        properties:
-          speed:
-            $ref: '#/components/schemas/SpeechSpeedMultiplier'
-    AudioBinary:
-      type: string
-      format: binary
-      description: Binary audio data.
-    TextToSynthesize:
-      type: string
-      minLength: 1
-      description: Text to synthesize.
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
   responses:
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    ProviderBadRequest:
-      description: Bad request - invalid parameters provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            validation-error:
-              summary: Validation error
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-    TtsSynthesisSuccess:
-      description: Synthesis successful.
-      content:
-        audio/*:
-          schema:
-            $ref: '#/components/schemas/AudioBinary'
     ProviderServiceUnavailable:
       description: Service unavailable.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ProviderErrorResponse'
+    TtsSynthesisSuccess:
+      description: Synthesis successful.
+      content:
+        audio/*:
+          schema:
+            $ref: '#/components/schemas/AudioBinary'
     ProviderInternalServerError:
       description: Internal server error from the provider.
       content:
@@ -184,6 +166,24 @@ components:
               value:
                 error: Service error
                 details: Internal processing error
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
   parameters:
     XWorldPartSlngOrpheus:
       name: X-World-Part-Override

@@ -63,7 +63,179 @@ paths:
         '503':
           $ref: '#/components/responses/ProviderServiceUnavailable'
 components:
+  responses:
+    ProviderServiceUnavailable:
+      description: Service unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    ProviderInternalServerError:
+      description: Internal server error from the provider.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            processing-error:
+              summary: Processing error
+              value:
+                error: Service error
+                details: Internal processing error
+    ProviderBadRequest:
+      description: Bad request - invalid parameters provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+          examples:
+            validation-error:
+              summary: Validation error
+              value:
+                error: Validation error
+                details: 'Missing required field: text'
+    ProviderUnauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProviderErrorResponse'
+    SlngInworldMaxSuccess:
+      description: 'Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld''s native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlngInworldMaxSuccessBody'
+          examples:
+            basic:
+              summary: Synthesis result (audioContent truncated for brevity)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 48
+                  modelId: inworld-tts-1.5-max
+            wordTimestamps:
+              summary: Result with WORD timestamps (timestampType=WORD)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 13
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  wordAlignment:
+                    words:
+                    - Hello,
+                    - world!
+                    wordStartTimeSeconds:
+                    - 0
+                    - 0.51
+                    wordEndTimeSeconds:
+                    - 0.51
+                    - 1.04
+                    phoneticDetails:
+                    - wordIndex: 0
+                      isPartial: false
+                      phones:
+                      - phoneSymbol: h
+                        startTimeSeconds: 0
+                        durationSeconds: 0.17
+                        visemeSymbol: aei
+                      - phoneSymbol: ə
+                        startTimeSeconds: 0.17
+                        durationSeconds: 0.05
+                        visemeSymbol: aei
+                      - phoneSymbol: l
+                        startTimeSeconds: 0.22
+                        durationSeconds: 0.11
+                        visemeSymbol: l
+                      - phoneSymbol: oʊ1
+                        startTimeSeconds: 0.33
+                        durationSeconds: 0.18
+                        visemeSymbol: o
+            characterTimestamps:
+              summary: Result with CHARACTER timestamps (timestampType=CHARACTER)
+              value:
+                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
+                usage:
+                  processedCharactersCount: 12
+                  modelId: inworld-tts-1.5-max
+                timestampInfo:
+                  characterAlignment:
+                    characters:
+                    - H
+                    - e
+                    - l
+                    - l
+                    - o
+                    - w
+                    - o
+                    - r
+                    - l
+                    - d
+                    - .
+                    characterStartTimeSeconds:
+                    - 0
+                    - 0.11
+                    - 0.21
+                    - 0.32
+                    - 0.42
+                    - 0.57
+                    - 0.66
+                    - 0.75
+                    - 0.84
+                    - 0.93
+                    - 1.02
+                    characterEndTimeSeconds:
+                    - 0.11
+                    - 0.21
+                    - 0.32
+                    - 0.42
+                    - 0.53
+                    - 0.66
+                    - 0.75
+                    - 0.84
+                    - 0.93
+                    - 1.02
+                    - 1.11
+  parameters:
+    XRegionSlngInworldMax:
+      name: X-Region-Override
+      in: header
+      required: false
+      description: Target region override. Auto-selected if not provided.
+      schema:
+        type: string
+        enum:
+        - us-east-1
   schemas:
+    ProviderErrorResponse:
+      type: object
+      description: 'Provider error response. Contains error information from the upstream provider.
+
+        Common errors include invalid speakers, unsupported languages, or malformed requests.
+
+        '
+      properties:
+        error:
+          type: string
+          description: Error type or category (e.g., "TTS service error", "Validation error").
+          example: TTS service error
+        status:
+          type: number
+          description: Original HTTP status code from the provider (may differ from gateway response code).
+          example: 400
+        details:
+          type: string
+          description: 'Detailed error message from the provider. For TTS errors, this typically includes
+
+            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
+
+            '
+          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
+      required:
+      - error
     SlngInworldMaxSuccessBody:
       type: object
       description: Inworld Max 1.5 synthesis result. Inworld's native response, passed through by the gateway.
@@ -153,32 +325,6 @@ components:
                   items:
                     type: number
                   description: End time per character in seconds.
-    ProviderErrorResponse:
-      type: object
-      description: 'Provider error response. Contains error information from the upstream provider.
-
-        Common errors include invalid speakers, unsupported languages, or malformed requests.
-
-        '
-      properties:
-        error:
-          type: string
-          description: Error type or category (e.g., "TTS service error", "Validation error").
-          example: TTS service error
-        status:
-          type: number
-          description: Original HTTP status code from the provider (may differ from gateway response code).
-          example: 400
-        details:
-          type: string
-          description: 'Detailed error message from the provider. For TTS errors, this typically includes
-
-            the specific validation failure (e.g., invalid speaker ID for the selected model/language).
-
-            '
-          example: 'Rime TTS API error: 400 Bad Request - Invalid argument: Invalid speaker: aurelie'
-      required:
-      - error
     SlngInworldMaxRequest:
       type: object
       description: Inworld Max 1.5 synthesis request, SLNG-hosted. Audio output is configured with flat fields (encoding, sample_rate, bit_rate, speaking_rate) that the gateway maps to Inworld's audioConfig.
@@ -285,152 +431,6 @@ components:
       - pt-BR
       - ru-RU
       - zh-CN
-  responses:
-    ProviderUnauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    ProviderBadRequest:
-      description: Bad request - invalid parameters provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            validation-error:
-              summary: Validation error
-              value:
-                error: Validation error
-                details: 'Missing required field: text'
-    SlngInworldMaxSuccess:
-      description: 'Synthesis successful. Unlike other SLNG TTS models (which return raw audio bytes), Inworld Max responds with JSON: the request is SLNG-normalized but the response is Inworld''s native body passed through unchanged, carrying base64-encoded audio plus usage and optional timestamp metadata.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SlngInworldMaxSuccessBody'
-          examples:
-            basic:
-              summary: Synthesis result (audioContent truncated for brevity)
-              value:
-                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
-                usage:
-                  processedCharactersCount: 48
-                  modelId: inworld-tts-1.5-max
-            wordTimestamps:
-              summary: Result with WORD timestamps (timestampType=WORD)
-              value:
-                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
-                usage:
-                  processedCharactersCount: 13
-                  modelId: inworld-tts-1.5-max
-                timestampInfo:
-                  wordAlignment:
-                    words:
-                    - Hello,
-                    - world!
-                    wordStartTimeSeconds:
-                    - 0
-                    - 0.51
-                    wordEndTimeSeconds:
-                    - 0.51
-                    - 1.04
-                    phoneticDetails:
-                    - wordIndex: 0
-                      isPartial: false
-                      phones:
-                      - phoneSymbol: h
-                        startTimeSeconds: 0
-                        durationSeconds: 0.17
-                        visemeSymbol: aei
-                      - phoneSymbol: ə
-                        startTimeSeconds: 0.17
-                        durationSeconds: 0.05
-                        visemeSymbol: aei
-                      - phoneSymbol: l
-                        startTimeSeconds: 0.22
-                        durationSeconds: 0.11
-                        visemeSymbol: l
-                      - phoneSymbol: oʊ1
-                        startTimeSeconds: 0.33
-                        durationSeconds: 0.18
-                        visemeSymbol: o
-            characterTimestamps:
-              summary: Result with CHARACTER timestamps (timestampType=CHARACTER)
-              value:
-                audioContent: SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAA
-                usage:
-                  processedCharactersCount: 12
-                  modelId: inworld-tts-1.5-max
-                timestampInfo:
-                  characterAlignment:
-                    characters:
-                    - H
-                    - e
-                    - l
-                    - l
-                    - o
-                    - w
-                    - o
-                    - r
-                    - l
-                    - d
-                    - .
-                    characterStartTimeSeconds:
-                    - 0
-                    - 0.11
-                    - 0.21
-                    - 0.32
-                    - 0.42
-                    - 0.57
-                    - 0.66
-                    - 0.75
-                    - 0.84
-                    - 0.93
-                    - 1.02
-                    characterEndTimeSeconds:
-                    - 0.11
-                    - 0.21
-                    - 0.32
-                    - 0.42
-                    - 0.53
-                    - 0.66
-                    - 0.75
-                    - 0.84
-                    - 0.93
-                    - 1.02
-                    - 1.11
-    ProviderServiceUnavailable:
-      description: Service unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-    ProviderInternalServerError:
-      description: Internal server error from the provider.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProviderErrorResponse'
-          examples:
-            processing-error:
-              summary: Processing error
-              value:
-                error: Service error
-                details: Internal processing error
-  parameters:
-    XRegionSlngInworldMax:
-      name: X-Region-Override
-      in: header
-      required: false
-      description: Target region override. Auto-selected if not provided.
-      schema:
-        type: string
-        enum:
-        - us-east-1
   securitySchemes:
     BearerAuth:
       type: http
